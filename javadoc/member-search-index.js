@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"com.example.mypackage","c":"Main","l":"displayMessage(String)","url":"displayMessage(java.lang.String)"},{"p":"com.example.mypackage","c":"Main","l":"Main()","url":"%3Cinit%3E()"},{"p":"com.example.mypackage","c":"Main","l":"main(String[])","url":"main(java.lang.String[])"}]
