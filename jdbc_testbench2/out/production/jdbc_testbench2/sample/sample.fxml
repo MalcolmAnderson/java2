@@ -13,5 +13,6 @@
       <Label layoutX="36.0" layoutY="83.0" text="Country Name" />
       <Button layoutX="135.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnAddCountry" prefHeight="25.0" prefWidth="105.0" text="Add Country" />
       <Button layoutX="135.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnRemoveCountry" text="Remove Country" />
+      <Button fx:id="btnUpdateUSSRToJapan" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onAction="#btnUpdateUSSRToJapan" text="Update USSR to Japan" />
    </children>
 </AnchorPane>

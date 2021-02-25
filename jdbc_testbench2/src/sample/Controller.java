@@ -56,4 +56,10 @@ public class Controller implements Initializable {
         jcm.setCountryName(txtCountryName.getText());
         jcm.RunDelete();
     }
+
+    public void btnUpdateUSSRToJapan(ActionEvent actionEvent) {
+        jcm.setCountryName("Japan");
+        jcm.setWhere_CountryName("USSR");
+        jcm.RunUpdate();
+    }
 }

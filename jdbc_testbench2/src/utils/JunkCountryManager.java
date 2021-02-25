@@ -7,14 +7,19 @@ public class JunkCountryManager {
     private String createDate = "2021-02-24 00:00:00";
     private String createdBy = "admin";
     private String lastUpdatedBy = "admin";
+    private String where_CountryName = "Tongo";
 
 //    String insertUSSR = "INSERT INTO countries (Country, Create_Date, Created_By, Last_Updated_By) "
 //            + " VALUES ('USSR', '2021-02-23 00:00:00', 'admin', 'admin' )";
 //    String strDeleteAllUSSR = "DELETE FROM countries WHERE  Country = 'USSR'";
 
-    private String insertStatement = String.format("INSERT INTO countries (Country, Create_Date, Created_By, Last_Updated_By) "
-            + " VALUES ('%s', '%s', '%s', '%s' )", getCountryName(), getCreateDate(), getCreatedBy(), getLastUpdatedBy());
-    private String deleteStatement = String.format("DELETE FROM countries WHERE  Country = '%s'", getCountryName());
+    private String insertStatement = String.format(
+            "INSERT INTO countries (Country, Create_Date, Created_By, Last_Updated_By) "
+            + " VALUES ('%s', '%s', '%s', '%s' )", countryName, createDate, createdBy, lastUpdatedBy);
+    private String deleteStatement = String.format(
+            "DELETE FROM countries WHERE  Country = '%s'", countryName);
+    private String updateStatement = String.format(
+            "UPDATE countries SET Country = '%s' WHERE Country = '%s'", countryName, where_CountryName);
 
     public String getInsertStatement() {
         return insertStatement;
@@ -40,6 +45,10 @@ public class JunkCountryManager {
         dbQM.RunSQLString(deleteStatement);
     }
 
+    public void RunUpdate(){
+        dbQM.RunSQLString(updateStatement);
+    }
+
     public String getCountryName() {
         return countryName;
     }
@@ -48,6 +57,7 @@ public class JunkCountryManager {
         this.countryName = countryName;
         UpdateInsertStatement();
         UpdateDeleteStatement();
+        UpdateUpdateStatement();
     }
 
     public String getCreateDate() {
@@ -77,12 +87,28 @@ public class JunkCountryManager {
         UpdateInsertStatement();
     }
 
+    public String getWhere_CountryName() {
+        return where_CountryName;
+    }
+
+    public void setWhere_CountryName(String where_CountryName) {
+        this.where_CountryName = where_CountryName;
+    }
+
     private void UpdateInsertStatement() {
-        insertStatement = String.format("INSERT INTO countries (Country, Create_Date, Created_By, Last_Updated_By) "
-                + " VALUES ('%s', '%s', '%s', '%s' )", getCountryName(), getCreateDate(), getCreatedBy(), getLastUpdatedBy());
+        insertStatement = String.format(
+                "INSERT INTO countries (Country, Create_Date, Created_By, Last_Updated_By) "
+                + " VALUES ('%s', '%s', '%s', '%s' )",
+                getCountryName(), getCreateDate(), getCreatedBy(), getLastUpdatedBy());
+    }
+    private void UpdateUpdateStatement(){
+        updateStatement = String.format(
+                "UPDATE countries SET Country = '%s' WHERE Country = '%s'",
+                countryName, where_CountryName);
     }
 
     private void UpdateDeleteStatement(){
-        deleteStatement = String.format("DELETE FROM countries WHERE  Country = '%s'", getCountryName());
+        deleteStatement = String.format(
+                "DELETE FROM countries WHERE  Country = '%s'", getCountryName());
     }
 }
