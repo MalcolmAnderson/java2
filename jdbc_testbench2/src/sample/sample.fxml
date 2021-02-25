@@ -5,7 +5,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button layoutX="117.0" layoutY="224.0" mnemonicParsing="false" onAction="#showMe" text="Show Me" />
-      <Button layoutX="25.0" layoutY="157.0" mnemonicParsing="false" onAction="#forceCloseConnection" text="Close Connection" />
+      <Button layoutX="202.0" layoutY="236.0" mnemonicParsing="false" onAction="#showMe" text="Show Me" />
+      <Button layoutX="80.0" layoutY="236.0" mnemonicParsing="false" onAction="#forceCloseConnection" text="Close Connection" />
+      <Button layoutX="169.0" layoutY="14.0" mnemonicParsing="false" onAction="#addUSSR" prefHeight="25.0" prefWidth="99.0" text="Add USSR" />
+      <Button layoutX="169.0" layoutY="43.0" mnemonicParsing="false" onAction="#deleteAllUSSR" text="Delete All USSR" />
+      <TextField fx:id="txtCountryName" layoutX="134.0" layoutY="79.0" />
+      <Label layoutX="36.0" layoutY="83.0" text="Country Name" />
+      <Button layoutX="135.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnAddCountry" prefHeight="25.0" prefWidth="105.0" text="Add Country" />
+      <Button layoutX="135.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnRemoveCountry" text="Remove Country" />
    </children>
 </AnchorPane>

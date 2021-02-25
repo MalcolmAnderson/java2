@@ -1,18 +1,14 @@
 package sample;
 
-import dbAccess.DBCountries;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import utils.DBConnection;
-import utils.DBQuery;
-
-import java.sql.SQLException;
-import java.sql.Statement;
+import utils.*;
 
 public class Main extends Application {
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -25,27 +21,22 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        String innerTest = "test";
+        String testing = String.format("This is a %s", innerTest);
+        System.out.println(testing);
+
+        DBConnection.startConnection();
+
+        //JunkDrawer jd = new JunkDrawer();
+        JunkCountryManager jcm = new JunkCountryManager();
+        jcm.setCountryName("USSR");
+        jcm.RunInsert();
+
         System.out.println("Egg");
-        try {
-            DBQuery.setStatement(DBConnection.startConnection());
-            Statement statement = DBQuery.getStatement();
-            // Raw SQL statement
-            String insertStatement = "INSERT INTO countries (Country, Create_Date, Created_By, Last_Updated_By) ";
-            insertStatement += " VALUES ('USSR', '2021-02-23 00:00:00', 'admin', 'admin' )";
-
-            // Execute Statement
-            Boolean isASelectStatement = statement.execute(insertStatement);
-            System.out.println("isASelectStatement = " + isASelectStatement.toString());
-            if( ! isASelectStatement){
-                System.out.println("Impacted records = " + statement.getUpdateCount());
-            }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
 
         //DBCountries.checkDateConversion();
 
+        //jd.addUSSRToDB();
 
         launch(args);
         DBConnection.endConnection();
