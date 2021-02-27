@@ -1,20 +1,23 @@
 package utils;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBQuery {
+    // At some point, rename this DBStatement,
+    // or be able to explain why DBQuery is the right name for this class
 
-    private static Statement statement;
+    private static PreparedStatement statement;
 
-    // Create statement object
-    public static void setStatement(Connection conn) throws SQLException {
-        statement = conn.createStatement();
+    // Create Statement object
+    public static void setPreparedStatement(Connection conn, String sqlStatement) throws SQLException {
+        statement = conn.prepareStatement(sqlStatement);
     }
 
-    // Return statement object
-    public static Statement getStatement(){
+    // Return Statement object
+    public static PreparedStatement getPreparedStatement(){
         return statement;
     }
 }

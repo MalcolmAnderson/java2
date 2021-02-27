@@ -32,13 +32,12 @@ public class DBConnection {
         return conn;
     }
 
-
-    public static Connection startConnection()
-    {
+    public static Connection startConnection(){
         System.out.println("Begin startConnection");
         try {
             Class.forName(mySqlJDBCDriver);
-            conn = (Connection) DriverManager.getConnection(
+            conn =
+                    DriverManager.getConnection(
                     connectionString, secrets.getUserName(), secrets.getPassword());
             System.out.println("Connection successful");
 

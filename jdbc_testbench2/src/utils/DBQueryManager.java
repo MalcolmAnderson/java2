@@ -7,10 +7,11 @@ public class DBQueryManager {
 
     public void RunSQLString(String unvalidatedSQL){
         try {
-            DBQuery.setStatement(DBConnection.getConnection());
-            Statement statement = DBQuery.getStatement();
-
             System.out.println("RunSQLString: unvalidatedSQL = " + unvalidatedSQL);
+
+            DBQuery.setPreparedStatement(DBConnection.getConnection(), unvalidatedSQL);
+            Statement statement = DBQuery.getPreparedStatement();
+
             // Execute Statement
             Boolean isASelectStatement = statement.execute(unvalidatedSQL);
             System.out.println("isASelectStatement = " + isASelectStatement.toString());
