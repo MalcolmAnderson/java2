@@ -3,9 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainScreen_Controller">
    <children>
-      <Label layoutX="244.0" layoutY="162.0" text="This is the main page" />
+      <Label layoutX="177.0" layoutY="23.0" text="This is the main page showing the calendar" />
+      <Button layoutX="208.0" layoutY="296.0" mnemonicParsing="false" text="Manage Users" />
+      <Button layoutX="39.0" layoutY="296.0" mnemonicParsing="false" text="Manage Appointments" />
+      <Button layoutX="319.0" layoutY="296.0" mnemonicParsing="false" text="Manage Customers" />
+      <Button layoutX="455.0" layoutY="296.0" mnemonicParsing="false" text="Manage Contacts" />
+      <Button layoutX="252.0" layoutY="340.0" mnemonicParsing="false" text="Reports Screen" />
+      <TableView fx:id="tableViewAppointment" layoutX="19.0" layoutY="52.0" prefHeight="200.0" prefWidth="559.0">
+        <columns>
+          <TableColumn fx:id="placeHolder" prefWidth="75.0" text="PlaceHolder" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

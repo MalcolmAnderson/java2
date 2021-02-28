@@ -6,16 +6,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import models.Appointment;
+import models.Appointments;
+import models.ManageTestData;
 
 import java.io.IOException;
 
 public class FxmlNavigationTools {
 
+    public Appointments appointments = ManageTestData.BuildPlaceHolderData();
+
 
     Stage stage;
     Parent scene;
 
-    public void openMainScreenWhileGettingInventory(
+    public void openMainScreenWhileGettingAppointments(
             ActionEvent event,
             String viewNameAndPath) {
         // Assumes that the event variable is a button object
@@ -29,8 +34,8 @@ public class FxmlNavigationTools {
             // get controller and load data
             MainScreen_Controller mainScreenController = loader.getController();
 //            mainScreenController.loadInventory(inv);
-            mainScreenController.LoadInventory();
-            stage.setTitle("Inventory Management System");
+            mainScreenController.LoadAppointments();
+            stage.setTitle("Appointments");
 
             stage.setScene(mainScreenScene);
             stage.show();

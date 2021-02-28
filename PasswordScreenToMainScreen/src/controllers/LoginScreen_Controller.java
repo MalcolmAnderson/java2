@@ -23,7 +23,9 @@ public class LoginScreen_Controller implements Initializable {
             String styleString = "-fx-text-fill: #00FF00 ;";
             labelPrompt.setStyle(styleString);
             labelPrompt.setText("Login Successful.");
-            navTools.openMainScreenWhileGettingInventory(event, "/views/MainScreen.fxml");
+            // TODO log success to access log text file
+            navTools.openMainScreenWhileGettingAppointments(event, "/views/MainScreen.fxml");
+
         } else {
             System.out.println("Failed Login");
             String styleString = "-fx-text-fill: " + utils.getRandomColor() +";";
