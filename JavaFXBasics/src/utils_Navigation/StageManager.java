@@ -1,4 +1,4 @@
-package sample;
+package utils_Navigation;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -8,8 +8,7 @@ import java.io.IOException;
 public class StageManager {
 
 
-
-    public static void ChangeScene(ActionEvent event, Scenes scene ) {
+    public static void ChangeScene(ActionEvent event, navInfo scene ) {
         SceneChanger sc = new SceneChanger();
         try {
             sc.changeScenes(event, scene.getFxmlFileName(), scene.getScreenTitle());

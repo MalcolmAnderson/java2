@@ -1,8 +1,8 @@
-package sample;
+package utils_Navigation;
 
-public class navInfo_Submenu_2 extends Scenes{
+public class navInfo_Submenu_2 extends navInfo {
     @Override String getFxmlFileName() {
-        return "Submenu_2.fxml";
+        return pathToViews + "Submenu_2.fxml";
     }
     @Override String getScreenTitle() {
         return "Submenu 2 Screen";

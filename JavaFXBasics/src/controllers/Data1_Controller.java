@@ -1,5 +1,7 @@
-package sample;
+package controllers;
 
+import utils_Navigation.StageManager;
+import utils_Navigation.navInfo_Submenu_2;
 import javafx.event.ActionEvent;
 
 public class Data1_Controller {
