@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import models.Appointment;
 import models.Appointments;
 import models.ManageTestData;
 
@@ -32,7 +31,7 @@ public class FxmlNavigationTools {
             Scene mainScreenScene = new Scene(mainScreenParent);
 
             // get controller and load data
-            MainScreen_Controller mainScreenController = loader.getController();
+            Appointments_Controller mainScreenController = loader.getController();
 //            mainScreenController.loadInventory(inv);
             mainScreenController.LoadAppointments();
             stage.setTitle("Appointments");

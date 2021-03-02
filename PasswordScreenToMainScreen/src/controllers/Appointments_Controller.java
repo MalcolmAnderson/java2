@@ -2,15 +2,21 @@ package controllers;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Appointment;
 import models.Appointments;
 import models.ManageTestData;
+import utils_Navigation.*;
 
-public class MainScreen_Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Appointments_Controller implements Initializable {
 
     FxmlNavigationTools navTools = new FxmlNavigationTools();
 
@@ -53,4 +59,27 @@ public class MainScreen_Controller {
         Platform.exit();
     }
 
+    public void onClick_AddAppointments(ActionEvent event) {
+        StageManager.ChangeScene(event, new navInfo_AddAppointments());
+    }
+
+    @Override public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    public void onClick_ManageUsers(ActionEvent event) {
+        StageManager.ChangeScene(event, new navInfo_ManageUsers());
+    }
+
+    public void onClick_ManageCustomers(ActionEvent event) {
+        StageManager.ChangeScene(event, new navInfo_ManageCustomers());
+    }
+
+    public void onClick_ManageContacts(ActionEvent event) {
+        StageManager.ChangeScene(event, new navInfo_ManageContacts());
+    }
+
+    public void onClick_Reports(ActionEvent event) {
+        StageManager.ChangeScene(event, new navInfo_Reports());
+    }
 }

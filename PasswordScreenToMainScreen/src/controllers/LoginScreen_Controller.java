@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import main.Utils;
+import utils_Navigation.StageManager;
+import utils_Navigation.navInfo_Appointments;
 
 public class LoginScreen_Controller implements Initializable {
     public PasswordField labelPassword;
@@ -24,7 +26,8 @@ public class LoginScreen_Controller implements Initializable {
             labelPrompt.setStyle(styleString);
             labelPrompt.setText("Login Successful.");
             // TODO log success to access log text file
-            navTools.openMainScreenWhileGettingAppointments(event, "/views/MainScreen.fxml");
+            StageManager.ChangeScene(event, new navInfo_Appointments());
+//            navTools.openMainScreenWhileGettingAppointments(event, "/views/Appointments.fxml");
 
         } else {
             System.out.println("Failed Login");
