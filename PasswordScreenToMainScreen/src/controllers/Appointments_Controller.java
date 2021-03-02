@@ -18,8 +18,6 @@ import java.util.ResourceBundle;
 
 public class Appointments_Controller implements Initializable {
 
-    FxmlNavigationTools navTools = new FxmlNavigationTools();
-
     private Appointments appointments;
 
     @FXML private TableView appointmentsTableView;

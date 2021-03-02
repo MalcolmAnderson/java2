@@ -9,6 +9,10 @@ import models.Appointments;
 
 public class Main extends Application {
 
+    // TODO - Change login_activity.txt to point to current directory
+    // TODO - Change password checker to check the database for passwords
+
+
     Appointments appointments;
 
     @Override
