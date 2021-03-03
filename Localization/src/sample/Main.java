@@ -6,6 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+
 public class Main extends Application {
 
     @Override
@@ -18,6 +22,43 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+//         launch(args);
+
+        Locale french = new Locale("fr", "FR");
+        Locale spanish = new Locale("es", "ES");
+        Locale german = Locale.GERMAN;
+        Locale english = Locale.US;
+        System.out.println(Locale.getDefault());
+
+//        Scanner keyboard = new Scanner(System.in);
+//
+//        System.out.print("Enter a language (de, es, fr): ");
+//        String languageCode = keyboard.nextLine();
+//
+//        if(languageCode.equals("fr")){
+//            Locale.setDefault(french);
+//        }else if (languageCode.equals("es")){
+//            Locale.setDefault(spanish);
+//        }else if (languageCode.equals("de")){
+//            Locale.setDefault(german);
+//        } else {
+//            System.out.println("Language not supported");
+//            System.exit(0);
+//        }
+        ResourceBundle rb = ResourceBundle.getBundle("sample/Nat", Locale.getDefault());
+        System.out.println(rb.getString("hello") + " " + rb.getString("world"));
+
+        System.exit(0);
+
+    }
+
+    public static void firstHello(){
+        ResourceBundle rb = ResourceBundle.getBundle("sample/Nat", Locale.getDefault());
+//        if(Locale.getDefault().getLanguage().equals("de") ||
+//                Locale.getDefault().getLanguage().equals("es") ||
+//                Locale.getDefault().getLanguage().equals("fr")){
+//            System.out.println(rb.getString("hello") + " " + rb.getString("world"));
+//        }
+        //System.out.println("hello world");
     }
 }
