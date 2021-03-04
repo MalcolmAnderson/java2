@@ -49,7 +49,7 @@ public class Main extends Application {
 //            System.out.println("Language not supported");
 //            System.exit(0);
 //        }
-        Locale.setDefault(english);
+        Locale.setDefault(french);
         ResourceBundle rb = ResourceBundle.getBundle("sample/Nat", Locale.getDefault());
         System.out.println(rb.getString("hello") + " " + rb.getString("world"));
 

@@ -8,5 +8,7 @@
 
       <Button fx:id="btnManageContacts" layoutX="105.0" layoutY="188.0" mnemonicParsing="false" text="%ManageContacts" />
       <Label fx:id="txtLabel" layoutX="222.0" layoutY="93.0" text="%Thisscreenisusedtomanagecontacts" />
+      <Button layoutX="105.0" layoutY="266.0" mnemonicParsing="false" onAction="#onClickSetEnglish" text="%English" />
+      <Button layoutX="221.0" layoutY="266.0" mnemonicParsing="false" onAction="#onClickSetFrench" text="%French" />
    </children>
 </AnchorPane>
