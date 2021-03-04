@@ -14,15 +14,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("sample.fxml"));
+        loader.setResources(ResourceBundle.getBundle("sample/Nat", Locale.getDefault()));
+        Parent root = loader.load();
+
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
-//         launch(args);
 
         Locale french = new Locale("fr", "FR");
         Locale spanish = new Locale("es", "ES");
@@ -45,8 +49,12 @@ public class Main extends Application {
 //            System.out.println("Language not supported");
 //            System.exit(0);
 //        }
+        Locale.setDefault(english);
         ResourceBundle rb = ResourceBundle.getBundle("sample/Nat", Locale.getDefault());
         System.out.println(rb.getString("hello") + " " + rb.getString("world"));
+
+        launch(args);
+
 
         System.exit(0);
 
