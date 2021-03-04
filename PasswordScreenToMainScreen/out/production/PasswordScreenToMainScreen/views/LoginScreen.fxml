@@ -6,21 +6,24 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginScreen_Controller">
    <children>
-      <TextField fx:id="textUserName" layoutX="167.0" layoutY="52.0" />
-      <Label layoutX="67.0" layoutY="54.0" text="User Name">
+      <TextField fx:id="textUserName" layoutX="168.0" layoutY="31.0" />
+      <Label layoutX="68.0" layoutY="33.0" text="User Name">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <PasswordField fx:id="labelPassword" layoutX="167.0" layoutY="84.0" />
-      <Button layoutX="164.0" layoutY="159.0" mnemonicParsing="false" onAction="#onClick_LogIn" text="Log In" />
-      <Label layoutX="67.0" layoutY="88.0" text="Password">
+      <PasswordField fx:id="labelPassword" layoutX="168.0" layoutY="63.0" />
+      <Button layoutX="164.0" layoutY="112.0" mnemonicParsing="false" onAction="#onClick_LogIn" text="Log In" />
+      <Label layoutX="68.0" layoutY="67.0" text="Password">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="88.0" layoutY="14.0" text="Acme Appointment Setter version 0.0.1" />
-      <Label fx:id="labelPrompt" layoutX="69.0" layoutY="129.0" text="Enter credentials and then click Log In button" />
-      <Label layoutX="96.0" layoutY="197.0" text="Detected Local Language is English" />
+      <Label layoutX="88.0" layoutY="14.0" text="Acme Appointment Setter version 0.0.1" textAlignment="CENTER" />
+      <Label fx:id="txtLoginPrompt" layoutX="72.0" layoutY="95.0" text="Enter credentials and then click Log In button" textAlignment="CENTER" />
+      <Label layoutX="99.0" layoutY="144.0" text="Detected Local Language is English" textAlignment="CENTER" />
+      <Label layoutX="97.0" layoutY="175.0" text="Choose another language if desired" textAlignment="CENTER" />
+      <Button fx:id="btnEnglish" layoutX="97.0" layoutY="192.0" mnemonicParsing="false" text="English" />
+      <Button fx:id="btnFrench" layoutX="234.0" layoutY="192.0" mnemonicParsing="false" text="French" />
    </children>
 </AnchorPane>

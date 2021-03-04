@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,6 +27,9 @@ public class LoginScreen_Controller implements Initializable {
     public PasswordField labelPassword;
     public TextField textUserName;
     public Label labelPrompt; //  = "Enter credentials and then click Log In button"
+    public Button btnEnglish;
+    public Button btnFrench;
+    public Label txtLoginPrompt;
     Utils utils = new Utils();
 
     public void onClick_LogIn(ActionEvent event) {
