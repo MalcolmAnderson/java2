@@ -7,11 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Appointments;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class Main extends Application {
 
     // TODO - Change login_activity.txt to point to current directory
     // TODO - Change password checker to check the database for passwords
-
+    ResourceBundle rb = ResourceBundle.getBundle("main/Nat", Locale.getDefault());
 
     Appointments appointments;
 
@@ -19,11 +22,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         FXMLLoader loader = new FXMLLoader();
+
         loader.setLocation(getClass().getResource("/views/LoginScreen.fxml"));
+        loader.setResources(rb);
         Parent loginScreenParent = loader.load();
         Scene loginScreenScene = new Scene(loginScreenParent);
 
-        primaryStage.setTitle("Acme Appointment Setter version 0.0.1");
+
+        primaryStage.setTitle(rb.getString("Acme.Appointment.Setter.version.0.0.1"));
         primaryStage.setScene(loginScreenScene);
         primaryStage.show();
 
@@ -33,12 +39,10 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-
-        //FxmlNavigationTools navTools = new FxmlNavigationTools();
-
         // make data connection
 
         launch(args);
+        System.exit(0);
     }
 
 

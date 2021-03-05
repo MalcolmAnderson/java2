@@ -13,17 +13,17 @@
          </font>
       </Label>
       <PasswordField fx:id="labelPassword" layoutX="168.0" layoutY="63.0" />
-      <Button layoutX="164.0" layoutY="112.0" mnemonicParsing="false" onAction="#onClick_LogIn" text="Log In" />
+      <Button fx:id="btnLogIn" layoutX="164.0" layoutY="112.0" mnemonicParsing="false" onAction="#onClick_LogIn" text="%Log.In" />
       <Label layoutX="68.0" layoutY="67.0" text="Password">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="88.0" layoutY="14.0" text="Acme Appointment Setter version 0.0.1" textAlignment="CENTER" />
+      <Label fx:id="lblDescription" layoutX="88.0" layoutY="14.0" text="%Acme.Appointment.Setter.version.0.0.1" textAlignment="CENTER" />
       <Label fx:id="txtLoginPrompt" layoutX="72.0" layoutY="95.0" text="Enter credentials and then click Log In button" textAlignment="CENTER" />
       <Label layoutX="99.0" layoutY="144.0" text="Detected Local Language is English" textAlignment="CENTER" />
       <Label layoutX="97.0" layoutY="175.0" text="Choose another language if desired" textAlignment="CENTER" />
-      <Button fx:id="btnEnglish" layoutX="97.0" layoutY="192.0" mnemonicParsing="false" text="English" />
-      <Button fx:id="btnFrench" layoutX="234.0" layoutY="192.0" mnemonicParsing="false" text="French" />
+      <Button fx:id="btnEnglish" layoutX="97.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetEnglish" text="%English" />
+      <Button fx:id="btnFrench" layoutX="234.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetFrench" text="%French" />
    </children>
 </AnchorPane>
