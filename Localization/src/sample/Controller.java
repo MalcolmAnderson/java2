@@ -22,9 +22,7 @@ public class Controller implements Initializable {
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ResourceBundle rb = ResourceBundle.getBundle("sample/Nat", Locale.getDefault());
+    public void initialize(URL url, ResourceBundle rb) {
         btnManageContacts.setText(rb.getString("ManageContacts"));
         txtLabel.setText(rb.getString("Thisscreenisusedtomanagecontacts"));
     }
