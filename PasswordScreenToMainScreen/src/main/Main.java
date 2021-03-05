@@ -39,6 +39,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        Globals.setHasLoginBeenAttempted(false);
+        Globals.setLocalLanguage(Locale.getDefault().toString());
         // make data connection
 
         launch(args);

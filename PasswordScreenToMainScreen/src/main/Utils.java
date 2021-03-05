@@ -49,9 +49,6 @@ public class Utils {
         String successString = success ? "SUCCESS" : "FAILURE";
         String lineToLog = datetime + " " + successString + " " + userName;
         try {
-//            File file = new File("D:/login_activity.txt");
-//            boolean fileExists = file.exists();
-//            System.out.println(fileExists);
             FileWriter fw = new FileWriter("D:/login_activity.txt", true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(lineToLog);
@@ -59,6 +56,5 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

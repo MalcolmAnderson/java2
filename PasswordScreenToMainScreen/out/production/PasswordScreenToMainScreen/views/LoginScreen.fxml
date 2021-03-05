@@ -4,26 +4,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginScreen_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginScreen_Controller">
    <children>
       <TextField fx:id="textUserName" layoutX="168.0" layoutY="31.0" />
-      <Label layoutX="68.0" layoutY="33.0" text="User Name">
+      <Label fx:id="lblUserName" layoutX="26.0" layoutY="33.0" prefHeight="20.0" prefWidth="127.0" text="%User.Name" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <PasswordField fx:id="labelPassword" layoutX="168.0" layoutY="63.0" />
       <Button fx:id="btnLogIn" layoutX="164.0" layoutY="112.0" mnemonicParsing="false" onAction="#onClick_LogIn" text="%Log.In" />
-      <Label layoutX="68.0" layoutY="67.0" text="Password">
+      <Label fx:id="lblPassword" layoutX="26.0" layoutY="66.0" prefHeight="20.0" prefWidth="127.0" text="%Password" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label fx:id="lblDescription" layoutX="88.0" layoutY="14.0" text="%Acme.Appointment.Setter.version.0.0.1" textAlignment="CENTER" />
-      <Label fx:id="txtLoginPrompt" layoutX="72.0" layoutY="95.0" text="Enter credentials and then click Log In button" textAlignment="CENTER" />
-      <Label layoutX="99.0" layoutY="144.0" text="Detected Local Language is English" textAlignment="CENTER" />
-      <Label layoutX="97.0" layoutY="175.0" text="Choose another language if desired" textAlignment="CENTER" />
-      <Button fx:id="btnEnglish" layoutX="97.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetEnglish" text="%English" />
-      <Button fx:id="btnFrench" layoutX="234.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetFrench" text="%French" />
+      <Label fx:id="lblLoginPrompt" layoutX="21.0" layoutY="95.0" text="Enter credentials and then click Log In button" textAlignment="CENTER" />
+      <Label fx:id="lblDetectedLocalLanguage" layoutX="99.0" layoutY="144.0" text="%Detected.Local.Language" textAlignment="RIGHT" />
+      <Label fx:id="lblChangeAppLanguage" layoutX="55.0" layoutY="196.0" text="%Change.Application.Language" textAlignment="CENTER" />
+      <Button fx:id="btnEnglish" layoutX="250.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetEnglish" text="%English" />
+      <Button fx:id="btnFrench" layoutX="331.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetFrench" text="%French" />
+      <Label fx:id="localLanguage" layoutX="250.0" layoutY="144.0" text="placeholder" />
    </children>
 </AnchorPane>
