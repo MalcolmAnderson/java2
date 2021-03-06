@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import model.Country;
 import utils.DBConnection;
 import utils.JunkCountryManager;
+import utils.PreparedQueryExample;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,17 +35,19 @@ public class Controller implements Initializable {
     }
 
     public void addUSSR(ActionEvent actionEvent) {
-        jcm.setCountryName("USSR");
-        System.out.println(jcm.getCountryName());
-        System.out.println(jcm.getInsertStatement());
-        jcm.RunInsert();
-//        jd.addUSSRToDB();
+        PreparedQueryExample pqe = new PreparedQueryExample();
+        pqe.AddUSSR();
+//        jcm.setCountryName("USSR");
+//        System.out.println(jcm.getCountryName());
+//        System.out.println(jcm.getInsertStatement());
+//        jcm.RunInsert();
     }
 
     public void deleteAllUSSR(ActionEvent actionEvent) {
-        jcm.setCountryName("USSR");
-        jcm.RunDelete();
-//        jd.deleteAllUSSR();
+        PreparedQueryExample pqe = new PreparedQueryExample();
+        pqe.DeleteAllUSSR();
+//        jcm.setCountryName("USSR");
+//        jcm.RunDelete();
     }
 
     public void btnAddCountry(ActionEvent actionEvent) {
@@ -58,8 +61,8 @@ public class Controller implements Initializable {
     }
 
     public void btnUpdateUSSRToJapan(ActionEvent actionEvent) {
-        jcm.setCountryName("Japan");
-        jcm.setWhere_CountryName("USSR");
-        jcm.RunUpdate();
+        PreparedQueryExample pqe = new PreparedQueryExample();
+        pqe.UpdateUSSRToJapan();
+
     }
 }
