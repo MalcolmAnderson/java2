@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
 import main.Globals;
-import main.Locales;
+import Localization.Locales;
 import main.Utils;
 import utils_Navigation.StageManager;
 import utils_Navigation.navInfo_Appointments;
@@ -114,7 +114,7 @@ public class LoginScreen_Controller implements Initializable {
         }
 
     public void LoadView()  {
-        ResourceBundle rb = ResourceBundle.getBundle("main/Nat", Locale.getDefault());
+        ResourceBundle rb = ResourceBundle.getBundle("localization/Nat", Locale.getDefault());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/views/LoginScreen.fxml"));
         loader.setResources(rb);
