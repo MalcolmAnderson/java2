@@ -1,17 +1,13 @@
 package controllers;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import models.Appointment;
 import models.Appointments;
-import models.ManageTestData;
-import utils_Navigation.*;
+import utils.navigation.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;

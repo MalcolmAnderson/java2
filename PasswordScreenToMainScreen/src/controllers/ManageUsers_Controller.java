@@ -2,8 +2,8 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import utils_Navigation.StageManager;
-import utils_Navigation.navInfo_Appointments;
+import utils.navigation.StageManager;
+import utils.navigation.navInfo_Appointments;
 
 import java.net.URL;
 import java.util.ResourceBundle;

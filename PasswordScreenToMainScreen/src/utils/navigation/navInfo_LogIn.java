@@ -1,6 +1,4 @@
-package utils_Navigation;
-
-import java.util.ResourceBundle;
+package utils.navigation;
 
 public class navInfo_LogIn extends navInfo{
     @Override String getFxmlFileName() {

@@ -14,7 +14,7 @@ public class Main extends Application {
 
     // TODO - Change login_activity.txt to point to current directory
     // TODO - Change password checker to check the database for passwords
-    ResourceBundle rb = ResourceBundle.getBundle("localization/Nat", Locale.getDefault());
+    ResourceBundle rb = ResourceBundle.getBundle("utils.localization/Nat", Locale.getDefault());
 
     Appointments appointments;
 

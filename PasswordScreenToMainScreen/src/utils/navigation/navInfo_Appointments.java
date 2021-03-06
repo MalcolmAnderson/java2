@@ -1,4 +1,4 @@
-package utils_Navigation;
+package utils.navigation;
 
 public class navInfo_Appointments extends navInfo {
     @Override String getFxmlFileName() {

@@ -1,4 +1,4 @@
-package utils_Navigation;
+package utils.navigation;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

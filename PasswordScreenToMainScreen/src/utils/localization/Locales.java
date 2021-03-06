@@ -1,4 +1,4 @@
-package Localization;
+package utils.localization;
 
 
 import java.util.Locale;

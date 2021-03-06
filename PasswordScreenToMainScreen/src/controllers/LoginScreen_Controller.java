@@ -9,23 +9,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import main.Globals;
+import utils.localization.Locales;
+import utils.Utils;
+import utils.navigation.StageManager;
+import utils.navigation.navInfo_Appointments;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.stage.Stage;
-import main.Globals;
-import Localization.Locales;
-import main.Utils;
-import utils_Navigation.StageManager;
-import utils_Navigation.navInfo_Appointments;
-
 public class LoginScreen_Controller implements Initializable {
     public PasswordField labelPassword;
     public TextField textUserName;
-//    public Label labelPrompt; //  = "Enter credentials and then click Log In button"
     public Button btnEnglish;
     public Button btnFrench;
     public Label lblLoginPrompt;
@@ -40,6 +38,7 @@ public class LoginScreen_Controller implements Initializable {
     ResourceBundle rb;
     boolean hasLoginAttempted;
     boolean wasLoginSuccessful;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,7 +80,7 @@ public class LoginScreen_Controller implements Initializable {
             String styleString = "-fx-text-fill: #00FF00 ;";
             lblLoginPrompt.setStyle(styleString);
             Globals.setWasLoginSuccessful(true);
-            lblLoginPrompt.setText(rb.getString("Login.Successful"));
+            //lblLoginPrompt.setText(rb.getString("Login.Successful"));
             utils.WriteLoginAttempt(userName, true);
             StageManager.ChangeScene(event, new navInfo_Appointments());
 
@@ -114,7 +113,7 @@ public class LoginScreen_Controller implements Initializable {
         }
 
     public void LoadView()  {
-        ResourceBundle rb = ResourceBundle.getBundle("localization/Nat", Locale.getDefault());
+        ResourceBundle rb = ResourceBundle.getBundle("utils/localization/Nat", Locale.getDefault());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/views/LoginScreen.fxml"));
         loader.setResources(rb);

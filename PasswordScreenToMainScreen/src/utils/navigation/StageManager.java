@@ -1,4 +1,4 @@
-package utils_Navigation;
+package utils.navigation;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

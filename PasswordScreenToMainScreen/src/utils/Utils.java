@@ -1,4 +1,4 @@
-package main;
+package utils;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -39,7 +39,6 @@ public class Utils {
         return colorCode;
     }
 
-
     public void WriteLoginAttempt(String userName, boolean success) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -57,4 +56,5 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
 }
