@@ -17,7 +17,7 @@ public class Globals {
         return localLanguage;
     }
 
-    public static void setLocalLanguage(String localLanguage) {
+    public static void setDetectedSystemLocalLanguage(String localLanguage) {
         Globals.localLanguage = localLanguage;
     }
 

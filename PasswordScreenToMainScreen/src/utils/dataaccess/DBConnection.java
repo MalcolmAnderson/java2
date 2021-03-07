@@ -1,6 +1,6 @@
-package utils;
+package utils.dataaccess;
 
-import secrets.mysqlSecrets;
+import utils.dataaccess.secrets.mysqlSecrets;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +17,7 @@ public class DBConnection {
     private static final String connectionString = protocol + vendor + urlPortAndDbName + parameters;
 
     // Driver Interface Reference
-    private static final String mySqlJDBCDriver = "com.mysql.cj.jdbc.Driver";
+    private static final String mySqlJDBCDriver = "com.mysql.jdbc.Driver";
     private static Connection conn = null;
 
     public static Connection getConnection(){
