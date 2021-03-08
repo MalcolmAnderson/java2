@@ -24,19 +24,23 @@
          </children></StackPane>
         <StackPane prefHeight="150.0" prefWidth="200" GridPane.rowIndex="1">
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="allTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="allJerseyCol" prefWidth="150.0" text="Jersey #" />
+                <TableColumn fx:id="allNameCol" prefWidth="150.0" text="Name" />
+                  <TableColumn fx:id="allPointsCol" prefWidth="150.0" text="Points" />
+                  <TableColumn fx:id="allTeamColumn" prefWidth="150.0" text="Team" />
               </columns>
             </TableView>
          </children></StackPane>
         <StackPane prefHeight="150.0" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="fewTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="fewJerseyCol" prefWidth="150.0" text="Jersey #" />
+                <TableColumn fx:id="fewNameCol" prefWidth="150.0" text="Name" />
+                  <TableColumn fx:id="fewPointsCol" prefWidth="150.0" text="Points" />
+                  <TableColumn fx:id="fewTeamColumn" prefWidth="150.0" text="Team" />
               </columns>
             </TableView>
          </children></StackPane>
