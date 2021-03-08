@@ -24,7 +24,8 @@ public class Players_Controller implements Initializable {
     public Button removeB;
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        int x = 0;
+        x++;
     }
 
     public void onAddB(ActionEvent actionEvent) {
