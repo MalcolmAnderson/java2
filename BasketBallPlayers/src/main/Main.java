@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// Video from
+// https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=9969ffe1-8a4e-4d6c-aa1d-abbd01057497
 public class Main extends Application {
 
     @Override
