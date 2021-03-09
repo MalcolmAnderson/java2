@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Appointments_Controller implements Initializable {
+    public TableView tableViewAppointment;
     private Appointments appointments;
 
     @FXML private TableView<Appointment> appointmentsTable;
@@ -52,6 +53,7 @@ public class Appointments_Controller implements Initializable {
         }
 
         System.out.println(allAppointments.size());
+        tableViewAppointment.setItems(allAppointments);
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
