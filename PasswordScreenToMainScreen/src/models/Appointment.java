@@ -1,7 +1,5 @@
 package models;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Appointment {
@@ -27,6 +25,21 @@ public class Appointment {
         this.start = start;
         this.end = end;
         this.customer_Id = customer_Id;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", contact_Name='" + contact_Name + '\'' +
+                ", type='" + type + '\'' +
+                ", start=" + start +
+                ", end=" + end +
+                ", customer_Id=" + customer_Id +
+                '}';
     }
 
     public int getId() { return id; }

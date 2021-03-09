@@ -11,7 +11,7 @@
       <Button layoutX="319.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClick_ManageCustomers" text="Manage Customers" />
       <Button layoutX="455.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Manage Contacts" />
       <Button layoutX="252.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClick_Reports" text="Reports Screen" />
-      <TableView fx:id="tableViewAppointment" layoutX="19.0" layoutY="52.0" prefHeight="200.0" prefWidth="765.0">
+      <TableView fx:id="tableViewAppointment" layoutX="19.0" layoutY="43.0" prefHeight="246.0" prefWidth="765.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="title" prefWidth="75.0" text="Title" />

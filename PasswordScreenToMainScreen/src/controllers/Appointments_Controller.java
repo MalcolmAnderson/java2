@@ -17,12 +17,14 @@ import utils.navigation.*;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Appointments_Controller implements Initializable {
     private Appointments appointments;
 
-    @FXML private TableView appointmentsTableView;
+    @FXML private TableView<Appointment> appointmentsTable;
     public TableColumn id;
     public TableColumn title;
     public TableColumn description;
@@ -33,48 +35,39 @@ public class Appointments_Controller implements Initializable {
     public TableColumn end;
     public TableColumn custId;
 
+    private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
+
         Appointments foo = ManageTestData.BuildPlaceHolderData();
-//        appointmentsTableView.setItems(foo.getOL_Appointments());
-//        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        title.setCellValueFactory(new PropertyValueFactory<>("title"));
-//        description.setCellValueFactory(new PropertyValueFactory<>("description"));
-//        location.setCellValueFactory(new PropertyValueFactory<>("location"));
-//        contact.setCellValueFactory(new PropertyValueFactory<>("contact_Name"));
-//        type.setCellValueFactory(new PropertyValueFactory<>("type"));
-//        start.setCellValueFactory(new PropertyValueFactory<>("start"));
-//        end.setCellValueFactory(new PropertyValueFactory<>("end"));
-//        custId.setCellValueFactory(new PropertyValueFactory<>("customer_Id"));
-//        appointmentsTableView.refresh();
+        allAppointments.setAll(foo.getOL_Appointments());
+        ArrayList<Appointment> arrayOfAppointments = foo.getAppointments();
+        System.out.println(arrayOfAppointments.size());
+        for(int i = 0; i < arrayOfAppointments.size(); i++){
+//        for(int i = 0; i < 1; i++){
+            Appointment current = arrayOfAppointments.get(i);
+            allAppointments.add(current);
+            System.out.println(current.toString());
+        }
+
+        System.out.println(allAppointments.size());
+
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        location.setCellValueFactory(new PropertyValueFactory<>("location"));
+        contact.setCellValueFactory(new PropertyValueFactory<>("contact_Name"));
+        type.setCellValueFactory(new PropertyValueFactory<>("type"));
+        start.setCellValueFactory(new PropertyValueFactory<>("start"));
+        end.setCellValueFactory(new PropertyValueFactory<>("end"));
+        custId.setCellValueFactory(new PropertyValueFactory<>("customer_Id"));
+        //appointmentsTableView.refresh();
 
 
     }
-//    public void LoadInventory(Inventory inv){
-//        this.inv = inv;
-//
-//        partsTableView.setItems(inv.getAllParts());
-//        partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        partInventoryLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
-//        partPricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//
-//        productsTableView.setItems(inv.getAllProducts());
-//        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        productInventoryLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
-//        productPricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//    }
 
     public void LoadAppointments() {
-
-//        appointments = ManageTestData.BuildPlaceHolderData();
-//        ObservableList<Appointment> temp = (ObservableList<Appointment>)appointments.getAllAppointments();
-//        System.out.println("Number of rows in temp is " + temp.size());
-//        System.out.println("Number of rows in temp is " + temp.);
-//
-//        appointmentsTableView.setItems(appointments.getAllAppointments());
-        //placeHolder.setCellValueFactory(new PropertyValueFactory<>("placeHolder"));
 
         System.out.println("LoadInventory Doesn't Do Anything Yet.");
     }

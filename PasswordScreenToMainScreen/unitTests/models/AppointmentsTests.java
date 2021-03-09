@@ -2,17 +2,21 @@ package models;
 
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppointmentsTests {
 
+    //@FXML private TableView appointmentsTableView = new TableView();
 
     Appointments appointments;
 
@@ -61,6 +65,11 @@ public class AppointmentsTests {
     }
 
     @Test void GetTableViewColumnNames(){
+//        Appointments foo = ManageTestData.BuildPlaceHolderData();
+//        ObservableList<Appointment> ol_appointments = foo.getOL_Appointments();
+//        List<Appointment> list = ol_appointments.get(0).
+//        assertEquals(5, foo.getAppointments().size());
+//        System.out.println(list.toString());
 
     }
 
