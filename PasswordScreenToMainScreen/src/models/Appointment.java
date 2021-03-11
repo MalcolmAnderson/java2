@@ -1,6 +1,8 @@
 package models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Appointment {
 
@@ -59,6 +61,10 @@ public class Appointment {
 
     public String getType() {return type;}
     public void setType(String type) {this.type = type;}
+
+    public LocalDate getDate() {return getStart().toLocalDate();}
+    public LocalTime getStartTime() {return getStart().toLocalTime();}
+    public LocalTime getEndTime() {return getEnd().toLocalTime();}
 
     public LocalDateTime getStart() {return start;}
     public void setStart(LocalDateTime start) {this.start = start;}
