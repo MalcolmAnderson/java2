@@ -18,6 +18,6 @@ public class ManageCustomers_Controller implements Initializable {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
 
-    public void onClick_ManageCustomers(ActionEvent actionEvent) {
+    public void onClick_EditContact(ActionEvent actionEvent) {
     }
 }

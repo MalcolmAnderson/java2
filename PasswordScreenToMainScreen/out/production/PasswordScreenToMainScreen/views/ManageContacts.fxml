@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<!-- fx:controller="controllers.ManageContacts_Controller" -->
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageContacts_Controller">
    <children>
-      <Label layoutX="177.0" layoutY="23.0" text="This page is for adding adding, updating and deleting contacts" />
-      <Button layoutX="39.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Manage Contacts" />
-      <Button layoutX="348.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClick_Cancel" text="Cancel" />
+      <VBox alignment="CENTER" prefHeight="401.0" prefWidth="601.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="36.0" prefWidth="333.0" text="This page is for adding adding, updating and deleting contacts" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="317.0" prefWidth="601.0">
+               <children>
+                  <TableView prefHeight="237.0" prefWidth="500.0">
+                    <columns>
+                      <TableColumn prefWidth="100.0" text="Contact Id" />
+                      <TableColumn prefWidth="200.0" text="Name" />
+                        <TableColumn minWidth="50.0" prefWidth="200.0" text="Email" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="78.0" prefWidth="561.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Add Contact" />
+                  <Button mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Edit Contacts" />
+                  <Button mnemonicParsing="false" text="Delete Contact" />
+                  <Button mnemonicParsing="false" onAction="#onClick_Cancel" text="Return to Appointment Screen" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
