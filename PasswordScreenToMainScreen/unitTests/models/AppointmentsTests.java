@@ -1,16 +1,11 @@
 package models;
 
-import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -53,12 +48,12 @@ public class AppointmentsTests {
     }
 
     @Test void BuildTestData_ShouldHave5Records(){
-        Appointments foo = ManageTestData.BuildPlaceHolderData();
+        Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
         assertEquals(5, foo.getAppointments().size());
     }
 
     @Test void Appointments_getOL_ShouldWork(){
-        Appointments foo = ManageTestData.BuildPlaceHolderData();
+        Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
         ObservableList<Appointment> bar = foo.getOL_Appointments();
 //        assertEquals(5, foo.getOL_Appointments().size());
         assertEquals("ObservableListWrapper",foo.getOL_Appointments().getClass().getSimpleName());

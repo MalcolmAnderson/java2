@@ -6,26 +6,30 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
 import models.Appointment;
 import models.Appointments;
 import models.ManageTestData;
-import utils.dataaccess.DAOAppointments;
 import utils.navigation.*;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Appointments_Controller implements Initializable {
     public TableView tableViewAppointment;
-    private Appointments appointments;
+    public Button btnManageAppointments;
+    public Button btnManageUsers;
+    public Button btnManageCustomers;
+    public Button btnManageContacts;
+    public Button btnReportsScreen;
+//    private Appointments appointments;
 
     @FXML private TableView<Appointment> appointmentsTable;
     public TableColumn id;
@@ -43,10 +47,11 @@ public class Appointments_Controller implements Initializable {
 
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
+        SetButtonColors();
 
-        Appointments foo = ManageTestData.BuildPlaceHolderData();
+        Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
         allAppointments.setAll(foo.getOL_Appointments());
-        ArrayList<Appointment> arrayOfAppointments = foo.getAppointments();
+//        ArrayList<Appointment> arrayOfAppointments = foo.getAppointments();
 
         tableViewAppointment.setItems(allAppointments);
 
@@ -60,8 +65,21 @@ public class Appointments_Controller implements Initializable {
         start.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         end.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         custId.setCellValueFactory(new PropertyValueFactory<>("customer_Id"));
-        //appointmentsTableView.refresh();
+    }
 
+    private void SetButtonColors() {
+        Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
+        Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
+        btnManageAppointments.setBackground(bg_Red);
+        btnManageAppointments.setTextFill(Color.WHITE);
+        btnManageUsers.setBackground(bg_Red);
+        btnManageUsers.setTextFill(Color.WHITE);
+        btnManageCustomers.setBackground(bg_Yellow);
+//        btnManageCustomers.setTextFill(Color.WHITE);
+        btnManageContacts.setBackground(bg_Red);
+        btnManageContacts.setTextFill(Color.WHITE);
+        btnReportsScreen.setBackground(bg_Red);
+        btnReportsScreen.setTextFill(Color.WHITE);
     }
 
     public void LoadAppointments() {

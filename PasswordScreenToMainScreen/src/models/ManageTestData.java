@@ -2,11 +2,13 @@ package models;
 
 
 import java.time.LocalDateTime;
+import models.Appointments;
+import models.Customer;
 
 public class ManageTestData {
 
 
-    public static Appointments BuildPlaceHolderData() {
+    public static Appointments BuildPlaceHolderData_Appointments() {
 
         Appointments appointments = new Appointments();
 
@@ -65,5 +67,20 @@ public class ManageTestData {
         //}
 
         return appointments;
+    }
+
+    public static Customers BuildPlaceHolder_Customers() {
+        Customers customers = new Customers();
+        Customer one = new Customer( 4, "Bob Smith", "123 Cherry Lane, Machester CO 12345", "Boston4@hello.com");
+        Customer two = new Customer( 5, "Malcolm MacLucas", "123 Cherry Lane, Machester CO 12345", "Boston5@aol.com");
+        Customer three = new Customer( 6, "Tom Slytherin", "1133 SE Kamiaken Street, Pullman WA 99163", "Boston5@test.com");
+        Customer four = new Customer( 7, "Periandros of Corinth", "123 Cherry Lane, Machester CO 12345", "Periandros.O.Corinth@gmail.com");
+        Customer five = new Customer( 8, "Samuel of Sparta", "123 Cherry Lane, Machester CO 12345", "Boston7@hotmail.com");
+        customers.addCustomer(one);
+        customers.addCustomer(two);
+        customers.addCustomer(three);
+        customers.addCustomer(four);
+        customers.addCustomer(five);
+        return customers;
     }
 }
