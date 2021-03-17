@@ -1,6 +1,8 @@
-package models;
+package z_unitTests.models;
 
-import javafx.collections.ObservableList;
+import models.Appointment;
+import models.Appointments;
+import models._ManageTestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,12 +51,12 @@ public class AppointmentsTests {
     }
 
     @Test void BuildTestData_ShouldHave5Records(){
-        Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
+        Appointments foo = _ManageTestData.BuildPlaceHolderData_Appointments();
         assertEquals(6, foo.getAllAppointments().size());
     }
 
     @Test void AppointmentsShouldBeArrayListsOfAppointment(){
-        Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
+        Appointments foo = _ManageTestData.BuildPlaceHolderData_Appointments();
 //        ObservableList<Appointment> ol_appointments = foo.getOL_Appointments();
         List<Appointment> list = foo.getAllAppointments();
         assertEquals(6, list.size());

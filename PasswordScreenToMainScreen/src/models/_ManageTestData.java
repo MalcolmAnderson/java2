@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import models.Appointments;
 import models.Customer;
 
-public class ManageTestData {
+public class _ManageTestData {
 
 
     public static Appointments BuildPlaceHolderData_Appointments() {
@@ -71,16 +71,39 @@ public class ManageTestData {
 
     public static Customers BuildPlaceHolder_Customers() {
         Customers customers = new Customers();
-        Customer one = new Customer( 4, "Bob Smith", "123 Cherry Lane, Machester CO 12345", "Boston4@hello.com");
-        Customer two = new Customer( 5, "Malcolm MacLucas", "123 Cherry Lane, Machester CO 12345", "Boston5@aol.com");
-        Customer three = new Customer( 6, "Tom Slytherin", "1133 SE Kamiaken Street, Pullman WA 99163", "Boston5@test.com");
-        Customer four = new Customer( 7, "Periandros of Corinth", "123 Cherry Lane, Machester CO 12345", "Periandros.O.Corinth@gmail.com");
-        Customer five = new Customer( 8, "Samuel of Sparta", "123 Cherry Lane, Machester CO 12345", "Boston7@hotmail.com");
-        customers.addCustomer(one);
-        customers.addCustomer(two);
-        customers.addCustomer(three);
-        customers.addCustomer(four);
-        customers.addCustomer(five);
+
+        Customer zero = new                                    Customer(
+                1,
+                "Daddy Warbucks",
+                "1919 Boardwalk",
+                "01291",
+                "869-908-1875",
+                LocalDateTime.of(2021, 02, 23, 02, 11, 22),
+                "script",
+                LocalDateTime.of(2021, 02, 23, 02, 11, 22),
+                "script",
+                60);
+
+//        Customer one = new Customer(
+//                4,
+//                "Bob Smith",
+//                "123 Cherry Lane, Machester CO 12345",
+//                "Boston4@hello.com");
+
+//        Customer two = new Customer( 5, "Tom Slytherin", "123 Cherry Lane, Machester CO 12345", "Boston5@aol.com");
+//
+//        Customer three = new Customer( 6, "Malcolm MacLucas", "1135 SE Kamiaken Street, Pullman WA 99163", "malcolm.b.anderson@gmail.com");
+//
+//        Customer four = new Customer( 7, "Periandros of Corinth", "123 Cherry Lane, Machester CO 12345", "Periandros.O.Corinth@gmail.com");
+//
+//        Customer five = new Customer( 8, "Samuel of Sparta", "123 Cherry Lane, Machester CO 12345", "Boston7@hotmail.com");
+
+        customers.addCustomer(zero);
+//        customers.addCustomer(one);
+//        customers.addCustomer(two);
+//        customers.addCustomer(three);
+//        customers.addCustomer(four);
+//        customers.addCustomer(five);
         return customers;
     }
 }

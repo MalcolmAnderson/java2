@@ -1,4 +1,4 @@
-package DataAccess;
+package z_integrationTests.DataAccess;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package DataAccess;
+package z_integrationTests.DataAccess;
 
 import models.Customer;
 import models.Customers;

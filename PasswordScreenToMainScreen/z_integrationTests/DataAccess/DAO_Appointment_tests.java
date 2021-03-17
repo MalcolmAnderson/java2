@@ -1,4 +1,4 @@
-package DataAccess;
+package z_integrationTests.DataAccess;
 
 import models.Appointments;
 import org.junit.jupiter.api.AfterEach;

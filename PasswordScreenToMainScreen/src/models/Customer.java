@@ -6,37 +6,123 @@ import java.time.LocalTime;
 
 public class Customer {
 
-    private int id;
-    private String name;
-    private String address;
-    private String email;
+    public int customer_ID;
+    public String custormer_Name;
+    public String address;
+    public String postal_Code;
+    public String phone;
+    public LocalDateTime create_Date;
+    public String created_By;
+    public LocalDateTime last_Update;
+    public String last_Updated_By;
+    public int Division_ID;
 
-    public Customer(int id, String name, String address, String email){
-        this.id = id;
-        this.name = name;
+    public Customer(int customer_ID, String customer_Name, String address, String postal_Code, String phone, LocalDateTime create_Date, String created_By, LocalDateTime last_Update, String last_Updated_By, int division_ID) {
+        this.customer_ID = customer_ID;
+        this.custormer_Name = customer_Name;
         this.address = address;
-        this.email = email;
+        this.postal_Code = postal_Code;
+        this.phone = phone;
+        this.create_Date = create_Date;
+        this.created_By = created_By;
+        this.last_Update = last_Update;
+        this.last_Updated_By = last_Updated_By;
+        Division_ID = division_ID;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "customer_ID=" + customer_ID +
+                ", custormer_Name='" + custormer_Name + '\'' +
                 ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
+                ", postal_Code='" + postal_Code + '\'' +
+                ", phone='" + phone + '\'' +
+                ", create_Date=" + create_Date +
+                ", created_By='" + created_By + '\'' +
+                ", last_Update=" + last_Update +
+                ", last_Updated_By=" + last_Updated_By +
+                ", Division_ID=" + Division_ID +
                 '}';
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getCustomer_ID() {
+        return customer_ID;
+    }
 
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
+    public void setCustomer_ID(int customer_ID) {
+        this.customer_ID = customer_ID;
+    }
 
-    public String getAddress() {return address;}
-    public void setAddress(String address) {this.address = address;}
+    public String getCustormer_Name() {
+        return custormer_Name;
+    }
 
-    public String getEmail() {return email;}
-    public void setEmail(String email) {this.email = email;}
+    public void setCustormer_Name(String custormer_Name) {
+        this.custormer_Name = custormer_Name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPostal_Code() {
+        return postal_Code;
+    }
+
+    public void setPostal_Code(String postal_Code) {
+        this.postal_Code = postal_Code;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public LocalDateTime getCreate_Date() {
+        return create_Date;
+    }
+
+    public void setCreate_Date(LocalDateTime create_Date) {
+        this.create_Date = create_Date;
+    }
+
+    public String getCreated_By() {
+        return created_By;
+    }
+
+    public void setCreated_By(String created_By) {
+        this.created_By = created_By;
+    }
+
+    public LocalDateTime getLast_Update() {
+        return last_Update;
+    }
+
+    public void setLast_Update(LocalDateTime last_Update) {
+        this.last_Update = last_Update;
+    }
+
+    public String getLast_Updated_By() {
+        return last_Updated_By;
+    }
+
+    public void setLast_Updated_By(String last_Updated_By) {
+        this.last_Updated_By = last_Updated_By;
+    }
+
+    public int getDivision_ID() {
+        return Division_ID;
+    }
+
+    public void setDivision_ID(int division_ID) {
+        Division_ID = division_ID;
+    }
 }

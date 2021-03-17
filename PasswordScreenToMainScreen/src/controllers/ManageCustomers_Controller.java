@@ -14,7 +14,6 @@ import utils.navigation.StageManager;
 import utils.navigation.navInfo_Appointments;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManageCustomers_Controller implements Initializable {
@@ -42,7 +41,7 @@ public class ManageCustomers_Controller implements Initializable {
         btnDeleteCustomer.setBackground(bg_Yellow);
         // btnDeleteCustomer.setTextFill(Color.WHITE);
 
-        Customers foo = ManageTestData.BuildPlaceHolder_Customers();
+        Customers foo = _ManageTestData.BuildPlaceHolder_Customers();
         allCustomers.setAll(foo.getOL_Customers());
 //        ArrayList<Customer> arrayOfCustomers = foo.getCustomers();
 

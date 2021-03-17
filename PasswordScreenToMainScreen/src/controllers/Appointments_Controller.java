@@ -15,7 +15,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import models.Appointment;
 import models.Appointments;
-import models.ManageTestData;
+import models._ManageTestData;
 import utils.navigation.*;
 
 import java.net.URL;
@@ -48,7 +48,7 @@ public class Appointments_Controller implements Initializable {
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         SetButtonColors();
 
-        Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
+        Appointments foo = _ManageTestData.BuildPlaceHolderData_Appointments();
         allAppointments.setAll(foo.getAllAppointments());
         tableViewAppointment.setItems(allAppointments);
 
