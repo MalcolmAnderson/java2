@@ -1,4 +1,4 @@
-package utils.dataaccess.secrets;
+package utils.dataAccess.secrets;
 
 public class mysqlSecrets {
     public  String getUserName(){

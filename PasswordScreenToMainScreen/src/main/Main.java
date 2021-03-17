@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Appointments;
-import utils.dataaccess.DBConnection;
+import utils.dataAccess.DBConnection;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

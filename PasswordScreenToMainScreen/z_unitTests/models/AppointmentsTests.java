@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -49,21 +50,14 @@ public class AppointmentsTests {
 
     @Test void BuildTestData_ShouldHave5Records(){
         Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
-        assertEquals(5, foo.getAppointments().size());
+        assertEquals(6, foo.getAllAppointments().size());
     }
 
-    @Test void Appointments_getOL_ShouldWork(){
+    @Test void AppointmentsShouldBeArrayListsOfAppointment(){
         Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
-        ObservableList<Appointment> bar = foo.getOL_Appointments();
-//        assertEquals(5, foo.getOL_Appointments().size());
-        assertEquals("ObservableListWrapper",foo.getOL_Appointments().getClass().getSimpleName());
-    }
-
-    @Test void GetTableViewColumnNames(){
-//        Appointments foo = ManageTestData.BuildPlaceHolderData();
 //        ObservableList<Appointment> ol_appointments = foo.getOL_Appointments();
-//        List<Appointment> list = ol_appointments.get(0).
-//        assertEquals(5, foo.getAppointments().size());
+        List<Appointment> list = foo.getAllAppointments();
+        assertEquals(6, list.size());
 //        System.out.println(list.toString());
 
     }

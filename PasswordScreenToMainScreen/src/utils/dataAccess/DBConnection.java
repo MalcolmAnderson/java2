@@ -1,6 +1,6 @@
-package utils.dataaccess;
+package utils.dataAccess;
 
-import utils.dataaccess.secrets.mysqlSecrets;
+import utils.dataAccess.secrets.mysqlSecrets;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

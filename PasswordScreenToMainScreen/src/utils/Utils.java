@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
 import java.util.TimeZone;
@@ -17,6 +19,14 @@ public class Utils {
 
     public int add(int a, int b) {
         return a + b;
+    }
+
+    public LocalDateTime TimeStamp_to_LocalDateTime(Timestamp ts){
+        if(ts != null){
+            return ts.toLocalDateTime();
+        } else {
+            return null;
+        }
     }
 
     public boolean CheckPassword(String user, String password) {

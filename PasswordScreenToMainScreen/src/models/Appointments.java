@@ -6,24 +6,24 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 public class Appointments {
-    private ObservableList<Appointment> olAppointments = FXCollections.observableArrayList();
-    private ArrayList<Appointment> alAppointments = new ArrayList<Appointment>();
+    //private ObservableList<Appointment> olAppointments = FXCollections.observableArrayList();
+    private ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 
     public void addAppointment(Appointment appointment){
-        alAppointments.add(appointment);
+        appointments.add(appointment);
     }
 
-    public ObservableList<Appointment> getOL_Appointments() {
-        olAppointments.setAll(alAppointments);
-        return olAppointments;
+//    public Appointments getOL_Appointments() {
+//        olAppointments.setAll(appointments.);
+//        return olAppointments;
+//    }
+
+    public ArrayList<Appointment> getAllAppointments() {
+        return appointments;
     }
 
-    public ArrayList<Appointment> getAppointments() {
-        return alAppointments;
-    }
-
-    public void setAllAppointments(ArrayList<Appointment> alAppointments) {
-        this.alAppointments = alAppointments;
+    public void setAllAppointments(ArrayList<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }
 

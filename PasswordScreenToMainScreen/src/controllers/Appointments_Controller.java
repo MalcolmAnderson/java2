@@ -19,7 +19,6 @@ import models.ManageTestData;
 import utils.navigation.*;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Appointments_Controller implements Initializable {
@@ -50,11 +49,13 @@ public class Appointments_Controller implements Initializable {
         SetButtonColors();
 
         Appointments foo = ManageTestData.BuildPlaceHolderData_Appointments();
-        allAppointments.setAll(foo.getOL_Appointments());
-//        ArrayList<Appointment> arrayOfAppointments = foo.getAppointments();
-
+        allAppointments.setAll(foo.getAllAppointments());
         tableViewAppointment.setItems(allAppointments);
 
+        DefineTableElements();
+    }
+
+    private void DefineTableElements() {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));

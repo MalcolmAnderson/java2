@@ -1,13 +1,11 @@
 package controllers;
 
 import javafx.collections.FXCollections;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -36,12 +34,13 @@ public class ManageCustomers_Controller implements Initializable {
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
+        Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
         btnAddCustomer.setBackground(bg_Red);
         btnAddCustomer.setTextFill(Color.WHITE);
         btnEditCustomer.setBackground(bg_Red);
         btnEditCustomer.setTextFill(Color.WHITE);
-        btnDeleteCustomer.setBackground(bg_Red);
-        btnDeleteCustomer.setTextFill(Color.WHITE);
+        btnDeleteCustomer.setBackground(bg_Yellow);
+        // btnDeleteCustomer.setTextFill(Color.WHITE);
 
         Customers foo = ManageTestData.BuildPlaceHolder_Customers();
         allCustomers.setAll(foo.getOL_Customers());
@@ -60,6 +59,35 @@ public class ManageCustomers_Controller implements Initializable {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
 
-    public void onClick_EditContact(ActionEvent actionEvent) {
+    public void onClick_EditCustomer(ActionEvent actionEvent) {
+    }
+
+    public void onClickDAddCustomer(ActionEvent actionEvent) {
+    }
+
+    public void onClickDeleteCustomer(ActionEvent actionEvent) {
+        int selectedCustomerIndex = tvCustomerView.getSelectionModel().getSelectedIndex();
+        Customer selectedCustomer = (Customer)tvCustomerView.getSelectionModel().getSelectedItem();
+        System.out.println("Selected Customer Index = " + selectedCustomerIndex);
+        if (selectedCustomerIndex != -1){
+            Alert alert = new Alert(
+                    Alert.AlertType.CONFIRMATION,
+                    "Deleting a customer deletes that customer's appointments.\nDelete this customer?",
+                    ButtonType.YES,
+                    ButtonType.CANCEL);
+            alert.showAndWait();
+            if(alert.getResult() == ButtonType.YES){
+                tvCustomerView.getItems().remove(selectedCustomerIndex);
+
+                //TODO Delete the customer from the database
+                // inv.deletePart(selectedCustomer);
+            }
+        }else {
+            Alert alert = new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Please select a customer to delete",
+                    ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 }
