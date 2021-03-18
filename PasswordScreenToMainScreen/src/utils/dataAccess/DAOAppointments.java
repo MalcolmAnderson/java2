@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DAOAppointments {
+
+
+
     public Appointments selectAllAppointments(){
         Appointments appointments = new Appointments();
         Utils utils = new Utils();
@@ -16,7 +19,8 @@ public class DAOAppointments {
             String sql = "SELECT * FROM appointments;";
 
             String shouldWork = "SELECT Appointment_Id, Title, Description, Location, "
-                + "contacts.Contact_Name, Type, Start, End, customers.Customer_ID FROM appointments "
+                + "contacts.Contact_Name, Type, Start, End, customers.Customer_ID, customers.Customer_Name"
+                + " FROM appointments "
                 + "left join customers on "
                 + "appointments.Customer_ID = customers.Customer_ID "
                 + "left join contacts on "
@@ -35,7 +39,8 @@ public class DAOAppointments {
                 LocalDateTime start = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("Start"));
                 LocalDateTime end = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("End"));
                 int customerId = rs.getInt("Customer_ID");
-                appointments.addAppointment(new Appointment(appointmentId, title,description, location, contactName, type, start, end, customerId));
+                String customer_Name = rs.getString("Customer_Name");
+                appointments.addAppointment(new Appointment(appointmentId, title,description, location, contactName, type, start, end, customerId, customer_Name));
 //                System.out.println(appointmentId + ", " + title + ", " + description + ", " + customerId  + ", " + contactName);
 //                System.out.println(appointments.getAllAppointments().size());
             }

@@ -16,7 +16,8 @@ public class CustomerTests {
     Customers customers;
 
     @BeforeEach
-    void setUp() {customers = new Customers();
+    void setUp() {
+        customers = new Customers();
     }
 
     @AfterEach void tearDown() {
@@ -32,7 +33,7 @@ public class CustomerTests {
         Customer customer = customers.getCustomers().get(0);
         assertEquals(1, customers.getCustomers().size());
         assertEquals(1, customer.getCustomer_ID());
-        assertEquals("Daddy Warbucks", customer.getCustormer_Name());
+        assertEquals("Daddy Warbucks", customer.getCustomer_Name());
         assertEquals("1919 Boardwalk", customer.getAddress());
         assertEquals("01291", customer.getPostal_Code());
         assertEquals("869-908-1875", customer.getPhone());

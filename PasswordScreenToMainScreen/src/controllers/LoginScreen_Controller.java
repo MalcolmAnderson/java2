@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class LoginScreen_Controller implements Initializable {
     public PasswordField labelPassword;
@@ -34,6 +35,7 @@ public class LoginScreen_Controller implements Initializable {
     public Label localLanguage;
     public Label lblUserName;
     public Label lblPassword;
+    public Label lblTimeZone;
     Utils utils = new Utils();
     ResourceBundle rb;
     boolean hasLoginAttempted;
@@ -66,6 +68,7 @@ public class LoginScreen_Controller implements Initializable {
         }
         lblUserName.setText(rb.getString("User.Name"));
         lblPassword.setText(rb.getString("Password"));
+        lblTimeZone.setText(TimeZone.getDefault().getDisplayName());
 
 
     }

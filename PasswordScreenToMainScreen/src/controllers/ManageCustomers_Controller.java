@@ -20,12 +20,12 @@ public class ManageCustomers_Controller implements Initializable {
     public TableColumn tcId;
     public TableColumn tcName;
     public TableColumn tcAddress;
-    public TableColumn tcEmail;
     public TableView tvCustomerView;
     public Button btnAddCustomer;
     public Button btnEditCustomer;
     public Button btnDeleteCustomer;
     public Button btnExit;
+    public TableColumn tcPhone;
 
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
 
@@ -47,10 +47,10 @@ public class ManageCustomers_Controller implements Initializable {
 
         tvCustomerView.setItems(allCustomers);
 
-        tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        tcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>("customer_Name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("fullAddress"));
+        tcPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
 
@@ -71,7 +71,7 @@ public class ManageCustomers_Controller implements Initializable {
         if (selectedCustomerIndex != -1){
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,
-                    "Deleting a customer deletes that customer's appointments.\nDelete this customer?",
+                    "Deleting a customer deletes all customer appointments.\nDelete this customer?",
                     ButtonType.YES,
                     ButtonType.CANCEL);
             alert.showAndWait();

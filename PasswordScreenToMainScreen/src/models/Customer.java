@@ -1,13 +1,11 @@
 package models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class Customer {
 
     public int customer_ID;
-    public String custormer_Name;
+    public String customer_Name;
     public String address;
     public String postal_Code;
     public String phone;
@@ -19,7 +17,7 @@ public class Customer {
 
     public Customer(int customer_ID, String customer_Name, String address, String postal_Code, String phone, LocalDateTime create_Date, String created_By, LocalDateTime last_Update, String last_Updated_By, int division_ID) {
         this.customer_ID = customer_ID;
-        this.custormer_Name = customer_Name;
+        this.customer_Name = customer_Name;
         this.address = address;
         this.postal_Code = postal_Code;
         this.phone = phone;
@@ -34,7 +32,7 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "customer_ID=" + customer_ID +
-                ", custormer_Name='" + custormer_Name + '\'' +
+                ", customer_Name='" + customer_Name + '\'' +
                 ", address='" + address + '\'' +
                 ", postal_Code='" + postal_Code + '\'' +
                 ", phone='" + phone + '\'' +
@@ -54,12 +52,12 @@ public class Customer {
         this.customer_ID = customer_ID;
     }
 
-    public String getCustormer_Name() {
-        return custormer_Name;
+    public String getCustomer_Name() {
+        return customer_Name;
     }
 
-    public void setCustormer_Name(String custormer_Name) {
-        this.custormer_Name = custormer_Name;
+    public void setCustomer_Name(String customer_Name) {
+        this.customer_Name = customer_Name;
     }
 
     public String getAddress() {
@@ -124,5 +122,9 @@ public class Customer {
 
     public void setDivision_ID(int division_ID) {
         Division_ID = division_ID;
+    }
+
+    public String getFullAddress() {
+        return address;
     }
 }

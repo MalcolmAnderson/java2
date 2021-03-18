@@ -26,7 +26,7 @@
       <Button fx:id="btnEnglish" layoutX="250.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetEnglish" text="%English" />
       <Button fx:id="btnFrench" layoutX="331.0" layoutY="192.0" mnemonicParsing="false" onAction="#onClickSetFrench" text="%French" />
       <Label fx:id="localLanguage" layoutX="250.0" layoutY="144.0" text="placeholder" />
-      <Label layoutX="331.0" layoutY="45.0" text="ZoneId text" />
+      <Label fx:id="lblTimeZone" layoutX="331.0" layoutY="45.0" text="ZoneId text" />
       <Label layoutX="331.0" layoutY="23.0" text="Detected ZoneId" />
    </children>
 </AnchorPane>

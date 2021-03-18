@@ -15,9 +15,10 @@ public class Appointment {
     private LocalDateTime start;
     private LocalDateTime end;
     private int customer_Id;
+    private String customer_Name;
 
     public Appointment(int id, String title, String description, String location, String contact_Name,
-                       String type, LocalDateTime start, LocalDateTime end, int customer_Id){
+                       String type, LocalDateTime start, LocalDateTime end, int customer_Id, String customer_Name){
         this.id = id;
         this.title = title;
         this.description = description;
@@ -27,6 +28,7 @@ public class Appointment {
         this.start = start;
         this.end = end;
         this.customer_Id = customer_Id;
+        this.customer_Name = customer_Name;
     }
 
     @Override
@@ -41,8 +43,11 @@ public class Appointment {
                 ", start=" + start +
                 ", end=" + end +
                 ", customer_Id=" + customer_Id +
+                ", customer_Name=" + customer_Name +
                 '}';
     }
+
+    public String getCustomer_Name() {return customer_Name;}
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

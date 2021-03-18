@@ -38,7 +38,7 @@ public class AppointmentsTests {
         LocalDateTime start = LocalDateTime.of(2020, 04, 28, 9, 00);
         LocalDateTime end = LocalDateTime.of(2020, 04, 28, 10, 00);
 
-        Appointment foo = new Appointment(1, "a", "b", "c", "d", "e", start, end, 5);
+        Appointment foo = new Appointment(1, "a", "b", "c", "d", "e", start, end, 5, "Daddy Warbuck's Annie");
         assertEquals(1, foo.getId());
         assertEquals("a", foo.getTitle());
         assertEquals("b", foo.getDescription());
@@ -56,9 +56,9 @@ public class AppointmentsTests {
     }
 
     @Test void AppointmentsShouldBeArrayListsOfAppointment(){
-        Appointments foo = _ManageTestData.BuildPlaceHolderData_Appointments();
+        Appointments appointments = _ManageTestData.BuildPlaceHolderData_Appointments();
 //        ObservableList<Appointment> ol_appointments = foo.getOL_Appointments();
-        List<Appointment> list = foo.getAllAppointments();
+        List<Appointment> list = appointments.getAllAppointments();
         assertEquals(6, list.size());
 //        System.out.println(list.toString());
 

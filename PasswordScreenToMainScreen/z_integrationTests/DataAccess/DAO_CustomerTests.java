@@ -1,27 +1,23 @@
 package z_integrationTests.DataAccess;
 
-import models.Customer;
 import models.Customers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utils.Utils;
 import utils.dataAccess.DBConnection;
-import utils.dataAccess.DOACustomers;
-
-import java.util.ArrayList;
+import utils.dataAccess.DAOCustomers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DAO_CustomerTests {
 
-    DOACustomers dao;
+    DAOCustomers dao;
 
     @BeforeEach
     void setUp() {
         DBConnection.startConnection();
-        dao = new DOACustomers();
+        dao = new DAOCustomers();
     }
 
     @AfterEach
@@ -33,8 +29,8 @@ public class DAO_CustomerTests {
     void shouldRefreshCustomers() {
         Customers customers = new Customers();
         assertEquals(0, customers.getCustomers().size());
-        ArrayList<Customer> al = dao.SelectAllCustomers();
-        customers.setAllCustomers(al);
+        //customers = dao.
+        customers = dao.selectAllCustomers();
         assertEquals(3, customers.getCustomers().size());
 
     }
