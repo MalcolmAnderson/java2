@@ -4,18 +4,32 @@ import java.time.LocalDateTime;
 
 public class Customer {
 
-    public int customer_ID;
-    public String customer_Name;
-    public String address;
-    public String postal_Code;
-    public String phone;
-    public LocalDateTime create_Date;
-    public String created_By;
-    public LocalDateTime last_Update;
-    public String last_Updated_By;
-    public int Division_ID;
+    private int customer_ID;
+    private String customer_Name;
+    private String address;
+    private String postal_Code;
+    private String phone;
+    private LocalDateTime create_Date;
+    private String created_By;
+    private LocalDateTime last_Update;
+    private String last_Updated_By;
+    private int division_ID;
+    private String division;
+    private String country;
 
-    public Customer(int customer_ID, String customer_Name, String address, String postal_Code, String phone, LocalDateTime create_Date, String created_By, LocalDateTime last_Update, String last_Updated_By, int division_ID) {
+    public Customer(
+            int customer_ID,
+            String customer_Name,
+            String address,
+            String postal_Code,
+            String phone,
+            LocalDateTime create_Date,
+            String created_By,
+            LocalDateTime last_Update,
+            String last_Updated_By,
+            int division_ID,
+            String division,
+            String country) {
         this.customer_ID = customer_ID;
         this.customer_Name = customer_Name;
         this.address = address;
@@ -25,7 +39,9 @@ public class Customer {
         this.created_By = created_By;
         this.last_Update = last_Update;
         this.last_Updated_By = last_Updated_By;
-        Division_ID = division_ID;
+        this.division_ID = division_ID;
+        this.division = division;
+        this.country = country;
     }
 
     @Override
@@ -39,8 +55,10 @@ public class Customer {
                 ", create_Date=" + create_Date +
                 ", created_By='" + created_By + '\'' +
                 ", last_Update=" + last_Update +
-                ", last_Updated_By=" + last_Updated_By +
-                ", Division_ID=" + Division_ID +
+                ", last_Updated_By='" + last_Updated_By + '\'' +
+                ", division_ID=" + division_ID +
+                ", division='" + division + '\'' +
+                ", country='" + country + '\'' +
                 '}';
     }
 
@@ -117,14 +135,26 @@ public class Customer {
     }
 
     public int getDivision_ID() {
-        return Division_ID;
+        return division_ID;
     }
 
     public void setDivision_ID(int division_ID) {
-        Division_ID = division_ID;
+        this.division_ID = division_ID;
     }
 
-    public String getFullAddress() {
-        return address;
+    public String getDivision() {
+        return division;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

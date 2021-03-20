@@ -24,11 +24,9 @@ import java.util.ResourceBundle;
 public class Appointments_Controller implements Initializable {
     public TableView tableViewAppointment;
     public Button btnManageAppointments;
-    public Button btnManageUsers;
     public Button btnManageCustomers;
     public Button btnManageContacts;
     public Button btnReportsScreen;
-//    private Appointments appointments;
 
     @FXML private TableView<Appointment> appointmentsTable;
     public TableColumn id;
@@ -73,8 +71,6 @@ public class Appointments_Controller implements Initializable {
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
         btnManageAppointments.setBackground(bg_Red);
         btnManageAppointments.setTextFill(Color.WHITE);
-        btnManageUsers.setBackground(bg_Red);
-        btnManageUsers.setTextFill(Color.WHITE);
         btnManageCustomers.setBackground(bg_Yellow);
 //        btnManageCustomers.setTextFill(Color.WHITE);
         btnManageContacts.setBackground(bg_Red);

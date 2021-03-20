@@ -9,6 +9,7 @@ abstract class navInfo {
     ResourceBundle rb = ResourceBundle.getBundle("utils/localization/Nat", Locale.getDefault());
 
     String pathToViews = "../../views/";
+//    String pathToViews = "/views/";
 }
 
 

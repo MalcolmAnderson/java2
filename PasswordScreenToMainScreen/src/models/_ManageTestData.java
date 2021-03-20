@@ -82,7 +82,10 @@ public class _ManageTestData {
                 "script",
                 LocalDateTime.of(2021, 02, 23, 02, 11, 22),
                 "script",
-                60);
+                60,
+                "Scotland",
+                "UK");
+
 
 //        Customer one = new Customer(
 //                4,
