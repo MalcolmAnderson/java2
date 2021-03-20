@@ -34,7 +34,6 @@
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="910.0" spacing="20.0">
                <children>
                   <Button fx:id="btnManageAppointments" mnemonicParsing="false" onAction="#onClick_AddAppointments" text="Manage Appointments" />
-                  <Button fx:id="btnManageUsers" mnemonicParsing="false" onAction="#onClick_ManageUsers" text="Manage Users" />
                   <Button fx:id="btnManageCustomers" mnemonicParsing="false" onAction="#onClick_ManageCustomers" text="Manage Customers" />
                   <Button fx:id="btnManageContacts" mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Manage Contacts" />
                </children>
