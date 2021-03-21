@@ -1,13 +1,11 @@
 package utils.dataAccess;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import models.Appointment;
 import models.Customer;
 import models.Customers;
 import utils.Utils;
-
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -31,17 +29,6 @@ public class DAOCustomers {
                     + "c.Division_ID = d.Division_ID "
                     + "left join countries as tree on "
                     + "d.Country_ID = tree.Country_ID;";
-
-//            sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code"
-//                    + ", Phone, c.Create_Date as Create_Date, c.Created_By, c.Last_Update"
-//                    + ", c.Last_Updated_By, c.Division_ID, d.Division, tree.Country "
-//                    + "FROM customers as c "
-//                    + "left join first_level_divisions as d on "
-//                    + "c.Division_ID = d.Division_ID "
-//                    + "left join countries as tree on "
-//                    + "d.Country_ID = tree.Country_ID "
-//                    + "limit 1;";
-
 
 
             sql = shouldWork;
@@ -86,7 +73,4 @@ public class DAOCustomers {
         return customers;
     }
 
-    public ArrayList<Customer> SelectAllCustomers() {
-        return new ArrayList<Customer>();
-    }
 }

@@ -44,6 +44,15 @@ public class Customer {
         this.country = country;
     }
 
+    // custom getter
+    public String getFullAddress() {
+        return address + ", " + division + " " + postal_Code;
+    }
+
+
+
+
+
     @Override
     public String toString() {
         return "Customer{" +

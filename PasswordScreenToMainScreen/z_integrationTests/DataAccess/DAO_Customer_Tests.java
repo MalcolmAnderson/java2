@@ -1,5 +1,8 @@
 package z_integrationTests.DataAccess;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import models.Customer;
 import models.Customers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +21,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class DAO_CustomerTests {
+public class DAO_Customer_Tests {
 
     DAOCustomers dao;
 
@@ -79,9 +82,12 @@ public class DAO_CustomerTests {
     @Test void shouldRefreshCustomers() {
         Customers customers = new Customers();
         assertEquals(0, customers.getCustomers().size());
-        //customers = dao.
         customers = dao.selectAllCustomers();
         assertEquals(3, customers.getCustomers().size());
+        ObservableList<Customer> olCustomers = FXCollections.observableArrayList();
+        assertEquals(0, olCustomers.size());
+        olCustomers.setAll(customers.getCustomers());
+        assertEquals(3, olCustomers.size());
     }
 
 }

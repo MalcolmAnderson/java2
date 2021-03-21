@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import models.*;
+import utils.dataAccess.DAOCustomers;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_Appointments;
 
@@ -20,18 +21,37 @@ public class ManageCustomers_Controller implements Initializable {
     public TableColumn tcId;
     public TableColumn tcName;
     public TableColumn tcAddress;
-    public TableView tvCustomerView;
+    public TableView tvCustomers;
     public Button btnAddCustomer;
     public Button btnEditCustomer;
     public Button btnDeleteCustomer;
     public Button btnExit;
     public TableColumn tcPhone;
+    public TableColumn tcCountry;
 
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+    private DAOCustomers dao = new DAOCustomers();
 
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        SetButtonColors();
+
+
+        Customers customers = new Customers();
+        customers = dao.selectAllCustomers();
+        allCustomers.setAll(customers.getCustomers());
+
+        tvCustomers.setItems(allCustomers);
+
+        tcId.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>("customer_Name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("fullAddress"));
+        tcCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
+        tcPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+    }
+
+    private void SetButtonColors() {
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
         btnAddCustomer.setBackground(bg_Red);
@@ -40,17 +60,6 @@ public class ManageCustomers_Controller implements Initializable {
         btnEditCustomer.setTextFill(Color.WHITE);
         btnDeleteCustomer.setBackground(bg_Yellow);
         // btnDeleteCustomer.setTextFill(Color.WHITE);
-
-        Customers foo = _ManageTestData.BuildPlaceHolder_Customers();
-        allCustomers.setAll(foo.getOL_Customers());
-//        ArrayList<Customer> arrayOfCustomers = foo.getCustomers();
-
-        tvCustomerView.setItems(allCustomers);
-
-        tcId.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
-        tcName.setCellValueFactory(new PropertyValueFactory<>("customer_Name"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("fullAddress"));
-        tcPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
 
@@ -65,8 +74,8 @@ public class ManageCustomers_Controller implements Initializable {
     }
 
     public void onClickDeleteCustomer(ActionEvent actionEvent) {
-        int selectedCustomerIndex = tvCustomerView.getSelectionModel().getSelectedIndex();
-        Customer selectedCustomer = (Customer)tvCustomerView.getSelectionModel().getSelectedItem();
+        int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
+        Customer selectedCustomer = (Customer) tvCustomers.getSelectionModel().getSelectedItem();
         System.out.println("Selected Customer Index = " + selectedCustomerIndex);
         if (selectedCustomerIndex != -1){
             Alert alert = new Alert(
@@ -76,7 +85,7 @@ public class ManageCustomers_Controller implements Initializable {
                     ButtonType.CANCEL);
             alert.showAndWait();
             if(alert.getResult() == ButtonType.YES){
-                tvCustomerView.getItems().remove(selectedCustomerIndex);
+                tvCustomers.getItems().remove(selectedCustomerIndex);
 
                 //TODO Delete the customer from the database
                 // inv.deletePart(selectedCustomer);

@@ -31,10 +31,10 @@ public class SceneChanger {
 //            String currentPath = currentDirectoryPath.toString();
 //            System.out.println("Current directory path:: " + currentPath);
         // Directory path method four
-        FileSystem fileSystem = FileSystems.getDefault();
-        Path path = fileSystem.getPath("").toAbsolutePath();
-        String currentDirectoryPath = path.toString();
-        System.out.println("Current directory path:: " + currentDirectoryPath);
+//        FileSystem fileSystem = FileSystems.getDefault();
+//        Path path = fileSystem.getPath("").toAbsolutePath();
+//        String currentDirectoryPath = path.toString();
+//        System.out.println("Current directory path:: " + currentDirectoryPath);
 
 
         FXMLLoader loader = new FXMLLoader();

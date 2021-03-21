@@ -17,20 +17,20 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="317.0" prefWidth="601.0">
                <children>
-                  <TableView prefHeight="237.0" prefWidth="500.0">
+                  <TableView fx:id="tvContacts" prefHeight="237.0" prefWidth="500.0">
                     <columns>
-                      <TableColumn prefWidth="100.0" text="Contact Id" />
-                      <TableColumn prefWidth="200.0" text="Name" />
-                        <TableColumn minWidth="50.0" prefWidth="200.0" text="Email" />
+                      <TableColumn fx:id="tcContactID" prefWidth="100.0" text="Contact Id" />
+                      <TableColumn fx:id="tcContactName" prefWidth="200.0" text="Name" />
+                        <TableColumn fx:id="tcContactEmail" minWidth="50.0" prefWidth="200.0" text="Email" />
                     </columns>
                   </TableView>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="78.0" prefWidth="561.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" text="Add Contact" />
-                  <Button mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Edit Contacts" />
-                  <Button mnemonicParsing="false" text="Delete Contact" />
+                  <Button fx:id="btnAddContact" mnemonicParsing="false" text="Add Contact" />
+                  <Button fx:id="btnEditContact" mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Edit Contacts" />
+                  <Button fx:id="btnDeleteContact" mnemonicParsing="false" text="Delete Contact" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

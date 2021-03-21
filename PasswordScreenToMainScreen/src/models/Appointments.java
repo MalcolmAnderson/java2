@@ -13,11 +13,6 @@ public class Appointments {
         appointments.add(appointment);
     }
 
-//    public Appointments getOL_Appointments() {
-//        olAppointments.setAll(appointments.);
-//        return olAppointments;
-//    }
-
     public ArrayList<Appointment> getAllAppointments() {
         return appointments;
     }
