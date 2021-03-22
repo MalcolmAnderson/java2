@@ -34,7 +34,7 @@ public class CustomerTests {
         assertEquals(1, customers.getCustomers().size());
         assertEquals(1, customer.getCustomer_ID());
         assertEquals("Daddy Warbucks", customer.getCustomer_Name());
-        assertEquals("1919 Boardwalk", customer.getAddress());
+        assertEquals("1919 Boardwalk, Trenton", customer.getAddress());
         assertEquals("01291", customer.getPostal_Code());
         assertEquals("869-908-1875", customer.getPhone());
         LocalDateTime createDate =  LocalDateTime.of(2021, 02, 23, 02, 11, 22);
@@ -43,7 +43,7 @@ public class CustomerTests {
         LocalDateTime lastUpdate =  LocalDateTime.of(2021, 02, 23, 02, 11, 22);
         assertEquals(lastUpdate, customer.getLast_Update());
         assertEquals("script", customer.getLast_Updated_By());
-        assertEquals(60, customer.getDivision_ID());
+        assertEquals(29, customer.getDivision_ID());
 
 
 //        assertEquals(three.getEmail(), customer.getEmail());

@@ -75,16 +75,16 @@ public class _ManageTestData {
         Customer zero = new                                    Customer(
                 1,
                 "Daddy Warbucks",
-                "1919 Boardwalk",
+                "1919 Boardwalk, Trenton",
                 "01291",
                 "869-908-1875",
                 LocalDateTime.of(2021, 02, 23, 02, 11, 22),
                 "script",
                 LocalDateTime.of(2021, 02, 23, 02, 11, 22),
                 "script",
-                60,
-                "Scotland",
-                "UK");
+                29,
+                "New Jersey",
+                "U.S");
 
 
 //        Customer one = new Customer(

@@ -73,8 +73,8 @@ public class Appointments_Controller implements Initializable {
         btnManageAppointments.setTextFill(Color.WHITE);
         btnManageCustomers.setBackground(bg_Yellow);
 //        btnManageCustomers.setTextFill(Color.WHITE);
-        btnManageContacts.setBackground(bg_Red);
-        btnManageContacts.setTextFill(Color.WHITE);
+        btnManageContacts.setBackground(bg_Yellow);
+//        btnManageContacts.setTextFill(Color.WHITE);
         btnReportsScreen.setBackground(bg_Red);
         btnReportsScreen.setTextFill(Color.WHITE);
     }

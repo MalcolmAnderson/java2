@@ -1,6 +1,8 @@
 package z_integrationTests.DataAccess;
 
+import models.Appointment;
 import models.Appointments;
+import models._ManageTestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +27,40 @@ public class DAO_Appointment_tests {
     }
 
     @Test
-    void shouldRefreshCustomers() {
+    void shouldRefreshAppointments() {
+        System.out.println("Begin shouldRefreshAppointments");
         Appointments appointments = new Appointments();
         assertEquals(0, appointments.getAllAppointments().size());
         appointments = dao.selectAllAppointments();
 //        appointments.setAllAppointments(dao.selectAllAppointments());
 //        appointments.setAllAppointments(appointments.getAllAppointments());
         assertEquals(2, appointments.getAllAppointments().size());
+        System.out.println("End shouldRefreshAppointments");
     }
+    
+    @Test void shouldAddTestDataToAppointments(){
+        System.out.println("Begin shouldAddTestDataToAppointments");
+        Appointments appointments = new Appointments();
+        appointments = dao.selectAllAppointments();
+        int currentSize = appointments.getAllAppointments().size();
+        Appointments toBeAdded = _ManageTestData.BuildPlaceHolderData_Appointments();
+        for (Appointment current : toBeAdded.getAllAppointments()) {
+            appointments.addAppointment(current);
+        }
+        assertEquals(8, appointments.getAllAppointments().size());
+        appointments = dao.selectAllAppointments();
+        assertEquals(2, appointments.getAllAppointments().size());
+//        for (Appointment current : toBeAdded.getAllAppointments()) {
+//            dao.insertAppointment(current);
+//        }
+        Appointment current = toBeAdded.getAllAppointments().get(0);
+        System.out.println("Current Appointment Data");
+        System.out.println(current.toString());
+        dao.insertAppointment(current);
+        appointments = dao.selectAllAppointments();
+        assertEquals(2, appointments.getAllAppointments().size());
+        System.out.println("Begin shouldAddTestDataToAppointments");
+    }
+
 
 }

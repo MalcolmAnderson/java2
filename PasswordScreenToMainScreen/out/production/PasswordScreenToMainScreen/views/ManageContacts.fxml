@@ -28,9 +28,9 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="78.0" prefWidth="561.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnAddContact" mnemonicParsing="false" text="Add Contact" />
+                  <Button fx:id="btnAddContact" mnemonicParsing="false" onAction="#onClickAddContact" text="Add Contact" />
                   <Button fx:id="btnEditContact" mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Edit Contacts" />
-                  <Button fx:id="btnDeleteContact" mnemonicParsing="false" text="Delete Contact" />
+                  <Button fx:id="btnDeleteContact" mnemonicParsing="false" onAction="#onClickDeleteContact" text="Delete Contact" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -39,8 +39,9 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
+                  <Button fx:id="btnAddEric" mnemonicParsing="false" onAction="#onClickAddEric" text="Add Eric" />
                   <Button mnemonicParsing="false" onAction="#onClick_Cancel" text="Return to Appointment Screen" />
                </children>
             </HBox>

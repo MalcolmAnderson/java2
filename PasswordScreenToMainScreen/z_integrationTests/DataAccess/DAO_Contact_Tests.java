@@ -24,8 +24,6 @@ import models.Contact;
 
 
 public class DAO_Contact_Tests {
-
-
     DAOContacts dao;
 
     @BeforeEach
@@ -63,11 +61,25 @@ public class DAO_Contact_Tests {
         Contacts contacts = new Contacts();
         assertEquals(0, contacts.getContacts().size());
         contacts = dao.selectAllContacts();
-        assertEquals(3, contacts.getContacts().size());
+        assertEquals(4, contacts.getContacts().size());
         ObservableList<Contact> olContacts = FXCollections.observableArrayList();
         assertEquals(0, olContacts.size());
         olContacts.setAll(contacts.getContacts());
-        assertEquals(3, olContacts.size());
+        assertEquals(4, olContacts.size());
     }
+
+    void shouldAddAndDeleteAContact(){
+        Contacts contacts = new Contacts();
+        assertEquals(0, contacts.getContacts().size());
+        contacts = dao.selectAllContacts();
+        assertEquals(4, contacts.getContacts().size());
+        Contact current = new Contact(5, "Test McTestFace", "Test@Test.com");
+        dao.insertContact(current);
+        contacts = dao.selectAllContacts();
+        assertEquals(5, contacts.getContacts().size(), "Contact not added");
+        dao.deleteContactByID(current.contact_ID);
+        assertEquals(4, contacts.getContacts().size(), "Contact not deleted");
+    }
+
 
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class DAOCustomers {
 
 
-    public static Customers selectAllCustomers(){
+    public Customers selectAllCustomers(){
         Utils utils = new Utils();
         Customers customers = new Customers();
 
