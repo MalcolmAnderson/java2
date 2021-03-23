@@ -12,15 +12,25 @@ import javafx.scene.paint.Color;
 import models.Contact;
 import models.Contacts;
 import models.Customer;
+import models.Customers;
 import utils.dataAccess.DAOContacts;
 import utils.dataAccess.DAOCustomers;
-import utils.navigation.StageManager;
-import utils.navigation.navInfo_Appointments;
+import utils.navigation.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManageContacts_Controller implements Initializable {
+
+    private Customers customers;
+    public Customers getCustomers() {
+        return customers;
+    }
+    public void setCustomers(Customers customers) {
+        this.customers = customers;
+    }
+
+
     public Button btnAddContact;
     public Button btnEditContact;
     public Button btnDeleteContact;
@@ -31,6 +41,7 @@ public class ManageContacts_Controller implements Initializable {
 
     private ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     private DAOContacts dao = new DAOContacts();
+    private navInfo_ManageContacts navInfo = new navInfo_ManageContacts();
 
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -97,6 +108,15 @@ public class ManageContacts_Controller implements Initializable {
     }
 
     public void onClickAddContact(ActionEvent actionEvent) {
+        System.out.println("ProductAdd Clicked");
+        StageManager.ChangeScene(actionEvent, new navInfo_AddEditContacts());
+
+//        navInfo.open_AddModify_Contact_WhilePassingCurrentContact(
+//                actionEvent,
+//                nav,
+//                customers,
+//                "Add",
+//                null);
     }
 
     public void onClickAddEric(ActionEvent actionEvent) {
