@@ -28,9 +28,9 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="78.0" prefWidth="561.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnAddContact" mnemonicParsing="false" onAction="#onClickAddContact" text="Add Contact" />
-                  <Button fx:id="btnEditContact" mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Edit Contacts" />
-                  <Button fx:id="btnDeleteContact" mnemonicParsing="false" onAction="#onClickDeleteContact" text="Delete Contact" />
+                  <Button fx:id="btnAddContact" mnemonicParsing="false" onAction="#onClick_AddContact" text="Add Contact" />
+                  <Button fx:id="btnEditContact" mnemonicParsing="false" onAction="#onClick_EditContacts" text="Edit Contacts" />
+                  <Button fx:id="btnDeleteContact" mnemonicParsing="false" onAction="#onClick_DeleteContact" text="Delete Contact" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

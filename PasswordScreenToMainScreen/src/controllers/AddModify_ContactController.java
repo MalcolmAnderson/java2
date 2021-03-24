@@ -7,7 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import models.Contact;
 import utils.navigation.StageManager;
+import utils.navigation.navInfo_ManageContacts;
 import utils.navigation.navInfo_ManageUsers;
 
 import java.net.URL;
@@ -15,7 +17,7 @@ import java.util.ResourceBundle;
 
 //import utils.navigation.StageManager;
 
-public class AddModify_ContactsController implements Initializable {
+public class AddModify_ContactController implements Initializable {
     public Label lblScreenIdentifier;
     public Label lblContactID;
     public Label lblName;
@@ -23,6 +25,9 @@ public class AddModify_ContactsController implements Initializable {
     public TextField txtName;
     public TextField txtEmailAddress;
     public Label id;
+
+    public static Contact contact;
+    public static String addEdit;
 
 
 //    public void loadInventory(Inventory inv){
@@ -71,7 +76,7 @@ public class AddModify_ContactsController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if(alert.getResult() == ButtonType.YES){
-            StageManager.ChangeScene(event, new navInfo_ManageUsers());
+            StageManager.ChangeScene(event, new navInfo_ManageContacts());
         }
     }
 

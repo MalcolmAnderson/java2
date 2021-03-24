@@ -11,10 +11,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import models.Contact;
 import models.Contacts;
-import models.Customer;
 import models.Customers;
 import utils.dataAccess.DAOContacts;
-import utils.dataAccess.DAOCustomers;
 import utils.navigation.*;
 
 import java.net.URL;
@@ -79,10 +77,8 @@ public class ManageContacts_Controller implements Initializable {
     }
 
 
-    public void onClick_ManageContacts(ActionEvent event) {
-    }
 
-    public void onClickDeleteContact(ActionEvent actionEvent) {
+    public void onClick_DeleteContact(ActionEvent actionEvent) {
         int selectedContactIndex = tvContacts.getSelectionModel().getSelectedIndex();
         Contact selectedContact = (Contact) tvContacts.getSelectionModel().getSelectedItem();
         System.out.println("Selected Contact Index = " + selectedContactIndex);
@@ -107,16 +103,27 @@ public class ManageContacts_Controller implements Initializable {
         }
     }
 
-    public void onClickAddContact(ActionEvent actionEvent) {
+    public void onClick_AddContact(ActionEvent actionEvent) {
         System.out.println("ProductAdd Clicked");
-        StageManager.ChangeScene(actionEvent, new navInfo_AddEditContacts());
+        AddModify_ContactController.addEdit = "Add";
+        StageManager.ChangeScene(actionEvent, new navInfo_AddEditContact());
+    }
 
-//        navInfo.open_AddModify_Contact_WhilePassingCurrentContact(
-//                actionEvent,
-//                nav,
-//                customers,
-//                "Add",
-//                null);
+    public void onClick_EditContacts(ActionEvent actionEvent) {
+        int selectedContactIndex = tvContacts.getSelectionModel().getSelectedIndex();
+        Contact selectedContact = (Contact) tvContacts.getSelectionModel().getSelectedItem();
+        System.out.println("Selected Contact Index = " + selectedContactIndex);
+        if (selectedContactIndex != -1){
+            AddModify_ContactController.contact = selectedContact;
+            AddModify_ContactController.addEdit = "Edit";
+            StageManager.ChangeScene(actionEvent, new navInfo_AddEditContact());
+        }else {
+            Alert alert = new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Please select a contact to edit",
+                    ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
     public void onClickAddEric(ActionEvent actionEvent) {

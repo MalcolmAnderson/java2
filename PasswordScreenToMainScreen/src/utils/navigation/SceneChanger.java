@@ -39,6 +39,8 @@ public class SceneChanger {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(viewName));
+        System.out.println(viewName);
+        System.out.println(loader.getLocation());
         Parent parent = loader.load();
 
         Scene scene = new Scene(parent);
