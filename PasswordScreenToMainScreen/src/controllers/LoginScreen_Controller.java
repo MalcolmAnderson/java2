@@ -85,6 +85,7 @@ public class LoginScreen_Controller implements Initializable {
             Globals.setWasLoginSuccessful(true);
             //lblLoginPrompt.setText(rb.getString("Login.Successful"));
             utils.WriteLoginAttempt(userName, true);
+            Globals.setUserName(userName);
             StageManager.ChangeScene(event, new navInfo_Appointments());
 
         } else {

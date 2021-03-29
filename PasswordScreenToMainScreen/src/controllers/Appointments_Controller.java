@@ -73,7 +73,7 @@ public class Appointments_Controller implements Initializable {
         btnManageAppointments.setTextFill(Color.WHITE);
         btnManageCustomers.setBackground(bg_Yellow);
 //        btnManageCustomers.setTextFill(Color.WHITE);
-        btnManageContacts.setBackground(bg_Yellow);
+//        btnManageContacts.setBackground(bg_Yellow);
 //        btnManageContacts.setTextFill(Color.WHITE);
         btnReportsScreen.setBackground(bg_Red);
         btnReportsScreen.setTextFill(Color.WHITE);
@@ -81,7 +81,7 @@ public class Appointments_Controller implements Initializable {
 
     public void LoadAppointments() {
 
-        System.out.println("LoadInventory Doesn't Do Anything Yet.");
+        System.out.println("LoadAppointments Doesn't Do Anything Yet.");
     }
 
 
@@ -93,10 +93,6 @@ public class Appointments_Controller implements Initializable {
 
     public void onClick_AddAppointments(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_AddAppointments());
-    }
-
-    public void onClick_ManageUsers(ActionEvent event) {
-        StageManager.ChangeScene(event, new navInfo_ManageUsers());
     }
 
     public void onClick_ManageCustomers(ActionEvent event) {

@@ -21,12 +21,12 @@ import java.util.ResourceBundle;
 public class ManageContacts_Controller implements Initializable {
 
     private Customers customers;
-    public Customers getCustomers() {
-        return customers;
-    }
-    public void setCustomers(Customers customers) {
-        this.customers = customers;
-    }
+//    public Customers getCustomers() {
+//        return customers;
+//    }
+//    public void setCustomers(Customers customers) {
+//        this.customers = customers;
+//    }
 
 
     public Button btnAddContact;

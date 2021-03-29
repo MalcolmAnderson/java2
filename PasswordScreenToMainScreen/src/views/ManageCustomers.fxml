@@ -48,7 +48,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <children>
-                  <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#onClickDAddCustomer" text="Add Customer" />
+                  <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#onClickAddCustomer" text="Add Customer" />
                   <Button fx:id="btnEditCustomer" mnemonicParsing="false" onAction="#onClick_EditCustomer" text="Edit Customer" />
                   <Button fx:id="btnDeleteCustomer" mnemonicParsing="false" onAction="#onClickDeleteCustomer" text="Delete Customer" />
                </children>

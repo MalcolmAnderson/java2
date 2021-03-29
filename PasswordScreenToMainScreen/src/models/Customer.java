@@ -1,5 +1,7 @@
 package models;
 
+import main.Globals;
+
 import java.time.LocalDateTime;
 
 public class Customer {
@@ -16,6 +18,21 @@ public class Customer {
     private int division_ID;
     private String division;
     private String country;
+
+    public Customer() {
+        this.customer_ID = -1;
+        this.customer_Name = "";
+        this.address = "";
+        this.postal_Code = "";
+        this.phone = "";
+        this.create_Date = LocalDateTime.now();
+        this.created_By = Globals.getUserName();
+        this.last_Update = LocalDateTime.now();;
+        this.last_Updated_By = Globals.getUserName();
+        this.division_ID = -1;
+        this.division = "";
+        this.country = "";
+    }
 
     public Customer(
             int customer_ID,

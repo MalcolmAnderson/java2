@@ -12,6 +12,8 @@ import javafx.scene.layout.BackgroundFill;
 import models.*;
 import utils.dataAccess.DAOCustomers;
 import utils.navigation.StageManager;
+import utils.navigation.navInfo_AddEditContact;
+import utils.navigation.navInfo_AddEditCustomer;
 import utils.navigation.navInfo_Appointments;
 
 import java.net.URL;
@@ -68,9 +70,28 @@ public class ManageCustomers_Controller implements Initializable {
     }
 
     public void onClick_EditCustomer(ActionEvent actionEvent) {
+        int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
+        Customer selectedCustomer = (Customer) tvCustomers.getSelectionModel().getSelectedItem();
+        System.out.println("Selected Contact Index = " + selectedCustomerIndex);
+        if (selectedCustomerIndex != -1){
+            AddModify_CustomerController.customer = selectedCustomer;
+            AddModify_CustomerController.addEdit = "EDIT";
+            StageManager.ChangeScene(actionEvent, new navInfo_AddEditCustomer());
+        }else {
+            Alert alert = new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Please select a customer to edit",
+                    ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
-    public void onClickDAddCustomer(ActionEvent actionEvent) {
+    public void onClickAddCustomer(ActionEvent actionEvent) {
+        System.out.println("ProductAdd Clicked");
+        AddModify_CustomerController.addEdit = "ADD";
+        AddModify_CustomerController.customer = new Customer();
+        StageManager.ChangeScene(actionEvent, new navInfo_AddEditCustomer());
+
     }
 
     public void onClickDeleteCustomer(ActionEvent actionEvent) {

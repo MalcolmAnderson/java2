@@ -7,15 +7,23 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import models.Customer;
+import utils.Utils;
+import utils.dataAccess.DAOCustomers;
 import utils.navigation.StageManager;
-import utils.navigation.navInfo_ManageUsers;
+import utils.navigation.navInfo_ManageCustomers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 //import utils.navigation.StageManager;
 
-public class AddModify_CustomersController implements Initializable {
+public class AddModify_CustomerController implements Initializable {
+
+    public static Customer customer;
+    public static String addEdit;
+    Utils utils = new Utils();
+    private DAOCustomers dao = new DAOCustomers();
 
 
     @FXML private Label id;
@@ -68,7 +76,7 @@ public class AddModify_CustomersController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if(alert.getResult() == ButtonType.YES){
-            StageManager.ChangeScene(event, new navInfo_ManageUsers());
+            StageManager.ChangeScene(event, new navInfo_ManageCustomers());
         }
     }
 
@@ -99,7 +107,7 @@ public class AddModify_CustomersController implements Initializable {
 //            inv.addPart(newPart);
 //            IdNumber.commitIdNumber();
 //
-        StageManager.ChangeScene(event, new navInfo_ManageUsers());
+        StageManager.ChangeScene(event, new navInfo_ManageCustomers());
 //    } else {
 //            Alert alert = new Alert(Alert.AlertType.ERROR, "Inventory level can not be greater than max or less than min", ButtonType.OK);
 //            alert.showAndWait();
