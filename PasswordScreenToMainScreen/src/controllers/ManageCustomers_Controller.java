@@ -12,7 +12,6 @@ import javafx.scene.layout.BackgroundFill;
 import models.*;
 import utils.dataAccess.DAOCustomers;
 import utils.navigation.StageManager;
-import utils.navigation.navInfo_AddEditContact;
 import utils.navigation.navInfo_AddEditCustomer;
 import utils.navigation.navInfo_Appointments;
 
@@ -118,5 +117,11 @@ public class ManageCustomers_Controller implements Initializable {
                     ButtonType.OK);
             alert.showAndWait();
         }
+    }
+
+    public void onClickAddEric(ActionEvent actionEvent) {
+//        Customer eric = new Customer(4, "Eric Estrada", "Eric@Estrada.com");
+//        dao.insertOrUpdateContact(eric);
+//        RefreshScreenFromDataBase();
     }
 }

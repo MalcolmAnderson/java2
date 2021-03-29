@@ -1,4 +1,4 @@
-package models;
+package model_Tests;
 
 
 import models.Customer;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class CustomerTests {
+public class Customer_Tests {
 
     Customers customers;
 

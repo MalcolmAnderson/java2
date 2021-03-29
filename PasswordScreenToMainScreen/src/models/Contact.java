@@ -1,7 +1,5 @@
 package models;
 
-import java.time.LocalDateTime;
-
 public class Contact {
 
     public int contact_ID;

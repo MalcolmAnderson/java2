@@ -1,4 +1,4 @@
-package z_unitTests.models;
+package model_Tests;
 
 import models.Appointment;
 import models.Appointments;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AppointmentsTests {
+public class Appointments_Tests {
 
     //@FXML private TableView appointmentsTableView = new TableView();
 

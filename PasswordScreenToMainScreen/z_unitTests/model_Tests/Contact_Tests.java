@@ -1,17 +1,14 @@
-package models;
+package model_Tests;
 
+import models.Contact;
+import models.Contacts;
+import models._ManageTestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-import models.Contact;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-        import org.junit.jupiter.api.AfterEach;
-        import org.junit.jupiter.api.BeforeEach;
-        import org.junit.jupiter.api.Test;
-
-        import java.time.LocalDateTime;
-
-        import static org.junit.jupiter.api.Assertions.*;
 public class Contact_Tests {
 
     Contact contact;

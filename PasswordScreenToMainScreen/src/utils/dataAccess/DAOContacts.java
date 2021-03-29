@@ -1,14 +1,11 @@
 package utils.dataAccess;
 
-import models.Appointment;
 import models.Contact;
 import models.Contacts;
-import utils.Utils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DAOContacts {
