@@ -52,7 +52,7 @@
             </Label>
             <TextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtEmailAddress" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="id" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="lblIdValue" text="Label" GridPane.columnIndex="1" />
          </children>
          <padding>
             <Insets left="40.0" />

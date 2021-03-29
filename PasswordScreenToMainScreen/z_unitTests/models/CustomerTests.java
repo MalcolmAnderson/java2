@@ -1,4 +1,4 @@
-package z_unitTests.models;
+package models;
 
 
 import models.Customer;

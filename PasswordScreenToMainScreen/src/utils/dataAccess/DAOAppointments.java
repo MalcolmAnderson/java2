@@ -36,6 +36,7 @@ public class DAOAppointments {
         } catch (SQLException throwables) {
             System.out.println( throwables.getMessage());
             throwables.printStackTrace();
+            System.exit(-1);
         }
         return appointments;
     }

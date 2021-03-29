@@ -1,4 +1,4 @@
-package z_integrationTests.DataAccess;
+package DataAccess;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

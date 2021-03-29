@@ -13,6 +13,11 @@ public class Contact {
         this.contact_Name = contact_Name;
         this.email = email;
     }
+    public Contact() {
+        this.contact_ID = -1;
+        this.contact_Name = "";
+        this.email = "";
+    }
 
     @Override
     public String toString() {

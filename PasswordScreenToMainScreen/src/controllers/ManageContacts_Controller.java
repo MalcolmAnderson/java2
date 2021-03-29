@@ -43,7 +43,7 @@ public class ManageContacts_Controller implements Initializable {
 
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
-        SetButtonColors();
+//        SetButtonColors();
         SetColumnPropertyValues();
         RefreshScreenFromDataBase();
     }
@@ -105,7 +105,8 @@ public class ManageContacts_Controller implements Initializable {
 
     public void onClick_AddContact(ActionEvent actionEvent) {
         System.out.println("ProductAdd Clicked");
-        AddModify_ContactController.addEdit = "Add";
+        AddModify_ContactController.addEdit = "ADD";
+        AddModify_ContactController.contact = new Contact();
         StageManager.ChangeScene(actionEvent, new navInfo_AddEditContact());
     }
 
@@ -115,7 +116,7 @@ public class ManageContacts_Controller implements Initializable {
         System.out.println("Selected Contact Index = " + selectedContactIndex);
         if (selectedContactIndex != -1){
             AddModify_ContactController.contact = selectedContact;
-            AddModify_ContactController.addEdit = "Edit";
+            AddModify_ContactController.addEdit = "EDIT";
             StageManager.ChangeScene(actionEvent, new navInfo_AddEditContact());
         }else {
             Alert alert = new Alert(
@@ -128,7 +129,7 @@ public class ManageContacts_Controller implements Initializable {
 
     public void onClickAddEric(ActionEvent actionEvent) {
         Contact eric = new Contact(4, "Eric Estrada", "Eric@Estrada.com");
-        dao.insertContact(eric);
+        dao.insertOrUpdateContact(eric);
         RefreshScreenFromDataBase();
     }
 }

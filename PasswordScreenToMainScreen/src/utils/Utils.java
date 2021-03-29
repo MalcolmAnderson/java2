@@ -3,10 +3,7 @@ package utils;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -16,6 +13,7 @@ import java.util.TimeZone;
 
 public class Utils {
     static Random random = new Random();
+    private String nextIdNumberFilePath = "./NextIdNumber.txt";
 
     public int add(int a, int b) {
         return a + b;
@@ -67,4 +65,96 @@ public class Utils {
         }
     }
 
+    public int getNextIdNumber() {
+        BufferedReader reader;
+        File nextIdNumberFile = new File(nextIdNumberFilePath);
+        CheckForIdNumFile_OrCreate(nextIdNumberFile);
+        int nextNumber = getNextIdNumberFromFile(nextIdNumberFile);
+        return nextNumber;
+    }
+
+    private int getNextIdNumberFromFile(File nextIdNumberFile)  {
+        FileReader fr = null;
+        try {
+            fr = new FileReader(nextIdNumberFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("FileReader failed.");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        BufferedReader reader = new BufferedReader(fr);
+        String line = null;
+        try {
+            line = reader.readLine();
+        } catch (IOException e) {
+            System.out.println("reader.readLine() call failed.");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        int nextNumber = Integer.parseInt(line);
+        try {
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("reader.close() call failed.");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        return nextNumber;
+    }
+
+    private void CheckForIdNumFile_OrCreate(File nextIdNumberFile)  {
+        if(!nextIdNumberFile.exists()){
+            FileWriter fw = null;
+            try {
+                fw = new FileWriter(nextIdNumberFilePath, false);
+            } catch (IOException e) {
+                System.out.println("FileWriter failed.");
+                e.printStackTrace();
+                System.exit(-1);
+            }
+            PrintWriter pw = new PrintWriter(fw);
+            int defaultIdNumber = 101;
+            pw.println(defaultIdNumber);
+            try {
+                fw.close();
+            } catch (IOException e) {
+                System.out.println("FileWriter.close failed.");
+                e.printStackTrace();
+                System.exit(-1);
+            }
+        }
+    }
+
+    public String getNextIdNumberFilePath() {
+        return nextIdNumberFilePath;
+    }
+    public void setNextIdNumberFilePath(String nextIdNumberFilePath) {
+        this.nextIdNumberFilePath = nextIdNumberFilePath;
+    }
+
+    public void deleteFileIfItExists(String filePathToBeDeleted) {
+        File myFile = new File(filePathToBeDeleted);
+        if(myFile.exists()){
+            myFile.delete();
+        } else {
+            System.out.println("File " + filePathToBeDeleted + " has been deleted.");
+        }
+    }
+
+    public void commitNextIdNumber() {
+        int currentIdNumber = getNextIdNumber();
+        currentIdNumber++;
+        try {
+            FileWriter fw = new FileWriter(getNextIdNumberFilePath(), false);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println(currentIdNumber);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error updating Id Number");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+
+    }
 }

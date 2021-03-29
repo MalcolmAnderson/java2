@@ -11,33 +11,34 @@ public class _ManageTestData {
     public static Appointments BuildPlaceHolderData_Appointments() {
 
         Appointments appointments = new Appointments();
+        int id = 40;
 
-        Appointment one = new Appointment(1, "Bob #1", "An initial visit to determine needs",
+        Appointment one = new Appointment(id++, "Bob #1", "An initial visit to determine needs",
                 "Safeway Starbucks", "Bob Smith", "buyer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
                 LocalDateTime.of(2021, 04, 15, 10, 00), 1, "Cust1");
 
-        Appointment two = new Appointment(2, "Bob #2", "Review analysis for prospect",
+        Appointment two = new Appointment(id++, "Bob #2", "Review analysis for prospect",
                 "Starbucks 4th and main", "Bob Smith", "buyer",
                 LocalDateTime.of(2021, 04, 16, 19, 00),
                 LocalDateTime.of(2021, 04, 16, 20, 00), 1, "Cust2");
 
-        Appointment three = new Appointment(3, "Sam #2", "Review analysis for prospect",
+        Appointment three = new Appointment(id++, "Sam #2", "Review analysis for prospect",
                 "Safeway 428 Cedar", "Sam Brown", "investor",
                 LocalDateTime.of(2021, 04, 17, 11, 00),
                 LocalDateTime.of(2021, 04, 17, 12, 00), 1, "Cust3");
 
-        Appointment four = new Appointment(4, "Sam #3", "Complete client paperwork",
+        Appointment four = new Appointment(id++, "Sam #3", "Complete client paperwork",
                 "Safeway Starbucks", "Bob Smith", "buyer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
                 LocalDateTime.of(2021, 04, 15, 10, 00), 2, "Cust4");
 
-        Appointment five = new Appointment(5, "Carl #3", "Review wireframes",
+        Appointment five = new Appointment(id++, "Carl #3", "Review wireframes",
                 "Safeway Starbucks", "Carl Jones", "Web Designer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
                 LocalDateTime.of(2021, 04, 15, 10, 00), 2, "Cust5");
 
-        Appointment six = new Appointment(6, "Carl #4", "Issue payment, secure follow up",
+        Appointment six = new Appointment(id++, "Carl #4", "Issue payment, secure follow up",
                 "Safeway Starbucks", "Carl Jones", "UI Designer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
                 LocalDateTime.of(2021, 04, 15, 10, 00), 2, "Cust6");
@@ -108,5 +109,21 @@ public class _ManageTestData {
 //        customers.addCustomer(four);
 //        customers.addCustomer(five);
         return customers;
+    }
+
+    public static Contacts BuildPlaceHolder_Contacts() {
+        Contacts contacts = new Contacts();
+        int id = 42;
+        Contact one = new Contact(id++, "one", "one@ahah.com");
+        Contact two = new Contact(id++, "two", "tow@ahah.com");
+        Contact three = new Contact(id++, "three", "three@ahah.com");
+        Contact four = new Contact(id++, "four", "four@ahah.com");
+        Contact five = new Contact(id++, "five", "five@ahah.com");
+        contacts.addContact(one);
+        contacts.addContact(two);
+        contacts.addContact(three);
+        contacts.addContact(four);
+        contacts.addContact(five);
+        return contacts;
     }
 }

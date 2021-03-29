@@ -1,4 +1,4 @@
-package z_integrationTests.DataAccess;
+package DataAccess;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +8,7 @@ import utils.dataAccess.DBConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DataConnectionTetst {
+public class DataConnection_Tests {
 
     @BeforeEach void setUp() {
     }

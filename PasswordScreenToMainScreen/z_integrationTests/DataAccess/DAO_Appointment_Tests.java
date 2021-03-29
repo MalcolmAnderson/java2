@@ -1,4 +1,4 @@
-package z_integrationTests.DataAccess;
+package DataAccess;
 
 import models.Appointment;
 import models.Appointments;
@@ -11,7 +11,7 @@ import utils.dataAccess.DBConnection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DAO_Appointment_tests {
+public class DAO_Appointment_Tests {
 
     DAOAppointments dao;
 
@@ -28,14 +28,20 @@ public class DAO_Appointment_tests {
 
     @Test
     void shouldRefreshAppointments() {
-        System.out.println("Begin shouldRefreshAppointments");
-        Appointments appointments = new Appointments();
-        assertEquals(0, appointments.getAllAppointments().size());
-        appointments = dao.selectAllAppointments();
+        try {
+            System.out.println("Begin shouldRefreshAppointments");
+            Appointments appointments = new Appointments();
+            System.out.println("begin assert statement");
+            assertEquals(0, appointments.getAllAppointments().size());
+            System.out.println("Begin dao.selectAllAppointments()");
+            appointments = dao.selectAllAppointments();
 //        appointments.setAllAppointments(dao.selectAllAppointments());
 //        appointments.setAllAppointments(appointments.getAllAppointments());
-        assertEquals(2, appointments.getAllAppointments().size());
-        System.out.println("End shouldRefreshAppointments");
+            assertEquals(2, appointments.getAllAppointments().size());
+            System.out.println("End shouldRefreshAppointments");
+        } catch (Exception e){
+            assertTrue(false, "An uncaught exception happened");
+        }
     }
     
     @Test void shouldAddTestDataToAppointments(){
@@ -58,8 +64,8 @@ public class DAO_Appointment_tests {
         System.out.println(current.toString());
         dao.insertAppointment(current);
         appointments = dao.selectAllAppointments();
-        assertEquals(2, appointments.getAllAppointments().size());
-        System.out.println("Begin shouldAddTestDataToAppointments");
+        assertEquals(8, appointments.getAllAppointments().size());
+        System.out.println("End shouldAddTestDataToAppointments");
     }
 
 
