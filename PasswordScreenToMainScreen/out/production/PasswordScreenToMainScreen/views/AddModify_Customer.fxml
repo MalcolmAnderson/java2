@@ -76,7 +76,6 @@
                   <TextField fx:id="max" prefWidth="120.0" />
                </children>
             </HBox>
-            <TextField fx:id="source" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="id" text="Label" GridPane.columnIndex="1" />
             <Label fx:id="lblDivision" text="State" GridPane.rowIndex="6">
                <font>
@@ -84,6 +83,7 @@
                </font>
             </Label>
             <ComboBox prefHeight="25.0" prefWidth="261.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox prefHeight="25.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <padding>
             <Insets left="40.0" />

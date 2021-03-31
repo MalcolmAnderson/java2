@@ -82,12 +82,17 @@ public class DAO_Customer_Tests {
     @Test void shouldRefreshCustomers() {
         Customers customers = new Customers();
         assertEquals(0, customers.getCustomers().size());
+
         customers = dao.selectAllCustomers();
         assertEquals(3, customers.getCustomers().size());
         ObservableList<Customer> olCustomers = FXCollections.observableArrayList();
         assertEquals(0, olCustomers.size());
         olCustomers.setAll(customers.getCustomers());
         assertEquals(3, olCustomers.size());
+    }
+
+    @Test void shouldAddACustomer(){
+        assertTrue(false);
     }
 
 }
