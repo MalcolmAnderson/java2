@@ -38,52 +38,52 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="ID">
+            <Label fx:id="lblID" text="ID">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label text="Customer Name" GridPane.rowIndex="1">
+            <Label fx:id="lblCustomerName" text="Customer Name" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label text="Street Address" GridPane.rowIndex="2">
+            <Label fx:id="lblStreetAddress" text="Street Address" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label text="Postal Code" GridPane.rowIndex="3">
+            <Label fx:id="lblPostalCode" text="Postal Code" GridPane.rowIndex="3">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label text="State" GridPane.rowIndex="4">
+            <Label fx:id="lblState" text="State" GridPane.rowIndex="4">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblSourceDescription" text="Country" GridPane.rowIndex="5">
+            <Label fx:id="lblCountry" text="Country" GridPane.rowIndex="5">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="level" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="price" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtCustomerName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtStreetAddress" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtPostalCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="max" prefWidth="120.0" />
+                  <TextField fx:id="txtState" prefWidth="120.0" />
                </children>
             </HBox>
-            <Label fx:id="id" text="Label" GridPane.columnIndex="1" />
-            <Label fx:id="lblDivision" text="State" GridPane.rowIndex="6">
+            <Label fx:id="lblIdValue" text="id" GridPane.columnIndex="1" />
+            <Label fx:id="lblDivision" text="Division" GridPane.rowIndex="6">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ComboBox prefHeight="25.0" prefWidth="261.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox prefHeight="25.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="cmbDivision" prefHeight="25.0" prefWidth="261.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="cmbCountries" prefHeight="25.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <padding>
             <Insets left="40.0" />

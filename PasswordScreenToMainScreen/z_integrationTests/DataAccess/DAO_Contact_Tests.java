@@ -131,6 +131,7 @@ public class DAO_Contact_Tests {
         // Test
         Contact current = new Contact(contact_ID, testName, "Test@Test.com");
         dao.insertOrUpdateContact(current);
+        assertEquals(4, contacts.getContacts().size());
         assertTrue(dao.recordExists(current));
 
         // Teardown
@@ -160,7 +161,7 @@ public class DAO_Contact_Tests {
         Contact subject = contacts.getContactById(contact_ID);
         // Setup
         assertEquals("Test McTestFace3", subject.contact_Name);
-        String newName = "Where'd my name go?";
+        String newName = "Where did my name go?";
         subject.contact_Name = newName;
 
 
@@ -168,7 +169,7 @@ public class DAO_Contact_Tests {
         contacts = dao.selectAllContacts();
         assertEquals(5, contacts.getContacts().size(), "Should not have added another contact");
         subject = contacts.getContactById(contact_ID);
-        assertEquals(newName, subject.contact_Name);
+        assertEquals(newName, subject.contact_Name, "Should have updated name");
 
         // Teardown
         dao.deleteContactByID(current.contact_ID);

@@ -3,10 +3,8 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import models.Contact;
 import models.Customer;
 import utils.Utils;
 import utils.dataAccess.DAOCustomers;
@@ -20,15 +18,53 @@ import java.util.ResourceBundle;
 
 public class AddModify_CustomerController implements Initializable {
 
+    // setters
     public static Customer customer;
     public static String addEdit;
+
+    // screen elements
+    public Label lblID;
+    public Label lblCustomerName;
+    public Label lblStreetAddress;
+    public Label lblPostalCode;
+    public Label lblState;
+    public Label lblCountry;
+    public TextField txtCustomerName;
+    public TextField txtStreetAddress;
+    public TextField txtPostalCode;
+    public TextField txtState;
+    public Label lblIdValue;
+    public Label lblDivision;
+    public ComboBox cmbDivision;
+    public ComboBox cmbCountries;
+    public Label lblScreenIdentifier;
     Utils utils = new Utils();
     private DAOCustomers dao = new DAOCustomers();
 
 
-    @FXML private Label id;
-    @FXML private TextField name;
-    @FXML private TextField level;
+    private void HandleInboundContactObject() {
+        if(customer == null){
+            if(addEdit == "EDIT"){
+                System.out.println("Edit should not be able to submit a null Customer");
+                System.exit(-1);
+            }
+            customer = new Customer();
+            customer.setCustomer_ID(utils.getNextIdNumber());
+        } else if (customer.getCustomer_ID() == -1){
+            customer.setCustomer_ID(utils.getNextIdNumber());
+        }
+        if(addEdit == "ADD"){
+            lblScreenIdentifier.setText("Add Contact");
+        } else {
+            if (addEdit != "EDIT"){
+                System.out.println("the value of addEdit is " + addEdit);
+                System.out.println("the value of addEdit should only ever be ADD or EDIT");
+                System.exit(-1);
+            }
+            lblScreenIdentifier.setText("Edit Customer");
+        }
+    }
+
 
 //    public void loadInventory(Inventory inv){
 //        System.out.println("AddModify_PartController setInv called");
@@ -117,6 +153,7 @@ public class AddModify_CustomerController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("AddModify_PartController initialize called");
+        lblIdValue.setText(customer.getCustomer_ID());
 //        id.setText(Integer.toString(IdNumber.getNextIdNumber()));
 //        radioInHouse.setSelected(true);
 //        onChangeSource(null);

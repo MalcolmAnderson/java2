@@ -87,7 +87,7 @@ public class DAOContacts {
             sqlStatement = String.format(
                     "UPDATE contacts"
                     + " SET Contact_ID = '%s', Contact_Name = '%s', Email = '%s'"
-                    + " WHERE Contact_ID = '%s';", current.contact_ID, current.contact_Name, current.email, current.contact_ID);
+                    + " WHERE Contact_ID = %s;", current.contact_ID, current.contact_Name, current.email, current.contact_ID);
             System.out.println("DAOContacts - insertOrUpdateContact - Update Statement");
         } else {
             sqlStatement = String.format(
