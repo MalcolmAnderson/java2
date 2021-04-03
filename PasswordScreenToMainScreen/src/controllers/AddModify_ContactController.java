@@ -84,9 +84,4 @@ public class AddModify_ContactController implements Initializable {
             lblScreenIdentifier.setText("Edit Contact");
         }
     }
-
-    public void SetAddModifyLabel(String transactionType){
-        System.out.println("Trying to set value of lblScreenIdentifier");
-        lblScreenIdentifier.setText(transactionType + " Contacts");
-    }
 }

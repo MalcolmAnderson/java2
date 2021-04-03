@@ -4,14 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import models.Contact;
+import models.Country;
 import models.Customer;
+import models.Geography;
 import utils.Utils;
 import utils.dataAccess.DAOCustomers;
+import utils.dataAccess.DAOGeography;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_ManageCustomers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 //import utils.navigation.StageManager;
@@ -21,6 +24,9 @@ public class AddModify_CustomerController implements Initializable {
     // setters
     public static Customer customer;
     public static String addEdit;
+    private String currentCountry;
+    private ArrayList<Country> countries;
+    private ArrayList<Geography> currentDivisions;
 
     // screen elements
     public Label lblID;
@@ -38,11 +44,13 @@ public class AddModify_CustomerController implements Initializable {
     public ComboBox cmbDivision;
     public ComboBox cmbCountries;
     public Label lblScreenIdentifier;
+    public Label lblPhoneNumber;
+    public TextField txtPhoneNumber;
     Utils utils = new Utils();
     private DAOCustomers dao = new DAOCustomers();
 
 
-    private void HandleInboundContactObject() {
+    private void HandleInboundCustomerObject() {
         if(customer == null){
             if(addEdit == "EDIT"){
                 System.out.println("Edit should not be able to submit a null Customer");
@@ -66,48 +74,7 @@ public class AddModify_CustomerController implements Initializable {
     }
 
 
-//    public void loadInventory(Inventory inv){
-//        System.out.println("AddModify_PartController setInv called");
-//        this.inv = inv;
-//    }
-
-//    public void InitializeNewItem(){
-//        id.setText(Integer.toString(IdNumber.getNextIdNumber()));
-//        name.setText("part name");
-//        level.setText("0");
-//        price.setText("200.0");
-//        min.setText("0");
-//        max.setText("0");
-//        if(radioInHouse.isSelected()){
-//            source.setText("2001");
-//        } else {
-//            source.setText("Permberly Video and Parts");
-//        }
-//        onChangeSource(null);
-//
-//    }
-
-//    public void SetItemToModify(Part itemToModify){
-//        partBeingModified = itemToModify;
-//        System.out.println("In Set Item To Modify");
-//        id.setText(Integer.toString(IdNumber.getNextIdNumber()));
-//        name.setText(itemToModify.getName());
-//        level.setText(Integer.toString(itemToModify.getStock()));
-//        price.setText(Double.toString(itemToModify.getPrice()));
-//        min.setText(Integer.toString(itemToModify.getMin()));
-//        max.setText(Integer.toString(itemToModify.getMax()));
-//        if(itemToModify instanceof Part_InHouse){
-//            source.setText(Integer.toString(((Part_InHouse) itemToModify).getMachineId()));
-//            radioInHouse.setSelected(true);
-//        } else {
-//            source.setText( ((Part_Outsourced) itemToModify).getCompanyName());
-//            radioOutsourced.setSelected(true);
-//        }
-//        onChangeSource(null);
-//    }
-
-    @FXML
-    void onCancelAction(ActionEvent event) {
+    @FXML void onCancelAction(ActionEvent event) {
         System.out.println("Cancel Clicked");
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -116,51 +83,142 @@ public class AddModify_CustomerController implements Initializable {
         }
     }
 
-    @FXML
-    void onSaveAction(ActionEvent event) {
+    @FXML void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
-//        int iLevel = Integer.parseInt(level.getText());
-//        int iMin = Integer.parseInt(min.getText());
-//        int iMax = Integer.parseInt(max.getText());
-//        if(iMin <= iLevel && iLevel <= iMax) {
-//            Part newPart;
-//            if (radioInHouse.isSelected()) {
-//                newPart = new Part_InHouse(
-//                        Integer.parseInt(id.getText()),
-//                        name.getText(),
-//                        Double.parseDouble(price.getText()),
-//                        iLevel, iMin, iMax,
-//                        Integer.parseInt(source.getText()));
-//            } else {
-//                newPart = new Part_Outsourced(
-//                        Integer.parseInt(id.getText()),
-//                        name.getText(),
-//                        Double.parseDouble(price.getText()),
-//                        iLevel, iMin, iMax,
-//                        source.getText());
-//                inv.getAllParts().remove(partBeingModified);
-//            }
-//            inv.addPart(newPart);
-//            IdNumber.commitIdNumber();
-//
+
+        lblIdValue.setText(String.valueOf((customer.getCustomer_ID())));
+        txtCustomerName.setText(customer.getCustomer_Name());
+        txtPhoneNumber.setText(customer.getPhone());
+        txtStreetAddress.setText(customer.getAddress());
+        txtPostalCode.setText(customer.getPostal_Code());
+
+        customer.setCustomer_Name(txtCustomerName.getText());
+        customer.setPhone(txtPhoneNumber.getText());
+        customer.setAddress(txtStreetAddress.getText());
+        customer.setPostal_Code(txtPostalCode.getText());
+        String divisionName = getCurrentDivisionNameFromDivisionComboBox();
+        Geography currentGeo = getDivNameFromDivId(divisionName);
+        customer.setDivision_ID(currentGeo.getDivisionId());
+        customer.setDivision(currentGeo.getDivisionName());
+        customer.setCountry(currentGeo.getCountryName());
+
+        dao.insertOrUpdateCustomer(customer);
+        if(addEdit == "ADD"){
+            utils.commitNextIdNumber();
+        }
         StageManager.ChangeScene(event, new navInfo_ManageCustomers());
-//    } else {
-//            Alert alert = new Alert(Alert.AlertType.ERROR, "Inventory level can not be greater than max or less than min", ButtonType.OK);
-//            alert.showAndWait();
-//        }
+    }
+
+    private Geography getDivNameFromDivId(String divisionName) {
+        Geography retVal = null;
+        for(int i = 0; i < currentDivisions.size(); i++){
+            if(divisionName.equals(currentDivisions.get(i).getDivisionName())){
+                retVal = currentDivisions.get(i);
+                break;
+            }
+        }
+        if(retVal == null){
+            System.out.println("Division not found: " + divisionName);
+            System.exit(-1);
+        }
+        return retVal;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("AddModify_PartController initialize called");
-        lblIdValue.setText(customer.getCustomer_ID());
-//        id.setText(Integer.toString(IdNumber.getNextIdNumber()));
-//        radioInHouse.setSelected(true);
-//        onChangeSource(null);
+        HandleInboundCustomerObject();
+
+        ArrayList<Geography> knownWorld = DAOGeography.loadKnownWorld();
+        Geography.setKnownWorld(knownWorld);
+        countries = DAOGeography.getCountries();
+
+        SetSimpleScreenValues();
+
+        String country = customer.getCountry();
+        int divId = customer.getDivision_ID();
+        String divCur = customer.getDivision();
+
+        int countryId = setCmbCountryValue(countries, country);
+
+        System.out.println("Country Index: " + cmbCountries.getSelectionModel().getSelectedIndex());
+
+        int divisionCount = SetDivisionsByCountryId(countryId);
+        for(int i = 0; i < divisionCount; i++){
+            if(cmbDivision.getItems().get(i).toString().equals(divCur)){
+                cmbDivision.getSelectionModel().select(i);
+            }
+        }
+        System.out.println("Division Index: " + cmbDivision.getSelectionModel().getSelectedIndex());
+
     }
 
-    public void SetAddModifyLabel(String transactionType){
-        System.out.println("Trying to set value of lblScreenIdentifier");
-//        lblScreenIdentifier.setText(transactionType + " Customer");
+    private int SetDivisionsByCountryId(int countryId) {
+        currentDivisions = Geography.getDivisionsForCountryID(countryId);
+        int divisionCount = currentDivisions.size();
+        cmbDivision.getItems().clear();
+        for(int i = 0; i < currentDivisions.size(); i++){
+            cmbDivision.getItems().add(currentDivisions.get(i).getDivisionName());
+        }
+        cmbDivision.getSelectionModel().select(0);
+        return divisionCount;
+    }
+
+    private int setCmbCountryValue(ArrayList<Country> countries, String country) {
+        int countryId = -1;
+        for(int i = 0; i < countries.size(); i++){
+            String current = countries.get(i).getCountryName();
+            cmbCountries.getItems().add(current);
+            if(current.equals(country)){
+                currentCountry = current;
+                countryId = countries.get(i).getCountryId();
+                cmbCountries.getSelectionModel().select(i);
+            }
+        }
+        if(countryId == -1){
+            if(addEdit.toUpperCase().equals("EDIT")){
+                System.out.println("Country not found: " + country);
+                System.exit(-1);
+            } else {
+                cmbCountries.getSelectionModel().select(0);
+            }
+        }
+        return countryId;
+    }
+
+    private void SetSimpleScreenValues() {
+        lblIdValue.setText(String.valueOf((customer.getCustomer_ID())));
+        txtCustomerName.setText(customer.getCustomer_Name());
+        txtPhoneNumber.setText(customer.getPhone());
+        txtStreetAddress.setText(customer.getAddress());
+        txtPostalCode.setText(customer.getPostal_Code());
+
+    }
+
+    public void onActionCountry(ActionEvent actionEvent) {
+        String selectedCountry = getCurrentCountryNameFromCountryComboBox();
+        int countryId = getCountryIdFromCountryName(selectedCountry);
+        SetDivisionsByCountryId(countryId);
+    }
+
+    private String getCurrentCountryNameFromCountryComboBox() {
+        int i = cmbCountries.getSelectionModel().getSelectedIndex();
+        return cmbCountries.getItems().get(i).toString();
+    }
+
+    private String getCurrentDivisionNameFromDivisionComboBox() {
+        int i = cmbDivision.getSelectionModel().getSelectedIndex();
+        return cmbDivision.getItems().get(i).toString();
+    }
+
+    private int getCountryIdFromCountryName(String selectedCountry) {
+        int countryId = -1;
+        for(int i = 0; i < countries.size(); i++){
+            String current = countries.get(i).getCountryName();
+            if(current.equals(selectedCountry)){
+                countryId = countries.get(i).getCountryId();
+            }
+        }
+        return countryId;
     }
 }

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.Utils;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UtilsTest {
@@ -20,9 +22,13 @@ class UtilsTest {
     void tearDown() {
     }
 
-    @Test
-    void add() {
+    @Test void add() {
         int actual = utils.add(5, 2);
         assertEquals(7, actual);
+    }
+
+    @Test void shouldConvertLocalDateTimeToMySQLInputString(){
+        LocalDateTime dt = LocalDateTime.of(2020, 3, 14, 13, 56, 27);
+        assertTrue(false);
     }
 }

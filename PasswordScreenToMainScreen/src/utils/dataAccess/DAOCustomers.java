@@ -1,5 +1,7 @@
 package utils.dataAccess;
 
+import main.Globals;
+import models.Contact;
 import models.Customer;
 import models.Customers;
 import utils.Utils;
@@ -9,6 +11,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class DAOCustomers {
+
+    private DBQueryManager dbQM = new DBQueryManager();
 
 
     public Customers selectAllCustomers(){
@@ -70,6 +74,69 @@ public class DAOCustomers {
             throwables.printStackTrace();
         }
         return customers;
+    }
+
+
+    public boolean recordExists(Customer current){
+        ResultSet rs = null;
+        try {
+            String sql = String.format(
+                    "SELECT * FROM customers WHERE Customer_ID = '%s'", current.getCustomer_ID());
+            System.out.println(sql);
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+            throwables.printStackTrace();
+            System.exit(-1);
+        }
+        int size = 0;
+        if(rs != null){
+            try {
+                rs.last();
+            } catch (SQLException throwables) {
+                System.out.println("DAOCustomers - recordExists - rs.last threw an exception");
+                throwables.printStackTrace();
+                System.exit(-1);
+            }
+            try {
+                size = rs.getRow();
+            } catch (SQLException throwables) {
+                System.out.println("DAOCustomers - recordExists - rs.getRow threw an exception");
+                throwables.printStackTrace();
+                System.exit(-1);
+            }
+
+        }
+        System.out.println("DAOCustomers - recordExists - size = " + size);
+        return size > 0;
+    }
+
+
+    public void insertOrUpdateCustomer(Customer current) {
+        String sqlStatement = "";
+        if(recordExists(current)){
+            sqlStatement = String.format(
+                "UPDATE customers SET"
+                + " Customer_Name = '%s', Address = '%s',"
+                + " Postal_Code = '%s', Phone = '%s',  Last_Update = NOW(),"
+                + " Last_Updated_By = '%s', Division_ID = '%s' WHERE Customer_ID = %s;",
+                    current.getCustomer_Name(),
+                    current.getAddress(), current.getPostal_Code(),
+                    current.getPhone(), Globals.getUserName(),
+                    current.getDivision_ID(), current.getCustomer_ID());
+            System.out.println(sqlStatement);
+            System.out.println("DAOContacts - insertOrUpdateContact - Update Statement");
+        } else {
+//            sqlStatement = String.format(
+//                    "INSERT INTO contacts (Contact_ID, Contact_Name, Email) "
+//                            + " VALUES ("
+//                            + "'%s', '%s', '%s');",
+//                    current.contact_ID, current.contact_Name, current.email);
+            System.out.println("DAOContacts - insertOrUpdateContact - Insert Statement");
+        }
+        System.out.println(sqlStatement);
+        dbQM.RunSQLString(sqlStatement);
     }
 
 }
