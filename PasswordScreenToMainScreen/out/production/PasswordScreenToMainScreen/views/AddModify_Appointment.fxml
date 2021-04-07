@@ -3,9 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddAppointments_Controller">
+<AnchorPane prefHeight="600.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddAppointments_Controller">
    <children>
-      <Label layoutX="177.0" layoutY="23.0" text="This page is for adding new appointments" />
+      <HBox prefHeight="100.0" prefWidth="910.0" />
+      <Label layoutX="177.0" layoutY="23.0" text="This page is for adding and editing appointments" />
       <Button layoutX="39.0" layoutY="296.0" mnemonicParsing="false" text="Manage Appointments" />
       <Button layoutX="348.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClick_Cancel" text="Cancel" />
    </children>

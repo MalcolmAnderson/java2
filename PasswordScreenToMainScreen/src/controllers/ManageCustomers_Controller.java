@@ -53,13 +53,13 @@ public class ManageCustomers_Controller implements Initializable {
     }
 
     private void SetButtonColors() {
-        Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
-        Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
-        btnAddCustomer.setBackground(bg_Red);
-        btnAddCustomer.setTextFill(Color.WHITE);
-        btnEditCustomer.setBackground(bg_Red);
-        btnEditCustomer.setTextFill(Color.WHITE);
-        btnDeleteCustomer.setBackground(bg_Yellow);
+//        Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
+//        Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
+//        btnAddCustomer.setBackground(bg_Red);
+//        btnAddCustomer.setTextFill(Color.WHITE);
+//        btnEditCustomer.setBackground(bg_Red);
+//        btnEditCustomer.setTextFill(Color.WHITE);
+//        btnDeleteCustomer.setBackground(bg_Yellow);
         // btnDeleteCustomer.setTextFill(Color.WHITE);
     }
 
@@ -71,7 +71,7 @@ public class ManageCustomers_Controller implements Initializable {
     public void onClick_EditCustomer(ActionEvent actionEvent) {
         int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
         Customer selectedCustomer = (Customer) tvCustomers.getSelectionModel().getSelectedItem();
-        System.out.println("Selected Contact Index = " + selectedCustomerIndex);
+        System.out.println("Selected Customer Index = " + selectedCustomerIndex);
         if (selectedCustomerIndex != -1){
             AddModify_CustomerController.customer = selectedCustomer;
             AddModify_CustomerController.addEdit = "EDIT";
@@ -109,9 +109,7 @@ public class ManageCustomers_Controller implements Initializable {
             alert.showAndWait();
             if(alert.getResult() == ButtonType.YES){
                 tvCustomers.getItems().remove(selectedCustomerIndex);
-
-                //TODO Delete the customer from the database
-                // inv.deletePart(selectedCustomer);
+                dao.deleteCustomerByID(selectedCustomer.getCustomer_ID());
             }
         }else {
             Alert alert = new Alert(

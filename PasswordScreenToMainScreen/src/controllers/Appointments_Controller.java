@@ -46,8 +46,8 @@ public class Appointments_Controller implements Initializable {
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         SetButtonColors();
 
-        Appointments foo = _ManageTestData.BuildPlaceHolderData_Appointments();
-        allAppointments.setAll(foo.getAllAppointments());
+        Appointments appointments = _ManageTestData.BuildPlaceHolderData_Appointments();
+        allAppointments.setAll(appointments.getAllAppointments());
         tableViewAppointment.setItems(allAppointments);
 
         DefineTableElements();
@@ -69,9 +69,9 @@ public class Appointments_Controller implements Initializable {
     private void SetButtonColors() {
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
-        btnManageAppointments.setBackground(bg_Red);
-        btnManageAppointments.setTextFill(Color.WHITE);
-        btnManageCustomers.setBackground(bg_Yellow);
+        btnManageAppointments.setBackground(bg_Yellow);
+//        btnManageAppointments.setTextFill(Color.WHITE);
+//        btnManageCustomers.setBackground(bg_Yellow);
 //        btnManageCustomers.setTextFill(Color.WHITE);
 //        btnManageContacts.setBackground(bg_Yellow);
 //        btnManageContacts.setTextFill(Color.WHITE);

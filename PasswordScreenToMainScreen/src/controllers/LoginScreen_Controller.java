@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.Globals;
 import models.Geography;
+import utils.TimeConversion;
 import utils.dataAccess.DAOGeography;
 import utils.localization.Locales;
 import utils.Utils;
@@ -70,7 +71,8 @@ public class LoginScreen_Controller implements Initializable {
         }
         lblUserName.setText(rb.getString("User.Name"));
         lblPassword.setText(rb.getString("Password"));
-        lblTimeZone.setText(TimeZone.getDefault().getDisplayName());
+        TimeConversion tc = new TimeConversion();
+        lblTimeZone.setText(tc.getLocalZoneID().toString());
 
 
     }

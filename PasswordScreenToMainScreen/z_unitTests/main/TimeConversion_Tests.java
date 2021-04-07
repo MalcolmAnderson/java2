@@ -154,4 +154,9 @@ public class TimeConversion_Tests {
         assertEquals("2020-08-03T07:00", eastern.toString());
     }
 
+    @Test void confirmLocalZoneId(){
+        ZoneId localZone = tc.getLocalZoneID();
+        assertEquals("America/Los_Angeles", localZone.toString());
+    }
+
 }

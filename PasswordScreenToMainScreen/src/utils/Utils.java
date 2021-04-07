@@ -56,7 +56,7 @@ public class Utils {
         String successString = success ? "SUCCESS" : "FAILURE";
         String lineToLog = datetime + " " + successString + " " + userName;
         try {
-            FileWriter fw = new FileWriter("D:/login_activity.txt", true);
+            FileWriter fw = new FileWriter("login_activity.txt", true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(lineToLog);
             fw.close();

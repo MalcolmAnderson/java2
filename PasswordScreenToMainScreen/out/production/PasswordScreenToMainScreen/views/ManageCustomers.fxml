@@ -12,7 +12,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="910.0">
                <children>
-                  <Label prefHeight="20.0" text="This page is for adding adding, updating and deleting contacts" textAlignment="RIGHT">
+                  <Label prefHeight="20.0" text="This page is for adding adding, updating and deleting customers" textAlignment="RIGHT">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -55,7 +55,6 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="910.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onClickAddEric" text="Add Eric" />
                   <Button fx:id="btnExit" mnemonicParsing="false" onAction="#onClick_Cancel" text="Return to Appointment Screen" />
                </children>
                <VBox.margin>

@@ -92,13 +92,6 @@ public class AddModify_CustomerController implements Initializable {
 
     @FXML void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
-
-        lblIdValue.setText(String.valueOf((customer.getCustomer_ID())));
-        txtCustomerName.setText(customer.getCustomer_Name());
-        txtPhoneNumber.setText(customer.getPhone());
-        txtStreetAddress.setText(customer.getAddress());
-        txtPostalCode.setText(customer.getPostal_Code());
-
         customer.setCustomer_Name(txtCustomerName.getText());
         customer.setPhone(txtPhoneNumber.getText());
         customer.setAddress(txtStreetAddress.getText());
@@ -106,8 +99,6 @@ public class AddModify_CustomerController implements Initializable {
         String divisionName = getCurrentDivisionNameFromDivisionComboBox();
         Geography currentGeo = getDivNameFromDivId(divisionName);
         customer.setDivision_ID(currentGeo.getDivisionId());
-//        customer.setDivision(currentGeo.getDivisionName());
-//        customer.setCountry(currentGeo.getCountryName());
 
         dao.insertOrUpdateCustomer(customer);
         if(addEdit == "ADD"){

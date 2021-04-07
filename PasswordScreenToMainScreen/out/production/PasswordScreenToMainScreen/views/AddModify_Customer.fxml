@@ -64,6 +64,7 @@
                </font>
             </Label>
             <TextField fx:id="txtCustomerName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtStreetAddress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="txtPostalCode" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="lblIdValue" text="id" GridPane.columnIndex="1" />
@@ -79,7 +80,6 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <padding>
             <Insets left="40.0" />
