@@ -1,11 +1,14 @@
-package z_unitTests.main;
+package main;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.Utils;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +32,12 @@ class UtilsTest {
 
     @Test void shouldConvertLocalDateTimeToMySQLInputString(){
         LocalDateTime dt = LocalDateTime.of(2020, 3, 14, 13, 56, 27);
-        assertTrue(false);
+        assertEquals("2020-03-14T13:56:27", dt.toString());
+        assertEquals("2020-03-14", dt.toLocalDate().toString());
+        assertEquals("13:56:27", dt.toLocalTime().toString());
+        ZoneOffset tzo = ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now());
+        assertEquals("-07:00", tzo.toString());
+        assertEquals("2020-03-14 13:56:27", dt.toString());
+        //assertTrue(false);
     }
 }

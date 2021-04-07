@@ -11,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.Globals;
+import models.Geography;
+import utils.dataAccess.DAOGeography;
 import utils.localization.Locales;
 import utils.Utils;
 import utils.navigation.StageManager;
@@ -86,7 +88,13 @@ public class LoginScreen_Controller implements Initializable {
             //lblLoginPrompt.setText(rb.getString("Login.Successful"));
             utils.WriteLoginAttempt(userName, true);
             Globals.setUserName(userName);
-            StageManager.ChangeScene(event, new navInfo_Appointments());
+            Geography.setKnownWorld(DAOGeography.loadKnownWorld());
+            if(Geography.isKnownWorldLoaded()) {
+                StageManager.ChangeScene(event, new navInfo_Appointments());
+            } else {
+                System.out.println("KnownWorld was not succesfully loaded, exiting program");
+                System.exit(-1);
+            }
 
         } else {
             utils.WriteLoginAttempt(userName, false);

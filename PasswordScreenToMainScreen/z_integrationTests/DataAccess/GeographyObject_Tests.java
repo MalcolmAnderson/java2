@@ -1,4 +1,4 @@
-package model_Tests;
+package DataAccess;
 
 import models.*;
 import org.junit.jupiter.api.*;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class Geography_Tests {
+public class GeographyObject_Tests {
 
 
     static ArrayList<Geography> localWorld;
@@ -25,7 +25,7 @@ public class Geography_Tests {
         assertEquals(68, localWorld.size());
     }
     @AfterAll public static void runAfterAll(){
-//        DBConnection.endConnection();
+        DBConnection.endConnection();
     }
 
     @BeforeEach
@@ -48,7 +48,6 @@ public class Geography_Tests {
     }
 
     @Test public void shouldGetAllProvinces(){
-        assertEquals(null, Geography.getKnownWorld());
         Geography.setKnownWorld(localWorld);
         assertEquals(68, Geography.getKnownWorld().size());
         ArrayList<Geography> provinces = new ArrayList<Geography>();

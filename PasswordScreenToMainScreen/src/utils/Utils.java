@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.Date;
 import java.util.Random;
 import java.util.TimeZone;
@@ -157,4 +157,72 @@ public class Utils {
 
 
     }
+
+//    public String LocalDateTime_ToTimeStamp(LocalDateTime dt) {
+//        String retVal = dt.toLocalDate().toString();
+//        retVal += " ";
+//        retVal += dt.toLocalTime().toString();
+//        retVal += ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now()).toString();
+//        return retVal;
+//    }
+
+    public LocalDateTime Local_ToEastern(LocalDateTime ldt) {
+        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
+        ZoneId estZoneId = ZoneId.of("America/New_York");
+
+        ZonedDateTime zdtLocal = ZonedDateTime.of(ldt, localZoneId);
+        ZonedDateTime zdtEastern = ZonedDateTime.ofInstant(zdtLocal.toInstant(), estZoneId);
+        return zdtEastern.toLocalDateTime();
+    }
+
+    public LocalDateTime Eastern_ToLocal(LocalDateTime eastern){
+        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
+        ZoneId estZoneId = ZoneId.of("America/New_York");
+        ZoneId utcZoneId = ZoneId.of("UTC");
+
+        ZonedDateTime zdtUTC = ZonedDateTime.of(eastern, estZoneId);
+        ZonedDateTime zdtLocal = ZonedDateTime.ofInstant(zdtUTC.toInstant(), localZoneId);
+        return zdtLocal.toLocalDateTime();
+    }
+
+    public LocalDateTime Local_ToUTC(LocalDateTime ldt) {
+        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
+        ZoneId utcZoneId = ZoneId.of("UTC");
+
+        ZonedDateTime zdtLocal = ZonedDateTime.of(ldt, localZoneId);
+        ZonedDateTime zdtUTC = ZonedDateTime.ofInstant(zdtLocal.toInstant(), utcZoneId);
+        return zdtUTC.toLocalDateTime();
+    }
+
+    public LocalDateTime UTC_ToLocal(LocalDateTime utc){
+        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
+        ZoneId utcZoneId = ZoneId.of("UTC");
+
+        ZonedDateTime zdtUTC = ZonedDateTime.of(utc, utcZoneId);
+        ZonedDateTime zdtLocal = ZonedDateTime.ofInstant(zdtUTC.toInstant(), localZoneId);
+        return zdtLocal.toLocalDateTime();
+    }
+
+//
+//        ZonedDateTime localStartTime = ZonedDateTime.ofInstant(utcZDT.toInstant(),localZoneId);
+//
+//        LocalDate estDate = LocalDate.of(2020, 8, 3);
+//        LocalTime estTime = LocalTime.of(11, 0); // Get from Combo Box
+//        ZoneId estZoneId = ZoneId.of("America/New_York");
+//        ZonedDateTime estZDT = ZonedDateTime.of(estDate, estTime, estZoneId);
+//        assertEquals("2020-08-03T11:00", estZDT.toLocalDateTime().toString());// Creates ZonedDateTime object
+//
+//        // Convert EST to UTC
+//        ZoneId utcZID = ZoneId.of("UTC");
+//        ZonedDateTime utcZDT = ZonedDateTime.ofInstant(estZDT.toInstant(), utcZID);
+//        System.out.println("EST - UTC Time: " + utcZDT);
+//        assertEquals("2020-08-03T15:00", utcZDT.toLocalDateTime().toString());// Creates ZonedDateTime object
+//
+//        // Convert UTC to Local
+//        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
+//        ZonedDateTime localStartTime = ZonedDateTime.ofInstant(utcZDT.toInstant(),localZoneId);
+//        System.out.println("UTC - Local Time: " + localStartTime);
+//        assertEquals("2020-08-03T08:00", localStartTime.toLocalDateTime().toString());// Creates ZonedDateTime object
+
+//    }
 }

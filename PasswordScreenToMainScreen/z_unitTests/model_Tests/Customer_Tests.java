@@ -3,47 +3,60 @@ package model_Tests;
 
 import models.Customer;
 import models.Customers;
+import models.Geography;
 import models._ManageTestData;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import utils.dataAccess.DAOGeography;
+import utils.dataAccess.DBConnection;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class Customer_Tests {
 
-    Customers customers;
+    Customer customer;
+    Customers customers = new Customers();
+
+    @BeforeAll public static void runBeforeAll(){
+        DBConnection.startConnection();
+        Geography.setKnownWorld(DAOGeography.loadKnownWorld());
+        assertEquals(68, Geography.getKnownWorld().size());
+    }
+    @AfterAll
+    public static void runAfterAll(){
+        DBConnection.endConnection();
+    }
 
     @BeforeEach
     void setUp() {
-        customers = new Customers();
+        customer = null;
     }
 
     @AfterEach void tearDown() {
     }
 
     @Test void shouldWork() {
-        Customers customers = _ManageTestData.BuildPlaceHolder_Customers();
+        Customer customer = _ManageTestData.BuildTestData_Customers(22);
+        customers.addCustomer(customer);
         assertEquals(1, customers.getCustomers().size());
     }
 
     @Test void shouldGetFirstCustomer(){
-        Customers customers = _ManageTestData.BuildPlaceHolder_Customers();
-        Customer customer = customers.getCustomers().get(0);
+        Customer customer = _ManageTestData.BuildTestData_Customers(23);
+        customers.addCustomer(customer);
         assertEquals(1, customers.getCustomers().size());
-        assertEquals(1, customer.getCustomer_ID());
-        assertEquals("Daddy Warbucks", customer.getCustomer_Name());
-        assertEquals("1919 Boardwalk, Trenton", customer.getAddress());
-        assertEquals("01291", customer.getPostal_Code());
-        assertEquals("869-908-1875", customer.getPhone());
+        assertEquals(23, customer.getCustomer_ID());
+        assertEquals("Tom Slytherin", customer.getCustomer_Name());
+        assertEquals("2782 Alberta Street, Portland", customer.getAddress());
+        assertEquals("98601", customer.getPostal_Code());
+        assertEquals("503-908-1875", customer.getPhone());
         LocalDateTime createDate =  LocalDateTime.of(2021, 02, 23, 02, 11, 22);
         assertEquals(createDate, customer.getCreate_Date());
-        assertEquals("script", customer.getCreated_By());
+        assertEquals("Unit Tests", customer.getCreated_By());
         LocalDateTime lastUpdate =  LocalDateTime.of(2021, 02, 23, 02, 11, 22);
         assertEquals(lastUpdate, customer.getLast_Update());
-        assertEquals("script", customer.getLast_Updated_By());
-        assertEquals(29, customer.getDivision_ID());
+        assertEquals("Unit Tests", customer.getLast_Updated_By());
+        assertEquals(36, customer.getDivision_ID());
 
 
 //        assertEquals(three.getEmail(), customer.getEmail());

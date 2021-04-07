@@ -4,9 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Customer;
 import models.Customers;
+import models.Geography;
+import models._ManageTestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.dataAccess.DAOGeography;
 import utils.dataAccess.DBConnection;
 import utils.dataAccess.DAOCustomers;
 
@@ -14,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 //import java.sql.PreparedStatement;
 //import java.sql.*;
 
@@ -22,13 +26,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DAO_Customer_Tests {
-
+    boolean keepRecords = false;
     DAOCustomers dao;
 
     @BeforeEach
     void setUp() {
         DBConnection.startConnection();
         dao = new DAOCustomers();
+        if(! Geography.isKnownWorldLoaded()){
+            Geography.setKnownWorld(DAOGeography.loadKnownWorld());
+        }
     }
 
     @AfterEach
@@ -36,7 +43,87 @@ public class DAO_Customer_Tests {
         DBConnection.endConnection();
     }
 
+    @Test void shouldAddCustomer(){
+        System.out.println("Begin shouldAddCustomer");
+        Customer customer = _ManageTestData.BuildTestData_Customers(22);
+        customer.setLast_Update(LocalDateTime.of(2021, 02, 28, 14, 00, 00));
+        Customers customers = dao.selectAllCustomers();
+        // if test customer exists, delete it
+        if(customers.customerExists(22)){
+            dao.deleteCustomerByID(22);
+            customers = dao.selectAllCustomers();
+            if(customers.customerExists(22)){
+                System.out.println("Failed to delete customer 22");
+            }
+        }
+        // get customer count
+        int customerCount = customers.getCustomers().size();
+        // add test customer
+        dao.insertOrUpdateCustomer(customer);
+        customers = dao.selectAllCustomers();
+        // check if customer count has increased by 1
+        assertEquals(customerCount + 1, customers.getCustomers().size(), "failed to add customer");
+        // delete test customer
+        if(! keepRecords) {
+            dao.deleteCustomerByID(22);
+            // check that customer count has decreased by 1
+            customers = dao.selectAllCustomers();
+            assertEquals(customerCount, customers.getCustomers().size(), "failed to delete customer");
+        }
+    }
+    @Test void shouldUpdateCustomer(){
+        System.out.println("Begin shouldUpdateCustomer");
+
+        // Setup
+        int cust_id = 23;
+        Customer customer = _ManageTestData.BuildTestData_Customers(cust_id);
+        Customers customers = dao.selectAllCustomers();
+        // if test customer exists, delete it
+        if(customers.customerExists(cust_id)){
+            dao.deleteCustomerByID(cust_id);
+            customers = dao.selectAllCustomers();
+            if(customers.customerExists(cust_id)){
+                System.out.println("Failed to delete customer " + cust_id);
+            }
+        }
+        // get customer count
+        int customerCount = customers.getCustomers().size();
+        // add test customer
+        dao.insertOrUpdateCustomer(customer);
+
+        customers = dao.selectAllCustomers();
+        // check if customer count has increased by 1
+        assertEquals(customerCount + 1, customers.getCustomers().size(), "failed to add customer");
+        String currentCustName = customer.getCustomer_Name();
+        assertEquals("Tom Slytherin", currentCustName);
+
+        // Perform Test
+        // make and save changes to the test customer
+        customer.setDivision_ID(customer.getDivision_ID()+1);
+        String newCustName = "To Protect The Innocent";
+        customer.setCustomer_Name(newCustName);
+        dao.insertOrUpdateCustomer(customer);
+
+        // Validate
+        // check if customer count has stayed the same
+        customers = dao.selectAllCustomers();
+        assertEquals(customerCount + 1, customers.getCustomers().size(), "update should not have changed the count");
+        // find the customer and insure changes were made
+        Customer updatedCustomer = customers.getCustomerByID(cust_id);
+        assertEquals(newCustName, updatedCustomer.getCustomer_Name(), "customer info was not updated");
+
+        // Cleanup
+        // delete test customer
+        if(! keepRecords) {
+            dao.deleteCustomerByID(cust_id);
+            // check that customer count has decreased by 1
+            customers = dao.selectAllCustomers();
+            assertEquals(customerCount, customers.getCustomers().size(), "failed to delete customer");
+        }
+    }
+
     @Test void shouldGetCustomers() throws SQLException {
+        System.out.println("Begin shouldGetCustomers");
         String sql = "SELECT * FROM customers;";
 
         sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code"
@@ -80,6 +167,7 @@ public class DAO_Customer_Tests {
     }
 
     @Test void shouldRefreshCustomers() {
+        System.out.println("Begin shouldRefreshCustomers");
         Customers customers = new Customers();
         assertEquals(0, customers.getCustomers().size());
 
@@ -89,10 +177,6 @@ public class DAO_Customer_Tests {
         assertEquals(0, olCustomers.size());
         olCustomers.setAll(customers.getCustomers());
         assertEquals(3, olCustomers.size());
-    }
-
-    @Test void shouldAddACustomer(){
-        assertTrue(false);
     }
 
 }

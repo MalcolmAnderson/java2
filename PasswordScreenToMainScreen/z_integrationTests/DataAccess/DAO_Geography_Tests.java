@@ -8,21 +8,16 @@ import utils.dataAccess.DBConnection;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class DAO_Geography_Tests {
-
-    private static DAOGeography dao;
+public class DAO_Geography_Tests
+{
 
     @BeforeAll static void runOnceBeforeAllHaveStarted(){
         System.out.println("begin beforeAll");
         DBConnection.startConnection();
-        dao = new DAOGeography();
-        ArrayList<Geography> knownWorld = Geography.getKnownWorld();
-        assertEquals(null, knownWorld);
-        knownWorld = DAOGeography.loadKnownWorld();
-        assertEquals(68, knownWorld.size());
+        Geography.setKnownWorld(DAOGeography.loadKnownWorld());
         System.out.println("end beforeAll");
     }
     @AfterAll static void runOnceAfterAllAreDone(){
@@ -40,7 +35,8 @@ public class DAO_Geography_Tests {
     }
 
     @Test void shouldGetUSWhenPassingAlaska() {
-        Geography geography = dao.getGeographyByDivisionId(54);
+        System.out.println("Begin shouldGetUSWhenPassingAlaska");
+        Geography geography = Geography.getGeographyByDivisionId(54);
         System.out.println(geography.getDivisionId());
         assertEquals(54,geography.getDivisionId());
         assertEquals("U.S", geography.getCountryName());
@@ -49,22 +45,21 @@ public class DAO_Geography_Tests {
     }
 
     @Test void shouldGetAllStatesWhenPassingUS() {
-        ArrayList<Geography> divisions = dao.getDivisionsByCountry_ID(1);
+        System.out.println("Begin shouldGetAllStatesWhenPassingUS");
+        ArrayList<Geography> divisions = Geography.getDivisionsByCountry_ID(1);
         assertEquals(51, divisions.size());
     }
 
     @Test void shouldPopulateGeography_KnownWorld(){
-        ArrayList<Geography> knownWorld = Geography.getKnownWorld();
-        assertEquals(null, knownWorld);
-        Geography.setKnownWorld(DAOGeography.loadKnownWorld());
+        System.out.println("Begin shouldPopulateGeography_KnownWorld");
+        assertTrue(Geography.isKnownWorldLoaded());
         ArrayList<Geography> knownWorldCopy = Geography.getKnownWorld();
         assertEquals(68, knownWorldCopy.size());
     }
 
     @Test public void shouldGetAllCountries(){
-        ArrayList<Geography> knownWorld = Geography.getKnownWorld();
-        assertEquals(null, Geography.getKnownWorld());
-        Geography.setKnownWorld(knownWorld);
+        System.out.println("Begin shouldGetAllCountries");
+        assertTrue(Geography.isKnownWorldLoaded());
         ArrayList<Country> countryList = DAOGeography.getCountries();
         assertEquals(3, countryList.size());
     }

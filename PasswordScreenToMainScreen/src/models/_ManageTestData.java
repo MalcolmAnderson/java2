@@ -68,22 +68,47 @@ public class _ManageTestData {
         return appointments;
     }
 
-    public static Customers BuildPlaceHolder_Customers() {
-        Customers customers = new Customers();
+    public static Customer BuildTestData_Customers(int testCustomerNumber) {
+        //Customers customers = new Customers();
+        Customer retVal = null;
+        switch(testCustomerNumber){
+            case 22:{
+                retVal = new Customer(
+                        22,
+                        "Eric Estrada",
+                        "1919 Main Street, Los Angeles",
+                        "90031",
+                        "323-908-1875",
+                        LocalDateTime.of(2021, 02, 23, 02, 11, 22),
+                        "Unit Tests",
+                        LocalDateTime.of(2021, 02, 23, 02, 11, 22),
+                        "Unit Tests",
+                        29);
+//                customers.addCustomer(zero);
+            }
+            break;
+            case 23: {
+                retVal = new Customer(
+                        23,
+                        "Tom Slytherin",
+                        "2782 Alberta Street, Portland",
+                        "98601",
+                        "503-908-1875",
+                        LocalDateTime.of(2021, 02, 23, 02, 11, 22),
+                        "Unit Tests",
+                        LocalDateTime.of(2021, 02, 23, 02, 11, 22),
+                        "Unit Tests",
+                        36);
+//                customers.addCustomer(one);
+            }
+            break;
+            default:{
+                System.out.println("testCustomerNumber must be either 22 or 23");
+                System.exit(-1);
+            }
+        }
+        return retVal;
 
-        Customer zero = new                                    Customer(
-                1,
-                "Daddy Warbucks",
-                "1919 Boardwalk, Trenton",
-                "01291",
-                "869-908-1875",
-                LocalDateTime.of(2021, 02, 23, 02, 11, 22),
-                "script",
-                LocalDateTime.of(2021, 02, 23, 02, 11, 22),
-                "script",
-                29,
-                "New Jersey",
-                "U.S");
 
 
 //        Customer one = new Customer(
@@ -100,13 +125,11 @@ public class _ManageTestData {
 //
 //        Customer five = new Customer( 8, "Samuel of Sparta", "123 Cherry Lane, Machester CO 12345", "Boston7@hotmail.com");
 
-        customers.addCustomer(zero);
-//        customers.addCustomer(one);
 //        customers.addCustomer(two);
 //        customers.addCustomer(three);
 //        customers.addCustomer(four);
 //        customers.addCustomer(five);
-        return customers;
+//        return customers;
     }
 
     public static Contacts BuildPlaceHolder_Contacts() {

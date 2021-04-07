@@ -5,6 +5,7 @@ import models.Appointments;
 import models._ManageTestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.dataAccess.DAOAppointments;
 import utils.dataAccess.DBConnection;
@@ -26,8 +27,7 @@ public class DAO_Appointment_Tests {
         DBConnection.endConnection();
     }
 
-    @Test
-    void shouldRefreshAppointments() {
+    @Test void shouldRefreshAppointments() {
         try {
             System.out.println("Begin shouldRefreshAppointments");
             Appointments appointments = new Appointments();
@@ -43,7 +43,8 @@ public class DAO_Appointment_Tests {
             assertTrue(false, "An uncaught exception happened");
         }
     }
-    
+
+    @Disabled
     @Test void shouldAddTestDataToAppointments(){
         System.out.println("Begin shouldAddTestDataToAppointments");
         Appointments appointments = new Appointments();

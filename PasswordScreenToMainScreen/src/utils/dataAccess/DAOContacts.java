@@ -48,7 +48,6 @@ public class DAOContacts {
     }
 
     public Contacts selectAllContacts() {
-//        Utils utils = new Utils();
         Contacts contacts = new Contacts();
 
         try {

@@ -99,8 +99,8 @@ public class AddModify_CustomerController implements Initializable {
         String divisionName = getCurrentDivisionNameFromDivisionComboBox();
         Geography currentGeo = getDivNameFromDivId(divisionName);
         customer.setDivision_ID(currentGeo.getDivisionId());
-        customer.setDivision(currentGeo.getDivisionName());
-        customer.setCountry(currentGeo.getCountryName());
+//        customer.setDivision(currentGeo.getDivisionName());
+//        customer.setCountry(currentGeo.getCountryName());
 
         dao.insertOrUpdateCustomer(customer);
         if(addEdit == "ADD"){
@@ -129,8 +129,8 @@ public class AddModify_CustomerController implements Initializable {
         System.out.println("AddModify_PartController initialize called");
         HandleInboundCustomerObject();
 
-        ArrayList<Geography> knownWorld = DAOGeography.loadKnownWorld();
-        Geography.setKnownWorld(knownWorld);
+        //ArrayList<Geography> knownWorld = DAOGeography.loadKnownWorld();
+        //Geography.setKnownWorld(knownWorld);
         countries = DAOGeography.getCountries();
 
         SetSimpleScreenValues();

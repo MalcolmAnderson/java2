@@ -1,6 +1,7 @@
 package models;
 
 import main.Globals;
+import utils.dataAccess.DAOGeography;
 
 import java.time.LocalDateTime;
 
@@ -16,8 +17,9 @@ public class Customer {
     private LocalDateTime last_Update;
     private String last_Updated_By;
     private int division_ID;
-    private String division;
-    private String country;
+    private Geography geography;
+//    private String division;
+//    private String country;
 
     public Customer() {
         this.customer_ID = -1;
@@ -30,8 +32,8 @@ public class Customer {
         this.last_Update = LocalDateTime.now();;
         this.last_Updated_By = Globals.getUserName();
         this.division_ID = -1;
-        this.division = "";
-        this.country = "";
+//        this.division = "";
+//        this.country = "";
     }
 
     public Customer(
@@ -44,9 +46,7 @@ public class Customer {
             String created_By,
             LocalDateTime last_Update,
             String last_Updated_By,
-            int division_ID,
-            String division,
-            String country) {
+            int division_ID) {
         this.customer_ID = customer_ID;
         this.customer_Name = customer_Name;
         this.address = address;
@@ -57,13 +57,14 @@ public class Customer {
         this.last_Update = last_Update;
         this.last_Updated_By = last_Updated_By;
         this.division_ID = division_ID;
-        this.division = division;
-        this.country = country;
+        this.geography = Geography.getGeographyByDivisionId(division_ID);
+//        this.division = division;
+//        this.country = country;
     }
 
     // custom getter
     public String getFullAddress() {
-        return address + ", " + division + " " + postal_Code;
+        return address + ", " + geography.getDivisionName() + " " + postal_Code;
     }
 
 
@@ -83,8 +84,8 @@ public class Customer {
                 ", last_Update=" + last_Update +
                 ", last_Updated_By='" + last_Updated_By + '\'' +
                 ", division_ID=" + division_ID +
-                ", division='" + division + '\'' +
-                ", country='" + country + '\'' +
+                ", division='" + geography.getDivisionName() + '\'' +
+                ", country='" + geography.getCountryName() + '\'' +
                 '}';
     }
 
@@ -169,18 +170,18 @@ public class Customer {
     }
 
     public String getDivision() {
-        return division;
+        return geography.getDivisionName();
     }
 
-    public void setDivision(String division) {
-        this.division = division;
-    }
+//    public void setDivision(String division) {
+//        this.geography. division = division;
+//    }
 
     public String getCountry() {
-        return country;
+        return geography.getCountryName();
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+//    public void setCountry(String country) {
+//        this.country = country;
+//    }
 }
