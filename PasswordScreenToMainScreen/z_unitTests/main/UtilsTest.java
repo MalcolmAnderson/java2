@@ -37,7 +37,7 @@ class UtilsTest {
         assertEquals("13:56:27", dt.toLocalTime().toString());
         ZoneOffset tzo = ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now());
         assertEquals("-07:00", tzo.toString());
-        assertEquals("2020-03-14 13:56:27", dt.toString());
+        assertEquals("2020-03-14T13:56:27", dt.toString());
         //assertTrue(false);
     }
 }

@@ -48,7 +48,7 @@ public class ManageCustomers_Controller implements Initializable {
         tcId.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
         tcName.setCellValueFactory(new PropertyValueFactory<>("customer_Name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("fullAddress"));
-        tcCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
+        tcCountry.setCellValueFactory(new PropertyValueFactory<>("countryName"));
         tcPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
@@ -88,7 +88,10 @@ public class ManageCustomers_Controller implements Initializable {
     public void onClickAddCustomer(ActionEvent actionEvent) {
         System.out.println("ProductAdd Clicked");
         AddModify_CustomerController.addEdit = "ADD";
-        AddModify_CustomerController.customer = new Customer();
+        Customer newCustomer = new Customer();
+        newCustomer.setGeography(Geography.getGeographyByDivisionId(newCustomer.getDivision_ID()));
+        AddModify_CustomerController.customer = newCustomer;
+
         StageManager.ChangeScene(actionEvent, new navInfo_AddEditCustomer());
 
     }

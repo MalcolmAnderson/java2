@@ -38,7 +38,7 @@ public class Java_Tests {
 
         Customer current = _ManageTestData.BuildTestData_Customers(22);
         LocalDateTime lastUpdate = current.getLast_Update();
-        assertEquals("2021-02-23 02:11:22-07:00",  lastUpdate.toString());
+        assertEquals("2021-02-23T02:11:22",  lastUpdate.toString());
         String sqlStatement = String.format(
                 "UPDATE customers SET"
                         + " Customer_Name = '%s', Address = '%s',"
@@ -50,7 +50,7 @@ public class Java_Tests {
                 Globals.getUserName(),
                 current.getDivision_ID(), current.getCustomer_ID());
 
-        assertEquals("UPDATE customers SET Customer_Name = 'Eric Estrada', Address = '1919 Main Street, Los Angeles', Postal_Code = '90031', Phone = '323-908-1875',  Last_Update = '2021-02-23 02:11:22-07:00', Last_Updated_By = 'userName not set', Division_ID = '29' WHERE Customer_ID = 22;", sqlStatement);
+        assertEquals("UPDATE customers SET Customer_Name = 'Eric Estrada', Address = '1919 Main Street, Los Angeles', Postal_Code = '90031', Phone = '323-908-1875',  Last_Update = '2021-02-23T02:11:22', Last_Updated_By = 'userName not set', Division_ID = '29' WHERE Customer_ID = 22;", sqlStatement);
     }
 
 }

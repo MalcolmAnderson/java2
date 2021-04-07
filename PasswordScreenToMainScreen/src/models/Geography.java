@@ -11,6 +11,12 @@ public class Geography {
     private static ArrayList<Geography> knownWorld;
     private static ArrayList<Country> countries;
 
+    public  Geography(){
+        this.division_ID = 1;
+        this.countryName = "";
+        this.divisionName = "";
+        this.country_ID = 1;
+    }
     public Geography(int division_ID, String divisionName, String countryName, int country_ID) {
         this.division_ID = division_ID;
         this.countryName = countryName;
@@ -92,6 +98,8 @@ public class Geography {
     }
 
     public String getCountryName() {
+        System.out.println("getCountryName == null is:  " + countryName == null);
+        System.out.println("getCountryName countryName == " + countryName);
         return countryName;
     }
 

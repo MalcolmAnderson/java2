@@ -49,7 +49,7 @@ public class DAOCustomers {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                System.out.println("       getting Column names for customer");
+//                System.out.println("       getting Column names for customer");
                 int customer_ID = rs.getInt("Customer_ID");
                 String customer_Name = rs.getString("Customer_Name");
                 String address = rs.getString("Address");

@@ -47,6 +47,9 @@ public class DAO_Customer_Tests {
         System.out.println("Begin shouldAddCustomer");
         Customer customer = _ManageTestData.BuildTestData_Customers(22);
         customer.setLast_Update(LocalDateTime.of(2021, 02, 28, 14, 00, 00));
+        assertEquals("New Jersey", customer.getDivisionName());
+        assertEquals("U.S", customer.getCountryName());
+        assertEquals(29, customer.getDivision_ID());
         Customers customers = dao.selectAllCustomers();
         // if test customer exists, delete it
         if(customers.customerExists(22)){
@@ -156,9 +159,9 @@ public class DAO_Customer_Tests {
         ResultSet rs = ps.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();
         while(rs.next()) {
-            System.out.println("       getting Column names for customer");
+//            System.out.println("       getting Column names for customer");
             int size = rsmd.getColumnCount();
-            System.out.println("ResultSet column count: " + size);
+//            System.out.println("ResultSet column count: " + size);
             // Note: columns is apparently 1 based
             for (int i = 1; i <= size; i++) {
                 System.out.println(rsmd.getColumnName(i));

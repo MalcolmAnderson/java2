@@ -27,6 +27,7 @@ public class AddModify_CustomerController implements Initializable {
     private String currentCountry;
     private ArrayList<Country> countries;
     private ArrayList<Geography> currentDivisions;
+//    private Geography customerGeography;
 
     // screen elements
     public Label lblID;
@@ -51,24 +52,30 @@ public class AddModify_CustomerController implements Initializable {
 
 
     private void HandleInboundCustomerObject() {
+        System.out.println("AddModify_CustomerController HandleInboundCustomerObject called");
+
         if(customer == null){
             if(addEdit == "EDIT"){
                 System.out.println("Edit should not be able to submit a null Customer");
                 System.exit(-1);
             }
             customer = new Customer();
+            customer.setGeography(new Geography());
             customer.setCustomer_ID(utils.getNextIdNumber());
         } else if (customer.getCustomer_ID() == -1){
             customer.setCustomer_ID(utils.getNextIdNumber());
         }
         if(addEdit == "ADD"){
             lblScreenIdentifier.setText("Add Contact");
+//            customer.setGeography(new Geography());
         } else {
             if (addEdit != "EDIT"){
                 System.out.println("the value of addEdit is " + addEdit);
                 System.out.println("the value of addEdit should only ever be ADD or EDIT");
                 System.exit(-1);
             }
+            // if edit, set customerGeography
+//            customerGeography = Geography.getGeographyByDivisionId(customer.getDivision_ID());
             lblScreenIdentifier.setText("Edit Customer");
         }
     }
@@ -110,6 +117,7 @@ public class AddModify_CustomerController implements Initializable {
     }
 
     private Geography getDivNameFromDivId(String divisionName) {
+        System.out.println("AddModify_CustomerController getDivNameFromDivId called");
         Geography retVal = null;
         for(int i = 0; i < currentDivisions.size(); i++){
             if(divisionName.equals(currentDivisions.get(i).getDivisionName())){
@@ -126,18 +134,19 @@ public class AddModify_CustomerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("AddModify_PartController initialize called");
+        System.out.println("AddModify_CustomerController initialize called");
         HandleInboundCustomerObject();
 
-        //ArrayList<Geography> knownWorld = DAOGeography.loadKnownWorld();
-        //Geography.setKnownWorld(knownWorld);
         countries = DAOGeography.getCountries();
 
         SetSimpleScreenValues();
 
-        String country = customer.getCountry();
+        System.out.println("AddModify_CustomerController about to getCountryName");
+        String country = customer.getCountryName();
+        System.out.println("AddModify_CustomerController country == " + country);
         int divId = customer.getDivision_ID();
-        String divCur = customer.getDivision();
+
+        String divCur = customer.getDivisionName();
 
         int countryId = setCmbCountryValue(countries, country);
 
@@ -154,6 +163,8 @@ public class AddModify_CustomerController implements Initializable {
     }
 
     private int SetDivisionsByCountryId(int countryId) {
+        System.out.println("AddModify_CustomerController SetDivisionsByCountryId called");
+        System.out.println(countryId);
         currentDivisions = Geography.getDivisionsForCountryID(countryId);
         int divisionCount = currentDivisions.size();
         cmbDivision.getItems().clear();
@@ -165,6 +176,7 @@ public class AddModify_CustomerController implements Initializable {
     }
 
     private int setCmbCountryValue(ArrayList<Country> countries, String country) {
+        System.out.println("AddModify_CustomerController setCmbCountryValue called");
         int countryId = -1;
         for(int i = 0; i < countries.size(); i++){
             String current = countries.get(i).getCountryName();
@@ -187,6 +199,7 @@ public class AddModify_CustomerController implements Initializable {
     }
 
     private void SetSimpleScreenValues() {
+        System.out.println("AddModify_CustomerController SetSimpleScreenValues called");
         lblIdValue.setText(String.valueOf((customer.getCustomer_ID())));
         txtCustomerName.setText(customer.getCustomer_Name());
         txtPhoneNumber.setText(customer.getPhone());

@@ -31,7 +31,7 @@ public class Customer {
         this.created_By = Globals.getUserName();
         this.last_Update = LocalDateTime.now();;
         this.last_Updated_By = Globals.getUserName();
-        this.division_ID = -1;
+        this.division_ID = 1;
 //        this.division = "";
 //        this.country = "";
     }
@@ -84,8 +84,8 @@ public class Customer {
                 ", last_Update=" + last_Update +
                 ", last_Updated_By='" + last_Updated_By + '\'' +
                 ", division_ID=" + division_ID +
-                ", division='" + geography.getDivisionName() + '\'' +
-                ", country='" + geography.getCountryName() + '\'' +
+//                ", division='" + geography.getDivisionName() + '\'' +
+//                ", country='" + geography.getCountryName() + '\'' +
                 '}';
     }
 
@@ -169,19 +169,16 @@ public class Customer {
         this.division_ID = division_ID;
     }
 
-    public String getDivision() {
+    public String getDivisionName() {
         return geography.getDivisionName();
     }
 
-//    public void setDivision(String division) {
-//        this.geography. division = division;
-//    }
+    public void setGeography(Geography geography) {
+        this.geography = geography;
+    }
 
-    public String getCountry() {
+    public String getCountryName() {
         return geography.getCountryName();
     }
 
-//    public void setCountry(String country) {
-//        this.country = country;
-//    }
 }

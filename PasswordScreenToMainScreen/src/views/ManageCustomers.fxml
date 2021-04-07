@@ -31,9 +31,9 @@
                <children>
                   <TableView fx:id="tvCustomers" prefHeight="600.0" prefWidth="870.0">
                      <columns>
-                        <TableColumn fx:id="tcId" prefWidth="25.0" text="Id" />
+                        <TableColumn fx:id="tcId" prefWidth="35.0" text="Id" />
                         <TableColumn fx:id="tcName" prefWidth="200.0" text="Name" />
-                        <TableColumn fx:id="tcAddress" prefWidth="402.0" text="Address" />
+                        <TableColumn fx:id="tcAddress" prefWidth="392.0" text="Address" />
                         <TableColumn fx:id="tcCountry" prefWidth="70.0" text="Country" />
                         <TableColumn fx:id="tcPhone" minWidth="50.0" prefWidth="171.0" text="Phone" />
                      </columns>
