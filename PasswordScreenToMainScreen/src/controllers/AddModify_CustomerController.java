@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import main.Globals;
 import models.Country;
 import models.Customer;
 import models.Geography;
@@ -122,7 +123,8 @@ public class AddModify_CustomerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        rb = resources;
+//        rb = resources;
+        rb = Globals.getResourceBundle();
         System.out.println("AddModify_CustomerController initialize called");
         HandleInboundCustomerObject();
 

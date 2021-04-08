@@ -43,6 +43,13 @@ public class ManageCustomers_Controller implements Initializable {
         customers = dao.selectAllCustomers();
         allCustomers.setAll(customers.getCustomers());
 
+//        System.out.println("Key Id = " + rb.getString("Id"));
+//        tcId.setText(rb.getString("Id"));
+//        tcName.setText(rb.getString("Name"));
+//        tcAddress.setText(rb.getString("Address"));
+//        tcCountry.setText(rb.getString("Country"));
+//        tcPhone.setText(rb.getString("Phone"));
+
         tvCustomers.setItems(allCustomers);
 
         tcId.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
