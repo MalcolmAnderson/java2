@@ -48,12 +48,15 @@ public class LoginScreen_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.rb = Globals.getResourceBundle();
+//        String rbPath = "utils.localization/Nat";
+//        rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
+
         btnLogIn.setText(rb.getString("Log.In"));
         btnEnglish.setText(rb.getString("English"));
         btnFrench.setText(rb.getString("French"));
-        lblDescription.setText(rb.getString("Acme.Appointment.Setter.version.0.0.1"));
+        lblDescription.setText(rb.getString("Acme.Appointment.Setter.version.1.0.0"));
         lblDetectedLocalLanguage.setText(rb.getString("Detected.Local.Language"));
-        lblDetectedTimeZone.setText(rb.getString("Detected.Time.Zone"));
+//        lblDetectedTimeZone.setText(rb.getString("Detected.Time.Zone"));
         if(Globals.getLocalLanguage().equals("fr_FR") ){
             localLanguage.setText(rb.getString("French"));
         } else {
@@ -138,7 +141,7 @@ public class LoginScreen_Controller implements Initializable {
         try {
             Parent root = loader.load();
             Stage s = (Stage) btnLogIn.getScene().getWindow();
-            s.setTitle(rb.getString("Acme.Appointment.Setter.version.0.0.1"));
+            s.setTitle(rb.getString("Acme.Appointment.Setter.version.1.0.0"));
             s.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();

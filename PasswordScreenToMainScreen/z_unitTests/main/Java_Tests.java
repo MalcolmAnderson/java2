@@ -11,9 +11,13 @@ import utils.dataAccess.DAOCustomers;
 import utils.dataAccess.DAOGeography;
 import utils.dataAccess.DBConnection;
 
+import java.nio.file.FileSystems;
 import java.time.LocalDateTime;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Java_Tests {
     DAOCustomers dao;
@@ -51,6 +55,24 @@ public class Java_Tests {
                 current.getDivision_ID(), current.getCustomer_ID());
 
         assertEquals("UPDATE customers SET Customer_Name = 'Eric Estrada', Address = '1919 Main Street, Los Angeles', Postal_Code = '90031', Phone = '323-908-1875',  Last_Update = '2021-02-23T02:11:22', Last_Updated_By = 'userName not set', Division_ID = '29' WHERE Customer_ID = 22;", sqlStatement);
+    }
+
+    @Test public void getDirectoryAndFiles(){
+        String userDirectory = FileSystems.getDefault()
+                .getPath("utils/localization")
+                .toAbsolutePath()
+                .toString();
+        assertEquals("foo", userDirectory);
+        assertTrue(userDirectory.endsWith("."));
+    }
+
+    @Test public void anotherTest(){
+        String rbPath = "utils.localization/Nat";
+        ResourceBundle rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
+        String foo = rb.getString("Phone");
+        assertEquals("foo", foo);
+        Globals.setResourceBundle(rb);
+
     }
 
 }

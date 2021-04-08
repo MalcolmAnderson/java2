@@ -19,7 +19,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblDescription" layoutX="88.0" layoutY="14.0" text="%Acme.Appointment.Setter.version.0.0.1" textAlignment="CENTER" />
+      <Label fx:id="lblDescription" layoutX="88.0" layoutY="14.0" text="%Acme.Appointment.Setter.version.1.0.0" textAlignment="CENTER" />
       <Label fx:id="lblLoginPrompt" layoutX="6.0" layoutY="95.0" prefHeight="17.0" prefWidth="439.0" text="Enter credentials and then click Log In button" textAlignment="CENTER" />
       <Label fx:id="lblDetectedLocalLanguage" layoutX="99.0" layoutY="144.0" text="%Detected.Local.Language" textAlignment="RIGHT" />
       <Label fx:id="lblChangeAppLanguage" layoutX="55.0" layoutY="196.0" text="%Change.Application.Language" textAlignment="CENTER" />

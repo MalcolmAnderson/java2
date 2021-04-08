@@ -26,8 +26,6 @@ public class Main extends Application {
         // set environment
         Globals.setHasLoginBeenAttempted(false);
         Globals.setDetectedSystemLocalLanguage(Locale.getDefault().toString());
-        File myFile = new File("utils.localization/Nat");
-        System.out.println("My file exists: " + myFile.exists());
         String rbPath = "utils.localization/Nat";
         ResourceBundle rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
         Globals.setResourceBundle(rb);
@@ -53,7 +51,7 @@ public class Main extends Application {
         Parent loginScreenParent = loader.load();
         Scene loginScreenScene = new Scene(loginScreenParent);
 
-        primaryStage.setTitle(rb.getString(rb.getString("Acme.Appointment.Setter.version.0.0.1")));
+//        primaryStage.setTitle(rb.getString(rb.getString("Acme.Appointment.Setter.version.1.0.0")));
         primaryStage.setScene(loginScreenScene);
         primaryStage.show();
     }

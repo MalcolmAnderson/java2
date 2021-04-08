@@ -5,7 +5,7 @@ public class navInfo_LogIn extends navInfo{
         return pathToViews + "LoginScreen.fxml";
     }
     @Override String getScreenTitle() {
-        String retVal = rb.getString("Acme.Appointment.Setter.version.0.0.1");
+        String retVal = rb.getString("Acme.Appointment.Setter.version.1.0.0");
         return retVal;
     }
 }
