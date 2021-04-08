@@ -20,15 +20,6 @@ import java.util.ResourceBundle;
 
 public class ManageContacts_Controller implements Initializable {
 
-    private Customers customers;
-//    public Customers getCustomers() {
-//        return customers;
-//    }
-//    public void setCustomers(Customers customers) {
-//        this.customers = customers;
-//    }
-
-
     public Button btnAddContact;
     public Button btnEditContact;
     public Button btnDeleteContact;
@@ -40,7 +31,6 @@ public class ManageContacts_Controller implements Initializable {
     private ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     private DAOContacts dao = new DAOContacts();
     private navInfo_ManageContacts navInfo = new navInfo_ManageContacts();
-
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
 //        SetButtonColors();
@@ -71,12 +61,9 @@ public class ManageContacts_Controller implements Initializable {
 //        btnDeleteContact.setTextFill(Color.WHITE);
     }
 
-
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
-
-
 
     public void onClick_DeleteContact(ActionEvent actionEvent) {
         int selectedContactIndex = tvContacts.getSelectionModel().getSelectedIndex();

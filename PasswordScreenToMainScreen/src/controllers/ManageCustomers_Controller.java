@@ -30,14 +30,14 @@ public class ManageCustomers_Controller implements Initializable {
     public TableColumn tcPhone;
     public TableColumn tcCountry;
 
+
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     private DAOCustomers dao = new DAOCustomers();
-
+    private ResourceBundle rb;
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
 
         SetButtonColors();
-
 
         Customers customers = new Customers();
         customers = dao.selectAllCustomers();
@@ -62,7 +62,6 @@ public class ManageCustomers_Controller implements Initializable {
 //        btnDeleteCustomer.setBackground(bg_Yellow);
         // btnDeleteCustomer.setTextFill(Color.WHITE);
     }
-
 
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
@@ -93,7 +92,6 @@ public class ManageCustomers_Controller implements Initializable {
         AddModify_CustomerController.customer = newCustomer;
 
         StageManager.ChangeScene(actionEvent, new navInfo_AddEditCustomer());
-
     }
 
     public void onClickDeleteCustomer(ActionEvent actionEvent) {
@@ -120,9 +118,4 @@ public class ManageCustomers_Controller implements Initializable {
         }
     }
 
-    public void onClickAddEric(ActionEvent actionEvent) {
-//        Customer eric = new Customer(4, "Eric Estrada", "Eric@Estrada.com");
-//        dao.insertOrUpdateContact(eric);
-//        RefreshScreenFromDataBase();
-    }
 }

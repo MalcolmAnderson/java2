@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.TimeZone;
 
 public class LoginScreen_Controller implements Initializable {
     public PasswordField labelPassword;
@@ -39,6 +38,7 @@ public class LoginScreen_Controller implements Initializable {
     public Label lblUserName;
     public Label lblPassword;
     public Label lblTimeZone;
+    public Label lblDetectedTimeZone;
     Utils utils = new Utils();
     ResourceBundle rb;
     boolean hasLoginAttempted;
@@ -47,12 +47,13 @@ public class LoginScreen_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.rb = rb;
+        this.rb = Globals.getResourceBundle();
         btnLogIn.setText(rb.getString("Log.In"));
         btnEnglish.setText(rb.getString("English"));
         btnFrench.setText(rb.getString("French"));
         lblDescription.setText(rb.getString("Acme.Appointment.Setter.version.0.0.1"));
         lblDetectedLocalLanguage.setText(rb.getString("Detected.Local.Language"));
+        lblDetectedTimeZone.setText(rb.getString("Detected.Time.Zone"));
         if(Globals.getLocalLanguage().equals("fr_FR") ){
             localLanguage.setText(rb.getString("French"));
         } else {
@@ -73,8 +74,6 @@ public class LoginScreen_Controller implements Initializable {
         lblPassword.setText(rb.getString("Password"));
         TimeConversion tc = new TimeConversion();
         lblTimeZone.setText(tc.getLocalZoneID().toString());
-
-
     }
 
 
@@ -84,37 +83,42 @@ public class LoginScreen_Controller implements Initializable {
         String userName = textUserName.getText();
         if(utils.CheckPassword(userName, labelPassword.getText())){
             System.out.println("Successful Login");
-            String styleString = "-fx-text-fill: #00FF00 ;";
-            lblLoginPrompt.setStyle(styleString);
-            Globals.setWasLoginSuccessful(true);
-            //lblLoginPrompt.setText(rb.getString("Login.Successful"));
-            utils.WriteLoginAttempt(userName, true);
-            Globals.setUserName(userName);
-            Geography.setKnownWorld(DAOGeography.loadKnownWorld());
-            if(Geography.isKnownWorldLoaded()) {
-                StageManager.ChangeScene(event, new navInfo_Appointments());
-            } else {
-                System.out.println("KnownWorld was not succesfully loaded, exiting program");
-                System.exit(-1);
-            }
-
+            processSuccessfulLoginAndOpenMainScreen(event, userName);
         } else {
-            utils.WriteLoginAttempt(userName, false);
-            System.out.println("Failed Login");
-            String styleString = "-fx-text-fill: " + utils.getRandomColor() +";";
-            lblLoginPrompt.setStyle(styleString);
-            lblLoginPrompt.setText(rb.getString("Credentials.not.recognized.please.try.again"));
+            processFailedLoginAndSetErrorMessage(userName);
         }
     }
 
-        public void onClickSetEnglish(ActionEvent actionEvent) {
+    private void processFailedLoginAndSetErrorMessage(String userName) {
+        utils.WriteLoginAttempt(userName, false);
+        System.out.println("Failed Login");
+        String styleString = "-fx-text-fill: " + utils.getRandomColor() +";";
+        lblLoginPrompt.setStyle(styleString);
+        lblLoginPrompt.setText(rb.getString("Credentials.not.recognized.please.try.again"));
+    }
+
+    private void processSuccessfulLoginAndOpenMainScreen(ActionEvent event, String userName) {
+        String styleString = "-fx-text-fill: #00FF00 ;";
+        lblLoginPrompt.setStyle(styleString);
+        Globals.setWasLoginSuccessful(true);
+        utils.WriteLoginAttempt(userName, true);
+        Globals.setUserName(userName);
+        Geography.setKnownWorld(DAOGeography.loadKnownWorld());
+        if(Geography.isKnownWorldLoaded()) {
+            StageManager.ChangeScene(event, new navInfo_Appointments());
+        } else {
+            System.out.println("KnownWorld was not succesfully loaded, exiting program");
+            System.exit(-1);
+        }
+    }
+
+    public void onClickSetEnglish(ActionEvent actionEvent) {
             if(Locale.getDefault().toString().equals("fr_FR") ){
                 Locale.setDefault(Locales.English());
                 LoadView();
             } else {
                 System.out.println("\""+Locale.getDefault().toString()+"\"");
             }
-
         }
 
         public void onClickSetFrench(ActionEvent actionEvent) {
@@ -141,5 +145,4 @@ public class LoginScreen_Controller implements Initializable {
             System.exit(0);
         }
     }
-
 }

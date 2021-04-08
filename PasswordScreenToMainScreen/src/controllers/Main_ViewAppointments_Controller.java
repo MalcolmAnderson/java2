@@ -21,7 +21,7 @@ import utils.navigation.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Appointments_Controller implements Initializable {
+public class Main_ViewAppointments_Controller implements Initializable {
     public TableView tableViewAppointment;
     public Button btnManageAppointments;
     public Button btnManageCustomers;
@@ -41,7 +41,6 @@ public class Appointments_Controller implements Initializable {
     public TableColumn custId;
 
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
-
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         SetButtonColors();
@@ -82,13 +81,6 @@ public class Appointments_Controller implements Initializable {
     public void LoadAppointments() {
 
         System.out.println("LoadAppointments Doesn't Do Anything Yet.");
-    }
-
-
-
-
-    public void OnButtonClicked_Exit(){
-        Platform.exit();
     }
 
     public void onClick_AddAppointments(ActionEvent event) {

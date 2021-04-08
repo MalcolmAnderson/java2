@@ -31,11 +31,11 @@
                <children>
                   <TableView fx:id="tvCustomers" prefHeight="600.0" prefWidth="870.0">
                      <columns>
-                        <TableColumn fx:id="tcId" prefWidth="35.0" text="Id" />
-                        <TableColumn fx:id="tcName" prefWidth="200.0" text="Name" />
-                        <TableColumn fx:id="tcAddress" prefWidth="392.0" text="Address" />
-                        <TableColumn fx:id="tcCountry" prefWidth="70.0" text="Country" />
-                        <TableColumn fx:id="tcPhone" minWidth="50.0" prefWidth="171.0" text="Phone" />
+                        <TableColumn fx:id="tcId" prefWidth="35.0" text="%Id" />
+                        <TableColumn fx:id="tcName" prefWidth="200.0" text="%Name" />
+                        <TableColumn fx:id="tcAddress" prefWidth="392.0" text="%Address" />
+                        <TableColumn fx:id="tcCountry" prefWidth="70.0" text="%Country" />
+                        <TableColumn fx:id="tcPhone" minWidth="50.0" prefWidth="171.0" text="%Phone" />
                      </columns>
                   </TableView>
                </children>
@@ -48,14 +48,14 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <children>
-                  <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#onClickAddCustomer" text="Add Customer" />
-                  <Button fx:id="btnEditCustomer" mnemonicParsing="false" onAction="#onClick_EditCustomer" text="Edit Customer" />
-                  <Button fx:id="btnDeleteCustomer" mnemonicParsing="false" onAction="#onClickDeleteCustomer" text="Delete Customer" />
+                  <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#onClickAddCustomer" text="%Add.Customer" />
+                  <Button fx:id="btnEditCustomer" mnemonicParsing="false" onAction="#onClick_EditCustomer" text="%Edit.Customer" />
+                  <Button fx:id="btnDeleteCustomer" mnemonicParsing="false" onAction="#onClickDeleteCustomer" text="%Delete.Customer" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="910.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#onClick_Cancel" text="Return to Appointment Screen" />
+                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#onClick_Cancel" text="%Return.to.Appointment.Screen" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

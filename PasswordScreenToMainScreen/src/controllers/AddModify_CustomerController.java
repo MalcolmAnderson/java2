@@ -27,7 +27,6 @@ public class AddModify_CustomerController implements Initializable {
     private String currentCountry;
     private ArrayList<Country> countries;
     private ArrayList<Geography> currentDivisions;
-//    private Geography customerGeography;
 
     // screen elements
     public Label lblID;
@@ -49,6 +48,7 @@ public class AddModify_CustomerController implements Initializable {
     public TextField txtPhoneNumber;
     Utils utils = new Utils();
     private DAOCustomers dao = new DAOCustomers();
+    ResourceBundle rb;
 
 
     private void HandleInboundCustomerObject() {
@@ -74,12 +74,9 @@ public class AddModify_CustomerController implements Initializable {
                 System.out.println("the value of addEdit should only ever be ADD or EDIT");
                 System.exit(-1);
             }
-            // if edit, set customerGeography
-//            customerGeography = Geography.getGeographyByDivisionId(customer.getDivision_ID());
             lblScreenIdentifier.setText("Edit Customer");
         }
     }
-
 
     @FXML void onCancelAction(ActionEvent event) {
         System.out.println("Cancel Clicked");
@@ -125,6 +122,7 @@ public class AddModify_CustomerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        rb = resources;
         System.out.println("AddModify_CustomerController initialize called");
         HandleInboundCustomerObject();
 
@@ -132,16 +130,16 @@ public class AddModify_CustomerController implements Initializable {
 
         SetSimpleScreenValues();
 
-        System.out.println("AddModify_CustomerController about to getCountryName");
+//        System.out.println("AddModify_CustomerController about to getCountryName");
         String country = customer.getCountryName();
-        System.out.println("AddModify_CustomerController country == " + country);
+//        System.out.println("AddModify_CustomerController country == " + country);
         int divId = customer.getDivision_ID();
 
         String divCur = customer.getDivisionName();
 
         int countryId = setCmbCountryValue(countries, country);
 
-        System.out.println("Country Index: " + cmbCountries.getSelectionModel().getSelectedIndex());
+//        System.out.println("Country Index: " + cmbCountries.getSelectionModel().getSelectedIndex());
 
         int divisionCount = SetDivisionsByCountryId(countryId);
         for(int i = 0; i < divisionCount; i++){
@@ -150,7 +148,6 @@ public class AddModify_CustomerController implements Initializable {
             }
         }
         System.out.println("Division Index: " + cmbDivision.getSelectionModel().getSelectedIndex());
-
     }
 
     private int SetDivisionsByCountryId(int countryId) {
@@ -196,7 +193,6 @@ public class AddModify_CustomerController implements Initializable {
         txtPhoneNumber.setText(customer.getPhone());
         txtStreetAddress.setText(customer.getAddress());
         txtPostalCode.setText(customer.getPostal_Code());
-
     }
 
     public void onActionCountry(ActionEvent actionEvent) {
