@@ -70,9 +70,7 @@ public class Java_Tests {
         String rbPath = "utils.localization/Nat";
         ResourceBundle rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
         String foo = rb.getString("Phone");
-        assertEquals("foo", foo);
-        Globals.setResourceBundle(rb);
-
+        assertEquals("Phone", foo);
     }
 
 }

@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import main.Globals;
 import models.*;
 import utils.dataAccess.DAOCustomers;
 import utils.navigation.StageManager;
@@ -16,6 +17,7 @@ import utils.navigation.navInfo_AddEditCustomer;
 import utils.navigation.navInfo_Appointments;
 
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ManageCustomers_Controller implements Initializable {
@@ -36,19 +38,20 @@ public class ManageCustomers_Controller implements Initializable {
     private ResourceBundle rb;
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("ManageCustomers_Controller - initialize");
+        rb = Globals.getResourceBundle();
 
+        System.out.println("ResourceBundle getString: " + rb.getString("Password"));
         SetButtonColors();
 
-        Customers customers = new Customers();
-        customers = dao.selectAllCustomers();
-        allCustomers.setAll(customers.getCustomers());
+        LocalizeTextOnControlsAndHeaders();
 
-//        System.out.println("Key Id = " + rb.getString("Id"));
-//        tcId.setText(rb.getString("Id"));
-//        tcName.setText(rb.getString("Name"));
-//        tcAddress.setText(rb.getString("Address"));
-//        tcCountry.setText(rb.getString("Country"));
-//        tcPhone.setText(rb.getString("Phone"));
+        BindDataToTableView();
+    }
+
+    private void BindDataToTableView() {
+        Customers customers = dao.selectAllCustomers();
+        allCustomers.setAll(customers.getCustomers());
 
         tvCustomers.setItems(allCustomers);
 
@@ -57,6 +60,18 @@ public class ManageCustomers_Controller implements Initializable {
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("fullAddress"));
         tcCountry.setCellValueFactory(new PropertyValueFactory<>("countryName"));
         tcPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
+        tcId.setText(rb.getString("Id"));
+        tcName.setText(rb.getString("Name"));
+        tcAddress.setText(rb.getString("Address"));
+        tcCountry.setText(rb.getString("Country"));
+        tcPhone.setText(rb.getString("Phone"));
+        btnAddCustomer.setText(rb.getString("Add.Customer"));
+        btnEditCustomer.setText(rb.getString("Edit.Customer"));
+        btnDeleteCustomer.setText(rb.getString("Delete.Customer"));
+        btnExit.setText(rb.getString("Return.to.Appointment.Screen"));
     }
 
     private void SetButtonColors() {

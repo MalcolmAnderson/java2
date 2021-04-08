@@ -98,8 +98,8 @@ public class Geography {
     }
 
     public String getCountryName() {
-        System.out.println("getCountryName == null is:  " + countryName == null);
-        System.out.println("getCountryName countryName == " + countryName);
+//        System.out.println("getCountryName == null is:  " + countryName == null);
+//        System.out.println("getCountryName countryName == " + countryName);
         return countryName;
     }
 

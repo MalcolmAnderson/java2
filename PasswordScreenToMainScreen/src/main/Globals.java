@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Globals {
@@ -10,6 +11,8 @@ public class Globals {
     private static ResourceBundle rb;
 
     public static ResourceBundle getResourceBundle() {
+//        String rbPath = "utils.localization/Nat";
+//        rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
         return rb;
     }
 

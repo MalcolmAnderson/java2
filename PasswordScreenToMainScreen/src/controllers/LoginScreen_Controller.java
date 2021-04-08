@@ -48,8 +48,6 @@ public class LoginScreen_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.rb = Globals.getResourceBundle();
-//        String rbPath = "utils.localization/Nat";
-//        rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
 
         btnLogIn.setText(rb.getString("Log.In"));
         btnEnglish.setText(rb.getString("English"));
