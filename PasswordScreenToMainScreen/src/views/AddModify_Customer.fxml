@@ -63,18 +63,33 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCustomerName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtStreetAddress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtPostalCode" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="lblIdValue" text="id" GridPane.columnIndex="1" />
+            <TextField fx:id="txtCustomerName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font></TextField>
+            <TextField fx:id="txtPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font></TextField>
+            <TextField fx:id="txtStreetAddress" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font></TextField>
+            <TextField fx:id="txtPostalCode" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="18.0" />
+               </font></TextField>
+            <Label fx:id="lblIdValue" text="id" GridPane.columnIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
             <Label fx:id="lblDivision" text="Division" GridPane.rowIndex="6">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cmbDivision" prefHeight="25.0" prefWidth="261.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <ComboBox fx:id="cmbCountries" onAction="#onActionCountry" prefHeight="25.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="cmbDivision" prefHeight="25.0" prefWidth="261.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label fx:id="lblPhoneNumber" text="Phone Number" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
@@ -85,7 +100,7 @@
             <Insets left="40.0" />
          </padding>
       </GridPane>
-      <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="20.0">
+      <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="30.0">
          <children>
             <Button mnemonicParsing="false" onAction="#onSaveAction" text="Save">
                <font>
@@ -99,7 +114,7 @@
             </Button>
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets right="40.0" top="20.0" />
          </padding>
       </HBox>
    </children>
