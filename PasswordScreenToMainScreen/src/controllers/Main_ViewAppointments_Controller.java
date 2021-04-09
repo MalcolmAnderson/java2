@@ -75,12 +75,12 @@ public class Main_ViewAppointments_Controller implements Initializable {
     private void SetButtonColors() {
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
-        btnAddAppointment.setBackground(bg_Red);
-        btnAddAppointment.setTextFill(Color.WHITE);
-        btnEditAppointment.setBackground(bg_Red);
-        btnEditAppointment.setTextFill(Color.WHITE);
-        btnDeleteAppointment.setBackground(bg_Red);
-        btnDeleteAppointment.setTextFill(Color.WHITE);
+        btnAddAppointment.setBackground(bg_Yellow);
+//        btnAddAppointment.setTextFill(Color.WHITE);
+        btnEditAppointment.setBackground(bg_Yellow);
+//        btnEditAppointment.setTextFill(Color.WHITE);
+        btnDeleteAppointment.setBackground(bg_Yellow);
+//        btnDeleteAppointment.setTextFill(Color.WHITE);
         btnReportsScreen.setBackground(bg_Red);
         btnReportsScreen.setTextFill(Color.WHITE);
     }
@@ -129,26 +129,26 @@ public class Main_ViewAppointments_Controller implements Initializable {
     }
 
     public void onClickDeleteAppointment(ActionEvent actionEvent) {
-//        int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
-//        Customer selectedCustomer = (Customer) tvCustomers.getSelectionModel().getSelectedItem();
-//        System.out.println("Selected Customer Index = " + selectedCustomerIndex);
-//        if (selectedCustomerIndex != -1){
-//            Alert alert = new Alert(
-//                    Alert.AlertType.CONFIRMATION,
-//                    "Deleting a customer deletes all customer appointments.\nDelete this customer?",
-//                    ButtonType.YES,
-//                    ButtonType.CANCEL);
-//            alert.showAndWait();
-//            if(alert.getResult() == ButtonType.YES){
-//                tvCustomers.getItems().remove(selectedCustomerIndex);
+        int selectedAppointmentIndex = tvAppointments.getSelectionModel().getSelectedIndex();
+        Appointment selectedAppointment = (Appointment) tvAppointments.getSelectionModel().getSelectedItem();
+        System.out.println("Selected Appointment Index = " + selectedAppointmentIndex);
+        if (selectedAppointmentIndex != -1){
+            Alert alert = new Alert(
+                    Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to delete this appointment?",
+                    ButtonType.YES,
+                    ButtonType.CANCEL);
+            alert.showAndWait();
+            if(alert.getResult() == ButtonType.YES){
+                tvAppointments.getItems().remove(selectedAppointmentIndex);
 //                dao.deleteCustomerByID(selectedCustomer.getCustomer_ID());
-//            }
-//        }else {
-//            Alert alert = new Alert(
-//                    Alert.AlertType.INFORMATION,
-//                    "Please select a customer to delete",
-//                    ButtonType.OK);
-//            alert.showAndWait();
-//        }
+            }
+        }else {
+            Alert alert = new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Please select an appointment to delete",
+                    ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 }
