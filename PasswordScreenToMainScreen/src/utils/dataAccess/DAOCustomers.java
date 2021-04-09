@@ -192,6 +192,5 @@ public class DAOCustomers {
             System.out.println("DAOCustomers - deleteCustomerByID - Delete Statement");
             System.out.println(deleteStatement);
             dbQM.RunSQLString(deleteStatement);
-
     }
 }

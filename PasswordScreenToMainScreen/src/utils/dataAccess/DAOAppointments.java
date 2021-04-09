@@ -73,4 +73,12 @@ public class DAOAppointments {
         System.out.println(insertStatement);
         dbQM.RunSQLString(insertStatement);
     }
+
+    public void deleteAppointmentsByCustomerId(int customer_id) {
+        String deleteStatement = String.format(
+                "DELETE FROM appointments WHERE Customer_ID = '%s'", customer_id);
+        System.out.println("DAOAppointments - deleteAppointmentsByCustomerId - Delete Statement");
+        System.out.println(deleteStatement);
+        dbQM.RunSQLString(deleteStatement);
+    }
 }

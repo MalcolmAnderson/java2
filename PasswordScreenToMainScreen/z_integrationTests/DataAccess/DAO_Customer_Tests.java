@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DAO_Customer_Tests {
-    boolean keepRecords = false;
+    boolean keepRecords = true;
     DAOCustomers dao;
 
     @BeforeEach
@@ -175,11 +175,19 @@ public class DAO_Customer_Tests {
         assertEquals(0, customers.getCustomers().size());
 
         customers = dao.selectAllCustomers();
-        assertEquals(4, customers.getCustomers().size());
+        if(keepRecords) {
+            assertEquals(5, customers.getCustomers().size());
+        } else {
+            assertEquals(3, customers.getCustomers().size());
+        }
         ObservableList<Customer> olCustomers = FXCollections.observableArrayList();
         assertEquals(0, olCustomers.size());
         olCustomers.setAll(customers.getCustomers());
-        assertEquals(4, olCustomers.size());
+        if(keepRecords) {
+            assertEquals(5, customers.getCustomers().size());
+        } else {
+            assertEquals(3, customers.getCustomers().size());
+        }
     }
 
 }

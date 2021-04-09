@@ -11,6 +11,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import main.Globals;
 import models.*;
+import utils.dataAccess.DAOAppointments;
 import utils.dataAccess.DAOCustomers;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_AddEditCustomer;
@@ -41,11 +42,8 @@ public class ManageCustomers_Controller implements Initializable {
         System.out.println("ManageCustomers_Controller - initialize");
         rb = Globals.getResourceBundle();
 
-        System.out.println("ResourceBundle getString: " + rb.getString("Password"));
         SetButtonColors();
-
         LocalizeTextOnControlsAndHeaders();
-
         BindDataToTableView();
     }
 
@@ -129,6 +127,8 @@ public class ManageCustomers_Controller implements Initializable {
             alert.showAndWait();
             if(alert.getResult() == ButtonType.YES){
                 tvCustomers.getItems().remove(selectedCustomerIndex);
+                DAOAppointments daoAppointments = new DAOAppointments();
+                daoAppointments.deleteAppointmentsByCustomerId(selectedCustomer.getCustomer_ID());
                 dao.deleteCustomerByID(selectedCustomer.getCustomer_ID());
             }
         }else {
