@@ -44,4 +44,7 @@ public class AddModify_AppointmentController implements Initializable {
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
+
+    public void onClick_Save(ActionEvent actionEvent) {
+    }
 }

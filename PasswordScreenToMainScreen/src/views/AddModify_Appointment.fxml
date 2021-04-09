@@ -11,11 +11,19 @@
          <children>
             <HBox prefWidth="910.0">
                <children>
-                  <Label text="Add Appointment">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font></Label>
+                  <HBox>
+                     <children>
+                        <Label fx:id="lblScreenIdentifier" text="Add Appointment">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
             </HBox>
             <GridPane prefWidth="910.0" vgap="15.0">
               <columnConstraints>
@@ -79,6 +87,47 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label text="Label" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <ChoiceBox prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+                        <DatePicker />
+                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
+                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <children>
+                        <DatePicker />
+                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
+                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
+                     </children>
+                  </HBox>
+                  <ChoiceBox prefHeight="25.0" prefWidth="394.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                </children>
                <padding>
                   <Insets left="40.0" />
