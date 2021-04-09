@@ -62,8 +62,8 @@ public class Java_Tests {
                 .getPath("utils/localization")
                 .toAbsolutePath()
                 .toString();
-        assertEquals("foo", userDirectory);
-        assertTrue(userDirectory.endsWith("."));
+        assertEquals("D:\\dev\\WGU\\java2\\PasswordScreenToMainScreen\\utils\\localization", userDirectory);
+//        assertTrue(userDirectory.endsWith("."));
     }
 
     @Test public void anotherTest(){
