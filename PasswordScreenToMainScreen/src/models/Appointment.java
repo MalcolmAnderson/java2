@@ -17,6 +17,19 @@ public class Appointment {
     private int customer_Id;
     private String customer_Name;
 
+    public Appointment(){
+        this.id = -1;
+        this.title = "";
+        this.description = "";
+        this.location = "";
+        this.contact_Name = "";
+        this.type = "";
+        this.start = null;
+        this.end = null;
+        this.customer_Id = -1;
+        this.customer_Name = "";
+    }
+
     public Appointment(int id, String title, String description, String location, String contact_Name,
                        String type, LocalDateTime start, LocalDateTime end, int customer_Id, String customer_Name){
         this.id = id;

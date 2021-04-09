@@ -1,32 +1,30 @@
 package controllers;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
-import models.Appointment;
-import models.Appointments;
-import models._ManageTestData;
+import main.Globals;
+import models.*;
 import utils.navigation.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Main_ViewAppointments_Controller implements Initializable {
-    public TableView tableViewAppointment;
-    public Button btnManageAppointments;
+    public TableView tvAppointments;
     public Button btnManageCustomers;
     public Button btnManageContacts;
     public Button btnReportsScreen;
+    public Button btnAddAppointment;
+    public Button btnEditAppointment;
+    public Button btnDeleteAppointment;
 
     @FXML private TableView<Appointment> appointmentsTable;
     public TableColumn id;
@@ -47,9 +45,18 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
         Appointments appointments = _ManageTestData.BuildPlaceHolderData_Appointments();
         allAppointments.setAll(appointments.getAllAppointments());
-        tableViewAppointment.setItems(allAppointments);
+        tvAppointments.setItems(allAppointments);
+        if(!Globals.getUserName().equals("admin")){
+            btnManageContacts.setManaged(false);
+            btnManageContacts.setVisible(false);
+        }
 
         DefineTableElements();
+        LocalizeTextOnControlsAndHeaders();
+
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
     }
 
     private void DefineTableElements() {
@@ -68,12 +75,12 @@ public class Main_ViewAppointments_Controller implements Initializable {
     private void SetButtonColors() {
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
-        btnManageAppointments.setBackground(bg_Yellow);
-//        btnManageAppointments.setTextFill(Color.WHITE);
-//        btnManageCustomers.setBackground(bg_Yellow);
-//        btnManageCustomers.setTextFill(Color.WHITE);
-//        btnManageContacts.setBackground(bg_Yellow);
-//        btnManageContacts.setTextFill(Color.WHITE);
+        btnAddAppointment.setBackground(bg_Red);
+        btnAddAppointment.setTextFill(Color.WHITE);
+        btnEditAppointment.setBackground(bg_Red);
+        btnEditAppointment.setTextFill(Color.WHITE);
+        btnDeleteAppointment.setBackground(bg_Red);
+        btnDeleteAppointment.setTextFill(Color.WHITE);
         btnReportsScreen.setBackground(bg_Red);
         btnReportsScreen.setTextFill(Color.WHITE);
     }
@@ -81,10 +88,6 @@ public class Main_ViewAppointments_Controller implements Initializable {
     public void LoadAppointments() {
 
         System.out.println("LoadAppointments Doesn't Do Anything Yet.");
-    }
-
-    public void onClick_AddAppointments(ActionEvent event) {
-        StageManager.ChangeScene(event, new navInfo_AddAppointments());
     }
 
     public void onClick_ManageCustomers(ActionEvent event) {
@@ -97,5 +100,55 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     public void onClick_Reports(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Reports());
+    }
+
+    public void onClickAddAppointment(ActionEvent actionEvent) {
+        System.out.println("Add Appointment Clicked");
+        AddModify_AppointmentController.addEdit = "ADD";
+        Appointment newAppointment = new Appointment();
+        AddModify_AppointmentController.appointment = newAppointment;
+
+        StageManager.ChangeScene(actionEvent, new navInfo_AddEditAppointment());
+    }
+
+    public void onClickEditAppointment(ActionEvent actionEvent) {
+        int selectedAppointmentIndex = tvAppointments.getSelectionModel().getSelectedIndex();
+        Appointment selectedAppointment = (Appointment) tvAppointments.getSelectionModel().getSelectedItem();
+        System.out.println("Selected Appointment Index = " + selectedAppointmentIndex);
+        if (selectedAppointmentIndex != -1){
+            AddModify_AppointmentController.appointment = selectedAppointment;
+            AddModify_AppointmentController.addEdit = "EDIT";
+            StageManager.ChangeScene(actionEvent, new navInfo_AddEditAppointment());
+        }else {
+            Alert alert = new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Please select an appointment to edit",
+                    ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+    public void onClickDeleteAppointment(ActionEvent actionEvent) {
+//        int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
+//        Customer selectedCustomer = (Customer) tvCustomers.getSelectionModel().getSelectedItem();
+//        System.out.println("Selected Customer Index = " + selectedCustomerIndex);
+//        if (selectedCustomerIndex != -1){
+//            Alert alert = new Alert(
+//                    Alert.AlertType.CONFIRMATION,
+//                    "Deleting a customer deletes all customer appointments.\nDelete this customer?",
+//                    ButtonType.YES,
+//                    ButtonType.CANCEL);
+//            alert.showAndWait();
+//            if(alert.getResult() == ButtonType.YES){
+//                tvCustomers.getItems().remove(selectedCustomerIndex);
+//                dao.deleteCustomerByID(selectedCustomer.getCustomer_ID());
+//            }
+//        }else {
+//            Alert alert = new Alert(
+//                    Alert.AlertType.INFORMATION,
+//                    "Please select a customer to delete",
+//                    ButtonType.OK);
+//            alert.showAndWait();
+//        }
     }
 }

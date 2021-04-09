@@ -107,7 +107,7 @@ public class ManageCustomers_Controller implements Initializable {
     }
 
     public void onClickAddCustomer(ActionEvent actionEvent) {
-        System.out.println("ProductAdd Clicked");
+        System.out.println("Add Customer Clicked");
         AddModify_CustomerController.addEdit = "ADD";
         Customer newCustomer = new Customer();
         newCustomer.setGeography(Geography.getGeographyByDivisionId(newCustomer.getDivision_ID()));

@@ -1,10 +1,10 @@
 package utils.navigation;
 
-public class navInfo_AddAppointments extends navInfo {
+public class navInfo_AddEditAppointment extends navInfo {
     @Override String getFxmlFileName() {
         return pathToViews + "AddModify_Appointment.fxml";
     }
     @Override String getScreenTitle() {
-        return "Add Appointments";
+        return "Add / Edit Appointment";
     }
 }

@@ -18,8 +18,6 @@ public class Customer {
     private String last_Updated_By;
     private int division_ID;
     private Geography geography;
-//    private String division;
-//    private String country;
 
     public Customer() {
         this.customer_ID = -1;
@@ -32,8 +30,6 @@ public class Customer {
         this.last_Update = LocalDateTime.now();;
         this.last_Updated_By = Globals.getUserName();
         this.division_ID = 1;
-//        this.division = "";
-//        this.country = "";
     }
 
     public Customer(
