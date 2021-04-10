@@ -20,13 +20,10 @@
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" spacing="30.0">
                      <children>
-                        <Label text="This is the main page showing the calendar">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
+                        <RadioButton mnemonicParsing="false" text="Show List By Week" />
+                        <RadioButton mnemonicParsing="false" text="Show List By Month" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
@@ -86,5 +83,6 @@
             </HBox>
          </children>
       </VBox>
+      <Label text="Label" />
    </children>
 </AnchorPane>

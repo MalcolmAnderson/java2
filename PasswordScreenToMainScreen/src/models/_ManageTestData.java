@@ -12,34 +12,34 @@ public class _ManageTestData {
         int id = 40;
 
         Appointment one = new Appointment(id++, "Bob #1", "An initial visit to determine needs",
-                "Safeway Starbucks", "Bob Smith", "buyer",
+                "Safeway Starbucks", "buyer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
-                LocalDateTime.of(2021, 04, 15, 10, 00), 1, "Cust1");
+                LocalDateTime.of(2021, 04, 15, 10, 00), 1, 2);
 
         Appointment two = new Appointment(id++, "Bob #2", "Review analysis for prospect",
-                "Starbucks 4th and main", "Bob Smith", "buyer",
+                "Starbucks 4th and main", "buyer",
                 LocalDateTime.of(2021, 04, 16, 19, 00),
-                LocalDateTime.of(2021, 04, 16, 20, 00), 1, "Cust2");
+                LocalDateTime.of(2021, 04, 16, 20, 00), 1, 3);
 
         Appointment three = new Appointment(id++, "Sam #2", "Review analysis for prospect",
-                "Safeway 428 Cedar", "Sam Brown", "investor",
+                "Safeway 428 Cedar", "investor",
                 LocalDateTime.of(2021, 04, 17, 11, 00),
-                LocalDateTime.of(2021, 04, 17, 12, 00), 1, "Cust3");
+                LocalDateTime.of(2021, 04, 17, 12, 00), 2, 2);
 
         Appointment four = new Appointment(id++, "Sam #3", "Complete client paperwork",
-                "Safeway Starbucks", "Bob Smith", "buyer",
+                "Safeway Starbucks", "buyer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
-                LocalDateTime.of(2021, 04, 15, 10, 00), 2, "Cust4");
+                LocalDateTime.of(2021, 04, 15, 10, 00), 2, 6);
 
         Appointment five = new Appointment(id++, "Carl #3", "Review wireframes",
-                "Safeway Starbucks", "Carl Jones", "Web Designer",
+                "Safeway Starbucks", "Web Designer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
-                LocalDateTime.of(2021, 04, 15, 10, 00), 2, "Cust5");
+                LocalDateTime.of(2021, 04, 15, 10, 00), 2, 42);
 
         Appointment six = new Appointment(id++, "Carl #4", "Issue payment, secure follow up",
-                "Safeway Starbucks", "Carl Jones", "UI Designer",
+                "Safeway Starbucks", "UI Designer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
-                LocalDateTime.of(2021, 04, 15, 10, 00), 2, "Cust6");
+                LocalDateTime.of(2021, 04, 15, 10, 00), 3, 57);
 
         appointments.addAppointment(one);
         appointments.addAppointment(two);
@@ -47,16 +47,6 @@ public class _ManageTestData {
         appointments.addAppointment(four);
         appointments.addAppointment(five);
         appointments.addAppointment(six);
-
-
-//        LocalDateTime start = LocalDateTime.of(2020, 04, 28, 9, 00);
-//        LocalDateTime end = LocalDateTime.of(2020, 04, 28, 10, 00);
-//        appointments.addAppointment(new Appointment(1, "a", "b", "c", "d", "e", start, end, 2));
-//        appointments.addAppointment(new Appointment(2, "a", "b", "c", "d", "e", start, end, 5));
-//        appointments.addAppointment(new Appointment(3, "a", "b", "c", "d", "e", start, end, 3));
-//        appointments.addAppointment(new Appointment(4, "a", "b", "c", "d", "e", start, end, 3));
-//        appointments.addAppointment(new Appointment(5, "a", "b", "c", "d", "e", start, end, 5));
-
 
         //for(int i = 1; i <= 5; i++){
 
@@ -66,6 +56,19 @@ public class _ManageTestData {
         //}
 
         return appointments;
+    }
+    public static Appointment BuildTestData_Appointment(int testAppointmentNumber){
+        int id = 70;
+        String title = "This is a title";
+        String description = "This is a description";
+        String location = "location";
+        String type = "type";
+        LocalDateTime start = LocalDateTime.of(1964, 03, 14, 23, 15, 48);
+        LocalDateTime end = LocalDateTime.of(2765, 04, 15, 02, 17, 52);
+        int customerId = 1;
+        int contactId = 2;
+        Appointment a = new Appointment(id, title, description, location, type, start, end, customerId, contactId);
+        return a;
     }
 
     public static Customer BuildTestData_Customers(int testCustomerNumber) {
@@ -83,7 +86,7 @@ public class _ManageTestData {
                         "Unit Tests",
                         LocalDateTime.of(2021, 02, 23, 02, 11, 22),
                         "Unit Tests",
-                        29);
+                        4);
 //                customers.addCustomer(zero);
             }
             break;

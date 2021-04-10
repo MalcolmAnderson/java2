@@ -13,21 +13,26 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button fx:id="btnBackOneUnit" mnemonicParsing="false" text="&lt;&lt;&lt;">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" spacing="30.0">
                      <children>
-                        <Label text="This is the main page showing the calendar">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
+                        <RadioButton mnemonicParsing="false" text="Show List By Week" />
+                        <RadioButton mnemonicParsing="false" text="Show List By Month" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button fx:id="btnForwardOneUnit" mnemonicParsing="false" text="&gt;&gt;&gt;">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
                </children>
@@ -78,5 +83,6 @@
             </HBox>
          </children>
       </VBox>
+      <Label text="Label" />
    </children>
 </AnchorPane>

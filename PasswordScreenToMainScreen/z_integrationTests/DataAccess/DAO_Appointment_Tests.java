@@ -37,14 +37,14 @@ public class DAO_Appointment_Tests {
             appointments = dao.selectAllAppointments();
 //        appointments.setAllAppointments(dao.selectAllAppointments());
 //        appointments.setAllAppointments(appointments.getAllAppointments());
-            assertEquals(2, appointments.getAllAppointments().size());
+            assertEquals(3, appointments.getAllAppointments().size());
             System.out.println("End shouldRefreshAppointments");
         } catch (Exception e){
             assertTrue(false, "An uncaught exception happened");
         }
     }
 
-    @Disabled
+
     @Test void shouldAddTestDataToAppointments(){
         System.out.println("Begin shouldAddTestDataToAppointments");
         Appointments appointments = new Appointments();
@@ -54,19 +54,25 @@ public class DAO_Appointment_Tests {
         for (Appointment current : toBeAdded.getAllAppointments()) {
             appointments.addAppointment(current);
         }
-        assertEquals(8, appointments.getAllAppointments().size());
+        assertEquals(9, appointments.getAllAppointments().size());
         appointments = dao.selectAllAppointments();
-        assertEquals(2, appointments.getAllAppointments().size());
-//        for (Appointment current : toBeAdded.getAllAppointments()) {
-//            dao.insertAppointment(current);
-//        }
+        assertEquals(3, appointments.getAllAppointments().size());
+        for (Appointment current : toBeAdded.getAllAppointments()) {
+            dao.insertAppointment(current);
+        }
         Appointment current = toBeAdded.getAllAppointments().get(0);
         System.out.println("Current Appointment Data");
         System.out.println(current.toString());
         dao.insertAppointment(current);
         appointments = dao.selectAllAppointments();
-        assertEquals(8, appointments.getAllAppointments().size());
+        assertEquals(9, appointments.getAllAppointments().size());
         System.out.println("End shouldAddTestDataToAppointments");
+    }
+
+    @Test void shouldCheckRecordExists(){
+
+        assertTrue(dao.AppointmentIdExists(1));
+        assertTrue(false);
     }
 
 

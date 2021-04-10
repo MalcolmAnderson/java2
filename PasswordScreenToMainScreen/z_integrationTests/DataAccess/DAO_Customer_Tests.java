@@ -47,9 +47,9 @@ public class DAO_Customer_Tests {
         System.out.println("Begin shouldAddCustomer");
         Customer customer = _ManageTestData.BuildTestData_Customers(22);
         customer.setLast_Update(LocalDateTime.of(2021, 02, 28, 14, 00, 00));
-        assertEquals("New Jersey", customer.getDivisionName());
+        assertEquals("California", customer.getDivisionName());
         assertEquals("U.S", customer.getCountryName());
-        assertEquals(29, customer.getDivision_ID());
+        assertEquals(4, customer.getDivision_ID());
         Customers customers = dao.selectAllCustomers();
         // if test customer exists, delete it
         if(customers.customerExists(22)){

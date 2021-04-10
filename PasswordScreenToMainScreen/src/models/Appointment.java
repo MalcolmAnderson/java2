@@ -10,38 +10,35 @@ public class Appointment {
     private String title;
     private String description;
     private String location;
-    private String contact_Name;
     private String type;
     private LocalDateTime start;
     private LocalDateTime end;
     private int customer_Id;
-    private String customer_Name;
+    private int contact_Id;
 
     public Appointment(){
         this.id = -1;
         this.title = "";
         this.description = "";
         this.location = "";
-        this.contact_Name = "";
         this.type = "";
         this.start = null;
         this.end = null;
         this.customer_Id = -1;
-        this.customer_Name = "";
+        this.contact_Id = -1;
     }
 
-    public Appointment(int id, String title, String description, String location, String contact_Name,
-                       String type, LocalDateTime start, LocalDateTime end, int customer_Id, String customer_Name){
+    public Appointment(int id, String title, String description, String location,
+                       String type, LocalDateTime start, LocalDateTime end, int customer_Id, int contact_Id){
         this.id = id;
         this.title = title;
         this.description = description;
         this.location = location;
-        this.contact_Name = contact_Name;
         this.type = type;
         this.start = start;
         this.end = end;
         this.customer_Id = customer_Id;
-        this.customer_Name = customer_Name;
+        this.contact_Id = contact_Id;
     }
 
     @Override
@@ -51,16 +48,14 @@ public class Appointment {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", location='" + location + '\'' +
-                ", contact_Name='" + contact_Name + '\'' +
+//                ", contact_Name='" + contact_Name + '\'' +
                 ", type='" + type + '\'' +
                 ", start=" + start +
                 ", end=" + end +
                 ", customer_Id=" + customer_Id +
-                ", customer_Name=" + customer_Name +
+//                ", customer_Name=" + customer_Name +
                 '}';
     }
-
-    public String getCustomer_Name() {return customer_Name;}
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -74,15 +69,8 @@ public class Appointment {
     public String getLocation() {return location;}
     public void setLocation(String location) {this.location = location;}
 
-    public String getContact_Name() {return contact_Name;}
-    public void setContact_Name(String contact_Name) {this.contact_Name = contact_Name;}
-
     public String getType() {return type;}
     public void setType(String type) {this.type = type;}
-
-    public LocalDate getDate() {return getStart().toLocalDate();}
-    public LocalTime getStartTime() {return getStart().toLocalTime();}
-    public LocalTime getEndTime() {return getEnd().toLocalTime();}
 
     public LocalDateTime getStart() {return start;}
     public void setStart(LocalDateTime start) {this.start = start;}
@@ -92,4 +80,7 @@ public class Appointment {
 
     public int getCustomer_Id() {return customer_Id;}
     public void setCustomer_Id(int customer_Id) {this.customer_Id = customer_Id;}
+
+    public int getContact_Id() {return contact_Id;}
+    public void setContact_Id(int contact_Id) {this.contact_Id = contact_Id;}
 }

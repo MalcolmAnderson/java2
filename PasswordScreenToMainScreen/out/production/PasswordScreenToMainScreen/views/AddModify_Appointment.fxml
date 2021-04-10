@@ -42,50 +42,80 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Appointment ID">
+                  <Label text="Appointment ID" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                   </Label>
-                  <Label text="Title" GridPane.rowIndex="1">
+                  <Label text="Title" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
-                  <Label text="Description" GridPane.rowIndex="2">
+                  <Label text="Description" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
-                  <Label text="Location" GridPane.rowIndex="3">
+                  <Label text="Location" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
-                  <Label text="Contact" GridPane.rowIndex="4">
+                  <Label text="Contact" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
-                  <Label text="Type" GridPane.rowIndex="5">
+                  <Label text="Type" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
-                  <Label text="Start Date and Time" GridPane.rowIndex="6">
+                  <Label text="Start Date and Time" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
-                  <Label text="End Date and Time" GridPane.rowIndex="7">
+                  <Label text="End Date and Time" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
-                  <Label text="Customer ID" GridPane.rowIndex="8">
+                  <Label text="Customer ID" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </Label>
                   <Label text="Label" GridPane.columnIndex="1">
                      <font>
@@ -96,22 +126,34 @@
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
                   </TextField>
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
                   </TextField>
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
                   </TextField>
                   <ChoiceBox prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
@@ -127,7 +169,12 @@
                         <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
                      </children>
                   </HBox>
-                  <ChoiceBox prefHeight="25.0" prefWidth="394.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <children>
+                        <ChoiceBox prefWidth="60.0" />
+                        <ChoiceBox prefHeight="25.0" prefWidth="306.0" />
+                     </children>
+                  </HBox>
                </children>
                <padding>
                   <Insets left="40.0" />

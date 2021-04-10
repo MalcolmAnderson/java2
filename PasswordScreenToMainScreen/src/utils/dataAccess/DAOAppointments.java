@@ -51,8 +51,9 @@ public class DAOAppointments {
         LocalDateTime start = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("Start"));
         LocalDateTime end = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("End"));
         int customerId = rs.getInt("Customer_ID");
+        int contactId = rs.getInt("Contact_ID");
         String customer_Name = rs.getString("Customer_Name");
-        Appointment current = new Appointment(appointmentId, title,description, location, contactName, type, start, end, customerId, customer_Name);
+        Appointment current = new Appointment(appointmentId, title, description, location, type, start, end, customerId, contactId);
         return current;
     }
 
@@ -68,7 +69,7 @@ public class DAOAppointments {
                 current.getId(), current.getTitle(), current.getDescription(),
                 current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
                 LocalDateTime.now(), "Test", LocalDateTime.now(), "Test", current.getCustomer_Id(),
-                66, 99);
+                1, 4);
         System.out.println("Insert Statement");
         System.out.println(insertStatement);
         dbQM.RunSQLString(insertStatement);
@@ -80,5 +81,25 @@ public class DAOAppointments {
         System.out.println("DAOAppointments - deleteAppointmentsByCustomerId - Delete Statement");
         System.out.println(deleteStatement);
         dbQM.RunSQLString(deleteStatement);
+    }
+
+    public String createStatement_InsertAppointment(Appointment a) {
+        return "not implemented";
+    }
+
+    public String createStatement_UpdateAppointment(Appointment a) {
+        return "not implemented";
+    }
+
+    public String createStatement_DeleteAppointmentByAppointmentId(Appointment a) {
+        return "not implemented";
+    }
+
+    public String createStatement_DeleteAppointmentByCustomerId(Appointment a) {
+        return "not implemented";
+    }
+
+    public boolean AppointmentIdExists(int i) {
+        return false;
     }
 }

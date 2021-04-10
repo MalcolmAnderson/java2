@@ -69,7 +69,7 @@ public class ManageCustomers_Controller implements Initializable {
         btnAddCustomer.setText(rb.getString("Add.Customer"));
         btnEditCustomer.setText(rb.getString("Edit.Customer"));
         btnDeleteCustomer.setText(rb.getString("Delete.Customer"));
-        btnExit.setText(rb.getString("Return.to.Appointment.Screen"));
+        btnExit.setText(rb.getString("Cancel"));
     }
 
     private void SetButtonColors() {
