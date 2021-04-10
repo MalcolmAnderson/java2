@@ -18,31 +18,17 @@ public class DAOCustomers {
     TimeConversion tc = new TimeConversion();
     Utils utils = new Utils();
 
-
-
     public Customers selectAllCustomers(){
 //        Utils utils = new Utils();
         Customers customers = new Customers();
 
-        // TODO Replace all this appointment code with CUSTOMER code.
-
         try{
             String sql = "SELECT * FROM customers;";
-
-//            String shouldWork = "SELECT Customer_ID, Customer_Name, Address, Postal_Code"
-//                    + ", Phone, c.Create_Date as Create_Date, c.Created_By, c.Last_Update"
-//                    + ", c.Last_Updated_By, c.Division_ID, d.Division, tree.Country "
-//                    + "FROM customers as c "
-//                    + "left join first_level_divisions as d on "
-//                    + "c.Division_ID = d.Division_ID "
-//                    + "left join countries as tree on "
-//                    + "d.Country_ID = tree.Country_ID;";
 
             String shouldWork = "SELECT Customer_ID, Customer_Name, Address, Postal_Code"
                     + ", Phone, c.Create_Date as Create_Date, c.Created_By, c.Last_Update"
                     + ", c.Last_Updated_By, c.Division_ID "
                     + "FROM customers as c; ";
-
 
             sql = shouldWork;
             System.out.println(sql);
@@ -60,22 +46,7 @@ public class DAOCustomers {
                 LocalDateTime last_Update = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("Last_Update"));
                 String last_Updated_By = rs.getString("Last_Updated_By");
                 int division_ID = rs.getInt("Division_ID");
-//                String division = rs.getString("Division");
-//                String country = rs.getString("Country");
 
-//                Customer current = new Customer(
-//                        customer_ID,
-//                        customer_Name,
-//                        address,
-//                        postal_Code,
-//                        phone,
-//                        create_Date,
-//                        created_By,
-//                        last_Update,
-//                        last_Updated_By,
-//                        division_ID,
-//                        division,
-//                        country);
                 Customer current = new Customer(
                         customer_ID,
                         customer_Name,

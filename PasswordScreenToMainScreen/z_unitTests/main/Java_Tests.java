@@ -37,6 +37,13 @@ public class Java_Tests {
     void tearDown() {
     }
 
+
+    @Test void CreateTimeStampShouldWork(){
+        LocalDateTime one = LocalDateTime.of(1964, 3, 14, 23, 42, 56);
+        LocalDateTime two = LocalDateTime.of(1971, 5, 26, 9, 56, 27);
+        assertEquals("1964-03-14T23:42:56", one.toString());
+    }
+
     @Test
     void stringFormatShouldWork() {
 

@@ -16,15 +16,6 @@ public class DAOAppointments {
         try{
             String sql = "SELECT * FROM appointments;";
 
-            String shouldWork = "SELECT Appointment_Id, Title, Description, Location"
-                + ", contacts.Contact_Name, Type, Start, End, customers.Customer_ID, customers.Customer_Name"
-                + " FROM appointments"
-                + " left join customers on"
-                + " appointments.Customer_ID = customers.Customer_ID"
-                + " left join contacts on"
-                + " appointments.Contact_ID = contacts.Contact_ID;";
-            sql = shouldWork;
-//            System.out.println(sql);
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -46,13 +37,11 @@ public class DAOAppointments {
         String title = rs.getString("Title");
         String description = rs.getString("Description");
         String location = rs.getString("Location");
-        String contactName = rs.getString("Contact_Name");
         String type = rs.getString("Type");
         LocalDateTime start = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("Start"));
         LocalDateTime end = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("End"));
         int customerId = rs.getInt("Customer_ID");
         int contactId = rs.getInt("Contact_ID");
-        String customer_Name = rs.getString("Customer_Name");
         Appointment current = new Appointment(appointmentId, title, description, location, type, start, end, customerId, contactId);
         return current;
     }
@@ -91,12 +80,22 @@ public class DAOAppointments {
         return "not implemented";
     }
 
-    public String createStatement_DeleteAppointmentByAppointmentId(Appointment a) {
-        return "not implemented";
+    public String createStatement_DeleteAppointmentByAppointmentId(int appointmentId) {
+        System.out.println("DAOAppointments - createStatement_DeleteAppointmentByAppointmentId");
+        String deleteStatement = String.format(
+                "DELETE FROM appointments WHERE Appointment_ID = %s", appointmentId);
+        System.out.println(deleteStatement);
+        return deleteStatement;
+//        dbQM.RunSQLString(deleteStatement);
     }
 
-    public String createStatement_DeleteAppointmentByCustomerId(Appointment a) {
-        return "not implemented";
+    public String createStatement_DeleteAppointmentByCustomerId(int customerId) {
+        System.out.println("DAOAppointments - createStatement_DeleteAppointmentByCustomerId");
+        String deleteStatement = String.format(
+                "DELETE FROM appointments WHERE Customer_ID = %s", customerId);
+        System.out.println(deleteStatement);
+        return deleteStatement;
+//        dbQM.RunSQLString(deleteStatement);
     }
 
     public boolean AppointmentIdExists(int i) {

@@ -30,12 +30,6 @@ public class Appointments_Tests {
     void tearDown() {
     }
 
-    @Test void CreateTimeStampShouldWork(){
-        LocalDateTime one = LocalDateTime.of(1964, 3, 14, 23, 42, 56);
-        LocalDateTime two = LocalDateTime.of(1971, 5, 26, 9, 56, 27);
-        assertEquals("1964-03-14T23:42:56", one.toString());
-    }
-
     @Test
     void AppointmentConstructor_ShouldWork() {
         LocalDateTime start = LocalDateTime.of(2020, 04, 28, 9, 00);
@@ -87,34 +81,6 @@ public class Appointments_Tests {
         assertEquals(end, a.getEnd());
         assertEquals(customerId, a.getCustomer_Id());
         assertEquals(contactId, a.getContact_Id());
-    }
-
-    @Test public void shouldGetSQLString_InsertAppointment(){
-        Appointment a = _ManageTestData.BuildTestData_Appointment(0);
-        DAOAppointments dao = new DAOAppointments();
-        String insertStatement = dao.createStatement_InsertAppointment(a);
-        assertTrue(false);
-    }
-
-    @Test public void shouldGetSQLString_UpdateAppointment(){
-        Appointment a = _ManageTestData.BuildTestData_Appointment(0);
-        DAOAppointments dao = new DAOAppointments();
-        String updateStatement = dao.createStatement_UpdateAppointment(a);
-        assertTrue(false);
-    }
-
-    @Test public void shouldGetSQLString_DeleteByAppointmentId(){
-        Appointment a = _ManageTestData.BuildTestData_Appointment(0);
-        DAOAppointments dao = new DAOAppointments();
-        String deleteByIdStatement = dao.createStatement_DeleteAppointmentByAppointmentId(a);
-        assertTrue(false);
-    }
-
-    @Test public void shouldGetSQLString_DeleteByCustomerId(){
-        Appointment a = _ManageTestData.BuildTestData_Appointment(0);
-        DAOAppointments dao = new DAOAppointments();
-        String deleteByCustomerIdStatement = dao.createStatement_DeleteAppointmentByCustomerId(a);
-        assertTrue(false);
     }
 
 }
