@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import models.Contact;
 import utils.Utils;
 import utils.dataAccess.DAOContacts;
+import utils.dataAccess.DBQueryManager;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_ManageContacts;
 
@@ -28,7 +29,7 @@ public class AddModify_ContactController implements Initializable {
     public static Contact contact;
     public static String addEdit;
     Utils utils = new Utils();
-    private DAOContacts dao = new DAOContacts();
+    private DAOContacts dao = new DAOContacts(new DBQueryManager());
 
 
     @FXML

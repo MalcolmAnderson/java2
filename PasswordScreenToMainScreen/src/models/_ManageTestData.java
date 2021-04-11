@@ -9,12 +9,13 @@ public class _ManageTestData {
     public static Appointments BuildPlaceHolderData_Appointments() {
 
         Appointments appointments = new Appointments();
-        int id = 40;
+        int id = 50;
 
         Appointment one = new Appointment(id++, "Bob #1", "An initial visit to determine needs",
                 "Safeway Starbucks", "buyer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
                 LocalDateTime.of(2021, 04, 15, 10, 00), 1, 2);
+
 
         Appointment two = new Appointment(id++, "Bob #2", "Review analysis for prospect",
                 "Starbucks 4th and main", "buyer",
@@ -29,17 +30,17 @@ public class _ManageTestData {
         Appointment four = new Appointment(id++, "Sam #3", "Complete client paperwork",
                 "Safeway Starbucks", "buyer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
-                LocalDateTime.of(2021, 04, 15, 10, 00), 2, 6);
+                LocalDateTime.of(2021, 04, 15, 10, 00), 2, 3);
 
         Appointment five = new Appointment(id++, "Carl #3", "Review wireframes",
                 "Safeway Starbucks", "Web Designer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
-                LocalDateTime.of(2021, 04, 15, 10, 00), 2, 42);
+                LocalDateTime.of(2021, 04, 15, 10, 00), 2, 2);
 
         Appointment six = new Appointment(id++, "Carl #4", "Issue payment, secure follow up",
                 "Safeway Starbucks", "UI Designer",
                 LocalDateTime.of(2021, 04, 15, 9, 00),
-                LocalDateTime.of(2021, 04, 15, 10, 00), 3, 57);
+                LocalDateTime.of(2021, 04, 15, 10, 00), 3, 3);
 
         appointments.addAppointment(one);
         appointments.addAppointment(two);
@@ -58,7 +59,7 @@ public class _ManageTestData {
         return appointments;
     }
     public static Appointment BuildTestData_Appointment(int testAppointmentNumber){
-        int id = 70;
+        int id = 60;
         String title = "This is a title";
         String description = "This is a description";
         String location = "location";

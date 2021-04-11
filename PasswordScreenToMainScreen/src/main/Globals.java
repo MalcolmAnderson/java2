@@ -7,6 +7,7 @@ public class Globals {
     private static boolean hasLoginBeenAttempted;
     private static String localLanguage;
     private static boolean wasLoginSuccessful;
+    private static int userId = -1;
     private static String userName = "userName not set";
     private static ResourceBundle rb;
 
@@ -50,5 +51,13 @@ public class Globals {
 
     public static void setUserName(String userName) {
         Globals.userName = userName;
+    }
+
+    public static int getUserId() {
+        return userId;
+    }
+
+    public static void setUserId(int user_id) {
+        Globals.userId = user_id;
     }
 }

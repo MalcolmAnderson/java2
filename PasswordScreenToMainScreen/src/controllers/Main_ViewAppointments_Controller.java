@@ -64,7 +64,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         location.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contact.setCellValueFactory(new PropertyValueFactory<>("contact_Name"));
+        contact.setCellValueFactory(new PropertyValueFactory<>("ContactName"));
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         start.setCellValueFactory(new PropertyValueFactory<>("startTime"));
@@ -150,5 +150,11 @@ public class Main_ViewAppointments_Controller implements Initializable {
                     ButtonType.OK);
             alert.showAndWait();
         }
+    }
+
+    public void onClickBackOne(ActionEvent actionEvent) {
+    }
+
+    public void onClickForwardOne(ActionEvent actionEvent) {
     }
 }

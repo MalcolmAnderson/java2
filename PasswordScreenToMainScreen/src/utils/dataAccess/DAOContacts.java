@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public class DAOContacts {
 
     private DBQueryManager dbQM = new DBQueryManager();
+    private static Contacts contacts = new Contacts();
+
+    public DAOContacts(DBQueryManager dbQM) {
+        this.dbQM = dbQM;
+        selectAllContacts();
+    }
 
     public boolean recordExists(Contact current){
         ResultSet rs = null;
@@ -47,8 +53,11 @@ public class DAOContacts {
         return size > 0;
     }
 
-    public Contacts selectAllContacts() {
-        Contacts contacts = new Contacts();
+    // dumps existing contacts list and refreshes from database
+    // use the dao.getAllContacts to make changes
+    public void selectAllContacts() {
+
+        contacts = new Contacts();
 
         try {
             String sql = "SELECT * FROM contacts;";
@@ -73,11 +82,11 @@ public class DAOContacts {
             throwables.printStackTrace();
             System.exit(-1);
         }
-        return contacts;
+//        return contacts;
     }
 
-    public ArrayList<Contact> getAllCustomers() {
-        return new ArrayList<Contact>();
+    public Contacts getAllContacts() {
+        return contacts;
     }
 
     public void insertOrUpdateContact(Contact current) {
@@ -113,5 +122,22 @@ public class DAOContacts {
         System.out.println("DAOContacts - deleteContactByName - Delete Statement");
         System.out.println(deleteStatement);
         dbQM.RunSQLString(deleteStatement);
+    }
+
+    public boolean ContactsHaveBeenLoaded() {
+        return contacts.getContacts().size() > 0;
+    }
+
+    public Contact getContactByContactId(int contact_id) {
+        if(contact_id > -1) {
+            for (Contact contact : contacts.getContacts()) {
+                if (contact.contact_ID == contact_id) {
+                    return contact;
+                }
+            }
+        }
+        System.out.println("Contact_ID " + contact_id + " does not exist.");
+        System.exit(-1);
+        return null;
     }
 }

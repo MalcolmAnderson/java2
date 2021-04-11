@@ -1,7 +1,9 @@
 package utils.dataAccess;
 
+import main.Globals;
 import models.Appointment;
 import models.Appointments;
+import models.Contact;
 import utils.Utils;
 
 import java.sql.*;
@@ -10,8 +12,13 @@ import java.time.LocalDateTime;
 public class DAOAppointments {
 
     private DBQueryManager dbQM = new DBQueryManager();
+    private DAOContacts daoContacts = new DAOContacts(dbQM);
 
     public Appointments selectAllAppointments(){
+        if(!daoContacts.ContactsHaveBeenLoaded()){
+            System.out.println("Contacts must be loaded before running DAOAppointments.selectAllAppointments()");
+            System.exit(-1);
+        }
         Appointments appointments = new Appointments();
         try{
             String sql = "SELECT * FROM appointments;";
@@ -20,6 +27,7 @@ public class DAOAppointments {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Appointment current = CreateAppointmentFromResultSetRow(rs);
+                current.setContact(daoContacts.getContactByContactId(current.getContact_Id()));
                 appointments.addAppointment(current);
             }
 
@@ -46,7 +54,11 @@ public class DAOAppointments {
         return current;
     }
 
+    // TODO should be running this through an insert or update method - see DAOCustomers
     public void insertAppointment(Appointment current) {
+//        int contactId = current.getContact_Id();
+//        Contact updatedContact = daoContacts.getContactByContactId(contactId);
+//        current.setContact(updatedContact);
         String insertStatement = String.format(
                 "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, "
                         + "Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, "
@@ -54,11 +66,11 @@ public class DAOAppointments {
                         + " VALUES ("
                         + "'%s', '%s', '%s', '%s','%s', "
                         + "'%s', '%s', '%s','%s', '%s', "
-                        + "'%s', '%s, '%s', '%s');",
+                        + "'%s', %s, %s, %s);",
                 current.getId(), current.getTitle(), current.getDescription(),
                 current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
                 LocalDateTime.now(), "Test", LocalDateTime.now(), "Test", current.getCustomer_Id(),
-                1, 4);
+                Globals.getUserId(),  current.getContact_Id());
         System.out.println("Insert Statement");
         System.out.println(insertStatement);
         dbQM.RunSQLString(insertStatement);
@@ -66,13 +78,21 @@ public class DAOAppointments {
 
     public void deleteAppointmentsByCustomerId(int customer_id) {
         String deleteStatement = String.format(
-                "DELETE FROM appointments WHERE Customer_ID = '%s'", customer_id);
+                "DELETE FROM appointments WHERE Customer_ID = %s", customer_id);
         System.out.println("DAOAppointments - deleteAppointmentsByCustomerId - Delete Statement");
         System.out.println(deleteStatement);
         dbQM.RunSQLString(deleteStatement);
     }
 
-    public String createStatement_InsertAppointment(Appointment a) {
+    public void deleteAppointmentsByAppointmentId(int appointment_id) {
+        String deleteStatement = String.format(
+                "DELETE FROM appointments WHERE Appointment_ID = %s", appointment_id);
+        System.out.println("DAOAppointments - deleteAppointmentsByAppointmentId - Delete Statement");
+        System.out.println(deleteStatement);
+        dbQM.RunSQLString(deleteStatement);
+    }
+
+    public String createStatement_InsertAppointment(Appointment current) {
         return "not implemented";
     }
 

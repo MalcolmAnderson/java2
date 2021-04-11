@@ -13,6 +13,7 @@ import models.Contact;
 import models.Contacts;
 import models.Customers;
 import utils.dataAccess.DAOContacts;
+import utils.dataAccess.DBQueryManager;
 import utils.navigation.*;
 
 import java.net.URL;
@@ -29,7 +30,7 @@ public class ManageContacts_Controller implements Initializable {
     public TableColumn tcContactEmail;
 
     private ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-    private DAOContacts dao = new DAOContacts();
+    private DAOContacts dao = new DAOContacts(new DBQueryManager());
     private navInfo_ManageContacts navInfo = new navInfo_ManageContacts();
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,7 +40,8 @@ public class ManageContacts_Controller implements Initializable {
     }
 
     private void RefreshScreenFromDataBase() {
-        Contacts contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        Contacts contacts = dao.getAllContacts();
         allContacts.setAll(contacts.getContacts());
         tvContacts.setItems(allContacts);
     }

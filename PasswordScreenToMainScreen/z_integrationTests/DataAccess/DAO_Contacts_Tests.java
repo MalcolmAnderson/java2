@@ -3,10 +3,10 @@ package DataAccess;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Contacts;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import models.Geography;
+import org.junit.jupiter.api.*;
 import utils.dataAccess.DAOContacts;
+import utils.dataAccess.DAOGeography;
 import utils.dataAccess.DBConnection;
 
 import java.sql.PreparedStatement;
@@ -16,25 +16,35 @@ import java.sql.SQLException;
 
 
 import models.Contact;
+import utils.dataAccess.DBQueryManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//import java.sql.PreparedStatement;
-//import java.sql.*;
+
+public class DAO_Contacts_Tests {
+    static DAOContacts dao;
+    Contacts contacts;
 
 
-public class DAO_Contact_Tests {
-    DAOContacts dao;
+    @BeforeAll
+    public static void runBeforeAll(){
+        DBConnection.startConnection();
+        dao = new DAOContacts(new DBQueryManager());
+        dao.selectAllContacts();
+    }
+    @AfterAll
+    public static void runAfterAll(){
+        DBConnection.endConnection();
+    }
+
 
     @BeforeEach
     void setUp() {
-        DBConnection.startConnection();
-        dao = new DAOContacts();
+        contacts = dao.getAllContacts();
     }
 
     @AfterEach
     void tearDown() {
-        DBConnection.endConnection();
     }
 
     @Test void shouldGetContacts() throws SQLException {
@@ -57,9 +67,10 @@ public class DAO_Contact_Tests {
     }
 
     @Test void shouldRefreshContacts() {
-        Contacts contacts = new Contacts();
-        assertEquals(0, contacts.getContacts().size());
-        contacts = dao.selectAllContacts();
+        Contacts localContacts = new Contacts();
+        assertEquals(0, localContacts.getContacts().size());
+        // This line already accomplished during test setup
+        //        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size(), "selectAllContacts Failed");
         ObservableList<Contact> olContacts = FXCollections.observableArrayList();
         assertEquals(0, olContacts.size());
@@ -69,23 +80,26 @@ public class DAO_Contact_Tests {
 
     @Test void shouldAddAndDeleteAContact(){
         // Setup
+
+        // delete any old copies of test records
         String testName = "Test McTestFace1";
         int contact_ID = 51;
         dao.deleteContactByName(testName);
-        Contacts contacts = new Contacts();
-        assertEquals(0, contacts.getContacts().size());
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size());
-        Contact current = new Contact(contact_ID, testName, "Test@Test.com");
 
         // Test
+        Contact current = new Contact(contact_ID, testName, "Test@Test.com");
         dao.insertOrUpdateContact(current);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(5, contacts.getContacts().size(), "Contact should have been added");
 
         // Teardown
         dao.deleteContactByID(current.contact_ID);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size(), "Contact not deleted");
     }
 
@@ -95,26 +109,29 @@ public class DAO_Contact_Tests {
         int contact_ID = 52;
         dao.deleteContactByID(contact_ID);
         dao.deleteContactByName(testName);
-        Contacts contacts = new Contacts();
-        assertEquals(0, contacts.getContacts().size());
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size());
 
         // Test
         // Create new Contact
         Contact current = new Contact(contact_ID, testName, "Test@Test.com");
         dao.insertOrUpdateContact(current);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(5, contacts.getContacts().size(), "Contact not added");
         // Insert same record again, should fail due to unique id;
         assertTrue(dao.recordExists(current));
         dao.insertOrUpdateContact(current); // should not work, should update existing contact
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertTrue(dao.recordExists(current));
         assertEquals(5, contacts.getContacts().size(), "Contact added a second time");
 
         // Teardown
         dao.deleteContactByID(current.contact_ID);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size(), "Contact not deleted");
     }
 
@@ -123,20 +140,22 @@ public class DAO_Contact_Tests {
         String testName = "Test McTestFace3";
         int contact_ID = 53;
         dao.deleteContactByName(testName);
-        Contacts contacts = new Contacts();
-        assertEquals(0, contacts.getContacts().size());
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size());
 
         // Test
         Contact current = new Contact(contact_ID, testName, "Test@Test.com");
         dao.insertOrUpdateContact(current);
-        assertEquals(4, contacts.getContacts().size());
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
+        assertEquals(5, contacts.getContacts().size());
         assertTrue(dao.recordExists(current));
 
         // Teardown
         dao.deleteContactByID(current.contact_ID);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size(), "Contact not deleted");
 
     }
@@ -147,14 +166,13 @@ public class DAO_Contact_Tests {
         int contact_ID = 53;
         dao.deleteContactByID(contact_ID);
         dao.deleteContactByName(testName);
-
-        Contacts contacts = new Contacts();
-        assertEquals(0, contacts.getContacts().size());
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size());
         Contact current = new Contact(contact_ID, testName, "Test@Test.com");
         dao.insertOrUpdateContact(current);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(5, contacts.getContacts().size(), "Contact not added");
 
         // Test
@@ -166,15 +184,21 @@ public class DAO_Contact_Tests {
 
 
         dao.insertOrUpdateContact(subject);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(5, contacts.getContacts().size(), "Should not have added another contact");
         subject = contacts.getContactById(contact_ID);
         assertEquals(newName, subject.contact_Name, "Should have updated name");
 
         // Teardown
         dao.deleteContactByID(current.contact_ID);
-        contacts = dao.selectAllContacts();
+        dao.selectAllContacts();
+        contacts = dao.getAllContacts();
         assertEquals(4, contacts.getContacts().size(), "Contact not deleted");
+    }
+
+    @Test void contactsShouldBeLoaded(){
+        assertEquals(4, contacts.getContacts().size());
     }
 
 

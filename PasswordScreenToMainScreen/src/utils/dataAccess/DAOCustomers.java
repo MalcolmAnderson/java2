@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class DAOCustomers {
 
     private DBQueryManager dbQM = new DBQueryManager();
@@ -19,19 +17,14 @@ public class DAOCustomers {
     Utils utils = new Utils();
 
     public Customers selectAllCustomers(){
-//        Utils utils = new Utils();
+        String sql = "SELECT * FROM customers;";
+        Customers customers = loadCustomersFromResultSet(sql);
+        return customers;
+    }
+
+    private Customers loadCustomersFromResultSet(String sql) {
         Customers customers = new Customers();
-
         try{
-            String sql = "SELECT * FROM customers;";
-
-            String shouldWork = "SELECT Customer_ID, Customer_Name, Address, Postal_Code"
-                    + ", Phone, c.Create_Date as Create_Date, c.Created_By, c.Last_Update"
-                    + ", c.Last_Updated_By, c.Division_ID "
-                    + "FROM customers as c; ";
-
-            sql = shouldWork;
-            System.out.println(sql);
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -68,46 +61,10 @@ public class DAOCustomers {
         return customers;
     }
 
-
-    public boolean recordExists(Customer current){
-        ResultSet rs = null;
-        try {
-            String sql = String.format(
-                    "SELECT * FROM customers WHERE Customer_ID = '%s'", current.getCustomer_ID());
-            System.out.println(sql);
-            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-            rs = ps.executeQuery();
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
-            throwables.printStackTrace();
-            System.exit(-1);
-        }
-        int size = 0;
-        if(rs != null){
-            try {
-                rs.last();
-            } catch (SQLException throwables) {
-                System.out.println("DAOCustomers - recordExists - rs.last threw an exception");
-                throwables.printStackTrace();
-                System.exit(-1);
-            }
-            try {
-                size = rs.getRow();
-            } catch (SQLException throwables) {
-                System.out.println("DAOCustomers - recordExists - rs.getRow threw an exception");
-                throwables.printStackTrace();
-                System.exit(-1);
-            }
-
-        }
-        System.out.println("DAOCustomers - recordExists - size = " + size);
-        return size > 0;
-    }
-
-
     public void insertOrUpdateCustomer(Customer current) {
         String sqlStatement = "";
-        if(recordExists(current)){
+        tableInfo c = new tableInfo_Customers();
+        if(dbQM.recordExists(c.getTableName(), c.getPrimaryKeyName(), current.getCustomer_ID())){
             sqlStatement = createCustomerUpdateSQLString(current);
             System.out.println("DAOCustomers - insertOrUpdateCustomer - Update Statement");
         } else {

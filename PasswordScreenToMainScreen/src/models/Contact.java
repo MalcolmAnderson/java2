@@ -13,8 +13,8 @@ public class Contact {
     }
     public Contact() {
         this.contact_ID = -1;
-        this.contact_Name = "";
-        this.email = "";
+        this.contact_Name = "not set";
+        this.email = "not set";
     }
 
     @Override

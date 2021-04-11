@@ -2,8 +2,13 @@ package utils;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import main.Globals;
+import utils.dataAccess.DBConnection;
 
 import java.io.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -27,14 +32,54 @@ public class Utils {
         }
     }
 
-    public boolean CheckPassword(String user, String password) {
-        return true;
+    public boolean CheckPassword(String userName, String password) {
+        boolean retVal = false;
+        String sql = String.format("SELECT * FROM users WHERE User_Name = '%s'", userName);
+        try{
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int size = rsSize(rs);
+            if(size > 1){
+                System.out.println("Constraint error, result set size = " + size + " for user name " + userName);
+                System.exit(-1);
+            }
+            if(rsSize(rs) == 1){
+                String expectedPassword = rs.getString("Password");
+                if(password.equals(expectedPassword)){
+                    Globals.setUserId(rs.getInt("User_ID"));
+                    Globals.setUserName(userName);
+                    retVal = true;
+                } else {
+                    retVal = false;
+                }
+            } else {
+                // user name does not exist
+//                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return retVal;
 
         // normally this would create a hash of the password,
         // and then check the password table to see if the hash maps
 
 //        Boolean successfulLoginAttempt = (user.equals("admin") && password.equals("admin"));
 //        return successfulLoginAttempt;
+    }
+
+    private int rsSize(ResultSet resultSet) {
+        int resultSetSize = 0;
+        if(resultSet != null){
+            try {
+                resultSet.last();
+                resultSetSize = resultSet.getRow();
+                resultSet.first();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return resultSetSize;
     }
 
     public String getRandomColor() {

@@ -13,7 +13,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnBackOneUnit" mnemonicParsing="false" text="&lt;&lt;&lt;">
+                        <Button fx:id="btnBackOneUnit" mnemonicParsing="false" onAction="#onClickBackOne" text="&lt;&lt;&lt;">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -28,7 +28,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnForwardOneUnit" mnemonicParsing="false" text="&gt;&gt;&gt;">
+                        <Button fx:id="btnForwardOneUnit" mnemonicParsing="false" onAction="#onClickForwardOne" text="&gt;&gt;&gt;">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -83,6 +83,5 @@
             </HBox>
          </children>
       </VBox>
-      <Label text="Label" />
    </children>
 </AnchorPane>

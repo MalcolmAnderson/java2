@@ -18,10 +18,6 @@ import java.util.logging.FileHandler;
 
 public class Main extends Application {
 
-    // TODO - Change login_activity.txt to point to current directory
-    // TODO - Change password checker to check the database for passwords
-
-
     public static void main(String[] args) {
         // set environment
         Globals.setHasLoginBeenAttempted(false);
