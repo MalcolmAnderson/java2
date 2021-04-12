@@ -1,7 +1,5 @@
 package utils;
 
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import main.Globals;
 import utils.dataAccess.DBConnection;
 
@@ -19,6 +17,7 @@ import java.util.TimeZone;
 public class Utils {
     static Random random = new Random();
     private String nextIdNumberFilePath = "./NextIdNumber.txt";
+    static private LocalDateTime forcedNowValue;
 
     public int add(int a, int b) {
         return a + b;
@@ -246,6 +245,19 @@ public class Utils {
         ZonedDateTime zdtUTC = ZonedDateTime.of(utc, utcZoneId);
         ZonedDateTime zdtLocal = ZonedDateTime.ofInstant(zdtUTC.toInstant(), localZoneId);
         return zdtLocal.toLocalDateTime();
+    }
+
+    public void setForcedNowValue(LocalDateTime forcedValueForNow) {
+        this.forcedNowValue = forcedValueForNow;
+    }
+    public LocalDateTime now(){
+        LocalDateTime now;
+        if(forcedNowValue == null){
+            now = LocalDateTime.now();
+        } else {
+            now = LocalDateTime.of(forcedNowValue.toLocalDate(), forcedNowValue.toLocalTime());
+        }
+        return now;
     }
 
 //

@@ -117,12 +117,12 @@
                         <Insets right="30.0" />
                      </padding>
                   </Label>
-                  <Label text="Label" GridPane.columnIndex="1">
+                  <Label fx:id="lblAppointmentNum" text="Label" GridPane.columnIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="txtTitle" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -130,7 +130,7 @@
                         <Insets right="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="txtDescription" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -138,7 +138,7 @@
                         <Insets right="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="txtLocation" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -147,7 +147,7 @@
                      </GridPane.margin>
                   </TextField>
                   <ChoiceBox prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextField fx:id="txtType" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -157,22 +157,22 @@
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <DatePicker />
-                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
+                        <DatePicker fx:id="dpStart" />
+                        <ChoiceBox fx:id="cbStartHours" prefHeight="25.0" prefWidth="70.0" />
+                        <ChoiceBox fx:id="cbStartMinutes" prefHeight="25.0" prefWidth="70.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <DatePicker />
-                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="70.0" />
+                        <DatePicker fx:id="dpEnd" />
+                        <ChoiceBox fx:id="cbEndHours" prefHeight="25.0" prefWidth="70.0" />
+                        <ChoiceBox fx:id="cbEndMinutes" prefHeight="25.0" prefWidth="70.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                      <children>
-                        <ChoiceBox prefWidth="60.0" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="306.0" />
+                        <ChoiceBox fx:id="cbCustomerId" prefWidth="60.0" />
+                        <ChoiceBox fx:id="cbCustomerName" prefHeight="25.0" prefWidth="306.0" />
                      </children>
                   </HBox>
                </children>

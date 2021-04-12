@@ -18,8 +18,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-//import utils.navigation.StageManager;
-
 public class AddModify_CustomerController implements Initializable {
 
     // setters
@@ -190,7 +188,7 @@ public class AddModify_CustomerController implements Initializable {
 
     private void SetSimpleScreenValues() {
         System.out.println("AddModify_CustomerController SetSimpleScreenValues called");
-        lblIdValue.setText(String.valueOf((customer.getCustomer_ID())));
+        lblIdValue.setText(String.valueOf(customer.getCustomer_ID()));
         txtCustomerName.setText(customer.getCustomer_Name());
         txtPhoneNumber.setText(customer.getPhone());
         txtStreetAddress.setText(customer.getAddress());

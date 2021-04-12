@@ -15,10 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilsTest {
 
     Utils utils;
+    LocalDateTime forcedValueForNow = LocalDateTime.of(1980, 01, 01, 00,00,00);
 
     @BeforeEach
     void setUp() {
         utils = new Utils();
+        utils.setForcedNowValue(forcedValueForNow);
     }
 
     @AfterEach
@@ -39,5 +41,9 @@ class UtilsTest {
         assertEquals("-07:00", tzo.toString());
         assertEquals("2020-03-14T13:56:27", dt.toString());
         //assertTrue(false);
+    }
+
+    @Test void utilsNowShouldReturnExpectedLDT(){
+        assertEquals(forcedValueForNow.toString(), utils.now().toString());
     }
 }

@@ -17,5 +17,14 @@ public class Appointments {
     public void setAllAppointments(ArrayList<Appointment> appointments) {
         this.appointments = appointments;
     }
+
+    public Appointment getAppointmentById(int idOfUpdatedAppointment) {
+        for (Appointment current: appointments) {
+            if(current.getId() == idOfUpdatedAppointment){
+                return current;
+            }
+        }
+        return null;
+    }
 }
 

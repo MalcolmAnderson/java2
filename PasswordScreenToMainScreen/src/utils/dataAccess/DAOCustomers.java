@@ -99,7 +99,7 @@ public class DAOCustomers {
             "UPDATE customers SET"
             + " Customer_Name = '%s', Address = '%s',"
             + " Postal_Code = '%s', Phone = '%s',  Last_Update = '%s',"
-            + " Last_Updated_By = '%s', Division_ID = '%s' WHERE Customer_ID = %s;",
+            + " Last_Updated_By = '%s', Division_ID = %s WHERE Customer_ID = %s;",
                 current.getCustomer_Name(),
                 current.getAddress(), current.getPostal_Code(),
                 current.getPhone(), utcLast_Update.toString(),

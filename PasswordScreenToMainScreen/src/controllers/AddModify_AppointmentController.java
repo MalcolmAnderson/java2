@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import main.Globals;
 import models.Appointment;
 import utils.dataAccess.DAOAppointments;
@@ -16,6 +17,22 @@ public class AddModify_AppointmentController implements Initializable {
 
     public static String addEdit;
     public static Appointment appointment;
+    public Label lblScreenIdentifier;
+    public Label lblAppointmentNum;
+    public TextField txtTitle;
+    public TextField txtDescription;
+    public TextField txtLocation;
+    public TextField txtType;
+    public DatePicker dpStart;
+    public ChoiceBox cbStartHours;
+    public ChoiceBox cbStartMinutes;
+    public DatePicker dpEnd;
+    public ChoiceBox cbEndHours;
+    public ChoiceBox cbEndMinutes;
+    public ChoiceBox cbCustomerId;
+    public ChoiceBox cbCustomerName;
+    public Button btnSave;
+    public Button btnCancel;
 
     private DAOAppointments dao = new DAOAppointments();
     private ResourceBundle rb;
@@ -26,13 +43,34 @@ public class AddModify_AppointmentController implements Initializable {
         System.out.println("ManageCustomers_Controller - initialize");
         rb = Globals.getResourceBundle();
 
+        HandleInboundCustomerObject();
+        SetSimpleScreenValues();
         SetButtonColors();
         LocalizeTextOnControlsAndHeaders();
-        BindDataToTableView();
+        LoadHours(cbStartHours);
+        LoadHours(cbEndHours);
+        LoadMinutes(cbStartMinutes);
+        LoadMinutes(cbEndMinutes);
 
     }
 
-    private void BindDataToTableView() {
+    private void SetSimpleScreenValues() {
+        System.out.println("AddModify_AppointmentController SetSimpleScreenValues called");
+        lblAppointmentNum.setText(String.valueOf(appointment.getId()));
+        txtTitle.setText(appointment.getTitle());
+        txtDescription.setText(appointment.getDescription());
+        txtLocation.setText(appointment.getLocation());
+        txtType.setText(appointment.getType());
+
+    }
+
+    private void HandleInboundCustomerObject() {
+    }
+
+    private void LoadMinutes(ChoiceBox cbStartMinutes) {
+    }
+
+    private void LoadHours(ChoiceBox cbStartHours) {
     }
 
     private void LocalizeTextOnControlsAndHeaders() {

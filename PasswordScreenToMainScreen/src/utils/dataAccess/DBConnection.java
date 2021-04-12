@@ -22,7 +22,7 @@ public class DBConnection {
 
     public static Connection getConnection(){
         try {
-            if(conn.isClosed()){
+            if(conn == null || conn.isClosed()){
                 System.out.println("Connection was closed, reopening");
                 startConnection();
             }

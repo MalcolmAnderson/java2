@@ -4,15 +4,21 @@ import main.Globals;
 import models.Appointment;
 import models.Appointments;
 import models.Contact;
+import models.Customer;
+import org.junit.jupiter.api.Disabled;
 import utils.Utils;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class DAOAppointments {
 
     private DBQueryManager dbQM = new DBQueryManager();
     private DAOContacts daoContacts = new DAOContacts(dbQM);
+    private Utils utils = new Utils();
 
     public Appointments selectAllAppointments(){
         if(!daoContacts.ContactsHaveBeenLoaded()){
@@ -54,27 +60,21 @@ public class DAOAppointments {
         return current;
     }
 
-    // TODO should be running this through an insert or update method - see DAOCustomers
-    public void insertAppointment(Appointment current) {
-//        int contactId = current.getContact_Id();
-//        Contact updatedContact = daoContacts.getContactByContactId(contactId);
-//        current.setContact(updatedContact);
-        String insertStatement = String.format(
-                "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, "
-                        + "Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, "
-                        + "Customer_ID, User_ID, Contact_ID) "
-                        + " VALUES ("
-                        + "'%s', '%s', '%s', '%s','%s', "
-                        + "'%s', '%s', '%s','%s', '%s', "
-                        + "'%s', %s, %s, %s);",
-                current.getId(), current.getTitle(), current.getDescription(),
-                current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
-                LocalDateTime.now(), "Test", LocalDateTime.now(), "Test", current.getCustomer_Id(),
-                Globals.getUserId(),  current.getContact_Id());
-        System.out.println("Insert Statement");
-        System.out.println(insertStatement);
-        dbQM.RunSQLString(insertStatement);
+    public void insertOrUpdateAppointment(Appointment current) {
+        String sqlStatement = "";
+        tableInfo a = new tableInfo_Appointments();
+        if(dbQM.recordExists(a.getTableName(), a.getPrimaryKeyName(), current.getId())){
+            sqlStatement = createStatement_UpdateAppointment(current);
+            System.out.println("DAOAppointment - insertOrUpdateAppointment - Update Statement");
+        } else {
+            sqlStatement = createStatement_InsertAppointment(current);
+            System.out.println("DAOAppointment - insertOrUpdateAppointment - Insert Statement");
+        }
+        System.out.println(sqlStatement);
+        dbQM.RunSQLString(sqlStatement);
     }
+
+
 
     public void deleteAppointmentsByCustomerId(int customer_id) {
         String deleteStatement = String.format(
@@ -93,11 +93,41 @@ public class DAOAppointments {
     }
 
     public String createStatement_InsertAppointment(Appointment current) {
-        return "not implemented";
+        LocalDateTime now = utils.now();
+        String insertStatement = String.format(
+                "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, "
+                        + "Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, "
+                        + "Customer_ID, User_ID, Contact_ID) "
+                        + "VALUES ("
+                        + "'%s', '%s', '%s', '%s', '%s', "
+                        + "'%s', '%s', '%s', '%s', '%s', "
+                        + "'%s', %s, %s, %s);",
+                current.getId(), current.getTitle(), current.getDescription(),
+                current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
+                now, "Test", now, "Test", current.getCustomer_Id(),
+                Globals.getUserId(),  current.getContact_Id());
+        System.out.println("Insert Statement");
+        System.out.println(insertStatement);
+        return insertStatement;
     }
 
-    public String createStatement_UpdateAppointment(Appointment a) {
-        return "not implemented";
+    @Disabled
+    public String createStatement_UpdateAppointment(Appointment current) {
+        LocalDateTime now = utils.now();
+        String updateStatement = String.format(
+                "UPDATE appointments SET"
+                        + " Title = '%s', Description = '%s',"
+                        + " Location = '%s', Type = '%s', Start = '%s', End  = '%s',"
+                        + " Create_Date = '%s', Created_By = '%s', Last_Update = '%s',"
+                        + " Last_Updated_By = '%s', Customer_ID = %s, User_ID = %s,"
+                        + " Contact_ID = %s WHERE Appointment_ID = %s",
+                current.getTitle(), current.getDescription(),
+                current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
+                now, "Test", now, "Test", current.getCustomer_Id(),
+                Globals.getUserId(),  current.getContact_Id(), current.getId());
+        System.out.println("update Statement");
+        System.out.println(updateStatement);
+        return updateStatement;
     }
 
     public String createStatement_DeleteAppointmentByAppointmentId(int appointmentId) {

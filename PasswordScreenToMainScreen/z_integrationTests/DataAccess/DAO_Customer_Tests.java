@@ -6,9 +6,7 @@ import models.Customer;
 import models.Customers;
 import models.Geography;
 import models._ManageTestData;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import utils.dataAccess.DAOGeography;
 import utils.dataAccess.DBConnection;
 import utils.dataAccess.DAOCustomers;
@@ -27,20 +25,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DAO_Customer_Tests {
     boolean keepRecords = true;
-    DAOCustomers dao;
+    static DAOCustomers dao;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll static void runOnceBeforeAllHaveStarted(){
+        System.out.println("begin beforeAll");
         DBConnection.startConnection();
         dao = new DAOCustomers();
         if(! Geography.isKnownWorldLoaded()){
             Geography.setKnownWorld(DAOGeography.loadKnownWorld());
         }
+        System.out.println("end beforeAll");
+    }
+    @AfterAll static void runOnceAfterAllAreDone(){
+        System.out.println("begin afterAll");
+        DBConnection.endConnection();
+        System.out.println("end afterAll");
     }
 
-    @AfterEach
-    void tearDown() {
-        DBConnection.endConnection();
+
+    @BeforeEach void setUp() {
+    }
+
+    @AfterEach void tearDown() {
     }
 
     @Test void shouldAddCustomer(){
