@@ -9,9 +9,12 @@ import utils.Utils;
 import utils.dataAccess.DAOAppointments;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_Appointments;
+import utils.navigation.navInfo_ManageCustomers;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddModify_AppointmentController implements Initializable {
@@ -187,6 +190,30 @@ public class AddModify_AppointmentController implements Initializable {
 
     public void onClick_Save(ActionEvent actionEvent) {
         // TODO - This is the key one to having basic functionality done.
+        appointment.setTitle(txtTitle.getText());
+        appointment.setDescription(txtDescription.getText());
+        appointment.setLocation(txtLocation.getText());
+        appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
+        int custNumVal = ((Customer)cbCustomers.getSelectionModel().getSelectedItem()).getCustomer_ID();
+        appointment.setCustomer_Id(custNumVal);
+        appointment.setStart(GetLDTFrom(dpStart, cbStartHours, cbStartMinutes));
+        appointment.setStart(GetLDTFrom(dpEnd, cbEndHours, cbEndMinutes));
+
+        dao.insertOrUpdateAppointment(appointment);
+        if(addEdit == "ADD"){
+            utils.commitNextIdNumber();
+        }
+        StageManager.ChangeScene(actionEvent, new navInfo_Appointments());
+
+    }
+
+    private LocalDateTime GetLDTFrom(DatePicker dpDate, ChoiceBox cbHours, ChoiceBox cbMinutes) {
+        LocalDate ldStart = dpDate.getValue();
+        int startHour = Integer.parseInt(cbHours.getSelectionModel().getSelectedItem().toString());
+        int startMinute = Integer.parseInt(cbMinutes.getSelectionModel().getSelectedItem().toString());
+        LocalTime ltStart = LocalTime.of(startHour, startMinute);
+        LocalDateTime ldt = LocalDateTime.of(ldStart, ltStart);
+        return ldt;
     }
 
     public void updateCustomerNumber(ActionEvent actionEvent) {
@@ -197,5 +224,8 @@ public class AddModify_AppointmentController implements Initializable {
     public void updateContactNumber(ActionEvent actionEvent) {
         Contact newContact = (Contact) cbContacts.getSelectionModel().getSelectedItem();
         lblContactNumValue.setText(String.valueOf(newContact.getContact_ID()));
+        System.out.println("newContact.getContact_ID(): " + newContact.getContact_ID());
+        System.out.println("lblContactNumValue: " + lblContactNumValue.getText());
+
     }
 }

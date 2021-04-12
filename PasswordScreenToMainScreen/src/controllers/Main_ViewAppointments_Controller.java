@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import main.Globals;
 import models.*;
+import utils.dataAccess.DAOAppointments;
 import utils.navigation.*;
 
 import java.net.URL;
@@ -25,6 +26,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
     public Button btnAddAppointment;
     public Button btnEditAppointment;
     public Button btnDeleteAppointment;
+    DAOAppointments dao = new DAOAppointments();
 
     @FXML private TableView<Appointment> appointmentsTable;
     public TableColumn id;
@@ -43,7 +45,8 @@ public class Main_ViewAppointments_Controller implements Initializable {
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         SetButtonColors();
 
-        Appointments appointments = _ManageTestData.BuildPlaceHolderData_Appointments();
+//        Appointments appointments = _ManageTestData.BuildPlaceHolderData_Appointments();
+        Appointments appointments = dao.selectAllAppointments();
         allAppointments.setAll(appointments.getAllAppointments());
         tvAppointments.setItems(allAppointments);
         if(!Globals.getUserName().equals("admin")){
