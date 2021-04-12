@@ -171,8 +171,12 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                      <children>
-                        <ChoiceBox fx:id="cbCustomerId" prefWidth="60.0" />
-                        <ChoiceBox fx:id="cbCustomerName" prefHeight="25.0" prefWidth="306.0" />
+                        <Label fx:id="lblCustNumValue" text="Label">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="cbCustomers" prefHeight="25.0" prefWidth="335.0" />
                      </children>
                   </HBox>
                </children>

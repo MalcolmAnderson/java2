@@ -1,5 +1,8 @@
 package main;
 
+import models.Contacts;
+import models.Customers;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -10,6 +13,8 @@ public class Globals {
     private static int userId = -1;
     private static String userName = "userName not set";
     private static ResourceBundle rb;
+    private static Customers masterCustomers;
+    private static Contacts masterContacts;
 
     public static ResourceBundle getResourceBundle() {
 //        String rbPath = "utils.localization/Nat";
@@ -59,5 +64,21 @@ public class Globals {
 
     public static void setUserId(int user_id) {
         Globals.userId = user_id;
+    }
+
+    public static Customers getMasterCustomers() {
+        return masterCustomers;
+    }
+
+    public static void setMasterCustomers(Customers masterCustomers) {
+        Globals.masterCustomers = masterCustomers;
+    }
+
+    public static Contacts getMasterContacts() {
+        return masterContacts;
+    }
+
+    public static void setMasterContacts(Contacts masterContacts) {
+        Globals.masterContacts = masterContacts;
     }
 }

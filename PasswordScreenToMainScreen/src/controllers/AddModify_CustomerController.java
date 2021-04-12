@@ -45,9 +45,10 @@ public class AddModify_CustomerController implements Initializable {
     public Label lblScreenIdentifier;
     public Label lblPhoneNumber;
     public TextField txtPhoneNumber;
-    Utils utils = new Utils();
+
+    private Utils utils = new Utils();
     private DAOCustomers dao = new DAOCustomers();
-    ResourceBundle rb;
+    private ResourceBundle rb;
 
 
     private void HandleInboundCustomerObject() {

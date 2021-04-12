@@ -13,9 +13,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.Globals;
+import models.Contacts;
+import models.Customers;
 import models.Geography;
 import utils.TimeConversion;
+import utils.dataAccess.DAOContacts;
+import utils.dataAccess.DAOCustomers;
 import utils.dataAccess.DAOGeography;
+import utils.dataAccess.DBQueryManager;
 import utils.localization.Locales;
 import utils.Utils;
 import utils.navigation.StageManager;
@@ -45,6 +50,10 @@ public class LoginScreen_Controller implements Initializable {
     ResourceBundle rb;
     boolean hasLoginAttempted;
     boolean wasLoginSuccessful;
+    private DAOCustomers daoCustomers = new DAOCustomers();
+    private Customers masterCustomers;
+    private DAOContacts daoContacts = new DAOContacts(new DBQueryManager());
+    private Contacts masterContacts;
 
 
     @Override
@@ -106,6 +115,11 @@ public class LoginScreen_Controller implements Initializable {
         Globals.setWasLoginSuccessful(true);
         utils.WriteLoginAttempt(userName, true);
         Globals.setUserName(userName);
+
+        Globals.setMasterCustomers(daoCustomers.selectAllCustomers());
+        daoContacts.selectAllContacts();
+        Globals.setMasterContacts(daoContacts.getAllContacts());
+
         Geography.setKnownWorld(DAOGeography.loadKnownWorld());
         if(Geography.isKnownWorldLoaded()) {
             StageManager.ChangeScene(event, new navInfo_Appointments());

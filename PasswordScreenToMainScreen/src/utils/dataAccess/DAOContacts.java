@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class DAOContacts {
 
     private DBQueryManager dbQM = new DBQueryManager();
-    private static Contacts contacts = new Contacts();
+    private Contacts contacts = new Contacts();
 
     public DAOContacts(DBQueryManager dbQM) {
         this.dbQM = dbQM;

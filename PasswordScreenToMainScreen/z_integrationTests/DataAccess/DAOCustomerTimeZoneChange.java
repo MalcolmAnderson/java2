@@ -12,15 +12,7 @@ import org.junit.jupiter.api.Test;
 import utils.dataAccess.DAOCustomers;
 import utils.dataAccess.DAOGeography;
 import utils.dataAccess.DBConnection;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
