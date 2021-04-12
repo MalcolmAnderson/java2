@@ -7,17 +7,18 @@ import main.Globals;
 import models.*;
 import utils.Utils;
 import utils.dataAccess.DAOAppointments;
-import utils.dataAccess.DAOCustomers;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_Appointments;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AddModify_AppointmentController implements Initializable {
 
     public static String addEdit;
     public static Appointment appointment;
+
     public Label lblScreenIdentifier;
     public Label lblAppointmentNum;
     public TextField txtTitle;
@@ -44,7 +45,6 @@ public class AddModify_AppointmentController implements Initializable {
     private Contacts contacts = Globals.getMasterContacts();
     private int currentCustomerNumber;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("AddModify_AppointmentController - initialize");
@@ -59,9 +59,7 @@ public class AddModify_AppointmentController implements Initializable {
 
         // TODO handle
         SetSimpleScreenValues();
-        SetButtonColors();
         LocalizeTextOnControlsAndHeaders();
-
     }
 
     private void PopulateChoiceBoxes() {
@@ -117,6 +115,30 @@ public class AddModify_AppointmentController implements Initializable {
         txtType.setText(appointment.getType());
         lblCustNumValue.setText(String.valueOf(appointment.getCustomer_Id()));
         lblContactNumValue.setText(String.valueOf(appointment.getCustomer_Id()));
+        System.out.println("start: " + appointment.getStart());
+        System.out.println("end: " +
+                appointment.getEnd());
+        SetDateAndTime(appointment.getStart(), dpStart, cbStartHours, cbStartMinutes);
+        SetDateAndTime(appointment.getEnd(), dpEnd, cbEndHours, cbEndMinutes);
+    }
+
+    private void SetDateAndTime(LocalDateTime ldt, DatePicker datePicker, ChoiceBox cbHours, ChoiceBox cbMinutes) {
+        if(ldt == null){
+            datePicker.setValue(LocalDateTime.now().toLocalDate());
+            cbHours.getSelectionModel().select(0);
+            cbMinutes.getSelectionModel().select(0);
+        } else {
+            datePicker.setValue(ldt.toLocalDate());
+            int startHour = ldt.getHour();
+            cbHours.getSelectionModel().select(startHour);
+            int startMinute = ldt.getMinute();
+            for (int i = 0; i < 12; i++) {
+                int curMin = Integer.parseInt((String) cbMinutes.getItems().get(i));
+                if (curMin == startMinute) {
+                    cbMinutes.getSelectionModel().select(i);
+                }
+            }
+        }
     }
 
     private void HandleInboundCustomerObject() {
@@ -159,14 +181,12 @@ public class AddModify_AppointmentController implements Initializable {
     private void LocalizeTextOnControlsAndHeaders() {
     }
 
-    private void SetButtonColors() {
-    }
-
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
 
     public void onClick_Save(ActionEvent actionEvent) {
+        // TODO - This is the key one to having basic functionality done.
     }
 
     public void updateCustomerNumber(ActionEvent actionEvent) {
