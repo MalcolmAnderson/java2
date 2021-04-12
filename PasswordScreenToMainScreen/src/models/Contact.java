@@ -19,6 +19,10 @@ public class Contact {
 
     @Override
     public String toString() {
+        return contact_Name;
+    }
+
+    public String toString_Full() {
         return "Contact{" +
                 "contact_ID=" + contact_ID +
                 ", contact_Name='" + contact_Name + '\'' +

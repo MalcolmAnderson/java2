@@ -146,7 +146,16 @@
                         <Insets right="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <ChoiceBox prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Label fx:id="lblContactNumValue" text="Label">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="cbContacts" onAction="#updateContactNumber" prefWidth="335.0" />
+                     </children>
+                  </HBox>
                   <TextField fx:id="txtType" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
@@ -176,7 +185,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="cbCustomers" prefHeight="25.0" prefWidth="335.0" />
+                        <ChoiceBox fx:id="cbCustomers" onAction="#updateCustomerNumber" prefWidth="335.0" />
                      </children>
                   </HBox>
                </children>

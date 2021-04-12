@@ -99,6 +99,7 @@ public class LoginScreen_Controller implements Initializable {
         } else {
             processFailedLoginAndSetErrorMessage(userName);
         }
+        System.out.println("Leaving onClick_LogIn");
     }
 
     private void processFailedLoginAndSetErrorMessage(String userName) {
@@ -110,23 +111,24 @@ public class LoginScreen_Controller implements Initializable {
     }
 
     private void processSuccessfulLoginAndOpenMainScreen(ActionEvent event, String userName) {
-        String styleString = "-fx-text-fill: #00FF00 ;";
-        lblLoginPrompt.setStyle(styleString);
+        System.out.println("Entering processSuccessfulLoginAndOpenMainScreen");
+        Geography.setKnownWorld(DAOGeography.loadKnownWorld());
         Globals.setWasLoginSuccessful(true);
         utils.WriteLoginAttempt(userName, true);
         Globals.setUserName(userName);
-
         Globals.setMasterCustomers(daoCustomers.selectAllCustomers());
         daoContacts.selectAllContacts();
         Globals.setMasterContacts(daoContacts.getAllContacts());
 
-        Geography.setKnownWorld(DAOGeography.loadKnownWorld());
+        String styleString = "-fx-text-fill: #00FF00 ;";
+        lblLoginPrompt.setStyle(styleString);
         if(Geography.isKnownWorldLoaded()) {
             StageManager.ChangeScene(event, new navInfo_Appointments());
         } else {
             System.out.println("KnownWorld was not succesfully loaded, exiting program");
             System.exit(-1);
         }
+        System.out.println("Leaving processSuccessfulLoginAndOpenMainScreen");
     }
 
     public void onClickSetEnglish(ActionEvent actionEvent) {

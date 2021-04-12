@@ -69,6 +69,9 @@ public class Customer {
 
     @Override
     public String toString() {
+        return customer_Name;
+    }
+    public String toString_Full() {
         return "Customer{" +
                 "customer_ID=" + customer_ID +
                 ", customer_Name='" + customer_Name + '\'' +

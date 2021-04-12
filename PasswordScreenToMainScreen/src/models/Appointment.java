@@ -55,6 +55,7 @@ public class Appointment {
                 ", start=" + start +
                 ", end=" + end +
                 ", customer_Id=" + customer_Id +
+                ", contact_Id=" + contact_Id +
                 '}';
     }
 
