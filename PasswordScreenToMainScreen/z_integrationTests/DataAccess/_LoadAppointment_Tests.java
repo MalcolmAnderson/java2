@@ -10,7 +10,7 @@ import utils.dataAccess.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoadAppointment_Tests {
+public class _LoadAppointment_Tests {
 
 
     static DAOContacts daoContacts;

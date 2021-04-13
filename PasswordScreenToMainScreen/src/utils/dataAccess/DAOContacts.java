@@ -74,6 +74,7 @@ public class DAOContacts {
                         contact_ID,
                         contact_Name,
                         email);
+                System.out.println(current.contact_ID + " - " + current.toString());
                 contacts.addContact(current);
             }
 

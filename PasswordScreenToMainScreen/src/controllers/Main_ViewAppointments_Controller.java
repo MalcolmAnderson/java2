@@ -26,19 +26,29 @@ public class Main_ViewAppointments_Controller implements Initializable {
     public Button btnAddAppointment;
     public Button btnEditAppointment;
     public Button btnDeleteAppointment;
+    public Button btnBackOneUnit;
+    public Button btnForwardOneUnit;
+    public TableColumn columnId;
+    public TableColumn columnTitle;
+    public TableColumn columnDescription;
+    public TableColumn columnLocation;
+    public TableColumn columnContact;
+    public TableColumn columnType;
+    public TableColumn columnStart;
+    public TableColumn columnEnd;
+    public TableColumn columnCustomerId;
     DAOAppointments dao = new DAOAppointments();
 
     @FXML private TableView<Appointment> appointmentsTable;
-    public TableColumn id;
-    public TableColumn title;
-    public TableColumn description;
-    public TableColumn location;
-    public TableColumn contact;
-    public TableColumn type;
-    public TableColumn date;
-    public TableColumn start;
-    public TableColumn end;
-    public TableColumn custId;
+//    public TableColumn columnId;
+//    public TableColumn title;
+//    public TableColumn description;
+//    public TableColumn location;
+//    public TableColumn contact;
+//    public TableColumn type;
+//    public TableColumn start;
+//    public TableColumn end;
+//    public TableColumn custId;
 
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
@@ -63,26 +73,25 @@ public class Main_ViewAppointments_Controller implements Initializable {
     }
 
     private void DefineTableElements() {
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        description.setCellValueFactory(new PropertyValueFactory<>("description"));
-        location.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contact.setCellValueFactory(new PropertyValueFactory<>("ContactName"));
-        type.setCellValueFactory(new PropertyValueFactory<>("type"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        start.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        end.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-        custId.setCellValueFactory(new PropertyValueFactory<>("customer_Id"));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        columnLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        columnContact.setCellValueFactory(new PropertyValueFactory<>("ContactName"));
+        columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        columnStart.setCellValueFactory(new PropertyValueFactory<>("startDisplay"));
+        columnEnd.setCellValueFactory(new PropertyValueFactory<>("endDisplay"));
+        columnCustomerId.setCellValueFactory(new PropertyValueFactory<>("customer_Id"));
     }
 
     private void SetButtonColors() {
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
-        btnAddAppointment.setBackground(bg_Yellow);
+//        btnAddAppointment.setBackground(bg_Yellow);
 //        btnAddAppointment.setTextFill(Color.WHITE);
-        btnEditAppointment.setBackground(bg_Yellow);
+//        btnEditAppointment.setBackground(bg_Yellow);
 //        btnEditAppointment.setTextFill(Color.WHITE);
-        btnDeleteAppointment.setBackground(bg_Yellow);
+//        btnDeleteAppointment.setBackground(bg_Yellow);
 //        btnDeleteAppointment.setTextFill(Color.WHITE);
         btnReportsScreen.setBackground(bg_Red);
         btnReportsScreen.setTextFill(Color.WHITE);
@@ -144,7 +153,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
             alert.showAndWait();
             if(alert.getResult() == ButtonType.YES){
                 tvAppointments.getItems().remove(selectedAppointmentIndex);
-//                dao.deleteCustomerByID(selectedCustomer.getCustomer_ID());
+                dao.deleteAppointmentsByAppointmentId(selectedAppointment.getId());
             }
         }else {
             Alert alert = new Alert(

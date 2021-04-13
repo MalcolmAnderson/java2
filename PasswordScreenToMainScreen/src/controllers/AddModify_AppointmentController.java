@@ -117,7 +117,7 @@ public class AddModify_AppointmentController implements Initializable {
         txtLocation.setText(appointment.getLocation());
         txtType.setText(appointment.getType());
         lblCustNumValue.setText(String.valueOf(appointment.getCustomer_Id()));
-        lblContactNumValue.setText(String.valueOf(appointment.getCustomer_Id()));
+        lblContactNumValue.setText(String.valueOf(appointment.getContact_Id()));
         System.out.println("start: " + appointment.getStart());
         System.out.println("end: " +
                 appointment.getEnd());
@@ -127,17 +127,18 @@ public class AddModify_AppointmentController implements Initializable {
 
     private void SetDateAndTime(LocalDateTime ldt, DatePicker datePicker, ChoiceBox cbHours, ChoiceBox cbMinutes) {
         if(ldt == null){
+            // initialize data for screen
             datePicker.setValue(LocalDateTime.now().toLocalDate());
             cbHours.getSelectionModel().select(0);
             cbMinutes.getSelectionModel().select(0);
         } else {
             datePicker.setValue(ldt.toLocalDate());
-            int startHour = ldt.getHour();
-            cbHours.getSelectionModel().select(startHour);
-            int startMinute = ldt.getMinute();
+            int hour = ldt.getHour();
+            cbHours.getSelectionModel().select(hour);
+            int minute = ldt.getMinute();
             for (int i = 0; i < 12; i++) {
                 int curMin = Integer.parseInt((String) cbMinutes.getItems().get(i));
-                if (curMin == startMinute) {
+                if (curMin == minute) {
                     cbMinutes.getSelectionModel().select(i);
                 }
             }
@@ -194,10 +195,11 @@ public class AddModify_AppointmentController implements Initializable {
         appointment.setDescription(txtDescription.getText());
         appointment.setLocation(txtLocation.getText());
         appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
+        appointment.setType(txtType.getText());
         int custNumVal = ((Customer)cbCustomers.getSelectionModel().getSelectedItem()).getCustomer_ID();
         appointment.setCustomer_Id(custNumVal);
         appointment.setStart(GetLDTFrom(dpStart, cbStartHours, cbStartMinutes));
-        appointment.setStart(GetLDTFrom(dpEnd, cbEndHours, cbEndMinutes));
+        appointment.setEnd(GetLDTFrom(dpEnd, cbEndHours, cbEndMinutes));
 
         dao.insertOrUpdateAppointment(appointment);
         if(addEdit == "ADD"){
@@ -209,10 +211,14 @@ public class AddModify_AppointmentController implements Initializable {
 
     private LocalDateTime GetLDTFrom(DatePicker dpDate, ChoiceBox cbHours, ChoiceBox cbMinutes) {
         LocalDate ldStart = dpDate.getValue();
-        int startHour = Integer.parseInt(cbHours.getSelectionModel().getSelectedItem().toString());
-        int startMinute = Integer.parseInt(cbMinutes.getSelectionModel().getSelectedItem().toString());
-        LocalTime ltStart = LocalTime.of(startHour, startMinute);
+//        System.out.println("ldDate: " + ldStart.toString());
+        int timeHour = Integer.parseInt(cbHours.getSelectionModel().getSelectedItem().toString());
+//        System.out.println(timeHour);
+        int timeMinute = Integer.parseInt(cbMinutes.getSelectionModel().getSelectedItem().toString());
+//        System.out.println(timeMinute);
+        LocalTime ltStart = LocalTime.of(timeHour, timeMinute);
         LocalDateTime ldt = LocalDateTime.of(ldStart, ltStart);
+//        System.out.println(ldt);
         return ldt;
     }
 

@@ -76,12 +76,11 @@ public class Appointment {
 
     public LocalDateTime getStart() {return start;}
     public void setStart(LocalDateTime start) {this.start = start;}
-    public LocalDate getDate() {return start.toLocalDate();}
-    public LocalTime getStartTime() {return start.toLocalTime();}
+    public String getStartDisplay() {return start.toLocalDate() + " - " + start.toLocalTime();}
 
     public LocalDateTime getEnd() {return end;}
     public void setEnd(LocalDateTime end) {this.end = end;}
-    public LocalTime getEndTime() {return end.toLocalTime();}
+    public String getEndDisplay() {return end.toLocalDate() + " - " + end.toLocalTime();}
 
     public int getCustomer_Id() {return customer_Id;}
     public void setCustomer_Id(int customer_Id) {this.customer_Id = customer_Id;}

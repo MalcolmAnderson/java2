@@ -53,7 +53,9 @@ public class DAOAppointments {
         String location = rs.getString("Location");
         String type = rs.getString("Type");
         LocalDateTime start = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("Start"));
+        start = utils.UTC_ToLocal(start);
         LocalDateTime end = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("End"));
+        end = utils.UTC_ToLocal(end);
         int customerId = rs.getInt("Customer_ID");
         int contactId = rs.getInt("Contact_ID");
         Appointment current = new Appointment(appointmentId, title, description, location, type, start, end, customerId, contactId);
@@ -104,7 +106,8 @@ public class DAOAppointments {
                         + "'%s', %s, %s, %s);",
                 current.getId(), current.getTitle(), current.getDescription(),
                 current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
-                now, "Test", now, "Test", current.getCustomer_Id(),
+                utils.Local_ToUTC(now), Globals.getUserId(), utils.Local_ToUTC(now),
+                Globals.getUserId(), current.getCustomer_Id(),
                 Globals.getUserId(),  current.getContact_Id());
         System.out.println("Insert Statement");
         System.out.println(insertStatement);
@@ -114,16 +117,28 @@ public class DAOAppointments {
     @Disabled
     public String createStatement_UpdateAppointment(Appointment current) {
         LocalDateTime now = utils.now();
+//        String updateStatement = String.format(
+//                "UPDATE appointments SET"
+//                        + " Title = '%s', Description = '%s',"
+//                        + " Location = '%s', Type = '%s', Start = '%s', End  = '%s',"
+//                        + " Create_Date = '%s', Created_By = '%s', Last_Update = '%s',"
+//                        + " Last_Updated_By = '%s', Customer_ID = %s, User_ID = %s,"
+//                        + " Contact_ID = %s WHERE Appointment_ID = %s",
+//                current.getTitle(), current.getDescription(),
+//                current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
+//                utils.Local_ToUTC(now), "Test", utils.Local_ToUTC(now), "Test", current.getCustomer_Id(),
+//                Globals.getUserId(),  current.getContact_Id(), current.getId());
+        // removed created information from update
         String updateStatement = String.format(
                 "UPDATE appointments SET"
                         + " Title = '%s', Description = '%s',"
                         + " Location = '%s', Type = '%s', Start = '%s', End  = '%s',"
-                        + " Create_Date = '%s', Created_By = '%s', Last_Update = '%s',"
+                        + " Last_Update = '%s',"
                         + " Last_Updated_By = '%s', Customer_ID = %s, User_ID = %s,"
                         + " Contact_ID = %s WHERE Appointment_ID = %s",
                 current.getTitle(), current.getDescription(),
                 current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
-                now, "Test", now, "Test", current.getCustomer_Id(),
+                utils.Local_ToUTC(now), Globals.getUserId(), current.getCustomer_Id(),
                 Globals.getUserId(),  current.getContact_Id(), current.getId());
         System.out.println("update Statement");
         System.out.println(updateStatement);
