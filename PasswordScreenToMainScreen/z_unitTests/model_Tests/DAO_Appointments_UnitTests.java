@@ -55,8 +55,8 @@ public class DAO_Appointments_UnitTests {
                 "'This is a description', " +
                 "'location', " +
                 "'type', " +
-                "'1964-03-14T23:15:48', '2765-04-15T02:17:52', '1980-01-01T00:00', " +
-                "'Test', '1980-01-01T00:00', 'Test', 1, -1, 2);";
+                "'1964-03-14T23:15:48', '2765-04-15T02:17:52', '1980-01-01T08:00', " +
+                "'-1', '1980-01-01T08:00', '-1', 1, -1, 2);";
         assertEquals(expected, insertStatement);
     }
 
@@ -66,12 +66,18 @@ public class DAO_Appointments_UnitTests {
 
         Appointment a = _ManageTestData.BuildTestData_Appointment(0);
         DAOAppointments dao = new DAOAppointments();
+//        String expected = "UPDATE appointments SET Title = " +
+//                "'This is a title', Description = 'This is a description', " +
+//                "Location = 'location', Type = 'type', Start = '1964-03-14T23:15:48', " +
+//                "End  = '2765-04-15T02:17:52', Create_Date = '1980-01-01T00:00', " +
+//                "Created_By = 'Test', Last_Update = '1980-01-01T00:00', " +
+//                "Last_Updated_By = 'Test', Customer_ID = 1, User_ID = -1, " +
+//                "Contact_ID = 2 WHERE Appointment_ID = 60";
         String expected = "UPDATE appointments SET Title = " +
                 "'This is a title', Description = 'This is a description', " +
                 "Location = 'location', Type = 'type', Start = '1964-03-14T23:15:48', " +
-                "End  = '2765-04-15T02:17:52', Create_Date = '1980-01-01T00:00', " +
-                "Created_By = 'Test', Last_Update = '1980-01-01T00:00', " +
-                "Last_Updated_By = 'Test', Customer_ID = 1, User_ID = -1, " +
+                "End  = '2765-04-15T02:17:52', Last_Update = '1980-01-01T08:00', " +
+                "Last_Updated_By = '-1', Customer_ID = 1, User_ID = -1, " +
                 "Contact_ID = 2 WHERE Appointment_ID = 60";
         String updateStatement = dao.createStatement_UpdateAppointment(a);
         assertEquals(expected, updateStatement);

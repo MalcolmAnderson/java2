@@ -182,7 +182,7 @@ public class DAO_Customer_Tests {
 
         customers = dao.selectAllCustomers();
         if(keepRecords) {
-            assertEquals(5, customers.getCustomers().size());
+            assertEquals(6, customers.getCustomers().size());
         } else {
             assertEquals(3, customers.getCustomers().size());
         }
@@ -190,7 +190,7 @@ public class DAO_Customer_Tests {
         assertEquals(0, olCustomers.size());
         olCustomers.setAll(customers.getCustomers());
         if(keepRecords) {
-            assertEquals(5, customers.getCustomers().size());
+            assertEquals(6, customers.getCustomers().size());
         } else {
             assertEquals(3, customers.getCustomers().size());
         }

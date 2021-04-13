@@ -37,19 +37,11 @@ public class Main_ViewAppointments_Controller implements Initializable {
     public TableColumn columnStart;
     public TableColumn columnEnd;
     public TableColumn columnCustomerId;
+    public RadioButton rbByWeek;
+    public RadioButton rbByMonth;
     DAOAppointments dao = new DAOAppointments();
 
-    @FXML private TableView<Appointment> appointmentsTable;
-//    public TableColumn columnId;
-//    public TableColumn title;
-//    public TableColumn description;
-//    public TableColumn location;
-//    public TableColumn contact;
-//    public TableColumn type;
-//    public TableColumn start;
-//    public TableColumn end;
-//    public TableColumn custId;
-
+//    @FXML private TableView<Appointment> appointmentsTable;
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -63,7 +55,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
             btnManageContacts.setManaged(false);
             btnManageContacts.setVisible(false);
         }
-
+        rbByWeek.setSelected(true);
         DefineTableElements();
         LocalizeTextOnControlsAndHeaders();
 
@@ -165,8 +157,18 @@ public class Main_ViewAppointments_Controller implements Initializable {
     }
 
     public void onClickBackOne(ActionEvent actionEvent) {
+        System.out.println("Back One Button clicked");
     }
 
     public void onClickForwardOne(ActionEvent actionEvent) {
+        System.out.println("Forward One Button clicked");
+    }
+
+    public void filterByWeek(ActionEvent actionEvent) {
+        System.out.println("Radio Button selected - Filter By Week");
+    }
+
+    public void filterByMonth(ActionEvent actionEvent) {
+        System.out.println("Radio Button selected - Filter By Month");
     }
 }

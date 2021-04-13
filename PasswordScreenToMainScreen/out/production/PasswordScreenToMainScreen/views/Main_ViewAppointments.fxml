@@ -22,8 +22,11 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" spacing="30.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Show List By Week" />
-                        <RadioButton mnemonicParsing="false" text="Show List By Month" />
+                        <RadioButton fx:id="rbByWeek" mnemonicParsing="false" onAction="#filterByWeek" text="Show List By Week">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="filterCriteria" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="rbByMonth" mnemonicParsing="false" onAction="#filterByMonth" text="Show List By Month" toggleGroup="$filterCriteria" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">

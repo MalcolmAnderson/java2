@@ -73,7 +73,7 @@ public class DAO_Appointment_Tests {
             System.out.println("Begin dao.selectAllAppointments()");
             RemoveTestAppointments(40, 45);
             appointments = dao.selectAllAppointments();
-            assertEquals(3, appointments.getAllAppointments().size());
+            assertEquals(4, appointments.getAllAppointments().size());
             System.out.println("End shouldRefreshAppointments");
         } catch (Exception e){
             assertTrue(false, "An uncaught exception happened");
@@ -90,24 +90,24 @@ public class DAO_Appointment_Tests {
         Appointments appointmentsDisconnectedFromDB = new Appointments();
         appointmentsDisconnectedFromDB = dao.selectAllAppointments();
         int currentSize = appointmentsDisconnectedFromDB.getAllAppointments().size();
-        assertEquals(3, currentSize);
+        assertEquals(4, currentSize);
 
         // create test data (6 records) but do not commit
         Appointments toBeAdded = _ManageTestData.BuildPlaceHolderData_Appointments();
         for (Appointment current : toBeAdded.getAllAppointments()) {
             appointmentsDisconnectedFromDB.addAppointment(current);
         }
-        assertEquals(9, appointmentsDisconnectedFromDB.getAllAppointments().size());
+        assertEquals(10, appointmentsDisconnectedFromDB.getAllAppointments().size());
         // reload original 3 records from DB
         appointmentsDisconnectedFromDB = dao.selectAllAppointments();
-        assertEquals(3, appointmentsDisconnectedFromDB.getAllAppointments().size());
+        assertEquals(4, appointmentsDisconnectedFromDB.getAllAppointments().size());
         // commit test data to DB
         assertEquals(6, toBeAdded.getAllAppointments().size());
         for (Appointment current : toBeAdded.getAllAppointments()) {
             dao.insertOrUpdateAppointment(current);
         }
         appointmentsDisconnectedFromDB = dao.selectAllAppointments();
-        assertEquals(9, appointmentsDisconnectedFromDB.getAllAppointments().size());
+        assertEquals(10, appointmentsDisconnectedFromDB.getAllAppointments().size());
         // get a single record from test data
         Appointment current = toBeAdded.getAllAppointments().get(0);
         System.out.println("Original duplicate Appointment data");
@@ -127,9 +127,8 @@ public class DAO_Appointment_Tests {
         appointmentsDisconnectedFromDB = dao.selectAllAppointments();
         // confirm size has not changed
         currentSize = appointmentsDisconnectedFromDB.getAllAppointments().size();
-        assertEquals(9, currentSize, "Size should not have changed");
+        assertEquals(10, currentSize, "Size should not have changed");
         // check modified data
-        // TODO write tests to confirm modified data written to DB
         current = appointmentsDisconnectedFromDB.getAppointmentById(idOfUpdatedAppointment);
         if(current != null) {
             assertEquals(newTitle, current.getTitle());
@@ -138,7 +137,7 @@ public class DAO_Appointment_Tests {
         }
         RemoveTestAppointments(50, 55);
         appointmentsDisconnectedFromDB = dao.selectAllAppointments();
-        assertEquals(3, appointmentsDisconnectedFromDB.getAllAppointments().size());
+        assertEquals(4, appointmentsDisconnectedFromDB.getAllAppointments().size());
         System.out.println("End shouldAddTestDataToAppointments");
     }
 

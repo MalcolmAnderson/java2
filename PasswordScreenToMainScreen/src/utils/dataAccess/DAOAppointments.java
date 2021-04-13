@@ -20,14 +20,23 @@ public class DAOAppointments {
     private DAOContacts daoContacts = new DAOContacts(dbQM);
     private Utils utils = new Utils();
 
+    public Appointments selectAppointmentsByStartAndEndDate(LocalDate start, LocalDate end){
+        return new Appointments();
+    }
+
     public Appointments selectAllAppointments(){
+        String sql = "SELECT * FROM appointments;";
+        Appointments appointments = RunGetAppointmentsQuery(sql);
+        return appointments;
+    }
+
+    private Appointments RunGetAppointmentsQuery(String sql) {
         if(!daoContacts.ContactsHaveBeenLoaded()){
-            System.out.println("Contacts must be loaded before running DAOAppointments.selectAllAppointments()");
+            System.out.println("Contacts must be loaded before running DAOAppointments.RunGetAppointmentsQuery()");
             System.exit(-1);
         }
         Appointments appointments = new Appointments();
         try{
-            String sql = "SELECT * FROM appointments;";
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
