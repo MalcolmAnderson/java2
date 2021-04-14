@@ -67,7 +67,7 @@ public class _LoadAppointment_Tests {
             dao.insertOrUpdateAppointment(current);
         }
         appointmentsDisconnectedFromDB = dao.selectAllAppointments();
-        assertEquals(9, appointmentsDisconnectedFromDB.getAllAppointments().size());
+        assertEquals(10, appointmentsDisconnectedFromDB.getAllAppointments().size());
         // get a single record from test data
         System.out.println("End shouldAddTestDataToAppointments");
     }

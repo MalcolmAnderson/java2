@@ -58,11 +58,10 @@ public class DAOContacts {
     public void selectAllContacts() {
 
         contacts = new Contacts();
+        String sql = "SELECT * FROM contacts;";
+        System.out.println(sql);
 
         try {
-            String sql = "SELECT * FROM contacts;";
-
-            System.out.println(sql);
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

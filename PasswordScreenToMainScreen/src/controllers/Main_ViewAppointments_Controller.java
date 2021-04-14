@@ -12,10 +12,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import main.Globals;
 import models.*;
+import utils.Utils;
 import utils.dataAccess.DAOAppointments;
 import utils.navigation.*;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class Main_ViewAppointments_Controller implements Initializable {
@@ -37,7 +39,11 @@ public class Main_ViewAppointments_Controller implements Initializable {
     public TableColumn columnStart;
     public TableColumn columnEnd;
     public TableColumn columnCustomerId;
+    public RadioButton rbByWeek;
+    public RadioButton rbByMonth;
+    public ToggleGroup tgShowBy;
     DAOAppointments dao = new DAOAppointments();
+    Utils utils = new Utils();
 
     @FXML private TableView<Appointment> appointmentsTable;
 //    public TableColumn columnId;
@@ -54,9 +60,17 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         SetButtonColors();
-
-//        Appointments appointments = _ManageTestData.BuildPlaceHolderData_Appointments();
-        Appointments appointments = dao.selectAllAppointments();
+        if(Globals.getSelectedRadioButton().equals("rbByWeek")){
+            rbByWeek.setSelected(true);
+        } else {
+            rbByMonth.setSelected(true);
+        }
+        RadioButton selected = (RadioButton) tgShowBy.getSelectedToggle();
+        System.out.println(selected.getId());
+        LocalDateTime start = utils.getLastSunday(LocalDateTime.now());
+        LocalDateTime end = utils.getNextSunday(LocalDateTime.now());
+        Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
+//        Appointments appointments = dao.selectAllAppointments();
         allAppointments.setAll(appointments.getAllAppointments());
         tvAppointments.setItems(allAppointments);
         if(!Globals.getUserName().equals("admin")){
@@ -165,8 +179,58 @@ public class Main_ViewAppointments_Controller implements Initializable {
     }
 
     public void onClickBackOne(ActionEvent actionEvent) {
+        LocalDateTime currentNow = Globals.getCurrentReferenceDate();
+        if(rbByWeek.isSelected()){
+            currentNow = currentNow.minusWeeks(1);
+            Globals.setCurrentReferenceDate(currentNow);
+            refreshAppointmentByWeek();
+        } else {
+            currentNow = currentNow.minusMonths(1);
+            Globals.setCurrentReferenceDate(currentNow);
+            refreshAppointmentByMonth();
+        }
     }
 
     public void onClickForwardOne(ActionEvent actionEvent) {
+        LocalDateTime currentNow = Globals.getCurrentReferenceDate();
+        if(rbByWeek.isSelected()){
+            currentNow = currentNow.plusWeeks(1);
+            Globals.setCurrentReferenceDate(currentNow);
+            refreshAppointmentByWeek();
+        } else {
+            currentNow = currentNow.plusMonths(1);
+            Globals.setCurrentReferenceDate(currentNow);
+            refreshAppointmentByMonth();
+        }
+    }
+
+    public void onClickShowByWeek(ActionEvent actionEvent) {
+        System.out.println("begin onClickShowByWeek");
+        Globals.setSelectedRadioButtonName("rbByWeek");
+
+        refreshAppointmentByWeek();
+    }
+
+    private void refreshAppointmentByWeek() {
+        LocalDateTime start = utils.getLastSunday(Globals.getCurrentReferenceDate());
+        LocalDateTime end = utils.getNextSunday(Globals.getCurrentReferenceDate());
+        Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
+        allAppointments.setAll(appointments.getAllAppointments());
+        tvAppointments.setItems(allAppointments);
+    }
+
+    public void onClickShowByMonth(ActionEvent actionEvent) {
+        System.out.println("begin onClickShowByWeek");
+        Globals.setSelectedRadioButtonName("rbByMonth");
+
+        refreshAppointmentByMonth();
+    }
+
+    private void refreshAppointmentByMonth() {
+        LocalDateTime start = utils.getFirstOfTheMonth(Globals.getCurrentReferenceDate());
+        LocalDateTime end = utils.getFirstOfNextMonth(Globals.getCurrentReferenceDate());
+        Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
+        allAppointments.setAll(appointments.getAllAppointments());
+        tvAppointments.setItems(allAppointments);
     }
 }

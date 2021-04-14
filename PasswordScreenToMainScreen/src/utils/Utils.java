@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.Random;
 import java.util.TimeZone;
@@ -30,6 +32,15 @@ public class Utils {
             return null;
         }
     }
+
+    public Timestamp LocalDateTime_to_TimeStamp(LocalDateTime ldt){
+        if(ldt != null){
+            return Timestamp.valueOf(ldt);
+        } else {
+            return null;
+        }
+    }
+
 
     public boolean CheckPassword(String userName, String password) {
         boolean retVal = false;
@@ -247,6 +258,17 @@ public class Utils {
         return zdtLocal.toLocalDateTime();
     }
 
+
+    public LocalDateTime Eastern_ToUTC(LocalDateTime eastern) {
+        ZoneId utcZoneId = ZoneId.of("UTC");
+        ZoneId estZoneId = ZoneId.of("America/New_York");
+
+        ZonedDateTime zdtEastern = ZonedDateTime.of(eastern, estZoneId);
+        ZonedDateTime zdtUDT = ZonedDateTime.ofInstant(zdtEastern.toInstant(), utcZoneId);
+        return zdtUDT.toLocalDateTime();
+    }
+
+
     public void setForcedNowValue(LocalDateTime forcedValueForNow) {
         this.forcedNowValue = forcedValueForNow;
     }
@@ -258,6 +280,47 @@ public class Utils {
             now = LocalDateTime.of(forcedNowValue.toLocalDate(), forcedNowValue.toLocalTime());
         }
         return now;
+    }
+
+
+    public LocalDateTime getFirstOfTheMonth(LocalDateTime now) {
+        // set to eastern midnight
+        LocalDate sunday = now.withDayOfMonth(1).toLocalDate();
+        LocalTime midnight = LocalTime.of(0, 0);
+        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
+        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
+        return easternSundayMidnight_UTC;
+    }
+
+    public LocalDateTime getFirstOfNextMonth(LocalDateTime now) {
+        // set to eastern midnight
+        LocalDate sunday = now.with(TemporalAdjusters.firstDayOfNextMonth()).toLocalDate();
+        LocalTime midnight = LocalTime.of(0, 0);
+        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
+        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
+        return easternSundayMidnight_UTC;
+    }
+
+    public LocalDateTime getLastSunday(LocalDateTime now) {
+        // set to eastern midnight
+        LocalDate sunday = now.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).toLocalDate();
+        LocalTime midnight = LocalTime.of(0, 0);
+        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
+        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
+        return easternSundayMidnight_UTC;
+    }
+
+    public LocalDateTime getNextSunday(LocalDateTime now) {
+        // set to eastern midnight
+        LocalDate sunday = now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY)).toLocalDate();
+        LocalTime midnight = LocalTime.of(0, 0);
+        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
+        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
+        return easternSundayMidnight_UTC;
+    }
+
+    public LocalDate getNextSunday(LocalDate now) {
+        return now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
     }
 
 //

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import utils.Utils;
 import utils.dataAccess.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class DAO_Appointments_UnitTests {
     //@FXML private TableView appointmentsTableView = new TableView();
 
     Appointments appointments;
+    DAOAppointments dao;
 
     static Utils utils;
     static LocalDateTime forcedValueForNow = LocalDateTime.of(1980, 01, 01, 00,00,00);
@@ -55,8 +57,8 @@ public class DAO_Appointments_UnitTests {
                 "'This is a description', " +
                 "'location', " +
                 "'type', " +
-                "'1964-03-14T23:15:48', '2765-04-15T02:17:52', '1980-01-01T00:00', " +
-                "'Test', '1980-01-01T00:00', 'Test', 1, -1, 2);";
+                "'1964-03-14T23:15:48', '2765-04-15T02:17:52', '1980-01-01T08:00', " +
+                "'-1', '1980-01-01T08:00', '-1', 1, -1, 2);";
         assertEquals(expected, insertStatement);
     }
 
@@ -69,12 +71,20 @@ public class DAO_Appointments_UnitTests {
         String expected = "UPDATE appointments SET Title = " +
                 "'This is a title', Description = 'This is a description', " +
                 "Location = 'location', Type = 'type', Start = '1964-03-14T23:15:48', " +
-                "End  = '2765-04-15T02:17:52', Create_Date = '1980-01-01T00:00', " +
-                "Created_By = 'Test', Last_Update = '1980-01-01T00:00', " +
-                "Last_Updated_By = 'Test', Customer_ID = 1, User_ID = -1, " +
+                "End  = '2765-04-15T02:17:52', Last_Update = '1980-01-01T08:00', " +
+                "Last_Updated_By = '-1', Customer_ID = 1, User_ID = -1, " +
                 "Contact_ID = 2 WHERE Appointment_ID = 60";
         String updateStatement = dao.createStatement_UpdateAppointment(a);
         assertEquals(expected, updateStatement);
+    }
+
+    @Test public void shouldGetGoodBetweenSelectStatement(){
+        dao = new DAOAppointments();
+        LocalDateTime start = LocalDateTime.of(2021, 04, 10, 0,0,0);
+        LocalDateTime end = LocalDateTime.of(2021, 04, 15, 0,0,0);
+        String expected = "SELECT * FROM appointments where Start >= '2021-04-10 07:00:00.0' AND End <= '2021-04-15T07:00';";
+        String actual = dao.getBetweenSQLStatement(start, end);
+        assertEquals(expected, actual, "SQL selection mistake.");
     }
 
     @Test public void shouldGetSQLString_DeleteByAppointmentId(){

@@ -25,10 +25,34 @@ public class DAOAppointments {
             System.out.println("Contacts must be loaded before running DAOAppointments.selectAllAppointments()");
             System.exit(-1);
         }
+        String sql = "SELECT * FROM appointments;";
+        Appointments appointments = selectAppointmentsFromSQLStatement(sql);
+        return appointments;
+    }
+
+    public Appointments selectAppointmentsInDateRange(LocalDateTime start, LocalDateTime end){
+        if(!daoContacts.ContactsHaveBeenLoaded()){
+            System.out.println("Contacts must be loaded before running DAOAppointments.selectAllAppointments()");
+            System.exit(-1);
+        }
+        String sql = getBetweenSQLStatement(start, end);
+        System.out.println(sql);
+        Appointments appointments = selectAppointmentsFromSQLStatement(sql);
+        return appointments;
+    }
+
+    public String getBetweenSQLStatement(LocalDateTime start, LocalDateTime end) {
+        start = utils.Local_ToUTC(start);
+        end = utils.Local_ToUTC(end);
+        Timestamp tsStart = Timestamp.valueOf(start);
+        Timestamp tsEnd = Timestamp.valueOf(end);
+        return String.format("SELECT * FROM appointments where Start >= '%s' AND End <= '%s';",
+                    tsStart.toString(), tsEnd.toString());
+    }
+
+    private Appointments selectAppointmentsFromSQLStatement(String sql) {
         Appointments appointments = new Appointments();
         try{
-            String sql = "SELECT * FROM appointments;";
-
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -36,7 +60,6 @@ public class DAOAppointments {
                 current.setContact(daoContacts.getContactByContactId(current.getContact_Id()));
                 appointments.addAppointment(current);
             }
-
         } catch (SQLException throwables) {
             System.out.println( throwables.getMessage());
             throwables.printStackTrace();
@@ -117,18 +140,6 @@ public class DAOAppointments {
     @Disabled
     public String createStatement_UpdateAppointment(Appointment current) {
         LocalDateTime now = utils.now();
-//        String updateStatement = String.format(
-//                "UPDATE appointments SET"
-//                        + " Title = '%s', Description = '%s',"
-//                        + " Location = '%s', Type = '%s', Start = '%s', End  = '%s',"
-//                        + " Create_Date = '%s', Created_By = '%s', Last_Update = '%s',"
-//                        + " Last_Updated_By = '%s', Customer_ID = %s, User_ID = %s,"
-//                        + " Contact_ID = %s WHERE Appointment_ID = %s",
-//                current.getTitle(), current.getDescription(),
-//                current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
-//                utils.Local_ToUTC(now), "Test", utils.Local_ToUTC(now), "Test", current.getCustomer_Id(),
-//                Globals.getUserId(),  current.getContact_Id(), current.getId());
-        // removed created information from update
         String updateStatement = String.format(
                 "UPDATE appointments SET"
                         + " Title = '%s', Description = '%s',"

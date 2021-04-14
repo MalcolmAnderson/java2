@@ -3,6 +3,7 @@ package main;
 import models.Contacts;
 import models.Customers;
 
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -15,6 +16,8 @@ public class Globals {
     private static ResourceBundle rb;
     private static Customers masterCustomers;
     private static Contacts masterContacts;
+    private static String selectedRadioButtonName;
+    private static LocalDateTime currentReferenceDate;
 
     public static ResourceBundle getResourceBundle() {
 //        String rbPath = "utils.localization/Nat";
@@ -80,5 +83,21 @@ public class Globals {
 
     public static void setMasterContacts(Contacts masterContacts) {
         Globals.masterContacts = masterContacts;
+    }
+
+    public static String getSelectedRadioButton() {
+        return selectedRadioButtonName;
+    }
+
+    public static void setSelectedRadioButtonName(String radioButtonName) {
+        Globals.selectedRadioButtonName = radioButtonName;
+    }
+
+    public static LocalDateTime getCurrentReferenceDate() {
+        return currentReferenceDate;
+    }
+
+    public static void setCurrentReferenceDate(LocalDateTime currentReferenceDate) {
+        Globals.currentReferenceDate = currentReferenceDate;
     }
 }

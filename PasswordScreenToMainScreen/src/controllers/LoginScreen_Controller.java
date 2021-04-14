@@ -28,6 +28,7 @@ import utils.navigation.navInfo_Appointments;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -119,6 +120,8 @@ public class LoginScreen_Controller implements Initializable {
         Globals.setMasterCustomers(daoCustomers.selectAllCustomers());
         daoContacts.selectAllContacts();
         Globals.setMasterContacts(daoContacts.getAllContacts());
+        Globals.setSelectedRadioButtonName("rbByWeek");
+        Globals.setCurrentReferenceDate(LocalDateTime.now());
 
         String styleString = "-fx-text-fill: #00FF00 ;";
         lblLoginPrompt.setStyle(styleString);
