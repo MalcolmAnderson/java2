@@ -323,6 +323,17 @@ public class Utils {
         return now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
     }
 
+    public boolean isValidBusinessHours(LocalDateTime ldt) {
+        ldt = Local_ToEastern(ldt);
+        LocalTime lt = ldt.toLocalTime();
+        LocalTime earlyLimit = LocalTime.of(8, 00,00);
+        LocalTime lateLimit = LocalTime.of(22, 00,00);
+        if(lt.isBefore(earlyLimit) || lt.isAfter(lateLimit)){
+            return false;
+        }
+        return true;
+    }
+
 //
 //        ZonedDateTime localStartTime = ZonedDateTime.ofInstant(utcZDT.toInstant(),localZoneId);
 //

@@ -156,18 +156,22 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     public void onClickDeleteAppointment(ActionEvent actionEvent) {
         int selectedAppointmentIndex = tvAppointments.getSelectionModel().getSelectedIndex();
-        Appointment selectedAppointment = (Appointment) tvAppointments.getSelectionModel().getSelectedItem();
+        Appointment selected = (Appointment) tvAppointments.getSelectionModel().getSelectedItem();
         System.out.println("Selected Appointment Index = " + selectedAppointmentIndex);
         if (selectedAppointmentIndex != -1){
+            String line1 = "Warning: This action will delete appointment Id: ";
+            String line2 = "\nAppointment type: ";
+            String line3 = "\nAre you sure you want to delete this appointment?";
+            String displayLine = line1 + selected.getId() + line2 + selected.getType() + line3;
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to delete this appointment?",
+                    displayLine,
                     ButtonType.YES,
                     ButtonType.CANCEL);
             alert.showAndWait();
             if(alert.getResult() == ButtonType.YES){
                 tvAppointments.getItems().remove(selectedAppointmentIndex);
-                dao.deleteAppointmentsByAppointmentId(selectedAppointment.getId());
+                dao.deleteAppointmentsByAppointmentId(selected.getId());
             }
         }else {
             Alert alert = new Alert(

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilsTest {
 
     Utils utils;
-    LocalDateTime forcedValueForNow = LocalDateTime.of(1980, 01, 01, 00,00,00);
+    LocalDateTime forcedValueForNow = LocalDateTime.of(1980, 1, 1, 0,0,0);
 
     @BeforeEach
     void setUp() {
@@ -47,27 +47,41 @@ class UtilsTest {
 
     @Test void shouldGetEasternForLastSundayAtMidnight(){
         // pacific time
-        LocalDateTime now = LocalDateTime.of(2021,04,07, 0,0,0);
+        LocalDateTime now = LocalDateTime.of(2021,4,7, 0,0,0);
         LocalDate sunday = now.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).toLocalDate();
         LocalTime midnight = LocalTime.of(0, 0);
         LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
         LocalDateTime easternSundayMidnight_UTC = utils.Eastern_ToUTC(easternSundayMidnight);
-        LocalDateTime expected = LocalDateTime.of(2021, 04, 04, 04, 0, 0);
+        LocalDateTime expected = LocalDateTime.of(2021, 4, 4, 4, 0, 0);
         assertEquals(expected, easternSundayMidnight_UTC);
 
     }
 
     @Test void shouldGetSundayOfWeekFromDate(){
-        LocalDateTime now = LocalDateTime.of(2021, 04, 07,0,0,0);
-        LocalDateTime expected = LocalDateTime.of(2021, 04, 04,4,0,0);
+        LocalDateTime now = LocalDateTime.of(2021, 4, 7,0,0,0);
+        LocalDateTime expected = LocalDateTime.of(2021, 4, 4,4,0,0);
         LocalDateTime actual = utils.getLastSunday(now);
         assertEquals(expected, actual);
     }
 
     @Test void shouldGetSundayOfNextWeekFromDate(){
-        LocalDate now = LocalDate.of(2021, 04, 07);
-        LocalDate expected = LocalDate.of(2021, 04, 11);
+        LocalDate now = LocalDate.of(2021, 4, 7);
+        LocalDate expected = LocalDate.of(2021, 4, 11);
         LocalDate actual = utils.getNextSunday(now);
         assertEquals(expected, actual);
+    }
+
+    @Test void shouldFailBecauseTooEarly(){
+        // local pacific time of 4:59:59 is before 5am, which is 8am eastern
+        LocalDateTime bad = LocalDateTime.of(2021, 4,15,4,59,59);
+        boolean isValid = utils.isValidBusinessHours(bad);
+        assertFalse(isValid);
+    }
+
+    @Test void shouldFailBecauseTooLate(){
+        // local pacific time of 4:59:59 is before 5am, which is 8am eastern
+        LocalDateTime bad = LocalDateTime.of(2021, 4,15,19,0,1);
+        boolean isValid = utils.isValidBusinessHours(bad);
+        assertFalse(isValid);
     }
 }

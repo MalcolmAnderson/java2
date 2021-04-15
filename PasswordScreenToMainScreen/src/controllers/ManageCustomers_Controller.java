@@ -32,6 +32,7 @@ public class ManageCustomers_Controller implements Initializable {
     public Button btnExit;
     public TableColumn tcPhone;
     public TableColumn tcCountry;
+    public TableColumn tcPostalCode;
 
 
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
@@ -56,6 +57,7 @@ public class ManageCustomers_Controller implements Initializable {
         tcId.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
         tcName.setCellValueFactory(new PropertyValueFactory<>("customer_Name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("fullAddress"));
+        tcPostalCode.setCellValueFactory(new PropertyValueFactory<>("postal_Code"));
         tcCountry.setCellValueFactory(new PropertyValueFactory<>("countryName"));
         tcPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
@@ -65,6 +67,7 @@ public class ManageCustomers_Controller implements Initializable {
         tcName.setText(rb.getString("Name"));
         tcAddress.setText(rb.getString("Address"));
         tcCountry.setText(rb.getString("Country"));
+        tcPostalCode.setText(rb.getString("Postal.Code"));
         tcPhone.setText(rb.getString("Phone"));
         btnAddCustomer.setText(rb.getString("Add.Customer"));
         btnEditCustomer.setText(rb.getString("Edit.Customer"));

@@ -54,13 +54,11 @@ public class Customer {
         this.last_Updated_By = last_Updated_By;
         this.division_ID = division_ID;
         this.geography = Geography.getGeographyByDivisionId(division_ID);
-//        this.division = division;
-//        this.country = country;
     }
 
     // custom getter
     public String getFullAddress() {
-        return address + ", " + geography.getDivisionName() + " " + postal_Code;
+        return address + ", " + geography.getDivisionName();
     }
 
 

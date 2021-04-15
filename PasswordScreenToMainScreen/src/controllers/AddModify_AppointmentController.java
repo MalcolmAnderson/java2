@@ -177,7 +177,7 @@ public class AddModify_AppointmentController implements Initializable {
     }
 
     private void LoadHours(ChoiceBox cbHours) {
-        for(int i = 0; i < 23; i++){
+        for(int i = 0; i < 24; i++){
             cbHours.getItems().add(String.format("%02d", i));
         }
     }
@@ -190,23 +190,78 @@ public class AddModify_AppointmentController implements Initializable {
     }
 
     public void onClick_Save(ActionEvent actionEvent) {
-        // TODO - This is the key one to having basic functionality done.
-        appointment.setTitle(txtTitle.getText());
-        appointment.setDescription(txtDescription.getText());
-        appointment.setLocation(txtLocation.getText());
+        boolean okToSave = true;
+        String ErrorMessage = "";
+
+        // confirm that contact and customer are selected
         appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
-        appointment.setType(txtType.getText());
-        int custNumVal = ((Customer)cbCustomers.getSelectionModel().getSelectedItem()).getCustomer_ID();
-        appointment.setCustomer_Id(custNumVal);
+        int customerID = Integer.parseInt(lblCustNumValue.getText());
+        boolean contactNotSelected = appointment.getContact_Id() == -1;
+        boolean customerNotSelected = customerID == -1;
+        boolean eitherCustomerOrContactNotSelected = contactNotSelected || customerNotSelected;
+        ErrorMessage = "Both Contact and Customer must be selected.";
+        okToSave = ErrorNotificationDialog(eitherCustomerOrContactNotSelected, ErrorMessage);
+        if( ! okToSave){
+            return;
+        }
+//        if (eitherCustomerOrContactNotSelected){
+//            okToSave = false;
+//
+//            String line1 = ErrorMessage;
+//            String displayLine = line1;
+//            Alert alert = new Alert(
+//                    Alert.AlertType.ERROR,
+//                    displayLine,
+//                    ButtonType.OK);
+//            alert.showAndWait();
+//        }
+
+        // confirm that start and end times fall within business hours
         appointment.setStart(GetLDTFrom(dpStart, cbStartHours, cbStartMinutes));
         appointment.setEnd(GetLDTFrom(dpEnd, cbEndHours, cbEndMinutes));
-
-        dao.insertOrUpdateAppointment(appointment);
-        if(addEdit == "ADD"){
-            utils.commitNextIdNumber();
+        boolean startIsGood = utils.isValidBusinessHours(appointment.getStart());
+        boolean endIsGood = utils.isValidBusinessHours(appointment.getEnd());
+        // TODO delete these 2 line, they are only for testing
+        startIsGood = true;
+        endIsGood = true;
+        // TODO delete above 2 lines, they are only for testing
+        ErrorMessage = "Both Start and End times must\nbe between 8am and 10pm Eastern Time.";
+        boolean timeOutSideOfAllowableWindow = ! startIsGood || ! endIsGood;
+        okToSave = ErrorNotificationDialog(timeOutSideOfAllowableWindow, ErrorMessage);
+        if( ! okToSave){
+            return;
         }
-        StageManager.ChangeScene(actionEvent, new navInfo_Appointments());
 
+        if(okToSave) {
+            appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
+            int custNumVal = ((Customer)cbCustomers.getSelectionModel().getSelectedItem()).getCustomer_ID();
+            appointment.setCustomer_Id(custNumVal);
+            appointment.setTitle(txtTitle.getText());
+            appointment.setDescription(txtDescription.getText());
+            appointment.setLocation(txtLocation.getText());
+            appointment.setType(txtType.getText());
+
+            dao.insertOrUpdateAppointment(appointment);
+            if (addEdit == "ADD") {
+                utils.commitNextIdNumber();
+            }
+            StageManager.ChangeScene(actionEvent, new navInfo_Appointments());
+        }
+    }
+
+    private boolean ErrorNotificationDialog(boolean timeOutSideOfAllowableWindow, String errorMessage) {
+        boolean okToSave = true;
+        if( timeOutSideOfAllowableWindow){
+            okToSave = false;
+
+            String displayLine = errorMessage;
+            Alert alert = new Alert(
+                    Alert.AlertType.ERROR,
+                    displayLine,
+                    ButtonType.OK);
+            alert.showAndWait();
+        }
+        return okToSave;
     }
 
     private LocalDateTime GetLDTFrom(DatePicker dpDate, ChoiceBox cbHours, ChoiceBox cbMinutes) {
