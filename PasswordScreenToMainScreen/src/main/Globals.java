@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Globals {
+    private static boolean stillFirstLogin;
     private static boolean hasLoginBeenAttempted;
     private static String localLanguage;
     private static boolean wasLoginSuccessful;
@@ -99,5 +100,13 @@ public class Globals {
 
     public static void setCurrentReferenceDate(LocalDateTime currentReferenceDate) {
         Globals.currentReferenceDate = currentReferenceDate;
+    }
+
+    public static boolean isStillFirstLogin() {
+        return stillFirstLogin;
+    }
+
+    public static void setStillFirstLogin(boolean stillFirstLogin) {
+        Globals.stillFirstLogin = stillFirstLogin;
     }
 }

@@ -129,7 +129,6 @@ public class DAO_Appointment_Tests {
         currentSize = appointmentsDisconnectedFromDB.getAllAppointments().size();
         assertEquals(9, currentSize, "Size should not have changed");
         // check modified data
-        // TODO write tests to confirm modified data written to DB
         current = appointmentsDisconnectedFromDB.getAppointmentById(idOfUpdatedAppointment);
         if(current != null) {
             assertEquals(newTitle, current.getTitle());

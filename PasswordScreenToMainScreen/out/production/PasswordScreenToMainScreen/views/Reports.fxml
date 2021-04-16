@@ -3,9 +3,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reports_Controller">
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reports_Controller">
    <children>
-      <Label layoutX="177.0" layoutY="23.0" text="This page is for running reports" />
-      <Button layoutX="348.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClick_Cancel" text="Cancel" />
+      <VBox prefHeight="600.0" prefWidth="1100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="520.0" prefWidth="1100.0">
+               <children>
+                  <TextArea fx:id="taReport" prefHeight="550.0" prefWidth="900.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="1100.0" spacing="30.0">
+               <children>
+                  <Button fx:id="btnAppointmentTypes" mnemonicParsing="false" onAction="#onClick_AppointmentTypes" text="Appointments by Type and by Month" />
+                  <Button fx:id="btnAppointmentsByContact" mnemonicParsing="false" onAction="#onClick_AppointmentsByContact" text="Appointments by Contact" />
+                  <Button fx:id="btnAppointmentsByCustomer" mnemonicParsing="false" onAction="#onClick_AppointmentsByCustomer" text="Appointments by Customer" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="1100.0">
+               <children>
+                  <Button fx:id="btnReturnToAppointmentScreen" mnemonicParsing="false" onAction="#onClick_btnReturnToAppointmentScreen" text="Return to Appointment Screen" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

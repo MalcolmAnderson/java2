@@ -50,7 +50,7 @@ public class DAOAppointments {
                     tsStart.toString(), tsEnd.toString());
     }
 
-    private Appointments selectAppointmentsFromSQLStatement(String sql) {
+    public Appointments selectAppointmentsFromSQLStatement(String sql) {
         Appointments appointments = new Appointments();
         try{
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
@@ -128,9 +128,9 @@ public class DAOAppointments {
                         + "'%s', '%s', '%s', '%s', '%s', "
                         + "'%s', %s, %s, %s);",
                 current.getId(), current.getTitle(), current.getDescription(),
-                current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
-                utils.Local_ToUTC(now), Globals.getUserId(), utils.Local_ToUTC(now),
-                Globals.getUserId(), current.getCustomer_Id(),
+                current.getLocation(), current.getType(), utils.Local_ToUTC(current.getStart()),
+                utils.Local_ToUTC(current.getEnd()), utils.Local_ToUTC(now), Globals.getUserId(),
+                utils.Local_ToUTC(now), Globals.getUserId(), current.getCustomer_Id(),
                 Globals.getUserId(),  current.getContact_Id());
         System.out.println("Insert Statement");
         System.out.println(insertStatement);
@@ -148,9 +148,9 @@ public class DAOAppointments {
                         + " Last_Updated_By = '%s', Customer_ID = %s, User_ID = %s,"
                         + " Contact_ID = %s WHERE Appointment_ID = %s",
                 current.getTitle(), current.getDescription(),
-                current.getLocation(), current.getType(), current.getStart(), current.getEnd(),
-                utils.Local_ToUTC(now), Globals.getUserId(), current.getCustomer_Id(),
-                Globals.getUserId(),  current.getContact_Id(), current.getId());
+                current.getLocation(), current.getType(), utils.Local_ToUTC(current.getStart()),
+                utils.Local_ToUTC(current.getEnd()), utils.Local_ToUTC(now), Globals.getUserId(),
+                current.getCustomer_Id(), Globals.getUserId(),  current.getContact_Id(), current.getId());
         System.out.println("update Statement");
         System.out.println(updateStatement);
         return updateStatement;

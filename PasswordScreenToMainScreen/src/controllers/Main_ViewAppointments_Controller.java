@@ -67,9 +67,11 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }
         RadioButton selected = (RadioButton) tgShowBy.getSelectedToggle();
         System.out.println(selected.getId());
-        LocalDateTime start = utils.getLastSunday(LocalDateTime.now());
-        LocalDateTime end = utils.getNextSunday(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = utils.getLastSunday(now);
+        LocalDateTime end = utils.getNextSunday(now);
         Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
+        HandleNextFifteenMinuteAlert(now, appointments);
 //        Appointments appointments = dao.selectAllAppointments();
         allAppointments.setAll(appointments.getAllAppointments());
         tvAppointments.setItems(allAppointments);
@@ -81,6 +83,33 @@ public class Main_ViewAppointments_Controller implements Initializable {
         DefineTableElements();
         LocalizeTextOnControlsAndHeaders();
 
+    }
+
+    private void HandleNextFifteenMinuteAlert(LocalDateTime now, Appointments appointments) {
+        if(Globals.isStillFirstLogin()) {
+            Globals.setStillFirstLogin(false);
+            boolean noAppointmentsExistInNext15Minutes = true;
+            LocalDateTime fifteenFromNow = now.plusMinutes(15);
+            for (Appointment appointment : appointments.getAllAppointments()) {
+                LocalDateTime start = appointment.getStart();
+                if (start.isAfter(now) && start.isBefore(fifteenFromNow)) {
+                    String message = String.format("Appointment %s is scheduled at %s", appointment.getId(), appointment.getStartDisplay());
+                    Alert alert = new Alert(
+                            Alert.AlertType.WARNING,
+                            message,
+                            ButtonType.OK);
+                    alert.showAndWait();
+                    noAppointmentsExistInNext15Minutes = false;
+                }
+            }
+            if (noAppointmentsExistInNext15Minutes) {
+                Alert alert = new Alert(
+                        Alert.AlertType.INFORMATION,
+                        "There are no appointments in the next 15 minutes.",
+                        ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
     }
 
     private void LocalizeTextOnControlsAndHeaders() {
@@ -107,8 +136,8 @@ public class Main_ViewAppointments_Controller implements Initializable {
 //        btnEditAppointment.setTextFill(Color.WHITE);
 //        btnDeleteAppointment.setBackground(bg_Yellow);
 //        btnDeleteAppointment.setTextFill(Color.WHITE);
-        btnReportsScreen.setBackground(bg_Red);
-        btnReportsScreen.setTextFill(Color.WHITE);
+        btnReportsScreen.setBackground(bg_Yellow);
+//        btnReportsScreen.setTextFill(Color.WHITE);
     }
 
     public void LoadAppointments() {

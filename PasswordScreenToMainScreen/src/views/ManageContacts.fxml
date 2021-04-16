@@ -41,8 +41,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnAddEric" mnemonicParsing="false" onAction="#onClickAddEric" text="Add Eric" />
-                  <Button mnemonicParsing="false" onAction="#onClick_Cancel" text="Return to Appointment Screen" />
+                  <Button fx:id="btnReturnToAppointmentScreen" mnemonicParsing="false" onAction="#onClick_Cancel" text="Return to Appointment Screen" />
                </children>
             </HBox>
          </children>

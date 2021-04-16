@@ -13,6 +13,7 @@ import utils.dataAccess.DBConnection;
 
 import java.nio.file.FileSystems;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -78,6 +79,13 @@ public class Java_Tests {
         ResourceBundle rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
         String foo = rb.getString("Phone");
         assertEquals("Phone", foo);
+    }
+
+    @Test public void whatCountsAsBefore10(){
+        LocalTime lateLimit = LocalTime.of(22, 0,1);
+        LocalTime lt = LocalTime.of(22, 0, 0);
+        boolean ltIsBefore10 = lt.isBefore(lateLimit);
+        assertTrue(ltIsBefore10);
     }
 
 }

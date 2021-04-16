@@ -60,6 +60,7 @@ public class LoginScreen_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.rb = Globals.getResourceBundle();
+        Globals.setStillFirstLogin(true);
 
         btnLogIn.setText(rb.getString("Log.In"));
         btnEnglish.setText(rb.getString("English"));

@@ -324,14 +324,36 @@ public class Utils {
     }
 
     public boolean isValidBusinessHours(LocalDateTime ldt) {
+        // Business Hours by Policy is between 8am and 10pm Eastern
         ldt = Local_ToEastern(ldt);
         LocalTime lt = ldt.toLocalTime();
-        LocalTime earlyLimit = LocalTime.of(8, 00,00);
-        LocalTime lateLimit = LocalTime.of(22, 00,00);
+        LocalTime earlyLimit = LocalTime.of(8, 0,0);
+        LocalTime lateLimit = LocalTime.of(22, 0,10);
         if(lt.isBefore(earlyLimit) || lt.isAfter(lateLimit)){
             return false;
         }
         return true;
+    }
+
+    public boolean isAppointmentWithinPolicy(LocalDateTime start, LocalDateTime end) {
+        boolean retVal = true;
+        boolean startIsGood;
+        boolean endIsGood;
+        startIsGood = isValidBusinessHours(start);  // seems to be having an issue
+        endIsGood = isValidBusinessHours(end);
+        boolean validAppointment = true;
+        if(startIsGood && endIsGood){
+            LocalDateTime runner = start;
+            while(runner.isBefore(end)){
+                runner = runner.plusMinutes(15);
+                if( ! isValidBusinessHours(runner)){
+                    validAppointment = false;
+                    break;
+                }
+            }
+        }
+        retVal = startIsGood && endIsGood && validAppointment;
+        return retVal;
     }
 
 //

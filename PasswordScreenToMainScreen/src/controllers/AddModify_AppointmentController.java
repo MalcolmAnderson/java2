@@ -92,7 +92,6 @@ public class AddModify_AppointmentController implements Initializable {
     }
 
     private void LoadContactList() {
-        // TODO get contacts working
         System.out.println("Entering AddModify_AppointmentController - LoadContactList");
         int contactCount = contacts.getContacts().size();
         Contact current;
@@ -196,41 +195,34 @@ public class AddModify_AppointmentController implements Initializable {
         // confirm that contact and customer are selected
         appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
         int customerID = Integer.parseInt(lblCustNumValue.getText());
-        boolean contactNotSelected = appointment.getContact_Id() == -1;
-        boolean customerNotSelected = customerID == -1;
-        boolean eitherCustomerOrContactNotSelected = contactNotSelected || customerNotSelected;
+        boolean contactSelected = (appointment.getContact_Id() != -1);
+        boolean customerSelected = (customerID != -1);
+        boolean bothCustomerAndContactSelected = contactSelected && customerSelected;
         ErrorMessage = "Both Contact and Customer must be selected.";
-        okToSave = ErrorNotificationDialog(eitherCustomerOrContactNotSelected, ErrorMessage);
+        okToSave = ErrorNotificationDialog(bothCustomerAndContactSelected, ErrorMessage);
         if( ! okToSave){
             return;
         }
-//        if (eitherCustomerOrContactNotSelected){
-//            okToSave = false;
-//
-//            String line1 = ErrorMessage;
-//            String displayLine = line1;
-//            Alert alert = new Alert(
-//                    Alert.AlertType.ERROR,
-//                    displayLine,
-//                    ButtonType.OK);
-//            alert.showAndWait();
-//        }
 
         // confirm that start and end times fall within business hours
-        appointment.setStart(GetLDTFrom(dpStart, cbStartHours, cbStartMinutes));
-        appointment.setEnd(GetLDTFrom(dpEnd, cbEndHours, cbEndMinutes));
-        boolean startIsGood = utils.isValidBusinessHours(appointment.getStart());
-        boolean endIsGood = utils.isValidBusinessHours(appointment.getEnd());
-        // TODO delete these 2 line, they are only for testing
-        startIsGood = true;
-        endIsGood = true;
-        // TODO delete above 2 lines, they are only for testing
-        ErrorMessage = "Both Start and End times must\nbe between 8am and 10pm Eastern Time.";
-        boolean timeOutSideOfAllowableWindow = ! startIsGood || ! endIsGood;
-        okToSave = ErrorNotificationDialog(timeOutSideOfAllowableWindow, ErrorMessage);
+        LocalDateTime start = GetLDTFrom(dpStart, cbStartHours, cbStartMinutes);
+        LocalDateTime end = GetLDTFrom(dpEnd, cbEndHours, cbEndMinutes);
+        appointment.setStart(start);
+        appointment.setEnd(end);
+        boolean isAppointmentWithinPolicy = utils.isAppointmentWithinPolicy(start, end);
+        ErrorMessage = "Appointment must start and end\nbetween 8am and 10pm Eastern Time.";
+        okToSave = ErrorNotificationDialog(isAppointmentWithinPolicy, ErrorMessage);
         if( ! okToSave){
             return;
         }
+
+        ErrorMessage = "Appointment must end may not be before appointment start.";
+        okToSave = ErrorNotificationDialog(start.isBefore(end), ErrorMessage);
+        if( ! okToSave){
+            return;
+        }
+
+
 
         if(okToSave) {
             appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
@@ -249,9 +241,9 @@ public class AddModify_AppointmentController implements Initializable {
         }
     }
 
-    private boolean ErrorNotificationDialog(boolean timeOutSideOfAllowableWindow, String errorMessage) {
+    private boolean ErrorNotificationDialog(boolean trueToContinue, String errorMessage) {
         boolean okToSave = true;
-        if( timeOutSideOfAllowableWindow){
+        if( ! trueToContinue){
             okToSave = false;
 
             String displayLine = errorMessage;
