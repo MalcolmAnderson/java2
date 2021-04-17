@@ -17,7 +17,6 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -105,6 +104,39 @@ public class Java_Tests {
         System.out.println(capitalCities.get("foo"));
         System.out.println(null == capitalCities.get("foo"));
         System.out.println(capitalCities);
+    }
+
+    @Test void anonymousClassShouldWork_1(){
+        class ZooGiftShop{
+            abstract class SaleTodayOnly{
+                abstract int dollarsOff();
+            }
+            public int admission(int basePrice){
+                SaleTodayOnly sale = new SaleTodayOnly() {
+                    @Override
+                    int dollarsOff() {return 3;}
+                }; // pay attention to this semicolon
+                return basePrice - sale.dollarsOff();
+            }
+        }
+        ZooGiftShop zoo = new ZooGiftShop();
+        assertEquals(7, zoo.admission(10));
+    }
+    public static class ZooGiftShop_2 {
+        interface SaleTodayOnly { // internal interfaces can only exist inside a static class
+            int dollarsOff();
+        }
+        public int admission(int basePrice){
+            SaleTodayOnly sale = new SaleTodayOnly() {
+                public int dollarsOff() {return 4;}
+            }; // pay attention to this semicolon
+            return basePrice - sale.dollarsOff();
+        }
+    }
+
+    @Test void anonymousClassShouldWork_2(){
+        ZooGiftShop_2 zoo = new ZooGiftShop_2();
+        assertEquals(6, zoo.admission(10));
     }
 
 }

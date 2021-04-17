@@ -17,12 +17,15 @@ import utils.navigation.navInfo_ManageCustomers;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.IntStream;
 
 public class AddModify_CustomerController implements Initializable {
 
     // setters
     public static Customer customer;
     public static String addEdit;
+    public Button btnSave;
+    public Button btnReturnToAppointmentScreen;
     private String currentCountry;
     private ArrayList<Country> countries;
     private ArrayList<Geography> currentDivisions;
@@ -78,7 +81,7 @@ public class AddModify_CustomerController implements Initializable {
         }
     }
 
-    @FXML void onCancelAction(ActionEvent event) {
+    @FXML void onClick_btnReturnToAppointmentScreen(ActionEvent event) {
         System.out.println("Cancel Clicked");
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -151,15 +154,18 @@ public class AddModify_CustomerController implements Initializable {
         System.out.println("Division Index: " + cmbDivision.getSelectionModel().getSelectedIndex());
     }
 
-    private int SetDivisionsByCountryId(int countryId) {
+        // TODO document Lambda in javadocs
+        private int SetDivisionsByCountryId(int countryId) {
         System.out.println("AddModify_CustomerController SetDivisionsByCountryId called");
         System.out.println(countryId);
         currentDivisions = Geography.getDivisionsForCountryID(countryId);
         int divisionCount = currentDivisions.size();
         cmbDivision.getItems().clear();
-        for(int i = 0; i < currentDivisions.size(); i++){
-            cmbDivision.getItems().add(currentDivisions.get(i).getDivisionName());
-        }
+        IntStream index = IntStream.range(0, currentDivisions.size());
+        index.forEach(i -> cmbDivision.getItems().add(currentDivisions.get(i).getDivisionName()));
+//        for(int i = 0; i < currentDivisions.size(); i++){
+//            cmbDivision.getItems().add(currentDivisions.get(i).getDivisionName());
+//        }
         cmbDivision.getSelectionModel().select(0);
         return divisionCount;
     }

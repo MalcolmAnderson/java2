@@ -102,12 +102,12 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="30.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onSaveAction" text="Save">
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSaveAction" text="Save">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onCancelAction" text="Cancel">
+            <Button fx:id="btnReturnToAppointmentScreen" mnemonicParsing="false" onAction="#onClick_btnReturnToAppointmentScreen" text="Return to Appointment Screen">
                <font>
                   <Font size="18.0" />
                </font>

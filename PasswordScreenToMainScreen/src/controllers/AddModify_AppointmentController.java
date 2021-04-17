@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
+import java.util.stream.IntStream;
 
 public class AddModify_AppointmentController implements Initializable {
 
@@ -71,10 +72,14 @@ public class AddModify_AppointmentController implements Initializable {
     private void PopulateChoiceBoxes() {
         LoadContactList();
         LoadCustomerList();
-        LoadHours(cbStartHours);
-        LoadHours(cbEndHours);
-        LoadMinutes(cbStartMinutes);
-        LoadMinutes(cbEndMinutes);
+        LoadIntegersIntoChoiceBox(cbStartHours, 0, 23);
+        LoadIntegersIntoChoiceBox(cbEndHours, 0, 23);
+        LoadIntegersIntoChoiceBox(cbStartMinutes, 0, 11);
+        LoadIntegersIntoChoiceBox(cbEndMinutes, 0, 11);
+//        LoadHours(cbStartHours);
+//        LoadHours(cbEndHours);
+//        LoadMinutes(cbStartMinutes);
+//        LoadMinutes(cbEndMinutes);
     }
 
     private void LoadCustomerList() {
@@ -172,17 +177,23 @@ public class AddModify_AppointmentController implements Initializable {
         }
     }
 
-    private void LoadMinutes(ChoiceBox cbMinutes) {
-        for(int i = 0; i < 12; i++){
-            cbMinutes.getItems().add(String.format("%02d", i * 5));
-        }
-    }
 
-    private void LoadHours(ChoiceBox cbHours) {
-        for(int i = 0; i < 24; i++){
-            cbHours.getItems().add(String.format("%02d", i));
-        }
+    // TODO document Lambda in javadocs
+    // replaced LoadMinutes and LoadHours with LoadIntegersIntoChoiceBox
+    private void LoadIntegersIntoChoiceBox(ChoiceBox cb, int start, int end){
+        IntStream hours = IntStream.rangeClosed(0, 11);
+        hours.forEach(i -> cb.getItems().add(String.format("%02d", i)));
     }
+//    private void LoadMinutes(ChoiceBox cbMinutes) {
+//        for(int i = 0; i < 12; i++){
+//            cbMinutes.getItems().add(String.format("%02d", i * 5));
+//        }
+//    }
+//    private void LoadHours(ChoiceBox cbHours) {
+//        for(int i = 0; i < 24; i++){
+//            cbHours.getItems().add(String.format("%02d", i));
+//        }
+//    }
 
     private void LocalizeTextOnControlsAndHeaders() {
     }
