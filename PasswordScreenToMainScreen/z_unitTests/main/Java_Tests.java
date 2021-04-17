@@ -14,8 +14,10 @@ import utils.dataAccess.DBConnection;
 import java.nio.file.FileSystems;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -86,6 +88,23 @@ public class Java_Tests {
         LocalTime lt = LocalTime.of(22, 0, 0);
         boolean ltIsBefore10 = lt.isBefore(lateLimit);
         assertTrue(ltIsBefore10);
+    }
+
+    @Test public void usingAHashMap(){
+        HashMap<String, Integer> capitalCities = new HashMap<String, Integer>();
+
+        // Add keys and values (Country, City)
+        String city = "England";
+        capitalCities.put(city, 1);
+        capitalCities.put("Germany", 1);
+        capitalCities.put("Norway", 1);
+        capitalCities.put("USA", 1);
+        int ec = capitalCities.get("England") + 1;
+        capitalCities.put("England", ++ec);
+        System.out.println(capitalCities.get(city));
+        System.out.println(capitalCities.get("foo"));
+        System.out.println(null == capitalCities.get("foo"));
+        System.out.println(capitalCities);
     }
 
 }

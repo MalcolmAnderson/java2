@@ -14,7 +14,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="1100.0" spacing="30.0">
                <children>
-                  <Button fx:id="btnAppointmentTypes" mnemonicParsing="false" onAction="#onClick_AppointmentTypes" text="Appointments by Type and by Month" />
+                  <Button fx:id="btnAppointmentTypes" mnemonicParsing="false" onAction="#onClick_AppointmentByTypeAndByMonth" text="Appointments by Type and by Month" />
                   <Button fx:id="btnAppointmentsByContact" mnemonicParsing="false" onAction="#onClick_AppointmentsByContact" text="Appointments by Contact" />
                   <Button fx:id="btnAppointmentsByCustomer" mnemonicParsing="false" onAction="#onClick_AppointmentsByCustomer" text="Appointments by Customer" />
                </children>
