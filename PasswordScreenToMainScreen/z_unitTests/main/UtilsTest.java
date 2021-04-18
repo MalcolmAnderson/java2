@@ -72,16 +72,22 @@ class UtilsTest {
     }
 
     @Test void shouldFailBecauseTooEarly(){
+        LocalTime earlyLimit = Globals.earlyLimitEasternTime;
+        LocalTime lateLimit = Globals.lateLimitEasternTime;
+
         // local pacific time of 4:59:59 is before 5am, which is 8am eastern
         LocalDateTime bad = LocalDateTime.of(2021, 4,15,4,59,59);
-        boolean isValid = utils.isValidBusinessHours(bad);
+        boolean isValid = utils.doesTimeFallOutsideOfForbiddenTimes(bad, earlyLimit, lateLimit);
         assertFalse(isValid);
     }
 
     @Test void shouldFailBecauseTooLate(){
+        LocalTime earlyLimit = Globals.earlyLimitEasternTime;
+        LocalTime lateLimit = Globals.lateLimitEasternTime;
+
         // local pacific time of 4:59:59 is before 5am, which is 8am eastern
         LocalDateTime bad = LocalDateTime.of(2021, 4,15,19,0,1);
-        boolean isValid = utils.isValidBusinessHours(bad);
+        boolean isValid = utils.doesTimeFallOutsideOfForbiddenTimes(bad, earlyLimit, lateLimit);
         assertFalse(isValid);
     }
 }

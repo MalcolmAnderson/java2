@@ -32,8 +32,7 @@ public class AddModify_ContactController implements Initializable {
     private DAOContacts dao = new DAOContacts(new DBQueryManager());
 
 
-    @FXML
-    void onCancelAction(ActionEvent event) {
+    @FXML public void onCancelAction(ActionEvent event) {
         System.out.println("Cancel Clicked");
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -42,8 +41,7 @@ public class AddModify_ContactController implements Initializable {
         }
     }
 
-    @FXML
-    void onSaveAction(ActionEvent event) {
+    @FXML public void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
         contact.contact_Name = txtName.getText();
         contact.email = txtEmailAddress.getText();

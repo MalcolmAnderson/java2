@@ -1,8 +1,6 @@
 package models;
 
 import main.Globals;
-import utils.dataAccess.DAOGeography;
-
 import java.time.LocalDateTime;
 
 public class Customer {
@@ -61,12 +59,7 @@ public class Customer {
         return address + ", " + geography.getDivisionName();
     }
 
-
-
-
-
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return customer_Name;
     }
     public String toString_Full() {

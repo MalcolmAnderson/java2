@@ -3,16 +3,10 @@ package utils.dataAccess;
 import main.Globals;
 import models.Appointment;
 import models.Appointments;
-import models.Contact;
-import models.Customer;
 import org.junit.jupiter.api.Disabled;
 import utils.Utils;
-
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class DAOAppointments {
 
@@ -69,6 +63,7 @@ public class DAOAppointments {
     }
 
     private Appointment CreateAppointmentFromResultSetRow(ResultSet rs) throws SQLException {
+        // TODO document how this function sets the appointment date and time to local time
         Utils utils = new Utils();
         int appointmentId = rs.getInt("Appointment_Id");
         String title = rs.getString("Title");
@@ -98,8 +93,6 @@ public class DAOAppointments {
         System.out.println(sqlStatement);
         dbQM.RunSQLString(sqlStatement);
     }
-
-
 
     public void deleteAppointmentsByCustomerId(int customer_id) {
         String deleteStatement = String.format(
@@ -137,8 +130,7 @@ public class DAOAppointments {
         return insertStatement;
     }
 
-    @Disabled
-    public String createStatement_UpdateAppointment(Appointment current) {
+    @Disabled public String createStatement_UpdateAppointment(Appointment current) {
         LocalDateTime now = utils.now();
         String updateStatement = String.format(
                 "UPDATE appointments SET"
@@ -174,7 +166,14 @@ public class DAOAppointments {
 //        dbQM.RunSQLString(deleteStatement);
     }
 
-    public boolean AppointmentIdExists(int i) {
-        return false;
+    public Appointments selectExistingNearCustomerAppointments(int customerID, Appointment a) {
+        LocalDateTime oneDayBefore = a.getStart().minusDays(1);
+        LocalDateTime oneDayAfter = a.getEnd().plusDays(1);
+        String sql = String.format(
+                "SELECT * FROM appointments where Customer_ID = %s AND Start >= '%s' AND End <= '%s' ;",
+                customerID, utils.Local_ToUTC(oneDayBefore), utils.Local_ToUTC(oneDayAfter));
+        System.out.println(sql);
+        Appointments nearAppointmentsForCustomer = selectAppointmentsFromSQLStatement(sql);
+        return  nearAppointmentsForCustomer;
     }
 }

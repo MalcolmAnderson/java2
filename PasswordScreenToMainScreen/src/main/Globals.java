@@ -4,6 +4,7 @@ import models.Contacts;
 import models.Customers;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -20,12 +21,16 @@ public class Globals {
     private static String selectedRadioButtonName;
     private static LocalDateTime currentReferenceDate;
 
+    // TODO determine if earlyLimit needs to be 7:59:59
+    public static LocalTime earlyLimitEasternTime = LocalTime.of(8, 0,0);
+    public static LocalTime lateLimitEasternTime = LocalTime.of(22, 0,0);
+
+
     public static ResourceBundle getResourceBundle() {
 //        String rbPath = "utils.localization/Nat";
 //        rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
         return rb;
     }
-
     public static void setResourceBundle(ResourceBundle rb) {
         Globals.rb = rb;
     }
@@ -33,7 +38,6 @@ public class Globals {
     public static boolean getHasLoginBeenAttempted() {
         return hasLoginBeenAttempted;
     }
-
     public static void setHasLoginBeenAttempted(boolean hasLoginBeenAttempted) {
         Globals.hasLoginBeenAttempted = hasLoginBeenAttempted;
     }
@@ -41,7 +45,6 @@ public class Globals {
     public static String getLocalLanguage() {
         return localLanguage;
     }
-
     public static void setDetectedSystemLocalLanguage(String localLanguage) {
         Globals.localLanguage = localLanguage;
     }
@@ -49,7 +52,6 @@ public class Globals {
     public static boolean getWasLoginSuccessful() {
         return wasLoginSuccessful;
     }
-
     public static void setWasLoginSuccessful(boolean wasLoginSuccessful) {
         Globals.wasLoginSuccessful = wasLoginSuccessful;
     }
@@ -57,7 +59,6 @@ public class Globals {
     public static String getUserName() {
         return userName;
     }
-
     public static void setUserName(String userName) {
         Globals.userName = userName;
     }
@@ -65,7 +66,6 @@ public class Globals {
     public static int getUserId() {
         return userId;
     }
-
     public static void setUserId(int user_id) {
         Globals.userId = user_id;
     }
@@ -73,7 +73,6 @@ public class Globals {
     public static Customers getMasterCustomers() {
         return masterCustomers;
     }
-
     public static void setMasterCustomers(Customers masterCustomers) {
         Globals.masterCustomers = masterCustomers;
     }
@@ -81,7 +80,6 @@ public class Globals {
     public static Contacts getMasterContacts() {
         return masterContacts;
     }
-
     public static void setMasterContacts(Contacts masterContacts) {
         Globals.masterContacts = masterContacts;
     }
@@ -89,7 +87,6 @@ public class Globals {
     public static String getSelectedRadioButton() {
         return selectedRadioButtonName;
     }
-
     public static void setSelectedRadioButtonName(String radioButtonName) {
         Globals.selectedRadioButtonName = radioButtonName;
     }
@@ -97,7 +94,6 @@ public class Globals {
     public static LocalDateTime getCurrentReferenceDate() {
         return currentReferenceDate;
     }
-
     public static void setCurrentReferenceDate(LocalDateTime currentReferenceDate) {
         Globals.currentReferenceDate = currentReferenceDate;
     }
@@ -105,7 +101,6 @@ public class Globals {
     public static boolean isStillFirstLogin() {
         return stillFirstLogin;
     }
-
     public static void setStillFirstLogin(boolean stillFirstLogin) {
         Globals.stillFirstLogin = stillFirstLogin;
     }

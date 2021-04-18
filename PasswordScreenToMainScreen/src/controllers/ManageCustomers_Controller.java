@@ -43,7 +43,7 @@ public class ManageCustomers_Controller implements Initializable {
         System.out.println("ManageCustomers_Controller - initialize");
         rb = Globals.getResourceBundle();
 
-        SetButtonColors();
+        //SetButtonColors();
         LocalizeTextOnControlsAndHeaders();
         BindDataToTableView();
     }

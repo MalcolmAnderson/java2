@@ -57,8 +57,7 @@ public class LoginScreen_Controller implements Initializable {
     private Contacts masterContacts;
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    @Override public void initialize(URL url, ResourceBundle rb) {
         this.rb = Globals.getResourceBundle();
         Globals.setStillFirstLogin(true);
 
@@ -89,7 +88,6 @@ public class LoginScreen_Controller implements Initializable {
         TimeConversion tc = new TimeConversion();
         lblTimeZone.setText(tc.getLocalZoneID().toString());
     }
-
 
     public void onClick_LogIn(ActionEvent event) {
         Globals.setHasLoginBeenAttempted(true);
@@ -144,14 +142,14 @@ public class LoginScreen_Controller implements Initializable {
             }
         }
 
-        public void onClickSetFrench(ActionEvent actionEvent) {
-            if(Locale.getDefault().toString().equals("en_US") ){
-                Locale.setDefault(Locales.French());
-                LoadView();
-            } else {
-                System.out.println("\""+Locale.getDefault().toString()+"\"");
-            }
+    public void onClickSetFrench(ActionEvent actionEvent) {
+        if(Locale.getDefault().toString().equals("en_US") ){
+            Locale.setDefault(Locales.French());
+            LoadView();
+        } else {
+            System.out.println("\""+Locale.getDefault().toString()+"\"");
         }
+    }
 
     public void LoadView()  {
         ResourceBundle rb = ResourceBundle.getBundle("utils/localization/Nat", Locale.getDefault());

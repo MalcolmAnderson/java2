@@ -33,7 +33,6 @@ public class Reports_Controller implements Initializable {
 //        SetButtonColors();
     }
 
-
     private void SetButtonColors() {
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
@@ -44,7 +43,6 @@ public class Reports_Controller implements Initializable {
 //        btnAppointmentsByContact.setBackground(bg_Yellow);
 //        btnAppointmentsByCustomer.setTextFill(Color.WHITE);
     }
-
 
     public void onClick_btnReturnToAppointmentScreen(ActionEvent actionEvent) {
         StageManager.ChangeScene(actionEvent, new navInfo_Appointments());

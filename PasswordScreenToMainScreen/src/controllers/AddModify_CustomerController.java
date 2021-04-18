@@ -81,7 +81,7 @@ public class AddModify_CustomerController implements Initializable {
         }
     }
 
-    @FXML void onClick_btnReturnToAppointmentScreen(ActionEvent event) {
+    @FXML public void onClick_btnReturnToAppointmentScreen(ActionEvent event) {
         System.out.println("Cancel Clicked");
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -90,7 +90,7 @@ public class AddModify_CustomerController implements Initializable {
         }
     }
 
-    @FXML void onSaveAction(ActionEvent event) {
+    @FXML public void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
         customer.setCustomer_Name(txtCustomerName.getText());
         customer.setPhone(txtPhoneNumber.getText());
@@ -123,8 +123,7 @@ public class AddModify_CustomerController implements Initializable {
         return retVal;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @Override public void initialize(URL location, ResourceBundle resources) {
 //        rb = resources;
         rb = Globals.getResourceBundle();
         System.out.println("AddModify_CustomerController initialize called");
@@ -154,8 +153,8 @@ public class AddModify_CustomerController implements Initializable {
         System.out.println("Division Index: " + cmbDivision.getSelectionModel().getSelectedIndex());
     }
 
-        // TODO document Lambda in javadocs
-        private int SetDivisionsByCountryId(int countryId) {
+    // TODO document Lambda in javadocs
+    private int SetDivisionsByCountryId(int countryId) {
         System.out.println("AddModify_CustomerController SetDivisionsByCountryId called");
         System.out.println(countryId);
         currentDivisions = Geography.getDivisionsForCountryID(countryId);

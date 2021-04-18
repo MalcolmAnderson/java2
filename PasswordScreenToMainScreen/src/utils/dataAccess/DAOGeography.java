@@ -52,7 +52,6 @@ public class DAOGeography {
         return rs;
     }
 
-
     public static ArrayList<Geography> loadKnownWorld() {
         ArrayList<Geography> divisions = new ArrayList<Geography>();
         ResultSet rs = null;

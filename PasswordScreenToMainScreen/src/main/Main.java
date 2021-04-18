@@ -5,16 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import models.Appointments;
-import main.Globals;
 import utils.dataAccess.DBConnection;
-
-import javax.naming.spi.DirectoryManager;
-import java.io.File;
-import java.io.FileReader;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.FileHandler;
 
 public class Main extends Application {
 
@@ -35,9 +28,7 @@ public class Main extends Application {
         System.exit(0);
     }
 
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
+    @Override public void start(Stage primaryStage) throws Exception{
         ResourceBundle rb = Globals.getResourceBundle();
 
         FXMLLoader loader = new FXMLLoader();

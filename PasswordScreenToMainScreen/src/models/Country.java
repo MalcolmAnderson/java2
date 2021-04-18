@@ -13,13 +13,6 @@ public class Country {
         this.country_ID = country_ID;
     }
 
-//    public static ArrayList<Geography> getKnownWorld() {
-//        return knownWorld;
-//    }
-//    public static void setKnownWorld(ArrayList<Geography> incomingKnownWorld) {
-//        knownWorld = incomingKnownWorld;
-//    }
-
     public String getCountryName() {
         return countryName;
     }

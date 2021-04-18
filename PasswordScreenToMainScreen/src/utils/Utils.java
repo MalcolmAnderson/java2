@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.*;
-import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.Random;
@@ -40,7 +39,6 @@ public class Utils {
             return null;
         }
     }
-
 
     public boolean CheckPassword(String userName, String password) {
         boolean retVal = false;
@@ -183,6 +181,7 @@ public class Utils {
     public String getNextIdNumberFilePath() {
         return nextIdNumberFilePath;
     }
+
     public void setNextIdNumberFilePath(String nextIdNumberFilePath) {
         this.nextIdNumberFilePath = nextIdNumberFilePath;
     }
@@ -212,14 +211,6 @@ public class Utils {
 
 
     }
-
-//    public String LocalDateTime_ToTimeStamp(LocalDateTime dt) {
-//        String retVal = dt.toLocalDate().toString();
-//        retVal += " ";
-//        retVal += dt.toLocalTime().toString();
-//        retVal += ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now()).toString();
-//        return retVal;
-//    }
 
     public LocalDateTime Local_ToEastern(LocalDateTime ldt) {
         ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
@@ -258,7 +249,6 @@ public class Utils {
         return zdtLocal.toLocalDateTime();
     }
 
-
     public LocalDateTime Eastern_ToUTC(LocalDateTime eastern) {
         ZoneId utcZoneId = ZoneId.of("UTC");
         ZoneId estZoneId = ZoneId.of("America/New_York");
@@ -268,10 +258,10 @@ public class Utils {
         return zdtUDT.toLocalDateTime();
     }
 
-
     public void setForcedNowValue(LocalDateTime forcedValueForNow) {
         this.forcedNowValue = forcedValueForNow;
     }
+
     public LocalDateTime now(){
         LocalDateTime now;
         if(forcedNowValue == null){
@@ -281,7 +271,6 @@ public class Utils {
         }
         return now;
     }
-
 
     public LocalDateTime getFirstOfTheMonth(LocalDateTime now) {
         // set to eastern midnight
@@ -323,12 +312,10 @@ public class Utils {
         return now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
     }
 
-    public boolean isValidBusinessHours(LocalDateTime ldt) {
+    public boolean doesTimeFallOutsideOfForbiddenTimes(LocalDateTime ldt, LocalTime earlyLimit, LocalTime lateLimit) {
         // Business Hours by Policy is between 8am and 10pm Eastern
         ldt = Local_ToEastern(ldt);
         LocalTime lt = ldt.toLocalTime();
-        LocalTime earlyLimit = LocalTime.of(8, 0,0);
-        LocalTime lateLimit = LocalTime.of(22, 0,10);
         if(lt.isBefore(earlyLimit) || lt.isAfter(lateLimit)){
             return false;
         }
@@ -339,14 +326,16 @@ public class Utils {
         boolean retVal = true;
         boolean startIsGood;
         boolean endIsGood;
-        startIsGood = isValidBusinessHours(start);  // seems to be having an issue
-        endIsGood = isValidBusinessHours(end);
+        LocalTime earlyLimit = Globals.earlyLimitEasternTime;
+        LocalTime lateLimit = Globals.lateLimitEasternTime;
+        startIsGood = doesTimeFallOutsideOfForbiddenTimes(start, earlyLimit, lateLimit);  // seems to be having an issue
+        endIsGood = doesTimeFallOutsideOfForbiddenTimes(end, earlyLimit, lateLimit);
         boolean validAppointment = true;
         if(startIsGood && endIsGood){
             LocalDateTime runner = start;
             while(runner.isBefore(end)){
                 runner = runner.plusMinutes(15);
-                if( ! isValidBusinessHours(runner)){
+                if( ! doesTimeFallOutsideOfForbiddenTimes(runner, earlyLimit, lateLimit)){
                     validAppointment = false;
                     break;
                 }
@@ -356,6 +345,7 @@ public class Utils {
         return retVal;
     }
 
+// Sample code from Malcolm W. (WGU) as a starter point for making my timezone logic work
 //
 //        ZonedDateTime localStartTime = ZonedDateTime.ofInstant(utcZDT.toInstant(),localZoneId);
 //

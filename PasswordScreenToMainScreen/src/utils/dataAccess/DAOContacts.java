@@ -6,7 +6,6 @@ import models.Contacts;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DAOContacts {
 
@@ -108,6 +107,7 @@ public class DAOContacts {
         System.out.println(sqlStatement);
         dbQM.RunSQLString(sqlStatement);
     }
+
     public void deleteContactByID(int id) {
         String deleteStatement = String.format(
                 "DELETE FROM contacts WHERE Contact_ID = '%s'", id);

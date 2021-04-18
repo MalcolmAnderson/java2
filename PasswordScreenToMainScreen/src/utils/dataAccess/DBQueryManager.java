@@ -63,5 +63,4 @@ public class DBQueryManager {
         }
         return size > 0;
     }
-
 }

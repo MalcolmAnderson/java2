@@ -17,8 +17,7 @@ public class Contact {
         this.email = "not set";
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return contact_Name;
     }
 
@@ -40,10 +39,6 @@ public class Contact {
 
     public String getContact_Name() {
         return contact_Name;
-    }
-
-    public void setContact_Name(String contact_Name) {
-        this.contact_Name = contact_Name;
     }
 
     public String getEmail() {

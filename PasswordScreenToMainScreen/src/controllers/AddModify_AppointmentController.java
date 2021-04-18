@@ -52,17 +52,14 @@ public class AddModify_AppointmentController implements Initializable {
     private Contacts contacts = Globals.getMasterContacts();
     private int currentCustomerNumber;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("AddModify_AppointmentController - initialize");
         rb = Globals.getResourceBundle();
         System.out.println("Current Appointment : " + appointment.toString());
 
         // Completed subroutines
-        HandleInboundCustomerObject();
-
-        // in progress
         PopulateChoiceBoxes();
+        HandleInboundCustomerObject();
 
         // TODO handle
         SetSimpleScreenValues();
@@ -72,10 +69,10 @@ public class AddModify_AppointmentController implements Initializable {
     private void PopulateChoiceBoxes() {
         LoadContactList();
         LoadCustomerList();
-        LoadIntegersIntoChoiceBox(cbStartHours, 0, 23);
-        LoadIntegersIntoChoiceBox(cbEndHours, 0, 23);
-        LoadIntegersIntoChoiceBox(cbStartMinutes, 0, 11);
-        LoadIntegersIntoChoiceBox(cbEndMinutes, 0, 11);
+        LoadIntegersIntoChoiceBox(cbStartHours, 0, 23, 1);
+        LoadIntegersIntoChoiceBox(cbEndHours, 0, 23, 1);
+        LoadIntegersIntoChoiceBox(cbStartMinutes, 0, 11, 5);
+        LoadIntegersIntoChoiceBox(cbEndMinutes, 0, 11, 5);
 //        LoadHours(cbStartHours);
 //        LoadHours(cbEndHours);
 //        LoadMinutes(cbStartMinutes);
@@ -180,10 +177,11 @@ public class AddModify_AppointmentController implements Initializable {
 
     // TODO document Lambda in javadocs
     // replaced LoadMinutes and LoadHours with LoadIntegersIntoChoiceBox
-    private void LoadIntegersIntoChoiceBox(ChoiceBox cb, int start, int end){
-        IntStream hours = IntStream.rangeClosed(0, 11);
-        hours.forEach(i -> cb.getItems().add(String.format("%02d", i)));
+    private void LoadIntegersIntoChoiceBox(ChoiceBox cb, int start, int end, int multiplier){
+        IntStream hours = IntStream.rangeClosed(start, end);
+        hours.forEach(i -> cb.getItems().add(String.format("%02d", i * multiplier)));
     }
+// Leave these comments to explain the Lamda change
 //    private void LoadMinutes(ChoiceBox cbMinutes) {
 //        for(int i = 0; i < 12; i++){
 //            cbMinutes.getItems().add(String.format("%02d", i * 5));
@@ -207,22 +205,15 @@ public class AddModify_AppointmentController implements Initializable {
         String ErrorMessage = "";
 
         // confirm that contact and customer are selected
-        appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
-        int customerID = Integer.parseInt(lblCustNumValue.getText());
-        boolean contactSelected = (appointment.getContact_Id() != -1);
-        boolean customerSelected = (customerID != -1);
-        boolean bothCustomerAndContactSelected = contactSelected && customerSelected;
-        ErrorMessage = "Both Contact and Customer must be selected.";
-        okToSave = ErrorNotificationDialog(bothCustomerAndContactSelected, ErrorMessage);
-        if( ! okToSave){
-            return;
-        }
+        if( ! validateBothContactAndCustomerAreSelected()){ return; }
+
 
         // confirm that start and end times fall within business hours
         LocalDateTime start = GetLDTFrom(dpStart, cbStartHours, cbStartMinutes);
         LocalDateTime end = GetLDTFrom(dpEnd, cbEndHours, cbEndMinutes);
         appointment.setStart(start);
         appointment.setEnd(end);
+        if (! validateAppointmentDoesNotOverlapWithExistingAppointmentForCustomer()) { return; }
         boolean isAppointmentWithinPolicy = utils.isAppointmentWithinPolicy(start, end);
         ErrorMessage = "Appointment must start and end\nbetween 8am and 10pm Eastern Time.";
         okToSave = ErrorNotificationDialog(isAppointmentWithinPolicy, ErrorMessage);
@@ -232,16 +223,14 @@ public class AddModify_AppointmentController implements Initializable {
 
         ErrorMessage = "Appointment must end may not be before appointment start.";
         okToSave = ErrorNotificationDialog(start.isBefore(end), ErrorMessage);
-        if( ! okToSave){
-            return;
-        }
+        if( ! okToSave){ return; }
 
 
 
         if(okToSave) {
             appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
-            int custNumVal = ((Customer)cbCustomers.getSelectionModel().getSelectedItem()).getCustomer_ID();
-            appointment.setCustomer_Id(custNumVal);
+            int customerNumberValue = ((Customer)cbCustomers.getSelectionModel().getSelectedItem()).getCustomer_ID();
+            appointment.setCustomer_Id(customerNumberValue);
             appointment.setTitle(txtTitle.getText());
             appointment.setDescription(txtDescription.getText());
             appointment.setLocation(txtLocation.getText());
@@ -253,6 +242,68 @@ public class AddModify_AppointmentController implements Initializable {
             }
             StageManager.ChangeScene(actionEvent, new navInfo_Appointments());
         }
+    }
+
+    private boolean validateAppointmentDoesNotOverlapWithExistingAppointmentForCustomer(){
+        String ErrorMessage;
+        boolean okToSave;
+        int customerID = Integer.parseInt(lblCustNumValue.getText());
+        Appointments customerAppointments = dao.selectExistingNearCustomerAppointments(customerID, appointment);
+        int appointmentIdOfConflict = isAppointmentFreeFromOverlap(appointment, customerAppointments);
+        ErrorMessage = "This appointment for customer " + customerID + " (appointment # " + appointment.getId() + ")\noverlaps with appointment # " + appointmentIdOfConflict;
+        okToSave = ErrorNotificationDialog(appointmentIdOfConflict == -1, ErrorMessage);
+        return okToSave;
+    }
+
+    private int isAppointmentFreeFromOverlap(Appointment thisAppointment, Appointments nearAppointmentsForCustomer) {
+        // returns the appointment Id of the first overlapping appointment
+        int overlappingAppointmentId = -1;
+        if(nearAppointmentsForCustomer.getAllAppointments().size() != 0){
+            LocalDateTime thisStart = thisAppointment.getStart();
+            LocalDateTime thisEnd = thisAppointment.getEnd();
+            for (Appointment a : nearAppointmentsForCustomer.getAllAppointments()) {
+                boolean startConflicts = isTimeBetween(thisStart, a);
+                boolean endConflicts = isTimeBetween(thisEnd, a);
+                int thisId = thisAppointment.getId();
+                int thatId = a.getId();
+                boolean comparingCurrentAppointmentAgainstThisAppointment = (thisId == thatId);
+                if( ! comparingCurrentAppointmentAgainstThisAppointment){
+                    if( startConflicts || endConflicts ) { // then still good
+                        overlappingAppointmentId = a.getId();
+                        break;
+                    }
+                }
+            }
+        }
+        return overlappingAppointmentId;
+    }
+
+    private boolean isEqualOr(LocalDateTime runner, String compare, LocalDateTime timeToCompareAgainst) {
+        boolean retVal = false;
+        if(compare.equals("BEFORE")){
+            retVal = (runner.isBefore(timeToCompareAgainst) || runner.equals(timeToCompareAgainst));
+        } else {
+            retVal = (runner.isAfter(timeToCompareAgainst) || runner.equals(timeToCompareAgainst));
+        }
+        return retVal;
+    }
+
+    private boolean isTimeBetween(LocalDateTime ldt, Appointment a) {
+        boolean isBetween = ldt.isAfter(a.getStart()) && ldt.isBefore(a.getEnd());
+        return isBetween;
+    }
+
+    private boolean validateBothContactAndCustomerAreSelected() {
+        String ErrorMessage;
+        boolean okToSave;
+        appointment.setContact_Id(Integer.parseInt(lblContactNumValue.getText()));
+        int customerID = Integer.parseInt(lblCustNumValue.getText());
+        boolean contactSelected = (appointment.getContact_Id() != -1);
+        boolean customerSelected = (customerID != -1);
+        boolean bothCustomerAndContactSelected = contactSelected && customerSelected;
+        ErrorMessage = "Both Contact and Customer must be selected.";
+        okToSave = ErrorNotificationDialog(bothCustomerAndContactSelected, ErrorMessage);
+        return okToSave;
     }
 
     private boolean ErrorNotificationDialog(boolean trueToContinue, String errorMessage) {
@@ -293,6 +344,5 @@ public class AddModify_AppointmentController implements Initializable {
         lblContactNumValue.setText(String.valueOf(newContact.getContact_ID()));
         System.out.println("newContact.getContact_ID(): " + newContact.getContact_ID());
         System.out.println("lblContactNumValue: " + lblContactNumValue.getText());
-
     }
 }

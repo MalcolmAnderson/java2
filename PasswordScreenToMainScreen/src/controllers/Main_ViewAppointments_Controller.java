@@ -46,20 +46,11 @@ public class Main_ViewAppointments_Controller implements Initializable {
     Utils utils = new Utils();
 
     @FXML private TableView<Appointment> appointmentsTable;
-//    public TableColumn columnId;
-//    public TableColumn title;
-//    public TableColumn description;
-//    public TableColumn location;
-//    public TableColumn contact;
-//    public TableColumn type;
-//    public TableColumn start;
-//    public TableColumn end;
-//    public TableColumn custId;
 
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
-        SetButtonColors();
+        //SetButtonColors();
         if(Globals.getSelectedRadioButton().equals("rbByWeek")){
             rbByWeek.setSelected(true);
         } else {
@@ -136,13 +127,8 @@ public class Main_ViewAppointments_Controller implements Initializable {
 //        btnEditAppointment.setTextFill(Color.WHITE);
 //        btnDeleteAppointment.setBackground(bg_Yellow);
 //        btnDeleteAppointment.setTextFill(Color.WHITE);
-        btnReportsScreen.setBackground(bg_Yellow);
+//        btnReportsScreen.setBackground(bg_Yellow);
 //        btnReportsScreen.setTextFill(Color.WHITE);
-    }
-
-    public void LoadAppointments() {
-
-        System.out.println("LoadAppointments Doesn't Do Anything Yet.");
     }
 
     public void onClick_ManageCustomers(ActionEvent event) {

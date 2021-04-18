@@ -34,7 +34,6 @@ public class Geography {
         return knownWorld.size() > 5;
     }
 
-
     public static ArrayList<Geography> getDivisionsForCountryID(int country_ID) {
         ArrayList<Geography> divisions = new ArrayList<Geography>();
 
@@ -45,7 +44,6 @@ public class Geography {
         });
         return divisions;
     }
-
 
     public static ArrayList<Geography> getKnownWorld() {
         return knownWorld;
@@ -91,7 +89,6 @@ public class Geography {
         }
         return divisions;
     }
-
 
     public int getDivisionId() {
         return division_ID;

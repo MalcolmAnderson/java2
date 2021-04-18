@@ -67,6 +67,4 @@ public class DBConnection {
         }
         System.out.println("Connection Successfully Closed");
     }
-
-
 }
