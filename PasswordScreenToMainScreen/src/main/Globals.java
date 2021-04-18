@@ -27,8 +27,8 @@ public class Globals {
 
 
     public static ResourceBundle getResourceBundle() {
-//        String rbPath = "utils.localization/Nat";
-//        rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
+        String rbPath = "utils.localization/Nat";
+        rb = ResourceBundle.getBundle(rbPath, Locale.getDefault());
         return rb;
     }
     public static void setResourceBundle(ResourceBundle rb) {

@@ -3,17 +3,12 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
 import main.Globals;
 import models.*;
 import utils.Utils;
 import utils.dataAccess.DAOAppointments;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_Appointments;
-import utils.navigation.navInfo_ManageCustomers;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,7 +45,7 @@ public class AddModify_AppointmentController implements Initializable {
     private Utils utils = new Utils();
     private Customers customers = Globals.getMasterCustomers();
     private Contacts contacts = Globals.getMasterContacts();
-    private int currentCustomerNumber;
+//    private int currentCustomerNumber;
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("AddModify_AppointmentController - initialize");
@@ -64,6 +59,10 @@ public class AddModify_AppointmentController implements Initializable {
         // TODO handle
         SetSimpleScreenValues();
         LocalizeTextOnControlsAndHeaders();
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
+
     }
 
     private void PopulateChoiceBoxes() {
@@ -163,14 +162,14 @@ public class AddModify_AppointmentController implements Initializable {
             appointment.setId(utils.getNextIdNumber());
         }
         if(addEdit == "ADD"){
-            lblScreenIdentifier.setText("Add Appointment");
+            lblScreenIdentifier.setText(rb.getString("Add.Appointment"));
         } else {
             if (addEdit != "EDIT"){
                 System.out.println("the value of addEdit is " + addEdit);
                 System.out.println("the value of addEdit should only ever be ADD or EDIT");
                 System.exit(-1);
             }
-            lblScreenIdentifier.setText("Edit Appointment");
+            lblScreenIdentifier.setText(rb.getString("Edit.Appointment"));
         }
     }
 
@@ -193,9 +192,6 @@ public class AddModify_AppointmentController implements Initializable {
 //        }
 //    }
 
-    private void LocalizeTextOnControlsAndHeaders() {
-    }
-
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
@@ -215,13 +211,13 @@ public class AddModify_AppointmentController implements Initializable {
         appointment.setEnd(end);
         if (! validateAppointmentDoesNotOverlapWithExistingAppointmentForCustomer()) { return; }
         boolean isAppointmentWithinPolicy = utils.isAppointmentWithinPolicy(start, end);
-        ErrorMessage = "Appointment must start and end\nbetween 8am and 10pm Eastern Time.";
+        ErrorMessage = rb.getString("ApptEasternStartEndPolicyMessage");
         okToSave = ErrorNotificationDialog(isAppointmentWithinPolicy, ErrorMessage);
         if( ! okToSave){
             return;
         }
 
-        ErrorMessage = "Appointment must end may not be before appointment start.";
+        ErrorMessage = rb.getString("ApptStartBeforeEndMessage");
         okToSave = ErrorNotificationDialog(start.isBefore(end), ErrorMessage);
         if( ! okToSave){ return; }
 
@@ -250,7 +246,11 @@ public class AddModify_AppointmentController implements Initializable {
         int customerID = Integer.parseInt(lblCustNumValue.getText());
         Appointments customerAppointments = dao.selectExistingNearCustomerAppointments(customerID, appointment);
         int appointmentIdOfConflict = isAppointmentFreeFromOverlap(appointment, customerAppointments);
-        ErrorMessage = "This appointment for customer " + customerID + " (appointment # " + appointment.getId() + ")\noverlaps with appointment # " + appointmentIdOfConflict;
+//        ErrorMessage = "This appointment for customer " + customerID + " (appointment # "
+//                + appointment.getId() + ")\noverlaps with appointment # " + appointmentIdOfConflict;
+        ErrorMessage = rb.getString("OverlapError_1") + " "
+                + customerID + " (" + rb.getString("OverlapError_2") +" # " + appointment.getId() + ")\n"
+                + rb.getString("OverlapError_3") + " # " + appointmentIdOfConflict;
         okToSave = ErrorNotificationDialog(appointmentIdOfConflict == -1, ErrorMessage);
         return okToSave;
     }
@@ -301,7 +301,7 @@ public class AddModify_AppointmentController implements Initializable {
         boolean contactSelected = (appointment.getContact_Id() != -1);
         boolean customerSelected = (customerID != -1);
         boolean bothCustomerAndContactSelected = contactSelected && customerSelected;
-        ErrorMessage = "Both Contact and Customer must be selected.";
+        ErrorMessage = rb.getString("Both.Contact.and.Customer.must.be.selected");
         okToSave = ErrorNotificationDialog(bothCustomerAndContactSelected, ErrorMessage);
         return okToSave;
     }

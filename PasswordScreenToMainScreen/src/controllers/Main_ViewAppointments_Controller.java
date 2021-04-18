@@ -30,23 +30,22 @@ public class Main_ViewAppointments_Controller implements Initializable {
     public Button btnDeleteAppointment;
     public Button btnBackOneUnit;
     public Button btnForwardOneUnit;
-    public TableColumn columnId;
-    public TableColumn columnTitle;
-    public TableColumn columnDescription;
-    public TableColumn columnLocation;
-    public TableColumn columnContact;
-    public TableColumn columnType;
-    public TableColumn columnStart;
-    public TableColumn columnEnd;
-    public TableColumn columnCustomerId;
+    public TableColumn tcId;
+    public TableColumn tcTitle;
+    public TableColumn tcDescription;
+    public TableColumn tcLocation;
+    public TableColumn tcContact;
+    public TableColumn tcType;
+    public TableColumn tcStart;
+    public TableColumn tcEnd;
+    public TableColumn tcCustomerId;
     public RadioButton rbByWeek;
     public RadioButton rbByMonth;
     public ToggleGroup tgShowBy;
+
     DAOAppointments dao = new DAOAppointments();
     Utils utils = new Utils();
-
-    @FXML private TableView<Appointment> appointmentsTable;
-
+    ResourceBundle rb = Globals.getResourceBundle();
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,6 +55,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
         } else {
             rbByMonth.setSelected(true);
         }
+        LocalizeTextOnControlsAndHeaders();
         RadioButton selected = (RadioButton) tgShowBy.getSelectedToggle();
         System.out.println(selected.getId());
         LocalDateTime now = LocalDateTime.now();
@@ -63,7 +63,6 @@ public class Main_ViewAppointments_Controller implements Initializable {
         LocalDateTime end = utils.getNextSunday(now);
         Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
         HandleNextFifteenMinuteAlert(now, appointments);
-//        Appointments appointments = dao.selectAllAppointments();
         allAppointments.setAll(appointments.getAllAppointments());
         tvAppointments.setItems(allAppointments);
         if(!Globals.getUserName().equals("admin")){
@@ -72,8 +71,29 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }
 
         DefineTableElements();
-        LocalizeTextOnControlsAndHeaders();
 
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
+        btnManageCustomers.setText(rb.getString("Manage.Customers"));
+        btnManageContacts.setText(rb.getString("Manage.Contacts"));
+        btnReportsScreen.setText(rb.getString("Reports.Screen"));
+        btnAddAppointment.setText(rb.getString("Add.Appointment"));
+        btnEditAppointment.setText(rb.getString("Edit.Appointment"));
+        btnDeleteAppointment.setText(rb.getString("Delete.Appointment"));
+//        btnBackOneUnit.setText(rb.getString("")); // not localized
+//        btnForwardOneUnit.setText(rb.getString("")); not localized
+        tcId.setText(rb.getString("ID"));
+        tcTitle.setText(rb.getString("Title"));
+        tcDescription.setText(rb.getString("Description"));
+        tcLocation.setText(rb.getString("Location"));
+        tcContact.setText(rb.getString("Contact"));
+        tcType.setText(rb.getString("Type"));
+        tcStart.setText(rb.getString("Start"));
+        tcEnd.setText(rb.getString("End"));
+        tcCustomerId.setText(rb.getString("Cust.ID"));
+        rbByWeek.setText(rb.getString("Show.List.By.Week"));
+        rbByMonth.setText(rb.getString("Show.List.By.Month"));
     }
 
     private void HandleNextFifteenMinuteAlert(LocalDateTime now, Appointments appointments) {
@@ -84,7 +104,8 @@ public class Main_ViewAppointments_Controller implements Initializable {
             for (Appointment appointment : appointments.getAllAppointments()) {
                 LocalDateTime start = appointment.getStart();
                 if (start.isAfter(now) && start.isBefore(fifteenFromNow)) {
-                    String message = String.format("Appointment %s is scheduled at %s", appointment.getId(), appointment.getStartDisplay());
+                    String message = String.format(rb.getString("Appointment.num.is.scheduled.at"),
+                            appointment.getId(), appointment.getStartDisplay());
                     Alert alert = new Alert(
                             Alert.AlertType.WARNING,
                             message,
@@ -96,26 +117,23 @@ public class Main_ViewAppointments_Controller implements Initializable {
             if (noAppointmentsExistInNext15Minutes) {
                 Alert alert = new Alert(
                         Alert.AlertType.INFORMATION,
-                        "There are no appointments in the next 15 minutes.",
+                        rb.getString("No.appointments.in.next.15.minutes"),
                         ButtonType.OK);
                 alert.showAndWait();
             }
         }
     }
 
-    private void LocalizeTextOnControlsAndHeaders() {
-    }
-
     private void DefineTableElements() {
-        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        columnLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
-        columnContact.setCellValueFactory(new PropertyValueFactory<>("ContactName"));
-        columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        columnStart.setCellValueFactory(new PropertyValueFactory<>("startDisplay"));
-        columnEnd.setCellValueFactory(new PropertyValueFactory<>("endDisplay"));
-        columnCustomerId.setCellValueFactory(new PropertyValueFactory<>("customer_Id"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tcDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        tcContact.setCellValueFactory(new PropertyValueFactory<>("ContactName"));
+        tcType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        tcStart.setCellValueFactory(new PropertyValueFactory<>("startDisplay"));
+        tcEnd.setCellValueFactory(new PropertyValueFactory<>("endDisplay"));
+        tcCustomerId.setCellValueFactory(new PropertyValueFactory<>("customer_Id"));
     }
 
     private void SetButtonColors() {
@@ -163,7 +181,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }else {
             Alert alert = new Alert(
                     Alert.AlertType.INFORMATION,
-                    "Please select an appointment to edit",
+                    rb.getString("Please.select.an.appointment.to.edit"),
                     ButtonType.OK);
             alert.showAndWait();
         }
@@ -174,9 +192,9 @@ public class Main_ViewAppointments_Controller implements Initializable {
         Appointment selected = (Appointment) tvAppointments.getSelectionModel().getSelectedItem();
         System.out.println("Selected Appointment Index = " + selectedAppointmentIndex);
         if (selectedAppointmentIndex != -1){
-            String line1 = "Warning: This action will delete appointment Id: ";
-            String line2 = "\nAppointment type: ";
-            String line3 = "\nAre you sure you want to delete this appointment?";
+            String line1 = rb.getString("ApptDeleteWarn_1");
+            String line2 = rb.getString("ApptDeleteWarn_2");
+            String line3 = rb.getString("ApptDeleteWarn_3");
             String displayLine = line1 + selected.getId() + line2 + selected.getType() + line3;
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,
@@ -191,7 +209,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }else {
             Alert alert = new Alert(
                     Alert.AlertType.INFORMATION,
-                    "Please select an appointment to delete",
+                    rb.getString("Please.select.an.appointment.to.delete"),
                     ButtonType.OK);
             alert.showAndWait();
         }

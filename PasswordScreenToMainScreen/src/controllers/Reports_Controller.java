@@ -30,7 +30,12 @@ public class Reports_Controller implements Initializable {
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         taReport.editableProperty().setValue(false);
+        LocalizeTextOnControlsAndHeaders();
+
 //        SetButtonColors();
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
     }
 
     private void SetButtonColors() {

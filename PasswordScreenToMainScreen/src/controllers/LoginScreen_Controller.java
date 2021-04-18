@@ -3,14 +3,12 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.input.KeyCode;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.Globals;
 import models.Contacts;
@@ -48,7 +46,7 @@ public class LoginScreen_Controller implements Initializable {
     public Label lblTimeZone;
     public Label lblDetectedTimeZone;
     Utils utils = new Utils();
-    ResourceBundle rb;
+    ResourceBundle rb = Globals.getResourceBundle();
     boolean hasLoginAttempted;
     boolean wasLoginSuccessful;
     private DAOCustomers daoCustomers = new DAOCustomers();
@@ -58,15 +56,20 @@ public class LoginScreen_Controller implements Initializable {
 
 
     @Override public void initialize(URL url, ResourceBundle rb) {
-        this.rb = Globals.getResourceBundle();
+//        this.rb = Globals.getResourceBundle();
         Globals.setStillFirstLogin(true);
+        LocalizeTextOnControlsAndHeaders();
+        TimeConversion tc = new TimeConversion();
+        lblTimeZone.setText(tc.getLocalZoneID().toString());
+    }
 
+    private void LocalizeTextOnControlsAndHeaders() {
         btnLogIn.setText(rb.getString("Log.In"));
         btnEnglish.setText(rb.getString("English"));
         btnFrench.setText(rb.getString("French"));
         lblDescription.setText(rb.getString("Acme.Appointment.Setter.version.1.0.0"));
         lblDetectedLocalLanguage.setText(rb.getString("Detected.Local.Language"));
-//        lblDetectedTimeZone.setText(rb.getString("Detected.Time.Zone"));
+        lblDetectedTimeZone.setText(rb.getString("Detected.Time.Zone"));
         if(Globals.getLocalLanguage().equals("fr_FR") ){
             localLanguage.setText(rb.getString("French"));
         } else {
@@ -85,8 +88,6 @@ public class LoginScreen_Controller implements Initializable {
         }
         lblUserName.setText(rb.getString("User.Name"));
         lblPassword.setText(rb.getString("Password"));
-        TimeConversion tc = new TimeConversion();
-        lblTimeZone.setText(tc.getLocalZoneID().toString());
     }
 
     public void onClick_LogIn(ActionEvent event) {
@@ -134,13 +135,13 @@ public class LoginScreen_Controller implements Initializable {
     }
 
     public void onClickSetEnglish(ActionEvent actionEvent) {
-            if(Locale.getDefault().toString().equals("fr_FR") ){
-                Locale.setDefault(Locales.English());
-                LoadView();
-            } else {
-                System.out.println("\""+Locale.getDefault().toString()+"\"");
-            }
+        if(Locale.getDefault().toString().equals("fr_FR") ){
+            Locale.setDefault(Locales.English());
+            LoadView();
+        } else {
+            System.out.println("\""+Locale.getDefault().toString()+"\"");
         }
+    }
 
     public void onClickSetFrench(ActionEvent actionEvent) {
         if(Locale.getDefault().toString().equals("en_US") ){
@@ -156,6 +157,7 @@ public class LoginScreen_Controller implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/views/LoginScreen.fxml"));
         loader.setResources(rb);
+        LocalizeTextOnControlsAndHeaders();
         try {
             Parent root = loader.load();
             Stage s = (Stage) btnLogIn.getScene().getWindow();

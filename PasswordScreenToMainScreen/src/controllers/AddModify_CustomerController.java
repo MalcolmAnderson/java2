@@ -128,6 +128,7 @@ public class AddModify_CustomerController implements Initializable {
         rb = Globals.getResourceBundle();
         System.out.println("AddModify_CustomerController initialize called");
         HandleInboundCustomerObject();
+        LocalizeTextOnControlsAndHeaders();
 
         countries = DAOGeography.getCountries();
 
@@ -151,6 +152,9 @@ public class AddModify_CustomerController implements Initializable {
             }
         }
         System.out.println("Division Index: " + cmbDivision.getSelectionModel().getSelectedIndex());
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
     }
 
     // TODO document Lambda in javadocs

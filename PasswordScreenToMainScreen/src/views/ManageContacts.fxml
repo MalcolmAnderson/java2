@@ -12,7 +12,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="36.0" text="This page is for adding adding, updating and deleting contacts" textAlignment="CENTER" />
+                  <Label fx:id="lblScreenPurpose" prefHeight="36.0" text="This page is for adding adding, updating and deleting contacts" textAlignment="CENTER" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="317.0" prefWidth="601.0">

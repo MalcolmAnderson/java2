@@ -46,10 +46,10 @@
                   <Button fx:id="btnLogIn" defaultButton="true" mnemonicParsing="false" onAction="#onClick_LogIn" text="%Log.In" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label fx:id="localLanguage" text="placeholder" />
                   <Label fx:id="lblDetectedLocalLanguage" text="%Detected.Local.Language" textAlignment="RIGHT" />
+                  <Label fx:id="localLanguage" text="placeholder" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">

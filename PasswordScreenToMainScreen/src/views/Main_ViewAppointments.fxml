@@ -44,15 +44,15 @@
                <children>
                   <TableView fx:id="tvAppointments" prefHeight="400.0" prefWidth="1050.0">
                     <columns>
-                      <TableColumn fx:id="columnId" minWidth="35.0" prefWidth="-1.0" text="ID" />
-                        <TableColumn fx:id="columnTitle" minWidth="140.0" prefWidth="-1.0" text="Title" />
-                        <TableColumn fx:id="columnDescription" minWidth="254.0" prefWidth="-1.0" text="Description" />
-                        <TableColumn fx:id="columnLocation" prefWidth="150.0" text="Location" />
-                        <TableColumn fx:id="columnContact" minWidth="95.0" prefWidth="-1.0" text="Contact" />
-                        <TableColumn fx:id="columnType" prefWidth="90.0" text="Type" />
-                        <TableColumn fx:id="columnStart" minWidth="110.0" prefWidth="-1.0" text="Start" />
-                        <TableColumn fx:id="columnEnd" minWidth="110.0" prefWidth="-1.0" text="End" />
-                        <TableColumn fx:id="columnCustomerId" prefWidth="50.0" text="Cust ID" />
+                      <TableColumn fx:id="tcId" minWidth="35.0" prefWidth="-1.0" text="ID" />
+                        <TableColumn fx:id="tcTitle" minWidth="140.0" prefWidth="-1.0" text="Title" />
+                        <TableColumn fx:id="tcDescription" minWidth="254.0" prefWidth="-1.0" text="Description" />
+                        <TableColumn fx:id="tcLocation" prefWidth="150.0" text="Location" />
+                        <TableColumn fx:id="tcContact" minWidth="95.0" prefWidth="-1.0" text="Contact" />
+                        <TableColumn fx:id="tcType" prefWidth="90.0" text="Type" />
+                        <TableColumn fx:id="tcStart" minWidth="110.0" prefWidth="-1.0" text="Start" />
+                        <TableColumn fx:id="tcEnd" minWidth="110.0" prefWidth="-1.0" text="End" />
+                        <TableColumn fx:id="tcCustomerId" prefWidth="50.0" text="Cust ID" />
                     </columns>
                   </TableView>
                </children>

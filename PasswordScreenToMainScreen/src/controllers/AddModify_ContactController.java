@@ -30,11 +30,12 @@ public class AddModify_ContactController implements Initializable {
     public static String addEdit;
     Utils utils = new Utils();
     private DAOContacts dao = new DAOContacts(new DBQueryManager());
-
+    private ResourceBundle rb;
 
     @FXML public void onCancelAction(ActionEvent event) {
         System.out.println("Cancel Clicked");
-        Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.WARNING,
+                rb.getString("AreYouSureYouWantToCancel_Long"), ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if(alert.getResult() == ButtonType.YES){
             StageManager.ChangeScene(event, new navInfo_ManageContacts());
@@ -52,13 +53,16 @@ public class AddModify_ContactController implements Initializable {
         StageManager.ChangeScene(event, new navInfo_ManageContacts());
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @Override public void initialize(URL location, ResourceBundle resources) {
         System.out.println("AddModify_ContactsController initialize called");
         HandleInboundContactObject();
         lblIdValue.setText(String.valueOf(contact.contact_ID));
         txtName.setText(contact.contact_Name);
         txtEmailAddress.setText(contact.email);
+        LocalizeTextOnControlsAndHeaders();
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
     }
 
     private void HandleInboundContactObject() {
@@ -73,14 +77,14 @@ public class AddModify_ContactController implements Initializable {
             contact.contact_ID = utils.getNextIdNumber();
         }
         if(addEdit == "ADD"){
-            lblScreenIdentifier.setText("Add Contact");
+            lblScreenIdentifier.setText("Add.Contact");
         } else {
             if (addEdit != "EDIT"){
                 System.out.println("the value of addEdit is " + addEdit);
                 System.out.println("the value of addEdit should only ever be ADD or EDIT");
                 System.exit(-1);
             }
-            lblScreenIdentifier.setText("Edit Contact");
+            lblScreenIdentifier.setText(rb.getString("Edit.Contact"));
         }
     }
 }

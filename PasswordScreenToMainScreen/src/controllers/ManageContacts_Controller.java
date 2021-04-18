@@ -28,6 +28,8 @@ public class ManageContacts_Controller implements Initializable {
     public TableColumn tcContactID;
     public TableColumn tcContactName;
     public TableColumn tcContactEmail;
+    public Label lblScreenPurpose;
+    public Button btnReturnToAppointmentScreen;
 
     private ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     private DAOContacts dao = new DAOContacts(new DBQueryManager());
@@ -35,8 +37,13 @@ public class ManageContacts_Controller implements Initializable {
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
 //        SetButtonColors();
+        LocalizeTextOnControlsAndHeaders();
+
         SetColumnPropertyValues();
         RefreshScreenFromDataBase();
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
     }
 
     private void RefreshScreenFromDataBase() {
