@@ -25,7 +25,7 @@ public class AddModify_CustomerController implements Initializable {
     public static Customer customer;
     public static String addEdit;
     public Button btnSave;
-    public Button btnReturnToAppointmentScreen;
+    public Button btnCancel;
     private String currentCountry;
     private ArrayList<Country> countries;
     private ArrayList<Geography> currentDivisions;
@@ -35,12 +35,10 @@ public class AddModify_CustomerController implements Initializable {
     public Label lblCustomerName;
     public Label lblStreetAddress;
     public Label lblPostalCode;
-    public Label lblState;
     public Label lblCountry;
     public TextField txtCustomerName;
     public TextField txtStreetAddress;
     public TextField txtPostalCode;
-    public TextField txtState;
     public Label lblIdValue;
     public Label lblDivision;
     public ComboBox cmbDivision;
@@ -51,7 +49,7 @@ public class AddModify_CustomerController implements Initializable {
 
     private Utils utils = new Utils();
     private DAOCustomers dao = new DAOCustomers();
-    private ResourceBundle rb;
+    ResourceBundle rb = Globals.getResourceBundle();
 
 
     private void HandleInboundCustomerObject() {
@@ -69,7 +67,7 @@ public class AddModify_CustomerController implements Initializable {
             customer.setCustomer_ID(utils.getNextIdNumber());
         }
         if(addEdit == "ADD"){
-            lblScreenIdentifier.setText("Add Contact");
+            lblScreenIdentifier.setText(rb.getString("Add.Customer"));
 //            customer.setGeography(new Geography());
         } else {
             if (addEdit != "EDIT"){
@@ -77,13 +75,25 @@ public class AddModify_CustomerController implements Initializable {
                 System.out.println("the value of addEdit should only ever be ADD or EDIT");
                 System.exit(-1);
             }
-            lblScreenIdentifier.setText("Edit Customer");
+            lblScreenIdentifier.setText(rb.getString("Edit.Customer"));
         }
+    }
+
+    private void LocalizeTextOnControlsAndHeaders() {
+        lblID.setText(rb.getString("ID"));
+        lblCustomerName.setText(rb.getString("Customer.Name"));
+        lblStreetAddress.setText(rb.getString("Street.Address"));
+        lblPostalCode.setText(rb.getString("Postal.Code"));
+        lblCountry.setText(rb.getString("Country"));
+        lblDivision.setText(rb.getString("Division"));
+        lblPhoneNumber.setText(rb.getString("Phone.Number"));
+        btnSave.setText(rb.getString("Save"));
+        btnCancel.setText(rb.getString("Cancel"));
     }
 
     @FXML public void onClick_btnReturnToAppointmentScreen(ActionEvent event) {
         System.out.println("Cancel Clicked");
-        Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to cancel this action?  Information will not be saved.", ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel.Question"), ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if(alert.getResult() == ButtonType.YES){
             StageManager.ChangeScene(event, new navInfo_ManageCustomers());
@@ -152,9 +162,6 @@ public class AddModify_CustomerController implements Initializable {
             }
         }
         System.out.println("Division Index: " + cmbDivision.getSelectionModel().getSelectedIndex());
-    }
-
-    private void LocalizeTextOnControlsAndHeaders() {
     }
 
     // TODO document Lambda in javadocs

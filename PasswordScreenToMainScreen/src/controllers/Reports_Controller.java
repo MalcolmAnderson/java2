@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
+import main.Globals;
 import models.Appointment;
 import models.Appointments;
 import utils.dataAccess.DAOAppointments;
@@ -27,6 +28,7 @@ public class Reports_Controller implements Initializable {
     public Button btnAppointmentsByCustomer;
 
     DAOAppointments dao = new DAOAppointments();
+    ResourceBundle rb = Globals.getResourceBundle();
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         taReport.editableProperty().setValue(false);
@@ -36,6 +38,10 @@ public class Reports_Controller implements Initializable {
     }
 
     private void LocalizeTextOnControlsAndHeaders() {
+        btnReturnToAppointmentScreen.setText(rb.getString("Return.To.Appointment.Screen"));
+        btnAppointmentTypes.setText(rb.getString("Appointments.by.Type.and.Month"));
+        btnAppointmentsByContact.setText(rb.getString("Appointments.by.Contact"));
+        btnAppointmentsByCustomer.setText(rb.getString("Appointments.by.Customer"));
     }
 
     private void SetButtonColors() {
@@ -61,7 +67,7 @@ public class Reports_Controller implements Initializable {
         String sqlStatement = "SELECT * FROM appointments order by start, type;";
         Appointments appointments = dao.selectAppointmentsFromSQLStatement(sqlStatement);
         taReport.setText("");
-        addLine("Appointments by Type and by Month");
+        addLine(rb.getString("Appointments.by.Type.and.Month"));
         HashMap<String, Integer> types = new HashMap<String, Integer>();
 
         int currentYear = -1;
@@ -94,7 +100,7 @@ public class Reports_Controller implements Initializable {
     private void printAppointmentsByTypeAndByMonth(HashMap<String, Integer> types, int currentYear, int currentMonth) {
         if(types.size() > 0){
             addLine("");
-            addLine("Type counts for  " + currentYear + " - " + new DateFormatSymbols().getMonths()[currentMonth - 1]);
+            addLine(rb.getString("Type.counts.for") + currentYear + " - " + new DateFormatSymbols().getMonths()[currentMonth - 1]);
             for(String type : types.keySet()){
                 addLine(type + " - " + types.get(type));
             }
@@ -106,7 +112,7 @@ public class Reports_Controller implements Initializable {
         String sqlStatement = "SELECT * FROM appointments order by Contact_ID, Start;";
         Appointments appointments = dao.selectAppointmentsFromSQLStatement(sqlStatement);
         taReport.setText("");
-        addLine("Schedule of Appointments by Contact");
+        addLine(rb.getString("Schedule.of.Appointments.by.Contact"));
 //        addLine("");
 
         int currentContact = -1;
@@ -120,7 +126,7 @@ public class Reports_Controller implements Initializable {
                 currentContact = thisContact;
                 String contactName = a.getContactName();
                 addLine("");
-                addLine("Appointments for Contact " + contactName);
+                addLine(rb.getString("Appointments.for.Contact") + contactName);
             }
 
             String line = String.format("%s - %s - %s - %s -  %s - %s - %s",
@@ -135,7 +141,7 @@ public class Reports_Controller implements Initializable {
         String sqlStatement = "SELECT * FROM appointments order by Customer_ID, Start;";
         Appointments appointments = dao.selectAppointmentsFromSQLStatement(sqlStatement);
         taReport.setText("");
-        addLine("Appointments by Customer");
+        addLine(rb.getString("Appointments.by.Customer"));
 //        addLine("");
 
         int currentCustomer = -1;
@@ -149,7 +155,7 @@ public class Reports_Controller implements Initializable {
                 currentCustomer = thisCustomer;
 //                String customerName = a.getContactName();
                 addLine("");
-                addLine("Appointments for Customer " + currentCustomer);
+                addLine(rb.getString("Appointments.for.Customer") + currentCustomer);
             }
 
             String line = String.format("%s - %s - %s - %s -  %s - %s - %s",

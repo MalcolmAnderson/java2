@@ -3,10 +3,8 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import main.Globals;
 import models.Contact;
 import utils.Utils;
 import utils.dataAccess.DAOContacts;
@@ -25,12 +23,14 @@ public class AddModify_ContactController implements Initializable {
     public TextField txtName;
     public TextField txtEmailAddress;
     public Label lblIdValue;
+    public Button btnSave;
+    public Button btnCancel;
 
     public static Contact contact;
     public static String addEdit;
     Utils utils = new Utils();
     private DAOContacts dao = new DAOContacts(new DBQueryManager());
-    private ResourceBundle rb;
+    private ResourceBundle rb = Globals.getResourceBundle();
 
     @FXML public void onCancelAction(ActionEvent event) {
         System.out.println("Cancel Clicked");
@@ -63,6 +63,12 @@ public class AddModify_ContactController implements Initializable {
     }
 
     private void LocalizeTextOnControlsAndHeaders() {
+        lblName.setText(rb.getString("Name"));
+        lblEmailAddress.setText(rb.getString("Email.Address"));
+        btnSave.setText(rb.getString("Save"));
+        btnCancel.setText(rb.getString("Cancel"));
+        lblContactID.setText(rb.getString("Contact.Id"));
+
     }
 
     private void HandleInboundContactObject() {
@@ -77,7 +83,7 @@ public class AddModify_ContactController implements Initializable {
             contact.contact_ID = utils.getNextIdNumber();
         }
         if(addEdit == "ADD"){
-            lblScreenIdentifier.setText("Add.Contact");
+            lblScreenIdentifier.setText(rb.getString("Add.Contact"));
         } else {
             if (addEdit != "EDIT"){
                 System.out.println("the value of addEdit is " + addEdit);

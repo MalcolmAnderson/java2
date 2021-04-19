@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
+import main.Globals;
 import models.Contact;
 import models.Contacts;
 import models.Customers;
@@ -30,6 +31,7 @@ public class ManageContacts_Controller implements Initializable {
     public TableColumn tcContactEmail;
     public Label lblScreenPurpose;
     public Button btnReturnToAppointmentScreen;
+    ResourceBundle rb = Globals.getResourceBundle();
 
     private ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     private DAOContacts dao = new DAOContacts(new DBQueryManager());
@@ -44,6 +46,14 @@ public class ManageContacts_Controller implements Initializable {
     }
 
     private void LocalizeTextOnControlsAndHeaders() {
+        btnAddContact.setText(rb.getString("Add.Contact"));
+        btnEditContact.setText(rb.getString("Edit.Contact"));
+        btnDeleteContact.setText(rb.getString("Delete.Contact"));
+        tcContactID.setText(rb.getString("Contact.Id"));
+        tcContactName.setText(rb.getString("Name"));
+        tcContactEmail.setText(rb.getString("Email.Address"));
+        lblScreenPurpose.setText(rb.getString("Manage.Contact.Purpose"));
+        btnReturnToAppointmentScreen.setText(rb.getString("Return.To.Appointment.Screen"));
     }
 
     private void RefreshScreenFromDataBase() {
@@ -81,7 +91,7 @@ public class ManageContacts_Controller implements Initializable {
         if (selectedContactIndex != -1){
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to delete this contact?",
+                    rb.getString("Delete.Contact.Question"),
                     ButtonType.YES,
                     ButtonType.CANCEL);
             alert.showAndWait();
@@ -93,7 +103,7 @@ public class ManageContacts_Controller implements Initializable {
         }else {
             Alert alert = new Alert(
                     Alert.AlertType.INFORMATION,
-                    "Please select a contact to delete",
+                    rb.getString("Please.select.a.contact.to.delete"),
                     ButtonType.OK);
             alert.showAndWait();
         }
@@ -117,7 +127,7 @@ public class ManageContacts_Controller implements Initializable {
         }else {
             Alert alert = new Alert(
                     Alert.AlertType.INFORMATION,
-                    "Please select a contact to edit",
+                    rb.getString("Please.select.a.contact.to.edit"),
                     ButtonType.OK);
             alert.showAndWait();
         }

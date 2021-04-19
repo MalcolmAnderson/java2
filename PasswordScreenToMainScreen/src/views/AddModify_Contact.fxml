@@ -52,11 +52,17 @@
             <TextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
-               </font></TextField>
+               </font>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></TextField>
             <TextField fx:id="txtEmailAddress" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
-               </font></TextField>
+               </font>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></TextField>
             <Label fx:id="lblIdValue" text="Label" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
@@ -68,12 +74,12 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="30.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onSaveAction" text="Save">
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSaveAction" text="Save">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onCancelAction" text="Cancel">
+            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancelAction" text="Cancel">
                <font>
                   <Font size="18.0" />
                </font>

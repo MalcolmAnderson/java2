@@ -33,6 +33,7 @@ public class ManageCustomers_Controller implements Initializable {
     public TableColumn tcPhone;
     public TableColumn tcCountry;
     public TableColumn tcPostalCode;
+    public Label lblScreenPurpose;
 
 
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
@@ -63,7 +64,7 @@ public class ManageCustomers_Controller implements Initializable {
     }
 
     private void LocalizeTextOnControlsAndHeaders() {
-        tcId.setText(rb.getString("Id"));
+        tcId.setText(rb.getString("ID"));
         tcName.setText(rb.getString("Name"));
         tcAddress.setText(rb.getString("Address"));
         tcCountry.setText(rb.getString("Country"));
@@ -73,6 +74,7 @@ public class ManageCustomers_Controller implements Initializable {
         btnEditCustomer.setText(rb.getString("Edit.Customer"));
         btnDeleteCustomer.setText(rb.getString("Delete.Customer"));
         btnExit.setText(rb.getString("Cancel"));
+        lblScreenPurpose.setText(rb.getString("Manage.Customer.Purpose"));
     }
 
     private void SetButtonColors() {
@@ -101,7 +103,7 @@ public class ManageCustomers_Controller implements Initializable {
         }else {
             Alert alert = new Alert(
                     Alert.AlertType.INFORMATION,
-                    "Please select a customer to edit",
+                    rb.getString("Please.select.a.customer.to.edit"),
                     ButtonType.OK);
             alert.showAndWait();
         }
@@ -124,7 +126,7 @@ public class ManageCustomers_Controller implements Initializable {
         if (selectedCustomerIndex != -1){
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,
-                    "Deleting a customer deletes all customer appointments.\nDelete this customer?",
+                    rb.getString("Delete.Customer.Question"),
                     ButtonType.YES,
                     ButtonType.CANCEL);
             alert.showAndWait();
@@ -137,7 +139,7 @@ public class ManageCustomers_Controller implements Initializable {
         }else {
             Alert alert = new Alert(
                     Alert.AlertType.INFORMATION,
-                    "Please select a customer to delete",
+                    rb.getString("Please.select.a.customer.to.delete"),
                     ButtonType.OK);
             alert.showAndWait();
         }

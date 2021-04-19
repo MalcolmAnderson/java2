@@ -9,6 +9,8 @@ import utils.Utils;
 import utils.dataAccess.DAOAppointments;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_Appointments;
+import utils.navigation.navInfo_ManageCustomers;
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,6 +41,15 @@ public class AddModify_AppointmentController implements Initializable {
     public Button btnSave;
     public Button btnCancel;
     public Label lblContactNumValue;
+    public Label lblAppointmentID;
+    public Label lblTitle;
+    public Label lblDescription;
+    public Label lblLocation;
+    public Label lblContact;
+    public Label lblType;
+    public Label lblStartDateAndTime;
+    public Label lblEndDateAndTime;
+    public Label lblCustomerID;
 
     private DAOAppointments dao = new DAOAppointments();
     private ResourceBundle rb;
@@ -62,13 +73,17 @@ public class AddModify_AppointmentController implements Initializable {
     }
 
     private void LocalizeTextOnControlsAndHeaders() {
-//        lblScreenIdentifier.setText(rb.getString(""));
-//        txtTitle.setText(rb.getString(""));
-//        txtDescription.setText(rb.getString(""));
-//        txtLocation.setText(rb.getString(""));
-//        txtType.setText(rb.getString(""));
-//        btnSave.setText(rb.getString(""));
-//        btnCancel.setText(rb.getString(""));
+        lblAppointmentID.setText(rb.getString("Appointment.ID"));
+        lblTitle.setText(rb.getString("Title"));
+        lblDescription.setText(rb.getString("Description"));
+        lblLocation.setText(rb.getString("Location"));
+        lblType.setText(rb.getString("Type"));
+        lblStartDateAndTime.setText(rb.getString("Start.Date.and.Time"));
+        lblEndDateAndTime.setText(rb.getString("End.Date.and.Time"));
+        lblCustomerID.setText(rb.getString("Customer.Id"));
+        btnSave.setText(rb.getString("Save"));
+        btnCancel.setText(rb.getString("Cancel"));
+
     }
 
     private void PopulateChoiceBoxes() {
@@ -199,7 +214,11 @@ public class AddModify_AppointmentController implements Initializable {
 //    }
 
     public void onClick_Cancel(ActionEvent event) {
-        StageManager.ChangeScene(event, new navInfo_Appointments());
+        Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel.Question"), ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.YES){
+            StageManager.ChangeScene(event, new navInfo_Appointments());
+        }
     }
 
     public void onClick_Save(ActionEvent actionEvent) {

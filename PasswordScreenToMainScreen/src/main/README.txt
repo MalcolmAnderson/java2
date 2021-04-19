@@ -29,4 +29,8 @@ Directions for how to run the program:
     <TK better directions>
 
 Additional Report
-    <TK description of additional report for requirement A3f>
+    The 3rd report gets a list of customers appointments in date order.
+
+
+Known issues
+    Need to add a routine to scrub single quotes in text going to the database
