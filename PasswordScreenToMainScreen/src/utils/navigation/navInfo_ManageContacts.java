@@ -15,7 +15,7 @@ public class navInfo_ManageContacts extends navInfo {
         return pathToViews + "ManageContacts.fxml";
     }
     @Override String getScreenTitle() {
-        return "Manage Contacts";
+        return rb.getString("Manage.Contacts"); // "Manage Contacts";
     }
 
     public void open_AddModify_Contact_WhilePassingCurrentContact(
@@ -40,7 +40,10 @@ public class navInfo_ManageContacts extends navInfo {
     private void ConfigureAndShowStage(
             Stage stage, Scene mainScreenScene,
             String transactionType){
-        stage.setTitle("Manage Contacts - " + transactionType + " "  + " Screen");
+        String title = rb.getString("ManageContacts_Screen_P1")
+                + transactionType
+                + rb.getString("ManageContacts_Screen_P2");
+        stage.setTitle(title);
         stage.setScene(mainScreenScene);
         stage.show();
     }

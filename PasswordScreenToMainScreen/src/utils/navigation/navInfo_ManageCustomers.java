@@ -5,6 +5,6 @@ public class navInfo_ManageCustomers extends navInfo {
         return pathToViews + "ManageCustomers.fxml";
     }
     @Override String getScreenTitle() {
-        return "Manage Customers";
+        return rb.getString("Manage.Customers");
     }
 }

@@ -5,6 +5,6 @@ public class navInfo_AddEditCustomer extends navInfo {
         return pathToViews + "AddModify_Customer.fxml";
     }
     @Override String getScreenTitle() {
-        return "Add / Edit Customer";
+        return rb.getString("Add.Edit.Customer"); // "Add / Edit Customer";
     }
 }

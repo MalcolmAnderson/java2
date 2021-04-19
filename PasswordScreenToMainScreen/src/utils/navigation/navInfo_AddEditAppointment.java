@@ -5,6 +5,6 @@ public class navInfo_AddEditAppointment extends navInfo {
         return pathToViews + "AddModify_Appointment.fxml";
     }
     @Override String getScreenTitle() {
-        return "Add / Edit Appointment";
+        return rb.getString("Add.Edit.Appointment"); //  "Add / Edit Appointment";
     }
 }

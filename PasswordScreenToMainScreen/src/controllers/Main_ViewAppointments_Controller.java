@@ -49,7 +49,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
-        //SetButtonColors();
+        SetButtonColors();
         if(Globals.getSelectedRadioButton().equals("rbByWeek")){
             rbByWeek.setSelected(true);
         } else {
@@ -139,13 +139,15 @@ public class Main_ViewAppointments_Controller implements Initializable {
     private void SetButtonColors() {
         Background bg_Red = new Background(new BackgroundFill(Color.RED, null, null));
         Background bg_Yellow = new Background(new BackgroundFill(Color.YELLOW, null, null));
-//        btnAddAppointment.setBackground(bg_Yellow);
+        btnManageCustomers.setBackground(bg_Yellow);
+        btnManageContacts.setBackground(bg_Yellow);
+        btnAddAppointment.setBackground(bg_Yellow);
 //        btnAddAppointment.setTextFill(Color.WHITE);
-//        btnEditAppointment.setBackground(bg_Yellow);
+        btnEditAppointment.setBackground(bg_Yellow);
 //        btnEditAppointment.setTextFill(Color.WHITE);
-//        btnDeleteAppointment.setBackground(bg_Yellow);
+        btnDeleteAppointment.setBackground(bg_Yellow);
 //        btnDeleteAppointment.setTextFill(Color.WHITE);
-//        btnReportsScreen.setBackground(bg_Yellow);
+        btnReportsScreen.setBackground(bg_Yellow);
 //        btnReportsScreen.setTextFill(Color.WHITE);
     }
 

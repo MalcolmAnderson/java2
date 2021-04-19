@@ -5,6 +5,6 @@ public class navInfo_Appointments extends navInfo {
         return pathToViews + "Main_ViewAppointments.fxml";
     }
     @Override String getScreenTitle() {
-        return "Appointments";
+        return rb.getString("Appointments"); // "Appointments";
     }
 }

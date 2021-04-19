@@ -62,7 +62,13 @@ public class AddModify_AppointmentController implements Initializable {
     }
 
     private void LocalizeTextOnControlsAndHeaders() {
-
+//        lblScreenIdentifier.setText(rb.getString(""));
+//        txtTitle.setText(rb.getString(""));
+//        txtDescription.setText(rb.getString(""));
+//        txtLocation.setText(rb.getString(""));
+//        txtType.setText(rb.getString(""));
+//        btnSave.setText(rb.getString(""));
+//        btnCancel.setText(rb.getString(""));
     }
 
     private void PopulateChoiceBoxes() {

@@ -5,6 +5,6 @@ public class navInfo_AddEditContact extends navInfo {
         return pathToViews + "AddModify_Contact.fxml";
     }
     @Override String getScreenTitle() {
-        return "Add / Edit Contact";
+        return rb.getString("Add.Edit.Contact"); // "Add / Edit Contact";
     }
 }

@@ -5,6 +5,6 @@ public class navInfo_Reports extends navInfo {
         return pathToViews + "Reports.fxml";
     }
     @Override String getScreenTitle() {
-        return "Reports";
+        return rb.getString("Reports");
     }
 }
