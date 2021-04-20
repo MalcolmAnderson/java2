@@ -9,8 +9,6 @@ import utils.Utils;
 import utils.dataAccess.DAOAppointments;
 import utils.navigation.StageManager;
 import utils.navigation.navInfo_Appointments;
-import utils.navigation.navInfo_ManageCustomers;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,6 +16,11 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
+/**
+ * Used to add and edit appointment records.
+ * Called from the main screen this screen is both the add screen and the edit screen.
+ * Certain fields are loaded by the calling screen using static variables in this file.
+ */
 public class AddModify_AppointmentController implements Initializable {
 
     public static String addEdit;
@@ -52,15 +55,22 @@ public class AddModify_AppointmentController implements Initializable {
     public Label lblCustomerID;
 
     private DAOAppointments dao = new DAOAppointments();
-    private ResourceBundle rb;
+    private ResourceBundle rb = Globals.getResourceBundle();
     private Utils utils = new Utils();
     private Customers customers = Globals.getMasterCustomers();
     private Contacts contacts = Globals.getMasterContacts();
 //    private int currentCustomerNumber;
 
+    /**
+     * This is the required JavaFX initialise method.
+     * This is the routine that sets up the screen.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("AddModify_AppointmentController - initialize");
-        rb = Globals.getResourceBundle();
+//        rb = Globals.getResourceBundle();
         System.out.println("Current Appointment : " + appointment.toString());
 
         // Completed subroutines
@@ -196,7 +206,29 @@ public class AddModify_AppointmentController implements Initializable {
 
 
     // TODO document Lambda in javadocs
+
     // replaced LoadMinutes and LoadHours with LoadIntegersIntoChoiceBox
+
+    /** This is the first of my lambda expressions.
+     * This method loads the choice boxes with hours and minutes used in appointment setting
+     *
+     * This method replaced 2 different routines.
+     * The commented lines below this show the original methods.
+     * //    private void LoadMinutes(ChoiceBox cbMinutes) {
+     * //        for(int i = 0; i < 12; i++){
+     * //            cbMinutes.getItems().add(String.format("%02d", i * 5));
+     * //        }
+     * //    }
+     * //    private void LoadHours(ChoiceBox cbHours) {
+     * //        for(int i = 0; i < 24; i++){
+     * //            cbHours.getItems().add(String.format("%02d", i));
+     * //        }
+     * //    }
+     * @param cb
+     * @param start
+     * @param end
+     * @param multiplier
+     */
     private void LoadIntegersIntoChoiceBox(ChoiceBox cb, int start, int end, int multiplier){
         IntStream hours = IntStream.rangeClosed(start, end);
         hours.forEach(i -> cb.getItems().add(String.format("%02d", i * multiplier)));
@@ -213,6 +245,11 @@ public class AddModify_AppointmentController implements Initializable {
 //        }
 //    }
 
+    /**
+     * Handles the click on the cancel button.
+     * Confirms with user that they are OK with deleting the appointment.
+     * @param event
+     */
     public void onClick_Cancel(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel.Question"), ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -221,6 +258,15 @@ public class AddModify_AppointmentController implements Initializable {
         }
     }
 
+    /**
+     * Handles the click on the save button.
+     * Before saving the following validations are performed in this method:
+     *      Validate Both Contact and Customer are Selected.
+     *      Validate that this customers appointment doesn't overlap any other appointments for that customer.
+     *      Validate that the appointment time is chronologically before the end time.
+     * Then it saves the appointment and closes the screen.
+     * @param actionEvent
+     */
     public void onClick_Save(ActionEvent actionEvent) {
         boolean okToSave = true;
         String ErrorMessage = "";
@@ -359,11 +405,21 @@ public class AddModify_AppointmentController implements Initializable {
         return ldt;
     }
 
+    /**
+     * Update Customer ID Value label.
+     * Method updates the label containing the Customer ID value based on what is selected in the choice box.
+     * @param actionEvent
+     */
     public void updateCustomerNumber(ActionEvent actionEvent) {
         Customer newCustomer = (Customer) cbCustomers.getSelectionModel().getSelectedItem();
         lblCustNumValue.setText(String.valueOf(newCustomer.getCustomer_ID()));
     }
 
+    /**
+     * Update Contact ID Value label
+     * Method updates the label containing the Contact ID value based on what is selected in the choice box.
+     * @param actionEvent
+     */
     public void updateContactNumber(ActionEvent actionEvent) {
         Contact newContact = (Contact) cbContacts.getSelectionModel().getSelectedItem();
         lblContactNumValue.setText(String.valueOf(newContact.getContact_ID()));

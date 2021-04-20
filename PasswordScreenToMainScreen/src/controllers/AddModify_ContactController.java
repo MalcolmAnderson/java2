@@ -15,6 +15,9 @@ import utils.navigation.navInfo_ManageContacts;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Only used by admin users to edit contacts.
+ */
 public class AddModify_ContactController implements Initializable {
     public Label lblScreenIdentifier;
     public Label lblContactID;
@@ -32,6 +35,13 @@ public class AddModify_ContactController implements Initializable {
     private DAOContacts dao = new DAOContacts(new DBQueryManager());
     private ResourceBundle rb = Globals.getResourceBundle();
 
+
+
+    /**
+     * Handles the click on the cancel button.
+     * Confirms with user that they are OK with deleting the contact.
+     * @param event
+     */
     @FXML public void onCancelAction(ActionEvent event) {
         System.out.println("Cancel Clicked");
         Alert alert = new Alert(Alert.AlertType.WARNING,
@@ -42,6 +52,11 @@ public class AddModify_ContactController implements Initializable {
         }
     }
 
+    /**
+     * Handles the click on the Save button.
+     *
+     * @param event
+     */
     @FXML public void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
         contact.contact_Name = txtName.getText();
@@ -53,6 +68,12 @@ public class AddModify_ContactController implements Initializable {
         StageManager.ChangeScene(event, new navInfo_ManageContacts());
     }
 
+    /**
+     * Main entry point of controller.
+     * Handles inbound Contact object and localizes the screen controls.
+     * @param location
+     * @param resources
+     */
     @Override public void initialize(URL location, ResourceBundle resources) {
         System.out.println("AddModify_ContactsController initialize called");
         HandleInboundContactObject();

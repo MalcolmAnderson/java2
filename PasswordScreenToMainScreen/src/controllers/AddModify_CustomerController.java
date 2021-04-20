@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
+/** Used to Add and Edit Customer data
+ *  Uses 2 static variables to communicate state.
+ */
 public class AddModify_CustomerController implements Initializable {
 
     // setters
@@ -91,6 +94,12 @@ public class AddModify_CustomerController implements Initializable {
         btnCancel.setText(rb.getString("Cancel"));
     }
 
+
+    /**
+     * Handles the click on the Return to Appointment Screen button.
+     * Confirms with user that they are OK with losing any changes.
+     * @param event
+     */
     @FXML public void onClick_btnReturnToAppointmentScreen(ActionEvent event) {
         System.out.println("Cancel Clicked");
         Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel.Question"), ButtonType.YES, ButtonType.NO);
@@ -100,6 +109,10 @@ public class AddModify_CustomerController implements Initializable {
         }
     }
 
+    /**
+     * Handles
+     * @param event
+     */
     @FXML public void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
         customer.setCustomer_Name(txtCustomerName.getText());
