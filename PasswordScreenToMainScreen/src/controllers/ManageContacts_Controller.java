@@ -20,6 +20,10 @@ import utils.navigation.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the Manage Contacts screen.
+ * Only accessible by the admin user.
+ */
 public class ManageContacts_Controller implements Initializable {
 
     public Button btnAddContact;
@@ -37,6 +41,11 @@ public class ManageContacts_Controller implements Initializable {
     private DAOContacts dao = new DAOContacts(new DBQueryManager());
     private navInfo_ManageContacts navInfo = new navInfo_ManageContacts();
 
+    /**
+     * Entry point for the Manage Contacts screen.
+     * @param url
+     * @param resourceBundle
+     */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
 //        SetButtonColors();
         LocalizeTextOnControlsAndHeaders();
@@ -80,10 +89,19 @@ public class ManageContacts_Controller implements Initializable {
 //        btnDeleteContact.setTextFill(Color.WHITE);
     }
 
+    /**
+     * Handles the user choosing to cancel back to the appointment screen.
+     * @param event
+     */
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
 
+    /**
+     * Handles the deletion of a contact.
+     * Ask user to confirm the deletion of the currently selected contact
+     * @param actionEvent
+     */
     public void onClick_DeleteContact(ActionEvent actionEvent) {
         int selectedContactIndex = tvContacts.getSelectionModel().getSelectedIndex();
         Contact selectedContact = (Contact) tvContacts.getSelectionModel().getSelectedItem();
@@ -109,6 +127,10 @@ public class ManageContacts_Controller implements Initializable {
         }
     }
 
+    /**
+     * Creates a new contact object and passes it and control to the add modify contact screen.
+     * @param actionEvent
+     */
     public void onClick_AddContact(ActionEvent actionEvent) {
         System.out.println("ProductAdd Clicked");
         AddModify_ContactController.addEdit = "ADD";
@@ -116,6 +138,10 @@ public class ManageContacts_Controller implements Initializable {
         StageManager.ChangeScene(actionEvent, new navInfo_AddEditContact());
     }
 
+    /**
+     * Takes the selected contact and passes it and control to the add modify contact screen
+     * @param actionEvent
+     */
     public void onClick_EditContacts(ActionEvent actionEvent) {
         int selectedContactIndex = tvContacts.getSelectionModel().getSelectedIndex();
         Contact selectedContact = (Contact) tvContacts.getSelectionModel().getSelectedItem();
@@ -133,9 +159,9 @@ public class ManageContacts_Controller implements Initializable {
         }
     }
 
-    public void onClickAddEric(ActionEvent actionEvent) {
-        Contact eric = new Contact(4, "Eric Estrada", "Eric@Estrada.com");
-        dao.insertOrUpdateContact(eric);
-        RefreshScreenFromDataBase();
-    }
+//    public void onClickAddEric(ActionEvent actionEvent) {
+//        Contact eric = new Contact(4, "Eric Estrada", "Eric@Estrada.com");
+//        dao.insertOrUpdateContact(eric);
+//        RefreshScreenFromDataBase();
+//    }
 }

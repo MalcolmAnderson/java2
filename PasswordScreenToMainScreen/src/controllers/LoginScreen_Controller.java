@@ -30,6 +30,9 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Called from Main, manages the login and if successful, sets up initial state.
+ */
 public class LoginScreen_Controller implements Initializable {
     public PasswordField labelPassword;
     public TextField textUserName;
@@ -55,6 +58,12 @@ public class LoginScreen_Controller implements Initializable {
     private Contacts masterContacts;
 
 
+    /**
+     * Entry point for the controller.
+     * Sets some state into the Globals store and gets the local time zone Id.
+     * @param url
+     * @param rb
+     */
     @Override public void initialize(URL url, ResourceBundle rb) {
 //        this.rb = Globals.getResourceBundle();
         Globals.setStillFirstLogin(true);
@@ -90,6 +99,11 @@ public class LoginScreen_Controller implements Initializable {
         lblPassword.setText(rb.getString("Password"));
     }
 
+    /**
+     * Performs log in checks.
+     * Checks the user name and password, and then passes control to the success or failure methods.
+     * @param event
+     */
     public void onClick_LogIn(ActionEvent event) {
         Globals.setHasLoginBeenAttempted(true);
         System.out.println("Clicked Log In button");
@@ -134,6 +148,11 @@ public class LoginScreen_Controller implements Initializable {
         System.out.println("Leaving processSuccessfulLoginAndOpenMainScreen");
     }
 
+    /**
+     * Handles setting all language to English.
+     * This routine will not be in the production version.
+     * @param actionEvent
+     */
     public void onClickSetEnglish(ActionEvent actionEvent) {
         if(Locale.getDefault().toString().equals("fr_FR") ){
             Locale.setDefault(Locales.English());
@@ -143,6 +162,12 @@ public class LoginScreen_Controller implements Initializable {
         }
     }
 
+
+    /**
+     * Handles setting all language to French.
+     * This routine will not be in the production version.
+     * @param actionEvent
+     */
     public void onClickSetFrench(ActionEvent actionEvent) {
         if(Locale.getDefault().toString().equals("en_US") ){
             Locale.setDefault(Locales.French());
@@ -152,6 +177,10 @@ public class LoginScreen_Controller implements Initializable {
         }
     }
 
+    /**
+     * The initial screen loader.
+     * This handcrafted navigation tool should probably be replaced by one of my navigation library tools.
+     */
     public void LoadView()  {
         ResourceBundle rb = ResourceBundle.getBundle("utils/localization/Nat", Locale.getDefault());
         FXMLLoader loader = new FXMLLoader();

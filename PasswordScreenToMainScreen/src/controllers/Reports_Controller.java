@@ -20,6 +20,9 @@ import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Controller for the reports screen.
+ */
 public class Reports_Controller implements Initializable {
     public TextArea taReport;
     public Button btnReturnToAppointmentScreen;
@@ -30,6 +33,11 @@ public class Reports_Controller implements Initializable {
     DAOAppointments dao = new DAOAppointments();
     ResourceBundle rb = Globals.getResourceBundle();
 
+    /**
+     * Entry point to the reports screen.
+     * @param url
+     * @param resourceBundle
+     */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         taReport.editableProperty().setValue(false);
         LocalizeTextOnControlsAndHeaders();
@@ -55,6 +63,10 @@ public class Reports_Controller implements Initializable {
 //        btnAppointmentsByCustomer.setTextFill(Color.WHITE);
     }
 
+    /**
+     * Closes report screen and returns to the appointment screen.
+     * @param actionEvent
+     */
     public void onClick_btnReturnToAppointmentScreen(ActionEvent actionEvent) {
         StageManager.ChangeScene(actionEvent, new navInfo_Appointments());
     }
@@ -63,6 +75,10 @@ public class Reports_Controller implements Initializable {
         taReport.appendText(line + "\n");
     }
 
+    /**
+     * Runs the Appointments by Type and Month report.
+     * @param actionEvent
+     */
     public void onClick_AppointmentByTypeAndByMonth(ActionEvent actionEvent) {
         String sqlStatement = "SELECT * FROM appointments order by start, type;";
         Appointments appointments = dao.selectAppointmentsFromSQLStatement(sqlStatement);
@@ -108,6 +124,10 @@ public class Reports_Controller implements Initializable {
         types.clear();
     }
 
+    /**
+     * Runs the Appointments by Contact report.
+     * @param actionEvent
+     */
     public void onClick_AppointmentsByContact(ActionEvent actionEvent) {
         String sqlStatement = "SELECT * FROM appointments order by Contact_ID, Start;";
         Appointments appointments = dao.selectAppointmentsFromSQLStatement(sqlStatement);
@@ -136,6 +156,10 @@ public class Reports_Controller implements Initializable {
         }
     }
 
+    /**
+     * Runs the Appointments by Customer report.
+     * @param actionEvent
+     */
     public void onClick_AppointmentsByCustomer(ActionEvent actionEvent) {
         DAOCustomers daoCustomers = new DAOCustomers();
         String sqlStatement = "SELECT * FROM appointments order by Customer_ID, Start;";

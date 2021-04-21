@@ -110,7 +110,8 @@ public class AddModify_CustomerController implements Initializable {
     }
 
     /**
-     * Handles
+     * Handles saving the customer changes by collecting the contents of the fields
+     * and adding them to the classes customer member.
      * @param event
      */
     @FXML public void onSaveAction(ActionEvent event) {
@@ -146,6 +147,12 @@ public class AddModify_CustomerController implements Initializable {
         return retVal;
     }
 
+    /**
+     * Entry level point for the controller.
+     * Sets up the screen, handles inbound customer objects and localizes screen controls.
+     * @param location
+     * @param resources
+     */
     @Override public void initialize(URL location, ResourceBundle resources) {
 //        rb = resources;
         rb = Globals.getResourceBundle();
@@ -178,6 +185,13 @@ public class AddModify_CustomerController implements Initializable {
     }
 
     // TODO document Lambda in javadocs
+
+    /**
+     * Gets division collection based on Country ID.
+     * Home of a Lambda expression.  Replaced for look with an forEach lambda.
+     * @param countryId
+     * @return
+     */
     private int SetDivisionsByCountryId(int countryId) {
         System.out.println("AddModify_CustomerController SetDivisionsByCountryId called");
         System.out.println(countryId);
@@ -225,6 +239,12 @@ public class AddModify_CustomerController implements Initializable {
         txtPostalCode.setText(customer.getPostal_Code());
     }
 
+    /**
+     * Handles changes to the country combo box.
+     * Gets the countryID based on the selected country.
+     * Passes the country Id into "SetDivisionByCountryID which populates the division combo box.
+     * @param actionEvent
+     */
     public void onActionCountry(ActionEvent actionEvent) {
         String selectedCountry = getCurrentCountryNameFromCountryComboBox();
         int countryId = getCountryIdFromCountryName(selectedCountry);

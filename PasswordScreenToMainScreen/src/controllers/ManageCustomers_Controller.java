@@ -2,13 +2,10 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import main.Globals;
 import models.*;
 import utils.dataAccess.DAOAppointments;
@@ -18,9 +15,11 @@ import utils.navigation.navInfo_AddEditCustomer;
 import utils.navigation.navInfo_Appointments;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the Manage Customers Screen.
+ */
 public class ManageCustomers_Controller implements Initializable {
     public TableColumn tcId;
     public TableColumn tcName;
@@ -40,6 +39,11 @@ public class ManageCustomers_Controller implements Initializable {
     private DAOCustomers dao = new DAOCustomers();
     private ResourceBundle rb;
 
+    /**
+     * Entry screen for the manage customer window.
+     * @param url
+     * @param resourceBundle
+     */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ManageCustomers_Controller - initialize");
         rb = Globals.getResourceBundle();
@@ -88,10 +92,18 @@ public class ManageCustomers_Controller implements Initializable {
         // btnDeleteCustomer.setTextFill(Color.WHITE);
     }
 
+    /**
+     * Handle user choosing to cancel out and go back to appointment screen.
+     * @param event
+     */
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
     }
 
+    /**
+     * Insures that a customer is selected and passes selected customer to the edit customer screen.
+     * @param actionEvent
+     */
     public void onClick_EditCustomer(ActionEvent actionEvent) {
         int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
         Customer selectedCustomer = (Customer) tvCustomers.getSelectionModel().getSelectedItem();
@@ -109,6 +121,10 @@ public class ManageCustomers_Controller implements Initializable {
         }
     }
 
+    /**
+     * Creates a new customer object and passes it to the add customer screen.
+     * @param actionEvent
+     */
     public void onClickAddCustomer(ActionEvent actionEvent) {
         System.out.println("Add Customer Clicked");
         AddModify_CustomerController.addEdit = "ADD";
@@ -119,6 +135,11 @@ public class ManageCustomers_Controller implements Initializable {
         StageManager.ChangeScene(actionEvent, new navInfo_AddEditCustomer());
     }
 
+    /**
+     * Insures a customer is selected, and then deletes it after a warning.
+     * If the user chooses to delete a customer, all of that customers appointments are deleted first.
+     * @param actionEvent
+     */
     public void onClickDeleteCustomer(ActionEvent actionEvent) {
         int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
         Customer selectedCustomer = (Customer) tvCustomers.getSelectionModel().getSelectedItem();

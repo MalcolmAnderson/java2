@@ -14,6 +14,7 @@ public class DAOAppointments {
     private DAOContacts daoContacts = new DAOContacts(dbQM);
     private Utils utils = new Utils();
 
+    /** Selects all appointments from Database. */
     public Appointments selectAllAppointments(){
         if(!daoContacts.ContactsHaveBeenLoaded()){
             System.out.println("Contacts must be loaded before running DAOAppointments.selectAllAppointments()");
@@ -24,6 +25,12 @@ public class DAOAppointments {
         return appointments;
     }
 
+    /**
+     * Selects all appointments (inclusive) based on date range.
+     * @param start - Start date and time
+     * @param end - End date and time
+     * @return - An Appointments object containing all relevant appointments.
+     */
     public Appointments selectAppointmentsInDateRange(LocalDateTime start, LocalDateTime end){
         if(!daoContacts.ContactsHaveBeenLoaded()){
             System.out.println("Contacts must be loaded before running DAOAppointments.selectAllAppointments()");
@@ -35,6 +42,13 @@ public class DAOAppointments {
         return appointments;
     }
 
+    /**
+     * Returns just the SQL string for selectAppointmentsInDateRange.
+     * Improves code readability
+     * @param start - Start date and time
+     * @param end - End date and time
+     * @return - String containing the correct SQL string for database
+     */
     public String getBetweenSQLStatement(LocalDateTime start, LocalDateTime end) {
         start = utils.Local_ToUTC(start);
         end = utils.Local_ToUTC(end);
@@ -44,6 +58,12 @@ public class DAOAppointments {
                     tsStart.toString(), tsEnd.toString());
     }
 
+    /**
+     * Manages the calling the database using the provided string.
+     * Places the data in a collection of Appointment objects and returns a single Appointments object
+     * @param sql - SQL string, assumed to be correct.
+     * @return - Appointments collection loaded from database based on SQL statement.
+     */
     public Appointments selectAppointmentsFromSQLStatement(String sql) {
         Appointments appointments = new Appointments();
         try{
@@ -80,6 +100,10 @@ public class DAOAppointments {
         return current;
     }
 
+    /**
+     * Checks for the existence of a record in the database and then creates an insert or update statement appropriately.
+     * @param current - Appointment object to be inserted or updated.
+     */
     public void insertOrUpdateAppointment(Appointment current) {
         String sqlStatement = "";
         tableInfo a = new tableInfo_Appointments();
@@ -94,6 +118,10 @@ public class DAOAppointments {
         dbQM.RunSQLString(sqlStatement);
     }
 
+    /**
+     * Deletes all appointments for a given customer Id
+     * @param customer_id - customer Id to remove all appointments for.
+     */
     public void deleteAppointmentsByCustomerId(int customer_id) {
         String deleteStatement = String.format(
                 "DELETE FROM appointments WHERE Customer_ID = %s", customer_id);
@@ -102,6 +130,10 @@ public class DAOAppointments {
         dbQM.RunSQLString(deleteStatement);
     }
 
+    /**
+     * Deletes a single appointment based on it's appointment ID
+     * @param appointment_id - appointment Id to be removed.
+     */
     public void deleteAppointmentsByAppointmentId(int appointment_id) {
         String deleteStatement = String.format(
                 "DELETE FROM appointments WHERE Appointment_ID = %s", appointment_id);
@@ -110,6 +142,11 @@ public class DAOAppointments {
         dbQM.RunSQLString(deleteStatement);
     }
 
+    /**
+     * Creates an SQL insert statement based on the "current" appointment taken as a parameter.
+     * @param current - A single appointment object
+     * @return - An SQL insert statement that can be passed to the database.
+     */
     public String createStatement_InsertAppointment(Appointment current) {
         LocalDateTime now = utils.now();
         String insertStatement = String.format(
@@ -130,6 +167,11 @@ public class DAOAppointments {
         return insertStatement;
     }
 
+    /**
+     * Creates an SQL update statement based on the "current" appointment taken as a parameter.
+     * @param current - A single appointment object
+     * @return - An SQL update statement that can be passed to the database.
+     */
     @Disabled public String createStatement_UpdateAppointment(Appointment current) {
         LocalDateTime now = utils.now();
         String updateStatement = String.format(
@@ -148,6 +190,11 @@ public class DAOAppointments {
         return updateStatement;
     }
 
+    /**
+     * Creates a delete statement based on an Appointment ID
+     * @param appointmentId - Appointment ID to create delete statement from
+     * @return - A ready to run SQL Statement
+     */
     public String createStatement_DeleteAppointmentByAppointmentId(int appointmentId) {
         System.out.println("DAOAppointments - createStatement_DeleteAppointmentByAppointmentId");
         String deleteStatement = String.format(
@@ -157,6 +204,11 @@ public class DAOAppointments {
 //        dbQM.RunSQLString(deleteStatement);
     }
 
+    /**
+     * Creates a delete statement based on an Customer ID
+     * @param customerId - Id to create delete statement from
+     * @return - A ready to run SQL STatement
+     */
     public String createStatement_DeleteAppointmentByCustomerId(int customerId) {
         System.out.println("DAOAppointments - createStatement_DeleteAppointmentByCustomerId");
         String deleteStatement = String.format(
@@ -166,6 +218,12 @@ public class DAOAppointments {
 //        dbQM.RunSQLString(deleteStatement);
     }
 
+    /**
+     * Selects all customer appointments for 24 hours before start, and 24 hours after end, to look for overlaps
+     * @param customerID - Customer Id to search for appointments
+     * @param a - The appointment object being validated for overlaps
+     * @return - A collection of appointments to be validated for overlaps.
+     */
     public Appointments selectExistingNearCustomerAppointments(int customerID, Appointment a) {
         LocalDateTime oneDayBefore = a.getStart().minusDays(1);
         LocalDateTime oneDayAfter = a.getEnd().plusDays(1);

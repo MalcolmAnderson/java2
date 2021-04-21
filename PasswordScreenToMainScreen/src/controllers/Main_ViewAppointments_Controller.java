@@ -20,6 +20,9 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for main Appointment view.
+ */
 public class Main_ViewAppointments_Controller implements Initializable {
     public TableView tvAppointments;
     public Button btnManageCustomers;
@@ -48,6 +51,12 @@ public class Main_ViewAppointments_Controller implements Initializable {
     ResourceBundle rb = Globals.getResourceBundle();
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
+    /**
+     * Entry point to the main appointment screen controller.
+     * This routine sets up the screen for use, wiring controls to data sources and localizing control values.
+     * @param url
+     * @param resourceBundle
+     */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         SetButtonColors();
         if(Globals.getSelectedRadioButton().equals("rbByWeek")){
@@ -151,18 +160,35 @@ public class Main_ViewAppointments_Controller implements Initializable {
 //        btnReportsScreen.setTextFill(Color.WHITE);
     }
 
+    /**
+     * Handles navigation to move to the Manage Customers Screen.
+     * @param event
+     */
     public void onClick_ManageCustomers(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_ManageCustomers());
     }
 
+    /**
+     * Handles navigation to move to the Manage Customers Screen.
+     * Only used for the admin login.
+     * @param event
+     */
     public void onClick_ManageContacts(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_ManageContacts());
     }
 
+    /**
+     * Handles navigation to move to the Reports Screen
+     * @param event
+     */
     public void onClick_Reports(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Reports());
     }
 
+    /**
+     * Handles creating a new appointment object and passing control to the Add Appointment screen.
+     * @param actionEvent
+     */
     public void onClickAddAppointment(ActionEvent actionEvent) {
         System.out.println("Add Appointment Clicked");
         AddModify_AppointmentController.addEdit = "ADD";
@@ -172,6 +198,10 @@ public class Main_ViewAppointments_Controller implements Initializable {
         StageManager.ChangeScene(actionEvent, new navInfo_AddEditAppointment());
     }
 
+    /**
+     * Handles creating a new appointment object and passing control to the Modify Appointment screen.
+     * @param actionEvent
+     */
     public void onClickEditAppointment(ActionEvent actionEvent) {
         int selectedAppointmentIndex = tvAppointments.getSelectionModel().getSelectedIndex();
         Appointment selectedAppointment = (Appointment) tvAppointments.getSelectionModel().getSelectedItem();
@@ -189,6 +219,10 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }
     }
 
+    /**
+     * Handles deleting an existing appointment from the screen and the database..
+     * @param actionEvent
+     */
     public void onClickDeleteAppointment(ActionEvent actionEvent) {
         int selectedAppointmentIndex = tvAppointments.getSelectionModel().getSelectedIndex();
         Appointment selected = (Appointment) tvAppointments.getSelectionModel().getSelectedItem();
@@ -217,6 +251,11 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }
     }
 
+    /**
+     * Navigation method for back button.
+     * In combination with the selection radio buttons, goes "backwards" one "time unit".
+     * @param actionEvent
+     */
     public void onClickBackOne(ActionEvent actionEvent) {
         LocalDateTime currentNow = Globals.getCurrentReferenceDate();
         if(rbByWeek.isSelected()){
@@ -230,6 +269,11 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }
     }
 
+    /**
+     * Navigation method for forward button.
+     * In combination with the selection radio buttons, goes "forwards" one "time unit".
+     * @param actionEvent
+     */
     public void onClickForwardOne(ActionEvent actionEvent) {
         LocalDateTime currentNow = Globals.getCurrentReferenceDate();
         if(rbByWeek.isSelected()){
@@ -243,6 +287,10 @@ public class Main_ViewAppointments_Controller implements Initializable {
         }
     }
 
+    /**
+     * Changes view from "by month" to "by week".
+     * @param actionEvent
+     */
     public void onClickShowByWeek(ActionEvent actionEvent) {
         System.out.println("begin onClickShowByWeek");
         Globals.setSelectedRadioButtonName("rbByWeek");
@@ -258,6 +306,10 @@ public class Main_ViewAppointments_Controller implements Initializable {
         tvAppointments.setItems(allAppointments);
     }
 
+    /**
+     * Changes view from "by week" to "by month".
+     * @param actionEvent
+     */
     public void onClickShowByMonth(ActionEvent actionEvent) {
         System.out.println("begin onClickShowByWeek");
         Globals.setSelectedRadioButtonName("rbByMonth");

@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 
 public class Main extends Application {
 
+    /** Sets global variables and then starts the login screen.
+     * Opens and closes the database connection. */
     public static void main(String[] args) {
         // set environment
         Globals.setHasLoginBeenAttempted(false);
@@ -28,6 +30,7 @@ public class Main extends Application {
         System.exit(0);
     }
 
+    /** Entry point to the login screen. */
     @Override public void start(Stage primaryStage) throws Exception{
         ResourceBundle rb = Globals.getResourceBundle();
 

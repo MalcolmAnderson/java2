@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
+/** Geography class is based on a division Id, and contains both division and country information. */
 public class Geography {
 
     private int division_ID;
@@ -11,12 +12,14 @@ public class Geography {
     private static ArrayList<Geography> knownWorld;
     private static ArrayList<Country> countries;
 
+    /** Blank constructor */
     public  Geography(){
         this.division_ID = 1;
         this.countryName = "";
         this.divisionName = "";
         this.country_ID = 1;
     }
+    /** Normal Constructor */
     public Geography(int division_ID, String divisionName, String countryName, int country_ID) {
         this.division_ID = division_ID;
         this.countryName = countryName;
@@ -24,9 +27,13 @@ public class Geography {
         this.country_ID = country_ID;
     }
 
-    // client code is expected to run:
-    //         Geography.setKnownWorld(DAOGeography.loadKnownWorld());
-    // before using rest of knownWorld functionality
+    /**
+     * client code is expected to run:
+     *         Geography.setKnownWorld(DAOGeography.loadKnownWorld());
+     * before using rest of knownWorld functionality
+     * returns true if known world has more than 5 objects in it (GB)
+     *
+     */
     public static boolean isKnownWorldLoaded(){
         if(knownWorld == null){
             return false;
@@ -34,6 +41,7 @@ public class Geography {
         return knownWorld.size() > 5;
     }
 
+    /** Returns a list of Geography objects for the country selected */
     public static ArrayList<Geography> getDivisionsForCountryID(int country_ID) {
         ArrayList<Geography> divisions = new ArrayList<Geography>();
 
@@ -45,13 +53,16 @@ public class Geography {
         return divisions;
     }
 
+    /** Returns the knownworld object */
     public static ArrayList<Geography> getKnownWorld() {
         return knownWorld;
     }
+    /** Sets the known world object.  Expected to be set by a DAO. */
     public static void setKnownWorld(ArrayList<Geography> incomingKnownWorld) {
         knownWorld = incomingKnownWorld;
     }
 
+    /** Returns a division object based on division Id. Failing to find a division id is considered a data error. */
     public static Geography getGeographyByDivisionId(int divisionId) {
         Geography retVal = null;
         ExitIfKnownWorldNotLoaded();
@@ -68,6 +79,7 @@ public class Geography {
         return retVal;
     }
 
+    /** crashes the system if known world has not yet been loaded. */
     private static void ExitIfKnownWorldNotLoaded() {
         if(!isKnownWorldLoaded()){
             System.out.println("KnownWorld must be loaded before this operation can be performed");
@@ -75,6 +87,7 @@ public class Geography {
         }
     }
 
+    /** returns all divisions from known world based on the country Id. */
     public static ArrayList<Geography> getDivisionsByCountry_ID(int country_ID) {
         ExitIfKnownWorldNotLoaded();
         ArrayList<Geography> divisions = new ArrayList<Geography>();
@@ -90,20 +103,24 @@ public class Geography {
         return divisions;
     }
 
+    /** returns the division Id of a single geo object. */
     public int getDivisionId() {
         return division_ID;
     }
 
+    /** returns the country name from a single geo object. */
     public String getCountryName() {
 //        System.out.println("getCountryName == null is:  " + countryName == null);
 //        System.out.println("getCountryName countryName == " + countryName);
         return countryName;
     }
 
+    /** returns the division name from a single geo object. */
     public String getDivisionName() {
         return divisionName;
     }
 
+    /** returns the country id from a single geo object. */
     public int getCountryId() {
         return country_ID;
     }
