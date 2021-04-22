@@ -1,14 +1,20 @@
 package utils.dataAccess;
 
-import models.Customer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * A central location for 2 critical functions, run an unvalidate SQL statemnent and check if a record exists
+ */
 public class DBQueryManager {
 
+    /**
+     * Runs an unvalidated sql statement
+     * @param unvalidatedSQL - sql statement.
+     */
     public void RunSQLString(String unvalidatedSQL){
         try {
             System.out.println("RunSQLString: unvalidatedSQL = " + unvalidatedSQL);
@@ -28,6 +34,13 @@ public class DBQueryManager {
         }
     }
 
+    /**
+     * Universal tool to check if a record exists based on a single column key value.
+     * @param tableName - Table name to check against
+     * @param keyColumnName - Column name to check key value against
+     * @param key - key value to search for.
+     * @return - true or false if key value can be found in designated column and table.
+     */
     public boolean recordExists(String tableName, String keyColumnName, int key) {
         ResultSet rs = null;
         // prepare statement

@@ -7,16 +7,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * DAO Object to manage contacts
+ */
 public class DAOContacts {
 
     private DBQueryManager dbQM = new DBQueryManager();
     private Contacts contacts = new Contacts();
 
+    /**
+     * Sets the DBQueryManager for collection
+     * @param dbQM - Input dbQM used for project
+     */
     public DAOContacts(DBQueryManager dbQM) {
         this.dbQM = dbQM;
         selectAllContacts();
     }
 
+    /**
+     * Contact check to confirm is a specific contact exists in the database.
+     * Key value is the Contact ID
+     * @param current - Contact object to be searched for.
+     * @return boolean - returns true if an object with the same contact ID of current exists in the database
+     */
     public boolean recordExists(Contact current){
         ResultSet rs = null;
         try {
@@ -54,6 +67,10 @@ public class DAOContacts {
 
     // dumps existing contacts list and refreshes from database
     // use the dao.getAllContacts to make changes
+
+    /**
+     * Gets all contacts from the database, populates Contacts object in DAO
+     */
     public void selectAllContacts() {
 
         contacts = new Contacts();
@@ -84,10 +101,19 @@ public class DAOContacts {
 //        return contacts;
     }
 
+    /**
+     * Returns the Contacts collection in the DAO
+     * @return Contacts - The Contacts object for the DAO
+     */
     public Contacts getAllContacts() {
         return contacts;
     }
 
+    /**
+     * Examines current for Id, and creates an update string if found, and an insert statement if not.
+     * statement is then passed to the dbQM to be run.
+     * @param current - Object to either be inserted or updated
+     */
     public void insertOrUpdateContact(Contact current) {
         String sqlStatement = "";
         if(recordExists(current)){
@@ -108,6 +134,10 @@ public class DAOContacts {
         dbQM.RunSQLString(sqlStatement);
     }
 
+    /**
+     * Deletes a record based on the id.  Does not check for existence first.
+     * @param id - ID of Contact to search for
+     */
     public void deleteContactByID(int id) {
         String deleteStatement = String.format(
                 "DELETE FROM contacts WHERE Contact_ID = '%s'", id);
@@ -116,6 +146,10 @@ public class DAOContacts {
         dbQM.RunSQLString(deleteStatement);
     }
 
+    /**
+     * Delete contact by name
+     * @param name - Name to search and delete by
+     */
     public void deleteContactByName(String name) {
         String deleteStatement = String.format(
                 "DELETE FROM contacts WHERE Contact_Name = '%s'", name);
@@ -124,10 +158,19 @@ public class DAOContacts {
         dbQM.RunSQLString(deleteStatement);
     }
 
+    /**
+     * Checks the size of the Contacts object and returns true if there are 1 or more records
+     * @return boolean - true or false - have contacts been loaded.
+     */
     public boolean ContactsHaveBeenLoaded() {
         return contacts.getContacts().size() > 0;
     }
 
+    /**
+     * Get contact object based on Contact ID
+     * @param contact_id - value to search for
+     * @return Contact - If contact is not found, application will shut down.
+     */
     public Contact getContactByContactId(int contact_id) {
         if(contact_id > -1) {
             for (Contact contact : contacts.getContacts()) {

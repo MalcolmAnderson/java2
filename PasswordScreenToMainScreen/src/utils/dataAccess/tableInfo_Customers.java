@@ -1,13 +1,21 @@
 package utils.dataAccess;
 
 public class tableInfo_Customers extends tableInfo {
-    @Override
-    public String getTableName() {
+
+    /**
+     * returns table name
+     * @return table name
+     */
+    @Override public String getTableName() {
         return "customers";
     }
 
-    @Override
-    public String getPrimaryKeyName() {
+
+    /**
+     * Returns primary key column name
+     * @return key column
+     */
+    @Override public String getPrimaryKeyName() {
         return "Customer_ID";
     }
 }

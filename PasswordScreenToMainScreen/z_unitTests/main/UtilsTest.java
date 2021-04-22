@@ -3,6 +3,7 @@ package main;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.TimeConversion;
 import utils.Utils;
 
 import java.time.*;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilsTest {
 
     Utils utils;
+    private TimeConversion tc = new TimeConversion();
     LocalDateTime forcedValueForNow = LocalDateTime.of(1980, 1, 1, 0,0,0);
 
     @BeforeEach
@@ -23,11 +25,6 @@ class UtilsTest {
 
     @AfterEach
     void tearDown() {
-    }
-
-    @Test void add() {
-        int actual = utils.add(5, 2);
-        assertEquals(7, actual);
     }
 
     @Test void shouldConvertLocalDateTimeToMySQLInputString(){
@@ -51,7 +48,7 @@ class UtilsTest {
         LocalDate sunday = now.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).toLocalDate();
         LocalTime midnight = LocalTime.of(0, 0);
         LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
-        LocalDateTime easternSundayMidnight_UTC = utils.Eastern_ToUTC(easternSundayMidnight);
+        LocalDateTime easternSundayMidnight_UTC = tc.Eastern_ToUTC(easternSundayMidnight);
         LocalDateTime expected = LocalDateTime.of(2021, 4, 4, 4, 0, 0);
         assertEquals(expected, easternSundayMidnight_UTC);
 
@@ -60,14 +57,14 @@ class UtilsTest {
     @Test void shouldGetSundayOfWeekFromDate(){
         LocalDateTime now = LocalDateTime.of(2021, 4, 7,0,0,0);
         LocalDateTime expected = LocalDateTime.of(2021, 4, 4,4,0,0);
-        LocalDateTime actual = utils.getLastSunday(now);
+        LocalDateTime actual = tc.getLastSunday(now);
         assertEquals(expected, actual);
     }
 
     @Test void shouldGetSundayOfNextWeekFromDate(){
         LocalDate now = LocalDate.of(2021, 4, 7);
         LocalDate expected = LocalDate.of(2021, 4, 11);
-        LocalDate actual = utils.getNextSunday(now);
+        LocalDate actual = tc.getNextSunday(now);
         assertEquals(expected, actual);
     }
 
@@ -77,7 +74,7 @@ class UtilsTest {
 
         // local pacific time of 4:59:59 is before 5am, which is 8am eastern
         LocalDateTime bad = LocalDateTime.of(2021, 4,15,4,59,59);
-        boolean isValid = utils.doesTimeFallOutsideOfForbiddenTimes(bad, earlyLimit, lateLimit);
+        boolean isValid = tc.doesTimeFallOutsideOfForbiddenTimes(bad, earlyLimit, lateLimit);
         assertFalse(isValid);
     }
 
@@ -87,7 +84,7 @@ class UtilsTest {
 
         // local pacific time of 4:59:59 is before 5am, which is 8am eastern
         LocalDateTime bad = LocalDateTime.of(2021, 4,15,19,0,1);
-        boolean isValid = utils.doesTimeFallOutsideOfForbiddenTimes(bad, earlyLimit, lateLimit);
+        boolean isValid = tc.doesTimeFallOutsideOfForbiddenTimes(bad, earlyLimit, lateLimit);
         assertFalse(isValid);
     }
 }

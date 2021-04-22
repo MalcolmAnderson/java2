@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import main.Globals;
 import models.*;
+import utils.TimeConversion;
 import utils.Utils;
 import utils.dataAccess.DAOAppointments;
 import utils.navigation.StageManager;
@@ -59,14 +60,14 @@ public class AddModify_AppointmentController implements Initializable {
     private Utils utils = new Utils();
     private Customers customers = Globals.getMasterCustomers();
     private Contacts contacts = Globals.getMasterContacts();
-//    private int currentCustomerNumber;
+    private TimeConversion tc = new TimeConversion();
 
     /**
      * This is the required JavaFX initialise method.
      * This is the routine that sets up the screen.
      *
-     * @param url
-     * @param resourceBundle
+     * @param url - required parameter for initialize
+     * @param resourceBundle - required parameter for initialize
      */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("AddModify_AppointmentController - initialize");
@@ -248,7 +249,7 @@ public class AddModify_AppointmentController implements Initializable {
     /**
      * Handles the click on the cancel button.
      * Confirms with user that they are OK with deleting the appointment.
-     * @param event
+     * @param event - required parameter for button click
      */
     public void onClick_Cancel(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.WARNING, rb.getString("Cancel.Question"), ButtonType.YES, ButtonType.NO);
@@ -265,7 +266,7 @@ public class AddModify_AppointmentController implements Initializable {
      *      Validate that this customers appointment doesn't overlap any other appointments for that customer.
      *      Validate that the appointment time is chronologically before the end time.
      * Then it saves the appointment and closes the screen.
-     * @param actionEvent
+     * @param actionEvent - required parameter for button click
      */
     public void onClick_Save(ActionEvent actionEvent) {
         boolean okToSave = true;
@@ -281,7 +282,7 @@ public class AddModify_AppointmentController implements Initializable {
         appointment.setStart(start);
         appointment.setEnd(end);
         if (! validateAppointmentDoesNotOverlapWithExistingAppointmentForCustomer()) { return; }
-        boolean isAppointmentWithinPolicy = utils.isAppointmentWithinPolicy(start, end);
+        boolean isAppointmentWithinPolicy = tc.isAppointmentWithinPolicy(start, end);
         ErrorMessage = rb.getString("ApptEasternStartEndPolicyMessage");
         okToSave = ErrorNotificationDialog(isAppointmentWithinPolicy, ErrorMessage);
         if( ! okToSave){
@@ -408,7 +409,7 @@ public class AddModify_AppointmentController implements Initializable {
     /**
      * Update Customer ID Value label.
      * Method updates the label containing the Customer ID value based on what is selected in the choice box.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void updateCustomerNumber(ActionEvent actionEvent) {
         Customer newCustomer = (Customer) cbCustomers.getSelectionModel().getSelectedItem();
@@ -418,7 +419,7 @@ public class AddModify_AppointmentController implements Initializable {
     /**
      * Update Contact ID Value label
      * Method updates the label containing the Contact ID value based on what is selected in the choice box.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void updateContactNumber(ActionEvent actionEvent) {
         Contact newContact = (Contact) cbContacts.getSelectionModel().getSelectedItem();

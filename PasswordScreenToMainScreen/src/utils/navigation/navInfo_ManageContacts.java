@@ -11,9 +11,18 @@ import models.Contact;
 import java.io.IOException;
 
 public class navInfo_ManageContacts extends navInfo {
+    /**
+     * get file name
+     * @return file name
+     */
     @Override String getFxmlFileName() {
         return pathToViews + "ManageContacts.fxml";
     }
+
+    /**
+     * gets Screen title as a resource bundle key value
+     * @return
+     */
     @Override String getScreenTitle() {
         return rb.getString("Manage.Contacts"); // "Manage Contacts";
     }

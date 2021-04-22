@@ -61,8 +61,8 @@ public class LoginScreen_Controller implements Initializable {
     /**
      * Entry point for the controller.
      * Sets some state into the Globals store and gets the local time zone Id.
-     * @param url
-     * @param rb
+     * @param url - JavaFx infrastructure parameter
+     * @param rb - JavaFx infrastructure parameter
      */
     @Override public void initialize(URL url, ResourceBundle rb) {
 //        this.rb = Globals.getResourceBundle();
@@ -102,7 +102,7 @@ public class LoginScreen_Controller implements Initializable {
     /**
      * Performs log in checks.
      * Checks the user name and password, and then passes control to the success or failure methods.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     public void onClick_LogIn(ActionEvent event) {
         Globals.setHasLoginBeenAttempted(true);
@@ -151,7 +151,7 @@ public class LoginScreen_Controller implements Initializable {
     /**
      * Handles setting all language to English.
      * This routine will not be in the production version.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickSetEnglish(ActionEvent actionEvent) {
         if(Locale.getDefault().toString().equals("fr_FR") ){
@@ -166,7 +166,7 @@ public class LoginScreen_Controller implements Initializable {
     /**
      * Handles setting all language to French.
      * This routine will not be in the production version.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickSetFrench(ActionEvent actionEvent) {
         if(Locale.getDefault().toString().equals("en_US") ){

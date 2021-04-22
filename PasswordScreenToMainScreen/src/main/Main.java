@@ -12,7 +12,8 @@ import java.util.ResourceBundle;
 public class Main extends Application {
 
     /** Sets global variables and then starts the login screen.
-     * Opens and closes the database connection. */
+     * Opens and closes the database connection.
+     * @param args - input parameters */
     public static void main(String[] args) {
         // set environment
         Globals.setHasLoginBeenAttempted(false);

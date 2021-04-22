@@ -35,8 +35,8 @@ public class Reports_Controller implements Initializable {
 
     /**
      * Entry point to the reports screen.
-     * @param url
-     * @param resourceBundle
+     * @param url - JavaFx infrastructure parameter
+     * @param resourceBundle - JavaFx infrastructure parameter
      */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         taReport.editableProperty().setValue(false);
@@ -65,7 +65,7 @@ public class Reports_Controller implements Initializable {
 
     /**
      * Closes report screen and returns to the appointment screen.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_btnReturnToAppointmentScreen(ActionEvent actionEvent) {
         StageManager.ChangeScene(actionEvent, new navInfo_Appointments());
@@ -77,7 +77,7 @@ public class Reports_Controller implements Initializable {
 
     /**
      * Runs the Appointments by Type and Month report.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_AppointmentByTypeAndByMonth(ActionEvent actionEvent) {
         String sqlStatement = "SELECT * FROM appointments order by start, type;";
@@ -126,7 +126,7 @@ public class Reports_Controller implements Initializable {
 
     /**
      * Runs the Appointments by Contact report.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_AppointmentsByContact(ActionEvent actionEvent) {
         String sqlStatement = "SELECT * FROM appointments order by Contact_ID, Start;";
@@ -158,7 +158,7 @@ public class Reports_Controller implements Initializable {
 
     /**
      * Runs the Appointments by Customer report.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_AppointmentsByCustomer(ActionEvent actionEvent) {
         DAOCustomers daoCustomers = new DAOCustomers();

@@ -98,7 +98,7 @@ public class AddModify_CustomerController implements Initializable {
     /**
      * Handles the click on the Return to Appointment Screen button.
      * Confirms with user that they are OK with losing any changes.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     @FXML public void onClick_btnReturnToAppointmentScreen(ActionEvent event) {
         System.out.println("Cancel Clicked");
@@ -112,7 +112,7 @@ public class AddModify_CustomerController implements Initializable {
     /**
      * Handles saving the customer changes by collecting the contents of the fields
      * and adding them to the classes customer member.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     @FXML public void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
@@ -150,8 +150,8 @@ public class AddModify_CustomerController implements Initializable {
     /**
      * Entry level point for the controller.
      * Sets up the screen, handles inbound customer objects and localizes screen controls.
-     * @param location
-     * @param resources
+     * @param location - JavaFx infrastructure parameter
+     * @param resources - JavaFx infrastructure parameter
      */
     @Override public void initialize(URL location, ResourceBundle resources) {
 //        rb = resources;
@@ -243,7 +243,7 @@ public class AddModify_CustomerController implements Initializable {
      * Handles changes to the country combo box.
      * Gets the countryID based on the selected country.
      * Passes the country Id into "SetDivisionByCountryID which populates the division combo box.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onActionCountry(ActionEvent actionEvent) {
         String selectedCountry = getCurrentCountryNameFromCountryComboBox();

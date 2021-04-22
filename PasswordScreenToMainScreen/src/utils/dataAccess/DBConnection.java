@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Manages database connections
+ */
 public class DBConnection {
     // JDBC Connection String
     // jdbc:mysql: //wgudb.ucertify.com:3306/WJ05mJn 
@@ -20,6 +23,11 @@ public class DBConnection {
     private static final String mySqlJDBCDriver = "com.mysql.jdbc.Driver";
     private static Connection conn = null;
 
+    /**
+     * startConnection must have been run before this method is called.
+     * Will return an existing connection, and reopen the connection if it has been closed.
+     * @return Connection - returns existing connection object.
+     */
     public static Connection getConnection(){
         try {
             if(conn == null || conn.isClosed()){
@@ -32,6 +40,10 @@ public class DBConnection {
         return conn;
     }
 
+    /**
+     * Initiates connection to the database
+     * @return Connection for use by DAOs
+     */
     public static Connection startConnection(){
         System.out.println("Begin startConnection");
         try {
@@ -53,6 +65,10 @@ public class DBConnection {
         return conn;
     }
 
+    /**
+     * Used to close connection to database
+     * Start and End are only expected to be used in the main loading program.
+     */
     public static void endConnection(){
         System.out.println("Begin endConnection");
         try {

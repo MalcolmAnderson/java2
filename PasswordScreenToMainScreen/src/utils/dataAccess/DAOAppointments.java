@@ -4,6 +4,7 @@ import main.Globals;
 import models.Appointment;
 import models.Appointments;
 import org.junit.jupiter.api.Disabled;
+import utils.TimeConversion;
 import utils.Utils;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -13,8 +14,12 @@ public class DAOAppointments {
     private DBQueryManager dbQM = new DBQueryManager();
     private DAOContacts daoContacts = new DAOContacts(dbQM);
     private Utils utils = new Utils();
+    private TimeConversion tc = new TimeConversion();
 
-    /** Selects all appointments from Database. */
+    /**
+     * Selects all appointments from Database.
+     * @return an Appointments object containing all selected Appointment objects
+     */
     public Appointments selectAllAppointments(){
         if(!daoContacts.ContactsHaveBeenLoaded()){
             System.out.println("Contacts must be loaded before running DAOAppointments.selectAllAppointments()");
@@ -50,8 +55,8 @@ public class DAOAppointments {
      * @return - String containing the correct SQL string for database
      */
     public String getBetweenSQLStatement(LocalDateTime start, LocalDateTime end) {
-        start = utils.Local_ToUTC(start);
-        end = utils.Local_ToUTC(end);
+        start = tc.Local_ToUTC(start);
+        end = tc.Local_ToUTC(end);
         Timestamp tsStart = Timestamp.valueOf(start);
         Timestamp tsEnd = Timestamp.valueOf(end);
         return String.format("SELECT * FROM appointments where Start >= '%s' AND End <= '%s';",
@@ -91,9 +96,9 @@ public class DAOAppointments {
         String location = rs.getString("Location");
         String type = rs.getString("Type");
         LocalDateTime start = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("Start"));
-        start = utils.UTC_ToLocal(start);
+        start = tc.UTC_ToLocal(start);
         LocalDateTime end = utils.TimeStamp_to_LocalDateTime(rs.getTimestamp("End"));
-        end = utils.UTC_ToLocal(end);
+        end = tc.UTC_ToLocal(end);
         int customerId = rs.getInt("Customer_ID");
         int contactId = rs.getInt("Contact_ID");
         Appointment current = new Appointment(appointmentId, title, description, location, type, start, end, customerId, contactId);
@@ -158,9 +163,9 @@ public class DAOAppointments {
                         + "'%s', '%s', '%s', '%s', '%s', "
                         + "'%s', %s, %s, %s);",
                 current.getId(), current.getTitle(), current.getDescription(),
-                current.getLocation(), current.getType(), utils.Local_ToUTC(current.getStart()),
-                utils.Local_ToUTC(current.getEnd()), utils.Local_ToUTC(now), Globals.getUserId(),
-                utils.Local_ToUTC(now), Globals.getUserId(), current.getCustomer_Id(),
+                current.getLocation(), current.getType(), tc.Local_ToUTC(current.getStart()),
+                tc.Local_ToUTC(current.getEnd()), tc.Local_ToUTC(now), Globals.getUserId(),
+                tc.Local_ToUTC(now), Globals.getUserId(), current.getCustomer_Id(),
                 Globals.getUserId(),  current.getContact_Id());
         System.out.println("Insert Statement");
         System.out.println(insertStatement);
@@ -182,8 +187,8 @@ public class DAOAppointments {
                         + " Last_Updated_By = '%s', Customer_ID = %s, User_ID = %s,"
                         + " Contact_ID = %s WHERE Appointment_ID = %s",
                 current.getTitle(), current.getDescription(),
-                current.getLocation(), current.getType(), utils.Local_ToUTC(current.getStart()),
-                utils.Local_ToUTC(current.getEnd()), utils.Local_ToUTC(now), Globals.getUserId(),
+                current.getLocation(), current.getType(), tc.Local_ToUTC(current.getStart()),
+                tc.Local_ToUTC(current.getEnd()), tc.Local_ToUTC(now), Globals.getUserId(),
                 current.getCustomer_Id(), Globals.getUserId(),  current.getContact_Id(), current.getId());
         System.out.println("update Statement");
         System.out.println(updateStatement);
@@ -229,7 +234,7 @@ public class DAOAppointments {
         LocalDateTime oneDayAfter = a.getEnd().plusDays(1);
         String sql = String.format(
                 "SELECT * FROM appointments where Customer_ID = %s AND Start >= '%s' AND End <= '%s' ;",
-                customerID, utils.Local_ToUTC(oneDayBefore), utils.Local_ToUTC(oneDayAfter));
+                customerID, tc.Local_ToUTC(oneDayBefore), tc.Local_ToUTC(oneDayAfter));
         System.out.println(sql);
         Appointments nearAppointmentsForCustomer = selectAppointmentsFromSQLStatement(sql);
         return  nearAppointmentsForCustomer;

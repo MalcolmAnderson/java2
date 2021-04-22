@@ -6,23 +6,30 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.Globals;
 
 import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 
+
+/**
+ * Used by stage manager to change screens
+ * See stage manager for usage example
+ */
 public class SceneChanger {
     // This method will accept:
     //      the title of the new scene
     //      the .fxml file for the view
     //      and the ActionEvent that triggered the change
 
+    /**
+     * Changes scenes based on input parameters
+     * @param event - Event passed in by controls like buttons
+     * @param viewName - File name of view to open
+     * @param title - String to set title to
+     * @throws IOException
+     */
     public void changeScenes(ActionEvent event, String viewName, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(viewName));
-//        loader.setResources(Globals.getResourceBundle());
 
         System.out.println(viewName);
         System.out.println(loader.getLocation());
@@ -35,7 +42,6 @@ public class SceneChanger {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
-
     }
 
 

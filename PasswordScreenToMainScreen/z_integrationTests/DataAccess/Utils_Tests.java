@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Utils_Tests {
     Utils utils;
+    UtilsForTesting uft = new UtilsForTesting();
 
     @BeforeAll
     static void runOnceBeforeAllHaveStarted(){
@@ -44,7 +45,7 @@ public class Utils_Tests {
         assertEquals("./NextIdNumber.txt", defaultNextIdNumberFilePath);
         String testFilePath = "./testFile1";
         // delete test file if it exists
-        utils.deleteFileIfItExists(testFilePath);
+        uft.deleteFileIfItExists(testFilePath);
         // get next number
         utils.setNextIdNumberFilePath(testFilePath);
         assertEquals(testFilePath, utils.getNextIdNumberFilePath());
@@ -65,7 +66,7 @@ public class Utils_Tests {
         assertEquals("./NextIdNumber.txt", defaultNextIdNumberFilePath);
         String testFilePath = "./testFile2";
         // delete test file if it exists
-        utils.deleteFileIfItExists(testFilePath);
+        uft.deleteFileIfItExists(testFilePath);
         // get next number
         utils.setNextIdNumberFilePath(testFilePath);
         assertEquals(testFilePath, utils.getNextIdNumberFilePath());

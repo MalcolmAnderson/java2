@@ -3,7 +3,6 @@ package controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,6 +11,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import main.Globals;
 import models.*;
+import utils.TimeConversion;
 import utils.Utils;
 import utils.dataAccess.DAOAppointments;
 import utils.navigation.*;
@@ -50,12 +50,13 @@ public class Main_ViewAppointments_Controller implements Initializable {
     Utils utils = new Utils();
     ResourceBundle rb = Globals.getResourceBundle();
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    private TimeConversion tc = new TimeConversion();
 
     /**
      * Entry point to the main appointment screen controller.
      * This routine sets up the screen for use, wiring controls to data sources and localizing control values.
-     * @param url
-     * @param resourceBundle
+     * @param url - JavaFx infrastructure parameter
+     * @param resourceBundle - JavaFx infrastructure parameter
      */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         SetButtonColors();
@@ -68,8 +69,8 @@ public class Main_ViewAppointments_Controller implements Initializable {
         RadioButton selected = (RadioButton) tgShowBy.getSelectedToggle();
         System.out.println(selected.getId());
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime start = utils.getLastSunday(now);
-        LocalDateTime end = utils.getNextSunday(now);
+        LocalDateTime start = tc.getLastSunday(now);
+        LocalDateTime end = tc.getNextSunday(now);
         Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
         HandleNextFifteenMinuteAlert(now, appointments);
         allAppointments.setAll(appointments.getAllAppointments());
@@ -162,7 +163,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     /**
      * Handles navigation to move to the Manage Customers Screen.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     public void onClick_ManageCustomers(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_ManageCustomers());
@@ -171,7 +172,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
     /**
      * Handles navigation to move to the Manage Customers Screen.
      * Only used for the admin login.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     public void onClick_ManageContacts(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_ManageContacts());
@@ -179,7 +180,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     /**
      * Handles navigation to move to the Reports Screen
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     public void onClick_Reports(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Reports());
@@ -187,7 +188,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     /**
      * Handles creating a new appointment object and passing control to the Add Appointment screen.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickAddAppointment(ActionEvent actionEvent) {
         System.out.println("Add Appointment Clicked");
@@ -200,7 +201,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     /**
      * Handles creating a new appointment object and passing control to the Modify Appointment screen.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickEditAppointment(ActionEvent actionEvent) {
         int selectedAppointmentIndex = tvAppointments.getSelectionModel().getSelectedIndex();
@@ -221,7 +222,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     /**
      * Handles deleting an existing appointment from the screen and the database..
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickDeleteAppointment(ActionEvent actionEvent) {
         int selectedAppointmentIndex = tvAppointments.getSelectionModel().getSelectedIndex();
@@ -254,7 +255,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
     /**
      * Navigation method for back button.
      * In combination with the selection radio buttons, goes "backwards" one "time unit".
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickBackOne(ActionEvent actionEvent) {
         LocalDateTime currentNow = Globals.getCurrentReferenceDate();
@@ -272,7 +273,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
     /**
      * Navigation method for forward button.
      * In combination with the selection radio buttons, goes "forwards" one "time unit".
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickForwardOne(ActionEvent actionEvent) {
         LocalDateTime currentNow = Globals.getCurrentReferenceDate();
@@ -289,7 +290,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     /**
      * Changes view from "by month" to "by week".
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickShowByWeek(ActionEvent actionEvent) {
         System.out.println("begin onClickShowByWeek");
@@ -299,8 +300,8 @@ public class Main_ViewAppointments_Controller implements Initializable {
     }
 
     private void refreshAppointmentByWeek() {
-        LocalDateTime start = utils.getLastSunday(Globals.getCurrentReferenceDate());
-        LocalDateTime end = utils.getNextSunday(Globals.getCurrentReferenceDate());
+        LocalDateTime start = tc.getLastSunday(Globals.getCurrentReferenceDate());
+        LocalDateTime end = tc.getNextSunday(Globals.getCurrentReferenceDate());
         Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
         allAppointments.setAll(appointments.getAllAppointments());
         tvAppointments.setItems(allAppointments);
@@ -308,7 +309,7 @@ public class Main_ViewAppointments_Controller implements Initializable {
 
     /**
      * Changes view from "by week" to "by month".
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickShowByMonth(ActionEvent actionEvent) {
         System.out.println("begin onClickShowByWeek");
@@ -318,8 +319,8 @@ public class Main_ViewAppointments_Controller implements Initializable {
     }
 
     private void refreshAppointmentByMonth() {
-        LocalDateTime start = utils.getFirstOfTheMonth(Globals.getCurrentReferenceDate());
-        LocalDateTime end = utils.getFirstOfNextMonth(Globals.getCurrentReferenceDate());
+        LocalDateTime start = tc.getFirstOfTheMonth(Globals.getCurrentReferenceDate());
+        LocalDateTime end = tc.getFirstOfNextMonth(Globals.getCurrentReferenceDate());
         Appointments appointments = dao.selectAppointmentsInDateRange(start, end);
         allAppointments.setAll(appointments.getAllAppointments());
         tvAppointments.setItems(allAppointments);

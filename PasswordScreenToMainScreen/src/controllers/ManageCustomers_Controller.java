@@ -41,8 +41,8 @@ public class ManageCustomers_Controller implements Initializable {
 
     /**
      * Entry screen for the manage customer window.
-     * @param url
-     * @param resourceBundle
+     * @param url - JavaFx infrastructure parameter
+     * @param resourceBundle - JavaFx infrastructure parameter
      */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ManageCustomers_Controller - initialize");
@@ -94,7 +94,7 @@ public class ManageCustomers_Controller implements Initializable {
 
     /**
      * Handle user choosing to cancel out and go back to appointment screen.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
@@ -102,7 +102,7 @@ public class ManageCustomers_Controller implements Initializable {
 
     /**
      * Insures that a customer is selected and passes selected customer to the edit customer screen.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_EditCustomer(ActionEvent actionEvent) {
         int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();
@@ -123,7 +123,7 @@ public class ManageCustomers_Controller implements Initializable {
 
     /**
      * Creates a new customer object and passes it to the add customer screen.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickAddCustomer(ActionEvent actionEvent) {
         System.out.println("Add Customer Clicked");
@@ -138,7 +138,7 @@ public class ManageCustomers_Controller implements Initializable {
     /**
      * Insures a customer is selected, and then deletes it after a warning.
      * If the user chooses to delete a customer, all of that customers appointments are deleted first.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClickDeleteCustomer(ActionEvent actionEvent) {
         int selectedCustomerIndex = tvCustomers.getSelectionModel().getSelectedIndex();

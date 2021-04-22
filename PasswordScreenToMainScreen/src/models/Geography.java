@@ -19,7 +19,14 @@ public class Geography {
         this.divisionName = "";
         this.country_ID = 1;
     }
-    /** Normal Constructor */
+
+    /**
+     * Normal Constructor
+     * @param division_ID - division Id
+     * @param divisionName - division Name
+     * @param countryName - Country Name
+     * @param country_ID - Country Id
+     */
     public Geography(int division_ID, String divisionName, String countryName, int country_ID) {
         this.division_ID = division_ID;
         this.countryName = countryName;
@@ -32,7 +39,7 @@ public class Geography {
      *         Geography.setKnownWorld(DAOGeography.loadKnownWorld());
      * before using rest of knownWorld functionality
      * returns true if known world has more than 5 objects in it (GB)
-     *
+     * @return boolean - true if knownworld is not null, and has at least 6 entries
      */
     public static boolean isKnownWorldLoaded(){
         if(knownWorld == null){
@@ -41,7 +48,9 @@ public class Geography {
         return knownWorld.size() > 5;
     }
 
-    /** Returns a list of Geography objects for the country selected */
+    /** Returns a list of Geography objects for the country selected
+     * @param country_ID - id to get division for
+     * @return ArrayList - division list based on country Id */
     public static ArrayList<Geography> getDivisionsForCountryID(int country_ID) {
         ArrayList<Geography> divisions = new ArrayList<Geography>();
 
@@ -53,16 +62,21 @@ public class Geography {
         return divisions;
     }
 
-    /** Returns the knownworld object */
+    /** Returns the knownworld object
+     * @return ArrayList - returns the list of known division country combinations */
     public static ArrayList<Geography> getKnownWorld() {
         return knownWorld;
     }
-    /** Sets the known world object.  Expected to be set by a DAO. */
+    /** Sets the known world object.  Expected to be set by a DAO.
+     * @param incomingKnownWorld - replaces exiting knownWorld with new incoming known world */
     public static void setKnownWorld(ArrayList<Geography> incomingKnownWorld) {
         knownWorld = incomingKnownWorld;
     }
 
-    /** Returns a division object based on division Id. Failing to find a division id is considered a data error. */
+    /** Returns a division object based on division Id.
+     * Failing to find a division id is considered a data error.
+     * @param divisionId - required division id.
+     * @return Geography - a single geo object containing the information based on the divisionID input */
     public static Geography getGeographyByDivisionId(int divisionId) {
         Geography retVal = null;
         ExitIfKnownWorldNotLoaded();
@@ -87,7 +101,9 @@ public class Geography {
         }
     }
 
-    /** returns all divisions from known world based on the country Id. */
+    /** returns all divisions from known world based on the country Id.
+     * @param country_ID - input country Id used to get return array
+     * @return ArrayList - a collection of Geography objects based on country code. */
     public static ArrayList<Geography> getDivisionsByCountry_ID(int country_ID) {
         ExitIfKnownWorldNotLoaded();
         ArrayList<Geography> divisions = new ArrayList<Geography>();
@@ -103,24 +119,28 @@ public class Geography {
         return divisions;
     }
 
-    /** returns the division Id of a single geo object. */
+    /** returns the division Id of a single geo object.
+     * @return int - value output */
     public int getDivisionId() {
         return division_ID;
     }
 
-    /** returns the country name from a single geo object. */
+    /** returns the country name from a single geo object.
+     * @return String - value output*/
     public String getCountryName() {
 //        System.out.println("getCountryName == null is:  " + countryName == null);
 //        System.out.println("getCountryName countryName == " + countryName);
         return countryName;
     }
 
-    /** returns the division name from a single geo object. */
+    /** returns the division name from a single geo object.
+     * @return String - value output */
     public String getDivisionName() {
         return divisionName;
     }
 
-    /** returns the country id from a single geo object. */
+    /** returns the country id from a single geo object.
+     * @return int - value output */
     public int getCountryId() {
         return country_ID;
     }

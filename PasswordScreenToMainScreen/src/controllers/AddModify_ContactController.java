@@ -40,7 +40,7 @@ public class AddModify_ContactController implements Initializable {
     /**
      * Handles the click on the cancel button.
      * Confirms with user that they are OK with deleting the contact.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     @FXML public void onCancelAction(ActionEvent event) {
         System.out.println("Cancel Clicked");
@@ -55,7 +55,7 @@ public class AddModify_ContactController implements Initializable {
     /**
      * Handles the click on the Save button.
      *
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     @FXML public void onSaveAction(ActionEvent event) {
         System.out.println("Save Clicked");
@@ -71,8 +71,8 @@ public class AddModify_ContactController implements Initializable {
     /**
      * Main entry point of controller.
      * Handles inbound Contact object and localizes the screen controls.
-     * @param location
-     * @param resources
+     * @param location - JavaFx infrastructure parameter
+     * @param resources - JavaFx infrastructure parameter
      */
     @Override public void initialize(URL location, ResourceBundle resources) {
         System.out.println("AddModify_ContactsController initialize called");

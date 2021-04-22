@@ -43,8 +43,8 @@ public class ManageContacts_Controller implements Initializable {
 
     /**
      * Entry point for the Manage Contacts screen.
-     * @param url
-     * @param resourceBundle
+     * @param url - JavaFx infrastructure parameter
+     * @param resourceBundle - JavaFx infrastructure parameter
      */
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
 //        SetButtonColors();
@@ -91,7 +91,7 @@ public class ManageContacts_Controller implements Initializable {
 
     /**
      * Handles the user choosing to cancel back to the appointment screen.
-     * @param event
+     * @param event - JavaFx infrastructure parameter
      */
     public void onClick_Cancel(ActionEvent event) {
         StageManager.ChangeScene(event, new navInfo_Appointments());
@@ -100,7 +100,7 @@ public class ManageContacts_Controller implements Initializable {
     /**
      * Handles the deletion of a contact.
      * Ask user to confirm the deletion of the currently selected contact
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_DeleteContact(ActionEvent actionEvent) {
         int selectedContactIndex = tvContacts.getSelectionModel().getSelectedIndex();
@@ -129,7 +129,7 @@ public class ManageContacts_Controller implements Initializable {
 
     /**
      * Creates a new contact object and passes it and control to the add modify contact screen.
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_AddContact(ActionEvent actionEvent) {
         System.out.println("ProductAdd Clicked");
@@ -140,7 +140,7 @@ public class ManageContacts_Controller implements Initializable {
 
     /**
      * Takes the selected contact and passes it and control to the add modify contact screen
-     * @param actionEvent
+     * @param actionEvent - JavaFx infrastructure parameter
      */
     public void onClick_EditContacts(ActionEvent actionEvent) {
         int selectedContactIndex = tvContacts.getSelectionModel().getSelectedIndex();

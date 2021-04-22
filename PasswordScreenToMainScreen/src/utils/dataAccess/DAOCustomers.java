@@ -10,12 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+/**
+ * Data Access Object to manage Customer Objects.
+ */
 public class DAOCustomers {
 
     private DBQueryManager dbQM = new DBQueryManager();
     TimeConversion tc = new TimeConversion();
     Utils utils = new Utils();
 
+    /**
+     * Gets all customers from data base
+     * @return Customers - Collection of customers from database
+     */
     public Customers selectAllCustomers(){
         String sql = "SELECT * FROM customers;";
         Customers customers = loadCustomersFromResultSet(sql);
@@ -61,6 +68,10 @@ public class DAOCustomers {
         return customers;
     }
 
+    /**
+     * Inserts or updates a Customer based on existence of an existing record
+     * @param current - Customer object to be added or inserted.
+     */
     public void insertOrUpdateCustomer(Customer current) {
         String sqlStatement = "";
         tableInfo c = new tableInfo_Customers();
@@ -75,6 +86,11 @@ public class DAOCustomers {
         dbQM.RunSQLString(sqlStatement);
     }
 
+    /**
+     * Creates Insert statement based on customer object
+     * @param current - customer object to create insert statement from
+     * @return String - Returned insert statement
+     */
     public String createCustomerInsertStatement(Customer current) {
         LocalDateTime utcLast_Update = getUTC_Now();
         LocalDateTime utcCreated_Date = getUTC_Now();
@@ -91,6 +107,11 @@ public class DAOCustomers {
         return sqlStatement;
     }
 
+    /**
+     * Creates Update statement based on customer object
+     * @param current - customer object to create update statement from
+     * @return String - Returned update statement
+     */
     public String createCustomerUpdateSQLString(Customer current) {
         LocalDateTime utcLast_Update = getUTC_Now();
         System.out.println("Update time = " + utcLast_Update.toString());
@@ -114,6 +135,10 @@ public class DAOCustomers {
                 LocalDateTime.now(), tc.getLocalZoneID(), tc.getUTCZoneID());
     }
 
+    /**
+     * Delete a customer by Id Number
+     * @param customerID - Customer number to search for and delete.
+     */
     public void deleteCustomerByID(int customerID) {
             String deleteStatement = String.format(
                     "DELETE FROM customers WHERE Customer_ID = '%s'", customerID);

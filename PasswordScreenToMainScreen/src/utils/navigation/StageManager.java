@@ -10,9 +10,25 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
+/**
+ * Used to change scenes.  below is the entire snipit from the main screen for loading the reports screen.
+ *
+ * It was decided to use polymorphism rather than a switch statement to manage the moving pieces.
+ * Commented out below the ChangeScene method was the original switch version
+ *
+ *     public void onClick_Reports(ActionEvent event) {
+ *         StageManager.ChangeScene(event, new navInfo_Reports());
+ *     }
+ */
 public class StageManager {
 
 
+    /**
+     * Takes the default action item from a button, and a navInfo object to open a new screen
+     * @param event - Java FX infrastructure object passed by buttons and other controls.
+     * @param scene - navInfo object
+     */
     public static void ChangeScene(ActionEvent event, navInfo scene ) {
         SceneChanger sc = new SceneChanger();
         try {

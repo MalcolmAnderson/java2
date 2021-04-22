@@ -16,14 +16,15 @@ import java.util.Random;
 import java.util.TimeZone;
 
 public class Utils {
-    static Random random = new Random();
+    private static Random random = new Random();
     private String nextIdNumberFilePath = "./NextIdNumber.txt";
     static private LocalDateTime forcedNowValue;
 
-    public int add(int a, int b) {
-        return a + b;
-    }
-
+    /**
+     * Convert Database TimeStamp value to LocalDateTime
+     * @param ts timestamp value
+     * @return converted local date time.
+     */
     public LocalDateTime TimeStamp_to_LocalDateTime(Timestamp ts){
         if(ts != null){
             return ts.toLocalDateTime();
@@ -40,6 +41,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Compares username and password to database values
+     * @param userName - User name to check
+     * @param password - Submitted password
+     * @return - true if values matched, false if values do not match
+     */
     public boolean CheckPassword(String userName, String password) {
         boolean retVal = false;
         String sql = String.format("SELECT * FROM users WHERE User_Name = '%s'", userName);
@@ -76,6 +83,11 @@ public class Utils {
 //        return successfulLoginAttempt;
     }
 
+    /**
+     * Returns the number of rows in a result set while handling errors.
+     * @param resultSet - submitted result set
+     * @return int - number of rows in result set
+     */
     private int rsSize(ResultSet resultSet) {
         int resultSetSize = 0;
         if(resultSet != null){
@@ -90,6 +102,11 @@ public class Utils {
         return resultSetSize;
     }
 
+    /**
+     * Provides a random color for password failure.
+     * During repeated fails, gives user feedback that screen is still working.
+     * @return returns a color code as a 6 digit string.
+     */
     public String getRandomColor() {
         // create a big random number - maximum is ffffff (hex) = 16777215 (dez)
         int nextInt = random.nextInt(0xffffff + 1);
@@ -100,6 +117,11 @@ public class Utils {
         return colorCode;
     }
 
+    /**
+     * Single use routine to write Login Attempts to the logs
+     * @param userName - User attempting to log in
+     * @param success - Success or failure of attempt
+     */
     public void WriteLoginAttempt(String userName, boolean success) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -118,6 +140,10 @@ public class Utils {
         }
     }
 
+    /**
+     * Gets next Id Number, but does not commit that number, will require logic change for multi user setups
+     * @return int - next number from list.
+     */
     public int getNextIdNumber() {
         BufferedReader reader;
         File nextIdNumberFile = new File(nextIdNumberFilePath);
@@ -178,23 +204,29 @@ public class Utils {
         }
     }
 
+    /**
+     * Returns path to next-ID file
+     * @return path to next-ID file
+     */
     public String getNextIdNumberFilePath() {
         return nextIdNumberFilePath;
     }
 
+    /**
+     * Sets file path
+     * @param nextIdNumberFilePath - File path
+     */
     public void setNextIdNumberFilePath(String nextIdNumberFilePath) {
         this.nextIdNumberFilePath = nextIdNumberFilePath;
     }
 
-    public void deleteFileIfItExists(String filePathToBeDeleted) {
-        File myFile = new File(filePathToBeDeleted);
-        if(myFile.exists()){
-            myFile.delete();
-        } else {
-            System.out.println("File " + filePathToBeDeleted + " has been deleted.");
-        }
-    }
 
+    /**
+     * Commits next Id Number
+     * The "next ID number" in the file is not actually in the system.
+     * When this routine is called, it means that the existing number has been written to the database
+     * and that the existing number needs to be incremented by one.
+     */
     public void commitNextIdNumber() {
         int currentIdNumber = getNextIdNumber();
         currentIdNumber++;
@@ -208,60 +240,22 @@ public class Utils {
             e.printStackTrace();
             System.exit(-1);
         }
-
-
     }
 
-    public LocalDateTime Local_ToEastern(LocalDateTime ldt) {
-        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
-        ZoneId estZoneId = ZoneId.of("America/New_York");
 
-        ZonedDateTime zdtLocal = ZonedDateTime.of(ldt, localZoneId);
-        ZonedDateTime zdtEastern = ZonedDateTime.ofInstant(zdtLocal.toInstant(), estZoneId);
-        return zdtEastern.toLocalDateTime();
-    }
-
-    public LocalDateTime Eastern_ToLocal(LocalDateTime eastern){
-        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
-        ZoneId estZoneId = ZoneId.of("America/New_York");
-        ZoneId utcZoneId = ZoneId.of("UTC");
-
-        ZonedDateTime zdtUTC = ZonedDateTime.of(eastern, estZoneId);
-        ZonedDateTime zdtLocal = ZonedDateTime.ofInstant(zdtUTC.toInstant(), localZoneId);
-        return zdtLocal.toLocalDateTime();
-    }
-
-    public LocalDateTime Local_ToUTC(LocalDateTime ldt) {
-        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
-        ZoneId utcZoneId = ZoneId.of("UTC");
-
-        ZonedDateTime zdtLocal = ZonedDateTime.of(ldt, localZoneId);
-        ZonedDateTime zdtUTC = ZonedDateTime.ofInstant(zdtLocal.toInstant(), utcZoneId);
-        return zdtUTC.toLocalDateTime();
-    }
-
-    public LocalDateTime UTC_ToLocal(LocalDateTime utc){
-        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
-        ZoneId utcZoneId = ZoneId.of("UTC");
-
-        ZonedDateTime zdtUTC = ZonedDateTime.of(utc, utcZoneId);
-        ZonedDateTime zdtLocal = ZonedDateTime.ofInstant(zdtUTC.toInstant(), localZoneId);
-        return zdtLocal.toLocalDateTime();
-    }
-
-    public LocalDateTime Eastern_ToUTC(LocalDateTime eastern) {
-        ZoneId utcZoneId = ZoneId.of("UTC");
-        ZoneId estZoneId = ZoneId.of("America/New_York");
-
-        ZonedDateTime zdtEastern = ZonedDateTime.of(eastern, estZoneId);
-        ZonedDateTime zdtUDT = ZonedDateTime.ofInstant(zdtEastern.toInstant(), utcZoneId);
-        return zdtUDT.toLocalDateTime();
-    }
-
+    /**
+     * Forced Now value for testing
+     * @param forcedValueForNow Sets time of "now"
+     */
     public void setForcedNowValue(LocalDateTime forcedValueForNow) {
         this.forcedNowValue = forcedValueForNow;
     }
 
+    /**
+     * Test safe version of now.
+     * If forcedNow has been set, return forcedNow, otherwise return time from system clock
+     * @return LocalDateTime - "Now" as far as the system knows.
+     */
     public LocalDateTime now(){
         LocalDateTime now;
         if(forcedNowValue == null){
@@ -272,100 +266,4 @@ public class Utils {
         return now;
     }
 
-    public LocalDateTime getFirstOfTheMonth(LocalDateTime now) {
-        // set to eastern midnight
-        LocalDate sunday = now.withDayOfMonth(1).toLocalDate();
-        LocalTime midnight = LocalTime.of(0, 0);
-        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
-        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
-        return easternSundayMidnight_UTC;
-    }
-
-    public LocalDateTime getFirstOfNextMonth(LocalDateTime now) {
-        // set to eastern midnight
-        LocalDate sunday = now.with(TemporalAdjusters.firstDayOfNextMonth()).toLocalDate();
-        LocalTime midnight = LocalTime.of(0, 0);
-        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
-        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
-        return easternSundayMidnight_UTC;
-    }
-
-    public LocalDateTime getLastSunday(LocalDateTime now) {
-        // set to eastern midnight
-        LocalDate sunday = now.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).toLocalDate();
-        LocalTime midnight = LocalTime.of(0, 0);
-        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
-        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
-        return easternSundayMidnight_UTC;
-    }
-
-    public LocalDateTime getNextSunday(LocalDateTime now) {
-        // set to eastern midnight
-        LocalDate sunday = now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY)).toLocalDate();
-        LocalTime midnight = LocalTime.of(0, 0);
-        LocalDateTime easternSundayMidnight = LocalDateTime.of(sunday, midnight);
-        LocalDateTime easternSundayMidnight_UTC = Eastern_ToUTC(easternSundayMidnight);
-        return easternSundayMidnight_UTC;
-    }
-
-    public LocalDate getNextSunday(LocalDate now) {
-        return now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
-    }
-
-    public boolean doesTimeFallOutsideOfForbiddenTimes(LocalDateTime ldt, LocalTime earlyLimit, LocalTime lateLimit) {
-        // Business Hours by Policy is between 8am and 10pm Eastern
-        ldt = Local_ToEastern(ldt);
-        LocalTime lt = ldt.toLocalTime();
-        if(lt.isBefore(earlyLimit) || lt.isAfter(lateLimit)){
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isAppointmentWithinPolicy(LocalDateTime start, LocalDateTime end) {
-        boolean retVal = true;
-        boolean startIsGood;
-        boolean endIsGood;
-        LocalTime earlyLimit = Globals.earlyLimitEasternTime;
-        LocalTime lateLimit = Globals.lateLimitEasternTime;
-        startIsGood = doesTimeFallOutsideOfForbiddenTimes(start, earlyLimit, lateLimit);  // seems to be having an issue
-        endIsGood = doesTimeFallOutsideOfForbiddenTimes(end, earlyLimit, lateLimit);
-        boolean validAppointment = true;
-        if(startIsGood && endIsGood){
-            LocalDateTime runner = start;
-            while(runner.isBefore(end)){
-                runner = runner.plusMinutes(15);
-                if( ! doesTimeFallOutsideOfForbiddenTimes(runner, earlyLimit, lateLimit)){
-                    validAppointment = false;
-                    break;
-                }
-            }
-        }
-        retVal = startIsGood && endIsGood && validAppointment;
-        return retVal;
-    }
-
-// Sample code from Malcolm W. (WGU) as a starter point for making my timezone logic work
-//
-//        ZonedDateTime localStartTime = ZonedDateTime.ofInstant(utcZDT.toInstant(),localZoneId);
-//
-//        LocalDate estDate = LocalDate.of(2020, 8, 3);
-//        LocalTime estTime = LocalTime.of(11, 0); // Get from Combo Box
-//        ZoneId estZoneId = ZoneId.of("America/New_York");
-//        ZonedDateTime estZDT = ZonedDateTime.of(estDate, estTime, estZoneId);
-//        assertEquals("2020-08-03T11:00", estZDT.toLocalDateTime().toString());// Creates ZonedDateTime object
-//
-//        // Convert EST to UTC
-//        ZoneId utcZID = ZoneId.of("UTC");
-//        ZonedDateTime utcZDT = ZonedDateTime.ofInstant(estZDT.toInstant(), utcZID);
-//        System.out.println("EST - UTC Time: " + utcZDT);
-//        assertEquals("2020-08-03T15:00", utcZDT.toLocalDateTime().toString());// Creates ZonedDateTime object
-//
-//        // Convert UTC to Local
-//        ZoneId localZoneId = ZoneId.of(ZoneId.systemDefault().toString());
-//        ZonedDateTime localStartTime = ZonedDateTime.ofInstant(utcZDT.toInstant(),localZoneId);
-//        System.out.println("UTC - Local Time: " + localStartTime);
-//        assertEquals("2020-08-03T08:00", localStartTime.toLocalDateTime().toString());// Creates ZonedDateTime object
-
-//    }
 }
