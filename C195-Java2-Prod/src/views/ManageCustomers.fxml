@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- fx:controller="controllers.ManageCustomers_Controller" -->
+
+<AnchorPane prefHeight="600.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageCustomers_Controller">
+   <children>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="910.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="910.0">
+               <children>
+                  <Label fx:id="lblScreenPurpose" prefHeight="20.0" text="This page is for adding adding, updating and deleting customers" textAlignment="RIGHT">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding></Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="600.0" prefWidth="910.0">
+               <children>
+                  <TableView fx:id="tvCustomers" prefHeight="600.0" prefWidth="870.0">
+                     <columns>
+                        <TableColumn fx:id="tcId" prefWidth="35.0" text="Id" />
+                        <TableColumn fx:id="tcName" prefWidth="200.0" text="Name" />
+                        <TableColumn fx:id="tcAddress" minWidth="-1.0" prefWidth="300.0" text="Address" />
+                        <TableColumn fx:id="tcCountry" prefWidth="70.0" text="Country" />
+                        <TableColumn fx:id="tcPostalCode" minWidth="-1.0" prefWidth="93.0" text="Postal Code" />
+                        <TableColumn fx:id="tcPhone" minWidth="50.0" prefWidth="171.0" text="Phone" />
+                     </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="910.0" spacing="20.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#onClickAddCustomer" text="Add.Customer" />
+                  <Button fx:id="btnEditCustomer" mnemonicParsing="false" onAction="#onClick_EditCustomer" text="Edit.Customer" />
+                  <Button fx:id="btnDeleteCustomer" mnemonicParsing="false" onAction="#onClickDeleteCustomer" text="Delete.Customer" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="910.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#onClick_Cancel" text="Cancel" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

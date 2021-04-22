@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginScreen_Controller">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="450.0" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER" prefWidth="450.0">
+               <children>
+                  <Label fx:id="lblDescription" text="%Acme.Appointment.Setter.version.1.0.0" textAlignment="CENTER" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefWidth="450.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lblUserName" prefHeight="20.0" prefWidth="127.0" text="%User.Name" textAlignment="RIGHT">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textUserName" />
+                  <Label fx:id="lblDetectedTimeZone" text="%Detected.Time.Zone" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefWidth="450.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lblPassword" prefHeight="20.0" prefWidth="127.0" text="%Password" textAlignment="RIGHT">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="labelPassword" />
+                  <Label fx:id="lblTimeZone" text="ZoneId text" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="450.0">
+               <children>
+                  <Label fx:id="lblLoginPrompt" text="Enter credentials and then click Log In button" textAlignment="CENTER" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnLogIn" defaultButton="true" mnemonicParsing="false" onAction="#onClick_LogIn" text="%Log.In" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label fx:id="lblDetectedLocalLanguage" text="%Detected.Local.Language" textAlignment="RIGHT" />
+                  <Label fx:id="localLanguage" text="placeholder" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label fx:id="lblChangeAppLanguage" text="%Change.Application.Language" textAlignment="CENTER" />
+                  <Button fx:id="btnEnglish" mnemonicParsing="false" onAction="#onClickSetEnglish" text="%English" />
+                  <Button fx:id="btnFrench" mnemonicParsing="false" onAction="#onClickSetFrench" text="%French" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

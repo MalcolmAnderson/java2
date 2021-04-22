@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Main_ViewAppointments_Controller">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="1100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1100.0" spacing="30.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnBackOneUnit" mnemonicParsing="false" onAction="#onClickBackOne" text="&lt;&lt;&lt;">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" spacing="30.0">
+                     <children>
+                        <RadioButton fx:id="rbByWeek" mnemonicParsing="false" onAction="#onClickShowByWeek" text="Show List By Week">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tgShowBy" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="rbByMonth" mnemonicParsing="false" onAction="#onClickShowByMonth" text="Show List By Month" toggleGroup="$tgShowBy" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnForwardOneUnit" mnemonicParsing="false" onAction="#onClickForwardOne" text="&gt;&gt;&gt;">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="510.0" prefWidth="1100.0">
+               <children>
+                  <TableView fx:id="tvAppointments" prefHeight="400.0" prefWidth="1050.0">
+                    <columns>
+                      <TableColumn fx:id="tcId" minWidth="35.0" prefWidth="-1.0" text="ID" />
+                        <TableColumn fx:id="tcTitle" minWidth="140.0" prefWidth="-1.0" text="Title" />
+                        <TableColumn fx:id="tcDescription" minWidth="254.0" prefWidth="-1.0" text="Description" />
+                        <TableColumn fx:id="tcLocation" prefWidth="150.0" text="Location" />
+                        <TableColumn fx:id="tcContact" minWidth="95.0" prefWidth="-1.0" text="Contact" />
+                        <TableColumn fx:id="tcType" prefWidth="90.0" text="Type" />
+                        <TableColumn fx:id="tcStart" minWidth="110.0" prefWidth="-1.0" text="Start" />
+                        <TableColumn fx:id="tcEnd" minWidth="110.0" prefWidth="-1.0" text="End" />
+                        <TableColumn fx:id="tcCustomerId" prefWidth="50.0" text="Cust ID" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1100.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnAddAppointment" mnemonicParsing="false" onAction="#onClickAddAppointment" text="Add Appointment" />
+                  <Button fx:id="btnEditAppointment" mnemonicParsing="false" onAction="#onClickEditAppointment" text="Edit Appointment" />
+                  <Button fx:id="btnDeleteAppointment" mnemonicParsing="false" onAction="#onClickDeleteAppointment" text="Delete Appointment" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1100.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnManageCustomers" mnemonicParsing="false" onAction="#onClick_ManageCustomers" text="Manage Customers" />
+                  <Button fx:id="btnManageContacts" mnemonicParsing="false" onAction="#onClick_ManageContacts" text="Manage Contacts" />
+                  <Button fx:id="btnReportsScreen" mnemonicParsing="false" onAction="#onClick_Reports" text="Reports Screen" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- fx:controller="controllers.ManageContacts_Controller" -->
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageContacts_Controller">
+   <children>
+      <VBox alignment="CENTER" prefHeight="401.0" prefWidth="601.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="lblScreenPurpose" prefHeight="36.0" text="This page is for adding adding, updating and deleting contacts" textAlignment="CENTER" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="317.0" prefWidth="601.0">
+               <children>
+                  <TableView fx:id="tvContacts" prefHeight="237.0" prefWidth="500.0">
+                    <columns>
+                      <TableColumn fx:id="tcContactID" prefWidth="100.0" text="Contact Id" />
+                      <TableColumn fx:id="tcContactName" prefWidth="200.0" text="Name" />
+                        <TableColumn fx:id="tcContactEmail" minWidth="50.0" prefWidth="200.0" text="Email" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="78.0" prefWidth="561.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnAddContact" mnemonicParsing="false" onAction="#onClick_AddContact" text="Add Contact" />
+                  <Button fx:id="btnEditContact" mnemonicParsing="false" onAction="#onClick_EditContacts" text="Edit Contacts" />
+                  <Button fx:id="btnDeleteContact" mnemonicParsing="false" onAction="#onClick_DeleteContact" text="Delete Contact" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnReturnToAppointmentScreen" mnemonicParsing="false" onAction="#onClick_Cancel" text="Return to Appointment Screen" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

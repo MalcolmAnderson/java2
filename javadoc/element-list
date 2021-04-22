@@ -1,1 +1,8 @@
-com.example.mypackage
+controllers
+main
+models
+utils
+utils.dataAccess
+utils.dataAccess.secrets
+utils.localization
+utils.navigation
